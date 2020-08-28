@@ -1,5 +1,6 @@
 # Definition of done
 
+* The code and documentation is in english
 * The code is readable or well commented
 * All Unit tests passed
 * The code was reviewed
