@@ -1,0 +1,18 @@
+Installation guide for project:
+
+1. Install latest version of python (also add to path in installation)
+2. Install PyCharm IDE
+4. Clone the gitlab repository (https://gitlab.com/xFrednet/t-302-honn-2020-team-9.git)
+
+5. Open the "Workout app" folder in PyCharm
+6. Press Ctrl-Alt-S (Should open settings)
+7. Press the "Project" dropdown
+8. Press the "Python interpreter" menu
+9. In the top right hand side press the wheel and press add
+10. Select initialize new environment, select python as interpreter and press apply.
+11. Press ok when done.
+12. When you look at the terminal in PyCharm it should now say (venv) in front of c:\...
+13. If not, navigate into the folder venv/Scripts from terminal, type activate and press enter
+14. Install requirements (Should be prompted by IDE, if not install manually with pip)
+15. While in the workoutapp app directory type in terminal: py manage.py runserver
+16. If no errors pop up and the localhost link is displayed you are good to go
