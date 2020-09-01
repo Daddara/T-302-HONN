@@ -20,11 +20,21 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="2ecad600-f192-4104-96bf-0bfda9bb9927" name="Default" comment="">
-      <change afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/requirements.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workoutapp.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workoutapp.iml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/manage.py" beforeDir="false" afterPath="$PROJECT_DIR$/manage.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/workoutapp/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/workout/__init__.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/workoutapp/asgi.py" beforeDir="false" afterPath="$PROJECT_DIR$/workout_project/asgi.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/workoutapp/settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/workout_project/settings.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/workoutapp/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/workout_project/urls.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/workoutapp/wsgi.py" beforeDir="false" afterPath="$PROJECT_DIR$/workout_project/wsgi.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/workouts/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/workout/migrations/__init__.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/workouts/admin.py" beforeDir="false" afterPath="$PROJECT_DIR$/workout/admin.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/workouts/apps.py" beforeDir="false" afterPath="$PROJECT_DIR$/workout/apps.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/workouts/migrations/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/workout_project/__init__.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/workouts/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/workout/models.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/workouts/tests.py" beforeDir="false" afterPath="$PROJECT_DIR$/workout/tests.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/workouts/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/workout/urls.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/workouts/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/workout/views.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -48,8 +58,11 @@
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="node.js.detected.package.eslint" value="true" />
+    <property name="node.js.detected.package.tslint" value="true" />
     <property name="node.js.path.for.package.eslint" value="project" />
+    <property name="node.js.path.for.package.tslint" value="project" />
     <property name="node.js.selected.package.eslint" value="(autodetect)" />
+    <property name="node.js.selected.package.tslint" value="(autodetect)" />
     <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable" />
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
@@ -64,7 +77,7 @@
       <option name="presentableId" value="Default" />
       <updated>1598808877115</updated>
       <workItem from="1598953923658" duration="54000" />
-      <workItem from="1598954012196" duration="811000" />
+      <workItem from="1598954012196" duration="2713000" />
     </task>
     <servers />
   </component>
@@ -87,6 +100,10 @@
     <option name="myLimit" value="2678400000" />
   </component>
   <component name="WindowStateProjectService">
+    <state x="414" y="175" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1598955817652">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="414" y="175" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1598955817652" />
     <state x="640" y="256" key="#com.intellij.openapi.updateSettings.impl.PluginUpdateInfoDialog" timestamp="1598953949760">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
