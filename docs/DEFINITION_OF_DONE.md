@@ -7,3 +7,4 @@
 * Functional tests passed
 * API functions are documented
 * The backend code is covered by unit tests
+* After an issue is moved to done, a team memmber must review it before it can be closed
