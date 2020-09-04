@@ -1,0 +1,11 @@
+.boxed{
+    border: 20px solid green;
+}
+.button{
+    color: black ;
+  background-color: #9cf ;
+  border-top: 1px solid #c0ffff ;
+  border-right: 1px solid #00f ;
+  border-bottom: 1px solid #00f ;
+  border-left: 1px solid #c0ffff ;
+}
