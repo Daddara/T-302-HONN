@@ -3,8 +3,23 @@ body{
     margin: 0;
     font-family: sans-serif;
 }
-.boxed{
-    border: 20px solid green;
+.container{
+    position: relative;
+    width: 1200px;
+    height: 330px;
+    margin: 250px auto;
+    background: #000;
+}
+.container .boxed{
+    position: relative;
+    width: 350px;
+    height: 350px;
+    background: lightpink;
+    float: left;
+    margin: 15px;
+    box-sizing: border-box;
+    overflow: hidden;
+    border-radius: 10px;
 }
 .button{
     color: black ;
