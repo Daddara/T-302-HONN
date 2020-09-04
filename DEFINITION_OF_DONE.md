@@ -2,9 +2,10 @@
 
 * The code and documentation is in english
 * The code is readable or well commented
-* All Unit tests passed
+* All unit tests run without errors
 * The code was reviewed
-* Functional tests passed
 * API functions are documented
-* The backend code is covered by unit tests
-* After an issue is moved to done, a team memmber must review it before it can be closed
+* The backend code has a minimum test coverage of 80%. This coverage should include:
+    * All successful routes
+    * Known Failure scenarios (Like missing data)
+    * Authentication tests
