@@ -24,7 +24,7 @@ body{
     overflow: hidden;
     border-radius: 10px;
 }
-.button{
+button{
     color: black ;
   background-color: #9cf ;
   border-top: 1px solid #c0ffff ;
