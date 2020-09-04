@@ -1,3 +1,8 @@
+body{
+    padding: 0;
+    margin: 0;
+    font-family: sans-serif;
+}
 .boxed{
     border: 20px solid green;
 }
@@ -7,5 +12,5 @@
   border-top: 1px solid #c0ffff ;
   border-right: 1px solid #00f ;
   border-bottom: 1px solid #00f ;
-  border-left: 1px solid #c0ffff ;
+  border-left: 1px solid #c0ffff;
 }
