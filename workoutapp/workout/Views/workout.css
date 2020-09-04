@@ -11,9 +11,12 @@ body{
     background: #000;
 }
 .container .boxed{
-    position: relative;
+    padding-top: 15px;
+    padding-bottom: 15px;
+    padding-left: 20px;
+    position: center;
     width: 350px;
-    height: 350px;
+    height: 200px;
     background: lightpink;
     float: left;
     margin: 15px;
