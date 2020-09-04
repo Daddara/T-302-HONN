@@ -75,8 +75,12 @@ WSGI_APPLICATION = 'workout_project.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'xhomxrmi',
+        'USER': 'xhomxrmi',
+        'PASSWORD': 'uAoRcGFoApllpxhvxPSDWIQf_9PxUcZj',
+        'HOST': 'rogue.db.elephantsql.com',
+        'PORT': '5432'
     }
 }
 
