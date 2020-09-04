@@ -4,20 +4,20 @@ body{
     font-family: sans-serif;
 }
 .container{
-    position: relative;
-    width: 1200px;
-    height: 330px;
-    margin: 250px auto;
-    background: #000;
+    border-radius: 25px;
+    size: auto;
+    margin: 100px auto;
+    background: midnightblue;
+    position: center;
+    padding: 50px;
 }
 .container .boxed{
     padding-top: 15px;
     padding-bottom: 15px;
-    padding-left: 20px;
-    position: center;
-    width: 350px;
-    height: 200px;
-    background: lightpink;
+    padding-left: 15px;
+    position: relative;
+    size: auto;
+    background: orangered;
     float: left;
     margin: 15px;
     box-sizing: border-box;
@@ -25,8 +25,9 @@ body{
     border-radius: 10px;
 }
 button{
+    border-radius: 15px;
     color: black ;
-  background-color: #9cf ;
+  background-color: #ffcfbe;
   border-top: 1px solid #c0ffff ;
   border-right: 1px solid #00f ;
   border-bottom: 1px solid #00f ;
@@ -34,9 +35,17 @@ button{
 }
 h1{
     font-size: 20px;
-    color: crimson;
+    color: #ffcfbe;
+    background-position: center;
+    position: center;
 }
 h2{
-    font-size: 16px;
-    color: aqua;
+    font-size: 10px;
+    color: lightgray;
+}
+
+label{
+    color: bisque;
+    margin-bottom: 30px;
+    padding-bottom: 10px;
 }
