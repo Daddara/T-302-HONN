@@ -1,34 +1,57 @@
-stages:
-  - test
-# - deploy
+image: python:latest
+
+services:
+  - postgres:latest
+
+variables:
+  POSTGRES_DB: ci
+
+cache:
+  paths:
+  - ~/.cache/pip/
+
+before_script:
+  - python -V
+  - pip install -r requirements.txt
 
 test:
-  stage: test
+  variables:
+    DATABASE_URL: "postgresql://postgres:postgres@postgres:5432/$POSTGRES_DB"
   script:
-    # this configures Django application to use attached postgres database that is run on `postgres` host
-    - apt-get update -qy
-    - apt-get install -y python-dev python-pip
-    - pip install -r requirements.txt
-    - python workoutapp/manage.py test
-  only:
-    - merge_requests
+    - python manage.py test --settings gitlab_ci_example_django.settings.ci
 
-# staging:
-#   stage: deploy
-#   script:
-#     - apt-get update -qy
-#     - apt-get install -y ruby-dev
-#     - gem install dpl
-#     - dpl --provider=heroku --app=gitlab-ci-python-test-staging --api-key=$HEROKU_STAGING_API_KEY
-#   only:
-#     - master
 # 
-# production:
-#   stage: deploy
+# stages:
+#   - test
+# # - deploy
+# 
+# test:
+#   stage: test
 #   script:
+#     # this configures Django application to use attached postgres database that is run on `postgres` host
 #     - apt-get update -qy
-#     - apt-get install -y ruby-dev
-#     - gem install dpl
-#     - dpl --provider=heroku --app=gitlab-ci-python-test-prod --api-key=$HEROKU_PRODUCTION_API_KEY
+#     - apt-get install -y python-dev python-pip
+#     - pip install -r requirements.txt
+#     - python workoutapp/manage.py test
 #   only:
-#     - tags
+#     - merge_requests
+# 
+# # staging:
+# #   stage: deploy
+# #   script:
+# #     - apt-get update -qy
+# #     - apt-get install -y ruby-dev
+# #     - gem install dpl
+# #     - dpl --provider=heroku --app=gitlab-ci-python-test-staging --api-key=$HEROKU_STAGING_API_KEY
+# #   only:
+# #     - master
+# # 
+# # production:
+# #   stage: deploy
+# #   script:
+# #     - apt-get update -qy
+# #     - apt-get install -y ruby-dev
+# #     - gem install dpl
+# #     - dpl --provider=heroku --app=gitlab-ci-python-test-prod --api-key=$HEROKU_PRODUCTION_API_KEY
+# #   only:
+# #     - tags
