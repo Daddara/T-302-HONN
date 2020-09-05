@@ -9,7 +9,10 @@ test:
     - apt-get update -qy
     - apt-get install -y python-dev python-pip
     - pip install -r requirements.txt
+    - cd workoutapp
     - python manage.py test
+  only:
+    - merge_requests
 
 # staging:
 #   stage: deploy
