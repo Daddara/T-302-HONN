@@ -18,7 +18,7 @@ test:
   variables:
     DATABASE_URL: "postgresql://postgres:postgres@postgres:5432/$POSTGRES_DB"
   script:
-    - python workoutapp/manage.py test --settings workoutapp.settings.ci
+    - python workoutapp/manage.py test --settings settings.ci
 
 # 
 # stages:
