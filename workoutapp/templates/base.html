@@ -3,6 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <title>Fitness app</title>
+    <!-- For extra css for specific pages -->
+    {% block extra_head %}
+
+    {% endblock %}
 </head>
 <body>
 <!--Main Navigation-->
@@ -44,6 +48,9 @@
     <script>
         const crfToken = '{{ csrf_token }}'
     </script>
+    {% block extra_js %}
+
+    {% endblock %}
 
 </body>
 </html>
