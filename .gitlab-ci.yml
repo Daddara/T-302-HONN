@@ -20,6 +20,3 @@ test:
     - python manage.py test
   only:
     - merge_requests
-  except:
-    - tags
-      - Y-No_CI
