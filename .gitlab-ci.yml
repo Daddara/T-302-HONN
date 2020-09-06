@@ -1,5 +1,8 @@
 image: python:latest
 
+only:
+  - merge_requests
+  
 services:
   - postgres:latest
 
