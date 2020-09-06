@@ -21,20 +21,21 @@ Here is how: https://docs.github.com/en/github/creating-cloning-and-archiving-re
     7. Press ok when done.
     8. When you look at the terminal in PyCharm it should now say (venv) in front of C:\...
     9. If not, navigate into the folder venv/Scripts from terminal, type activate and press enter
-* Install requirements (Should be prompted by IDE, if not install manually with pip)
-* Download the Django extension by running the command "pip install django"
+* Install requirements (Should be prompted by IDE, if not install manually with `pip install -r requirements.txt`)
+* Download the Django extension by running the command `pip install django`
 # Running the server
-* While in the workoutapp directory type in terminal: "py manage.py runserver"     
+* While in the workoutapp directory type in terminal: `py manage.py runserver`     
 * If no errors pop up and the localhost link is displayed you are good to go
 # Running the tests
-* While in the workoutapp directory type in terminal: "py manage.py test"
+* While in the workoutapp directory type in terminal: `py manage.py test`
 # Built with
 ### Dependencies
 `Python` `Pip` `Django`
+The current list can be found in the [requirements.txt](requirements.txt)
 ### Framework
 Django framework, see architecture [here](docs/project_overview/project_architecture.png)
 ### Lecture Aspects
-* We are using the three-tier architecture taught in Lecture 03: Software Architecture
+We are using the three-tier architecture taught in Lecture 03: Software Architecture
 ### Agreed Tasks
 
 #### User stories
