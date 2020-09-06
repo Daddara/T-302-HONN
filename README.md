@@ -9,7 +9,8 @@ The goal is to inspire the user to work out by competition or just giving him th
 * Install the latest version of PyCharm (IDE) https://www.jetbrains.com/pycharm/download/#section=windows
 * Make sure you have installed the latest version of pip https://pip.pypa.io/en/stable/installing/
 ### Installing
-* Clone the gitlab repository to an empty folder 
+* Clone the gitlab repository https://gitlab.com/xFrednet/t-302-honn-2020-team-9.git to an empty folder on your computer. 
+Here is how: https://docs.github.com/en/github/creating-cloning-and-archiving-repositories/cloning-a-repository
 * Create a virtual environment in your project folder by following these steps:
     1. Open the "Workout app" folder in PyCharm
     2. Press Ctrl-Alt-S (Should open settings)
@@ -31,10 +32,12 @@ The goal is to inspire the user to work out by competition or just giving him th
 ### Dependencies
 `Python` `Pip` `Django`
 ### Framework
-
+Django framework, see architecture [here](docs/project_overview/project_architecture.png)
 ### Lecture Aspects
-* We are using the three-tier architecture taught in lectures
+* We are using the three-tier architecture taught in Lecture 03: Software Architecture
 ### Agreed Tasks
+
+#### User stories
 The following are user stories to implement agreed by the TA
 * \#2 As a user I would like to be able to create and exercise that I can save and look at later.
 * \#5 As a user, I would like to be able to create a new workout using the website
@@ -66,6 +69,9 @@ The following are user stories to implement agreed by the TA
 * \#46 As a user I would like to be able to filter for public workouts by category so that I can see only what I'm interested in.
 * \#49 As a developer, I would like have a building pipeline in gitlab, so that I can make sure that my MR doesn't cause any new bugs and doesn't reduce the code coverage
 
+#### Definition of Done
+For this first sprint we have agreed to implement user stories #10, #11 and #29.
+The full definition of done you can read [here](DEFINITION_OF_DONE.md).
 
 
 # Contributors
