@@ -1,0 +1,22 @@
+image: python:latest
+
+services:
+  - postgres:latest
+
+variables:
+  POSTGRES_DB: ci
+
+cache:
+  paths:
+  - ~/.cache/pip/
+
+before_script:
+  - python -V
+  - pip install -r requirements.txt
+
+test:
+  script:
+    - cd workoutapp
+    - python manage.py test
+  only:
+    - merge_requests
