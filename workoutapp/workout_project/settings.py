@@ -74,6 +74,8 @@ WSGI_APPLICATION = 'workout_project.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/3.1/ref/settings/#databases
 
+
+
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
@@ -84,6 +86,9 @@ DATABASES = {
         'PORT': '5432'
     }
 }
+
+import sys
+if 'test' in sys.argv: DATABASES['default'] = { 'ENGINE': 'django.db.backends.sqlite3', 'NAME': 'testdatabase' }
 
 
 # Password validation
