@@ -27,7 +27,7 @@ Here is how: https://docs.github.com/en/github/creating-cloning-and-archiving-re
 * While in the workoutapp directory type in terminal: "py manage.py runserver"     
 * If no errors pop up and the localhost link is displayed you are good to go
 # Running the tests
-* While in the workoutapp directory type in terminal: "py manage.py pytest"
+* While in the workoutapp directory type in terminal: "py manage.py test"
 # Built with
 ### Dependencies
 `Python` `Pip` `Django`
