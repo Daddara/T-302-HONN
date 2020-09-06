@@ -1,8 +1,5 @@
 image: python:latest
 
-only:
-  - merge_requests
-  
 services:
   - postgres:latest
 
@@ -21,3 +18,8 @@ test:
   script:
     - cd workoutapp
     - python manage.py test
+  only:
+    - merge_requests
+  except:
+    - tags
+      - Y-No_CI
