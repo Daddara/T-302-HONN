@@ -7,7 +7,7 @@ class Category(models.Model):
     Name = models.CharField(max_length=20, default="", unique=True)
 
 class Workout(models.Model):
-    User = models.ForeignKey(User,  on_delete=models.CASCADE)
+    User = models.ForeignKey(User, on_delete=models.CASCADE)
     Category = models.ForeignKey(Category, null=True, on_delete=models.SET_NULL)
     Name = models.CharField(max_length=20, default="")
     CreatedAt = models.DateTimeField(auto_now=True)
