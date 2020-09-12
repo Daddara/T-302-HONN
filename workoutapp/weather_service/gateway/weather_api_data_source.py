@@ -1,4 +1,4 @@
-import urllib.request
+import urllib.request, urllib.error
 
 class WeatherApiDataSource:
 
@@ -15,9 +15,18 @@ class WeatherApiDataSource:
             city
         )
 
-        request = urllib.request.urlopen(url)
+        data = None
+        error = None
 
-        # TODO xFrednet 2020.09.12: Error handling
-        data = request.read()
+        try:
+            data = urllib.request.urlopen(url).read()
+        except urllib.error.HTTPError as e:
+            if e.code == 401:
+                # Unauthorized: happens when the API key is outdated.
+                error = '401 The API key is invalid'
+            if e.code == 400:
+                # Bad Request: Happens when the city is invalid.
+                error = '400 The city name is invalid'
+        # TODO xFrednet 2020.09.12: More error handling
 
-        return data, True
+        return data, (data is not None), error

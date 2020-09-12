@@ -28,11 +28,15 @@ class WeatherGateway:
         is_new = False
         for source in self.data_sources:
             is_new = False
-            data, is_new = source.load_data(city)
+            data, is_new, error = source.load_data(city)
 
             # Test if the data request was successful
             if data is not None:
                 break
+
+            if error is not None:
+                print(error)
+                return
 
         # Test if data is valid
         if data is None:
