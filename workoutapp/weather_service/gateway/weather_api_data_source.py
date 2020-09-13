@@ -8,11 +8,10 @@ class WeatherApiDataSource:
         # TODO xFrednet 2020.09.12: Load the API key from somewhere else this isn't the nicest way
         self.api_key = 'b0cf0f6686224ec6a9f164627201209'
 
-    def load_data(self, city):
-
+    def load_data(self, lat, lon):
         url = WeatherApiDataSource.BASE_URL.format(
             self.api_key,
-            city
+            '{},{}'.format(lat, lon)
         )
 
         data = None
