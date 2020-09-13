@@ -1,4 +1,9 @@
 import urllib.request, urllib.error
+import json
+import datetime
+
+from .weather_data import CurrentWeatherData
+
 
 class WeatherApiDataSource:
 
@@ -28,4 +33,29 @@ class WeatherApiDataSource:
                 error = '400 The city name is invalid'
         # TODO xFrednet 2020.09.12: More error handling
 
-        return data, (data is not None), error
+        mapped_data = self._try_map_to_weather_data(data)
+        return mapped_data, (mapped_data is not None), error
+
+    @staticmethod
+    def _try_map_to_weather_data(response_json):
+        if response_json is None:
+            return None
+
+        try:
+            response = json.loads(response_json)
+
+            location_data = response["location"]
+            current_data = response["current"]
+
+            return CurrentWeatherData(
+                date_time=datetime.datetime.fromtimestamp(int(current_data["last_updated_epoch"])),
+                lat=float(location_data["lat"]),
+                lon=float(location_data["lon"]),
+                temp_c=float(current_data["temp_c"]),
+                wind_kph=float(current_data["wind_kph"]),
+                precipitation_mm=float(current_data["precip_mm"]),
+                cloud=int(current_data["cloud"]),
+                visibility_km=float(current_data["vis_km"]),
+            )
+        except:
+            return None
