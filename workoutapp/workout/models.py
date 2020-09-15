@@ -1,56 +1,64 @@
+from django.contrib.auth.models import User
 from django.db import models
+import datetime
 
 
 # Create your models here.
-class Equipment(models.Model):
-    name = models.CharField(max_length=50)
-    description = models.CharField(max_length=200)
-    image = models.CharField(max_length=200)
-
-
-class User(models.Model):
-    pass
-
 
 class Category(models.Model):
-    name = models.CharField(max_length=50)
+    Name = models.CharField(max_length=20, default="", unique=True)
 
 
 class Workout(models.Model):
-   name = models.CharField(max_length=50)
-   description = models.TextField(max_length=200)
-   user = models.ForeignKey(User, on_delete=models.CASCADE())
-   likes = models.IntegerField(max_length=None)
-   dislikes = models.IntegerField(max_length=None)
-   category = models.ForeignKey(Category, on_delete=models.CASCADE())
-   created_at = models.DateTimeField()
+    User = models.ForeignKey(User, on_delete=models.CASCADE)
+    Category = models.ForeignKey(Category, null=True, on_delete=models.SET_NULL)
+    Name = models.CharField(max_length=20, default="")
+    CreatedAt = models.DateTimeField(auto_now=True)
+    Image = models.CharField(
+        max_length=250,
+        default="https://www.vhv.rs/dpng/d/256-2569650_men-profile-icon-png-image-free-download-searchpng.png")
+    Likes = models.IntegerField(default=0)
+    Dislikes = models.IntegerField(default=0)
+    Public = models.BooleanField(default=False)
 
-   class Meta:
-      db_table = "workout"
+
+class Comment(models.Model):
+    Workout = models.ForeignKey(Workout, on_delete=models.CASCADE)
+    Commenter = models.ForeignKey(User, on_delete=models.CASCADE)
+    Message = models.CharField(max_length=250, default="")
+
+
+class Equipment(models.Model):
+    Name = models.CharField(max_length=20, default="")
+    Description = models.CharField(max_length=250, default="")
+    Image = models.CharField(
+        max_length=250,
+        default="https://www.vhv.rs/dpng/d/256-2569650_men-profile-icon-png-image-free-download-searchpng.png")
 
 
 class Exercise(models.Model):
-    name = models.CharField(max_length=50)
-    description = models.CharField(max_length=300)
-    image = models.CharField(max_length=200)
-    equipment = models.ForeignKey(Equipment, on_delete=models.CASCADE())
-
+    Title = models.CharField(max_length=20, default="")
+    Creator = models.ForeignKey(User, null=True, on_delete=models.SET_NULL)
+    Description = models.CharField(max_length=250, default="")
+    Image = models.CharField(
+        max_length=250,
+        default="https://www.vhv.rs/dpng/d/256-2569650_men-profile-icon-png-image-free-download-searchpng.png")
+    Equipment = models.ForeignKey(Equipment, null=True, on_delete=models.SET_NULL)
+    Public = models.BooleanField(default=False)
     class Meta:
-        db_table = "exercise"
+        unique_together = ('Creator', 'Title',)
 
 
-class Unit(models.Model):
-    name = models.CharField(max_length=30)
-    unit = models.CharField(max_length=30)
+class UnitType(models.Model):
+    Name = models.CharField(max_length=20, default="")
+    Unit = models.CharField(max_length=20, default="")
 
 
 class WorkoutManager(models.Model):
-    workout = models.ForeignKey(Workout, on_delete=models.CASCADE())
-    exercise = models.ForeignKey(Exercise, on_delete=models.CASCADE())
-    unit = models.ForeignKey(Unit, on_delete=models.CASCADE())
-    reps = models.IntegerField(max_length=10)
-    quantity = models.IntegerField(max_length=20)
-
-
+    Workout = models.ForeignKey(Workout, on_delete=models.CASCADE)
+    Exercise = models.ForeignKey(Exercise, null=True, on_delete=models.SET_NULL)
+    Unit = models.ForeignKey(UnitType, null=True, on_delete=models.SET_NULL)
+    Reps = models.IntegerField(default=0)
+    Quantity = models.IntegerField(default=0)
 
 

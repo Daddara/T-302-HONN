@@ -2,4 +2,4 @@ from django.apps import AppConfig
 
 
 class WorkoutsConfig(AppConfig):
-    name = 'workout.css'
+    name = 'workout'

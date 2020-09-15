@@ -7,5 +7,11 @@
       <jdbc-driver>org.sqlite.JDBC</jdbc-driver>
       <jdbc-url>jdbc:sqlite:C:\Users\Saken\OneDrive\Nám\Nám - Haust20\honnun og sm\VERKEFNI\t-302-honn-2020-team-9\workoutapp\db.sqlite3</jdbc-url>
     </data-source>
+    <data-source source="LOCAL" name="PostgreSQL - xhomxrmi@rogue.db.elephantsql.com" uuid="a1012d84-573b-4fb8-9bab-c3ee28c04a8b">
+      <driver-ref>postgresql</driver-ref>
+      <synchronize>true</synchronize>
+      <jdbc-driver>org.postgresql.Driver</jdbc-driver>
+      <jdbc-url>jdbc:postgresql://rogue.db.elephantsql.com:5432/xhomxrmi</jdbc-url>
+    </data-source>
   </component>
 </project>
