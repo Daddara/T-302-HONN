@@ -1,57 +1,166 @@
+import urllib.request, urllib.error
+import json
+import datetime
+
+from .weather_data import CurrentWeatherData
+from .weather_data import ForecastWeatherData
+from .weather_data import WeatherWarnings
+
+
+class WeatherGatewayError:
+    """An error class for all possible errors that might occur in the gateway"""
+
+    STRING_FORMAT = '[{}] {}: {}'
+
+    ERR_TYPE_HTTP = 'HTTP'
+    ERR_TYPE_PARSING = 'PARSING'
+
+    def __init__(
+            self,
+            err_type: str,
+            err_sub_id: int = 0,
+            err_text: str = "<NO TEXT>"):
+        """Initializes the error object"""
+        self.err_type = err_type
+        self.err_sub_id = err_sub_id
+        self.err_text = err_text
+
+    def get_error_str(self):
+        """Creates a string with the error information"""
+        return WeatherGatewayError.STRING_FORMAT.format(
+            self.err_type,
+            self.err_sub_id,
+            self.err_text
+        )
+
+    def print_err(self):
+        """Prints the error string to the console"""
+        print(self.get_error_str())
+
+
 class WeatherGateway:
-    NEW_DATA_CALLBACK_NAME = 'new_weather_data_callback'
+    """This is the base interface to access weather data"""
 
-    def __init__(self, data_sources: []):
-        self.data_sources = data_sources
-        self.new_data_listeners = []
+    def get_weather_current(self, city: str) -> (CurrentWeatherData, WeatherGatewayError):
+        """Get the current weather data
 
-    def register_new_data_listener(self, listener):
+        Parameters
+        ----------
+        city : str
+            The city the weather should be loaded for.
+
+        Returns the current weather data as a CurrentWeatherData
+        -------
         """
-        This method can be used to register a
-        """
-        # Validation check
-        callback = getattr(listener, WeatherGateway.NEW_DATA_CALLBACK_NAME, None)
-        if not callable(callback):
-            print("Error: WeatherGateway: the submitted listener has no callback")
-            return
+        pass
 
-        # Add listener
-        self.new_data_listeners.append(listener)
+    def get_weather_forecast(self, city: str, days: int = 3) -> ForecastWeatherData:
+        """Get the weather forecast for x days
 
-    def get_data(self, lat, lon):
+        Parameters
+        ----------
+        city : str
+            The city the weather should be loaded for.
+        days : int
+            The amount of days to load for the forecast. (default: 3)
+
+        Returns the forecast weather data as a ForecastWeatherData
+        -------
         """
-        This method tries to load current weather data from the internal data_sources.
+        pass
+
+    def get_weather_warnings(self, city: str) -> WeatherWarnings:
+        """Get the weather warnings for the input city
+
+        Parameters
+        ----------
+        city : str
+            The city the weather should be loaded for.
+
+        Returns the weather warnings as a WeatherWarnings
+        -------
         """
 
-        # Go through all data sources in order
+
+class WeatherApiWeatherGateway(WeatherGateway):
+
+    CURRENT_URL = 'https://api.weatherapi.com/v1/current.json?key={}&q={}'
+    FORECAST_URL = 'https://api.weatherapi.com/v1/forecast.json?key={}&q={}&days={}'
+    ALERT_URL = 'https://api.weatherapi.com/v1/forecast.json?key={}&q={}&days={}'
+
+    def __init__(self):
+        WeatherGateway.__init__(self)
+
+        # TODO xFrednet 2020.09.12: Load the API key from somewhere else this isn't the nicest way
+        self.api_key = 'b0cf0f6686224ec6a9f164627201209'
+
+    def get_weather_current(self, city: str) -> (CurrentWeatherData, WeatherGatewayError):
+        url = WeatherApiWeatherGateway.CURRENT_URL.format(
+            self.api_key,
+            city
+        )
+
+        data, error = WeatherApiWeatherGateway._send_request(url)
+        if error is not None:
+            return data, error
+
+        return WeatherApiWeatherGateway._parse_current_weather_data(data)
+
+    @staticmethod
+    def _parse_current_weather_data(data) -> (CurrentWeatherData, WeatherGatewayError):
+        try:
+            response = json.loads(data)
+
+            location_data = response["location"]
+            current_data = response["current"]
+
+            return CurrentWeatherData(
+                date_time=datetime.datetime.fromtimestamp(int(current_data["last_updated_epoch"])),
+                lat=float(location_data["lat"]),
+                lon=float(location_data["lon"]),
+                name=location_data["name"],
+                temp_c=float(current_data["temp_c"]),
+                wind_kph=float(current_data["wind_kph"]),
+                precipitation_mm=float(current_data["precip_mm"]),
+                cloud=int(current_data["cloud"]),
+                visibility_km=float(current_data["vis_km"]),
+            ), None
+
+        except:
+            return None, WeatherGatewayError(
+                WeatherGatewayError.ERR_TYPE_PARSING,
+                0,
+                "IDK, bad documentation an such, you should never see this (Hello @Test)"
+            )
+
+    def get_weather_forecast(self, city: str, days: int = 3) -> ForecastWeatherData:
+        pass
+
+    def get_weather_warnings(self, city: str) -> WeatherWarnings:
+        pass
+
+    @staticmethod
+    def _send_request(url) -> (str, WeatherGatewayError):
         data = None
-        is_new = False
-        for source in self.data_sources:
-            is_new = False
-            data, is_new, error = source.load_data(lat, lon)
 
-            # Test if the data request was successful
-            if data is not None:
-                break
+        try:
+            data = urllib.request.urlopen(url).read()
+        except urllib.error.HTTPError as e:
+            error_text = None
 
-            if error is not None:
-                print(error)
-                return
+            if e.code == 401:
+                # Unauthorized: happens when the API key is outdated.
+                error_text = 'The API key is invalid'
+            if e.code == 400:
+                # Bad Request: Happens when the city is invalid.
+                error_text = 'The city name is invalid'
 
-        # Test if data is valid
-        if data is None:
-            print("Error: WeatherGateway: every data source has failed to supply data")
-            return None
+            return None, WeatherGatewayError(
+                WeatherGatewayError.ERR_TYPE_HTTP,
+                e.code,
+                error_text
+            )
+        # TODO xFrednet 2020.09.12: More error handling
 
-        # Inform the raw data listeners if the data is new
-        if is_new:
-            for lister in self.new_data_listeners:
-                lister.new_weather_data_callback(data)
+        return data, None
 
-        # Hand over to translate the data
-        # No undefined behavior over here I've learned that from Rust and C so please hug me
-        return data
-
-
-class WeatherDataSource:
-    pass

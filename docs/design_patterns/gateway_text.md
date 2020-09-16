@@ -5,7 +5,14 @@ Gateways also offer a great opportunity to implement a _Service Stub_ (See TODO 
 
 ## Use within the project
 
+### Weather API
 // TODO
+
+* How
+* Why
+
+### XYZ
+
 
 # Sources
 
