@@ -4,6 +4,7 @@ import datetime
 
 from .weather_data import CurrentWeatherData
 from .weather_data import ForecastWeatherData
+from .weather_data import ForecastDayWeatherData
 from .weather_data import WeatherWarnings
 
 
@@ -54,7 +55,7 @@ class WeatherGateway:
         """
         pass
 
-    def get_weather_forecast(self, city: str, days: int = 3) -> ForecastWeatherData:
+    def get_weather_forecast(self, city: str, days: int = 3) -> (ForecastWeatherData, WeatherGatewayError):
         """Get the weather forecast for x days
 
         Parameters
@@ -80,6 +81,7 @@ class WeatherGateway:
         Returns the weather warnings as a WeatherWarnings
         -------
         """
+        pass
 
 
 class WeatherApiWeatherGateway(WeatherGateway):
@@ -133,18 +135,72 @@ class WeatherApiWeatherGateway(WeatherGateway):
                 "IDK, bad documentation an such, you should never see this (Hello @Test)"
             )
 
-    def get_weather_forecast(self, city: str, days: int = 3) -> ForecastWeatherData:
-        pass
+    def get_weather_forecast(self, city: str, days: int = 3) -> (ForecastWeatherData, WeatherGatewayError):
+        # An interesting thing. The forecast of WeatherAPI is broken. Even when I try
+        # it on https://www.weatherapi.com/api-explorer.aspx. It will always only return
+        # three days. Super funny and interesting if you ask me but it causes some tests to fail #58
+        # -.- ~xFrednet 2020.09.17
+        days = 3
+
+        url = WeatherApiWeatherGateway.FORECAST_URL.format(
+            self.api_key,
+            city,
+            days
+        )
+
+        data, error = WeatherApiWeatherGateway._send_request(url)
+        if error is not None:
+            return data, error
+
+        return WeatherApiWeatherGateway._parse_forecast_weather_data(data)
+
+    @staticmethod
+    def _parse_forecast_weather_data(data):
+        try:
+            response = json.loads(data)
+
+            location_data = response["location"]
+            json_days = response["forecast"]["forecastday"]
+            forecast_days = []
+
+            for json_day in json_days:
+                json_day_sub = json_day['day']
+                forecast_days.append(
+                    ForecastDayWeatherData(
+                        date_time=int(json_day['date_epoch']),
+                        min_temp_c=float(json_day_sub['mintemp_c']),
+                        max_temp_c=float(json_day_sub['maxtemp_c']),
+                        avg_temp_c=float(json_day_sub['avgtemp_c']),
+                        max_wind_kmh=float(json_day_sub['maxwind_kph']),
+                        precipitation_mm=float(json_day_sub['totalprecip_mm']),
+                        avg_visibility_km=float(json_day_sub['avgvis_km']),
+                        chance_rain=float(json_day_sub['daily_chance_of_rain']) / 100.0,
+                        chance_snow=float(json_day_sub['daily_chance_of_snow']) / 100.0
+                    ))
+
+            return ForecastWeatherData(
+                date_time=datetime.datetime.now(),
+                lat=float(location_data["lat"]),
+                lon=float(location_data["lon"]),
+                name=location_data["name"],
+                days=forecast_days
+            ), None
+
+        except:
+            return None, WeatherGatewayError(
+                WeatherGatewayError.ERR_TYPE_PARSING,
+                0,
+                "IDK, bad documentation an such, you should never see this (Hello @Test)"
+            )
 
     def get_weather_warnings(self, city: str) -> WeatherWarnings:
         pass
 
     @staticmethod
     def _send_request(url) -> (str, WeatherGatewayError):
-        data = None
-
         try:
             data = urllib.request.urlopen(url).read()
+            return data, None
         except urllib.error.HTTPError as e:
             error_text = None
 
@@ -161,6 +217,3 @@ class WeatherApiWeatherGateway(WeatherGateway):
                 error_text
             )
         # TODO xFrednet 2020.09.12: More error handling
-
-        return data, None
-

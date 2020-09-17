@@ -17,6 +17,7 @@ class TestWeatherApiDataSource(unittest.TestCase):
         self.assertEqual(data.name, 'Reykjavik')
         # I can't test the rest because well look out the window the
         # weather in Reykjavik is constantly changing ^^
+        # Well we could test for rain to get a 50% success rate xD ~xFrednet 2020.09.16
 
     def test_get_current_weather_invalid_key(self):
         data_source = WeatherApiWeatherGateway()
@@ -37,7 +38,7 @@ class TestWeatherApiDataSource(unittest.TestCase):
         # ... I should really, really stop listening to music during development
         # and stop listening the voices in my head that say that this is funny...
         # Anyways how is your day MR reviewer? ~xFrednet
-        # I have no and I mean NO idea wat I was thinking when I wrote the first question...
+        # I have no and I mean NO idea what I was thinking when I wrote the first question...
         # But I'll leave it in for fun ~xFrednet 2020.09.16
         data, error = data_source.get_weather_current('some_invalid_city')
 
@@ -79,7 +80,7 @@ class TestWeatherApiDataSource(unittest.TestCase):
         self.assertEqual(data.visibility_km, 10.0)
 
         # Invalid syntax
-        data, error = WeatherApiWeatherGateway._parse_current_weather_data('{draws, life is like a roller coaster')
+        data, error = WeatherApiWeatherGateway._parse_current_weather_data('{life is like a roller coaster')
         self.assertIsNone(data)
         self.assertIsNotNone(error)
         self.assertEqual(error.err_type, WeatherGatewayError.ERR_TYPE_PARSING)
@@ -97,6 +98,18 @@ class TestWeatherApiDataSource(unittest.TestCase):
         self.assertEqual(error.err_type, WeatherGatewayError.ERR_TYPE_PARSING)
         self.assertEqual(error.err_sub_id, 0)
 
+    def test_get_forecast_data(self):
+        data_source = WeatherApiWeatherGateway()
+
+        data, error = data_source.get_weather_forecast('Reykjavik', days=4)
+
+        self.assertIsNotNone(data)
+        self.assertIsNone(error)
+
+        self.assertEqual(data.name, 'Reykjavik')
+        # Funny story explained in the API class. The api is broken and will always return
+        # three days ^^. Tracked by #58 ~xFrednet
+        # self.assertEqual(len(data.days), 4)
 
 if __name__ == '__main__':
     unittest.main()
