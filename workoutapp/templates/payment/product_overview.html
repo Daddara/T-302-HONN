@@ -67,15 +67,15 @@
                 if(data.status ==400){
                     var invalidID = parseInt(data.body['error']);
                     if(invalidID==1){
-                        window.location.href = "{% url 'payment-invalid' invalid_id=666 %}".replace(/666/, invalidID.toString())
+                        window.location.href = "{% url 'invalid-payment' invalid_id=666 %}".replace(/666/, invalidID.toString())
                     }
                     if(invalidID==2){
-                        window.location.href = "{% url 'payment-invalid' invalid_id=666 %}".replace(/666/, invalidID.toString())
+                        window.location.href = "{% url 'invalid-payment' invalid_id=666 %}".replace(/666/, invalidID.toString())
                     }
                 }
                 if(data.status ==404){
                     var productID = parseInt(data.body['productID']);
-                    window.location.href = "{% url 'payment-invalid' invalid_id=666 %}".replace(/666/, productID.toString())
+                    window.location.href = "{% url 'product-404' product_id=666 %}".replace(/666/, productID.toString())
                 }
 
             })
