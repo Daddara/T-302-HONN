@@ -19,7 +19,7 @@ test:
     - cd workoutapp
     - python manage.py migrate
     - coverage erase
-    - coverage manage.py test
+    - coverage run manage.py test
     - coverage report
   only:
     - merge_requests
