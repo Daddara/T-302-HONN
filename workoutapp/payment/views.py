@@ -78,16 +78,45 @@ def payment_invalid(request, invalid_id):
     # invalid 1 : Amount tampering
     if invalid_id == 1:
         return render(request, '400.html', context={'error': 'The price of the product was tampered with. The order'
-                                                             'not processed. Please contact support, or refund via '
+                                                             'was canceled. Please contact support, or refund via '
                                                              'paypal.'})
     # invalid 2 : Currency tampering
     if invalid_id == 2:
-        return HttpResponse(request, '400.html', context={'error': 'You have paid with the incorrect currency. Please'
-                                                                   'contact the administrators of the website via the '
-                                                                   'support page.'})
+        return render(request, '400.html', context={'error': 'You have paid with the incorrect currency. Please'
+                                                             'contact the administrators of the website via the '
+                                                             'support page.'})
+
+    else:
+        return render(request, '400.html', context={'error': 'Something unexplainable went wrong.'})
 
 
 @login_required
 def donate(request):
     # donate to a user
     pass
+
+
+def service_payment_complete(request, product_id, error_insertion):
+    """This is the service stub for the payment system. It allows bypassing of paypal payments in order to test
+    the functionality of the system. Instead of calling the payment_complete view when testing we call this view.
+    The paypal integration is still available on the client side."""
+    # For exception handling test
+    if error_insertion != 0:
+        return redirect('invalid-payment', invalid_id=error_insertion)
+
+    # Get product by id, return 404 if doesn't exist
+    try:
+        product = Product.objects.get(pk=product_id)
+    except Product.DoesNotExist:
+        return redirect('product-404')
+
+    # Everything checks out -> Create an order
+    new_order = Order.objects.create(product=product, customer=request.user, price=product.price_usd())
+    new_order.save()
+    user = request.user  # Fetching user
+    user_wallet = Wallet.objects.get(user=user)  # Fetching user wallet
+    user_wallet.add_balance(product.fitcoins)  # Adding to user balance
+
+    # Get the order ID straight from this view and redirect to completion page
+    order_id = new_order.id
+    return redirect('payment-success', order_id=order_id)
