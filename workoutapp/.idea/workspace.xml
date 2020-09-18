@@ -27,7 +27,9 @@
   <component name="ChangeListManager">
     <list default="true" id="cf7a409e-e59f-4519-8061-4b7a2faab5b8" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/payment/product_overview.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/payment/product_overview.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/local_database" beforeDir="false" afterPath="$PROJECT_DIR$/local_database" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/payment/tests.py" beforeDir="false" afterPath="$PROJECT_DIR$/payment/tests.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/user/tests.py" beforeDir="false" afterPath="$PROJECT_DIR$/user/tests.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -78,6 +80,33 @@
       <recent name="C:\Users\agirm\OneDrive\Documents\HR\3 önn\Hönnun og smíðu hugbúnaðar\gitlab_repo\t-302-honn-2020-team-9\workoutapp\static\checkout\js" />
     </key>
   </component>
+  <component name="RunManager">
+    <configuration name="Test: payment.tests.TestPayment.test_shop_fitcoins" type="DjangoTestsConfigurationType" temporary="true">
+      <module name="workoutapp" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
+      <option name="TARGET" value="payment.tests.TestPayment.test_shop_fitcoins" />
+      <option name="SETTINGS_FILE" value="" />
+      <option name="CUSTOM_SETTINGS" value="false" />
+      <option name="USE_OPTIONS" value="false" />
+      <option name="OPTIONS" value="" />
+      <method v="2" />
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Django tests.Test: payment.tests.TestPayment.test_shop_fitcoins" />
+      </list>
+    </recent_temporary>
+  </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
@@ -90,7 +119,9 @@
       <workItem from="1599604679547" duration="91000" />
       <workItem from="1599604864642" duration="22000" />
       <workItem from="1600169748904" duration="5041000" />
-      <workItem from="1600343430585" duration="40818000" />
+      <workItem from="1600343430585" duration="41129000" />
+      <workItem from="1600427109835" duration="5267000" />
+      <workItem from="1600442033954" duration="11246000" />
     </task>
     <servers />
   </component>
@@ -118,13 +149,36 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="740" y="275" key="FileChooserDialogImpl/0.0.1920.1040@0.0.1920.1040" timestamp="1600348374871" />
-    <state x="461" y="165" key="SettingsEditor" timestamp="1600348592649">
+    <state width="938" height="282" key="GridCell.Tab.0.bottom" timestamp="1600439942288">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="461" y="165" key="SettingsEditor/0.0.1920.1040@0.0.1920.1040" timestamp="1600348592649" />
+    <state width="938" height="282" key="GridCell.Tab.0.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1600439942288" />
+    <state width="938" height="282" key="GridCell.Tab.0.center" timestamp="1600439942288">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state width="938" height="282" key="GridCell.Tab.0.center/0.0.1920.1040@0.0.1920.1040" timestamp="1600439942288" />
+    <state width="938" height="282" key="GridCell.Tab.0.left" timestamp="1600439942288">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state width="938" height="282" key="GridCell.Tab.0.left/0.0.1920.1040@0.0.1920.1040" timestamp="1600439942288" />
+    <state width="938" height="282" key="GridCell.Tab.0.right" timestamp="1600439942288">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state width="938" height="282" key="GridCell.Tab.0.right/0.0.1920.1040@0.0.1920.1040" timestamp="1600439942288" />
+    <state x="461" y="165" key="SettingsEditor" timestamp="1600442144172">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="461" y="165" key="SettingsEditor/0.0.1920.1040@0.0.1920.1040" timestamp="1600442144172" />
+    <state x="777" y="434" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1600444257309">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="777" y="434" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/0.0.1920.1040@0.0.1920.1040" timestamp="1600444257309" />
     <state x="623" y="225" width="672" height="678" key="search.everywhere.popup" timestamp="1600277580117">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="623" y="225" width="672" height="678" key="search.everywhere.popup/0.0.1920.1040@0.0.1920.1040" timestamp="1600277580117" />
+  </component>
+  <component name="com.intellij.coverage.CoverageDataManagerImpl">
+    <SUITE FILE_PATH="coverage/workoutapp$Test__payment_tests_TestPayment_test_shop_fitcoins.coverage" NAME="Test: payment.tests.TestPayment.test_shop_fitcoins Coverage Results" MODIFIED="1600429466709" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="" />
   </component>
 </project>
