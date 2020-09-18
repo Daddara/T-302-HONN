@@ -19,12 +19,6 @@
         <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
         <item name="REMOTE_ROOT" type="e8cecc67:BranchNodeDescriptor" />
         <item name="GROUP_NODE:origin" type="e8cecc67:BranchNodeDescriptor" />
-        <item name="GROUP_NODE:haffi" type="e8cecc67:BranchNodeDescriptor" />
-      </path>
-      <path>
-        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
-        <item name="REMOTE_ROOT" type="e8cecc67:BranchNodeDescriptor" />
-        <item name="GROUP_NODE:origin" type="e8cecc67:BranchNodeDescriptor" />
         <item name="GROUP_NODE:xFrednet" type="e8cecc67:BranchNodeDescriptor" />
       </path>
     </expand>
@@ -32,18 +26,53 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="cf7a409e-e59f-4519-8061-4b7a2faab5b8" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/static/main/images/cover.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/templates/400.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/templates/404.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/templates/payment/complete.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/templates/payment/fitcoin_product.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/templates/payment/order_details.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/templates/payment/overview.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/templates/payment/product_overview.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/templates/payment/purchase_fitcoin_redirect_button.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/templates/payment/purchase_product_redirect_button.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/templates/payment/shop_fitcoins.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/templates/wallet/user_purchase_history.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/templates/wallet/user_transaction_history.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/templates/wallet/user_wallet.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/templates/wallet/wallet_redirect_button.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/wallet/urls.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workoutapp.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workoutapp.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/local_database" beforeDir="false" afterPath="$PROJECT_DIR$/local_database" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/main.css" beforeDir="false" afterPath="$PROJECT_DIR$/static/main.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/wallet/css/wallet.css" beforeDir="false" afterPath="$PROJECT_DIR$/static/wallet/css/wallet.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/wallet/js/payment.js" beforeDir="false" afterPath="$PROJECT_DIR$/payment/urls.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/base.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/base.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/wallet/donation_button.html" beforeDir="false" afterPath="$PROJECT_DIR$/static/payment/css/shop_fitcoins.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/wallet/purchase.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/payment/donation_button.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/wallet/wallet.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/wallet/wallet.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/user/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/user/views.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/wallet/admin.py" beforeDir="false" afterPath="$PROJECT_DIR$/wallet/admin.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/wallet/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/wallet/models.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/wallet/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/wallet/views.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/workout_project/settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/workout_project/settings.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/workout_project/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/workout_project/urls.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
+  <component name="DjangoConsoleOptions" custom-start-script="import sys; print('Python %s on %s' % (sys.version, sys.platform))&#10;import django; print('Django %s' % django.get_version())&#10;sys.path.extend([WORKING_DIR_AND_PYTHON_PATHS])&#10;if 'setup' in dir(django): django.setup()&#10;import django_manage_shell; django_manage_shell.run(PROJECT_ROOT)">
+    <option name="myCustomStartScript" value="import sys; print('Python %s on %s' % (sys.version, sys.platform))&#10;import django; print('Django %s' % django.get_version())&#10;sys.path.extend([WORKING_DIR_AND_PYTHON_PATHS])&#10;if 'setup' in dir(django): django.setup()&#10;import django_manage_shell; django_manage_shell.run(PROJECT_ROOT)" />
+  </component>
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
-        <option value="CSS File" />
         <option value="JavaScript File" />
+        <option value="CSS File" />
         <option value="HTML File" />
       </list>
     </option>
@@ -51,17 +80,18 @@
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
   </component>
-  <component name="JupyterTrust" id="cffcff8c-aa0a-4ce3-996a-5e507a37b936" />
+  <component name="JupyterTrust" id="6557bafd-06a2-46c1-b1fb-9d7c540485df" />
   <component name="ProjectId" id="1hFQwbQo4x8AYSYLijUEcoaLX0E" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
   <component name="PropertiesComponent">
+    <property name="ASKED_ADD_EXTERNAL_FILES" value="true" />
     <property name="DefaultHtmlFileTemplate" value="HTML File" />
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/../../../../Hugbúnaðarfræði/votes_db/hugb2020template/src/polling_api" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/workout_project/settings.py" />
     <property name="list.type.of.created.stylesheet" value="CSS" />
     <property name="node.js.detected.package.eslint" value="true" />
     <property name="node.js.detected.package.tslint" value="true" />
@@ -69,7 +99,15 @@
     <property name="node.js.path.for.package.tslint" value="project" />
     <property name="node.js.selected.package.eslint" value="(autodetect)" />
     <property name="node.js.selected.package.tslint" value="(autodetect)" />
-    <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable" />
+    <property name="settings.editor.selected.configurable" value="com.jetbrains.django.DjangoModulesConfigurable" />
+  </component>
+  <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\agirm\OneDrive\Documents\HR\3 önn\Hönnun og smíðu hugbúnaðar\gitlab_repo\t-302-honn-2020-team-9\workoutapp\static\main\images" />
+      <recent name="C:\Users\agirm\OneDrive\Documents\HR\3 önn\Hönnun og smíðu hugbúnaðar\gitlab_repo\t-302-honn-2020-team-9\workoutapp\templates" />
+      <recent name="C:\Users\agirm\OneDrive\Documents\HR\3 önn\Hönnun og smíðu hugbúnaðar\gitlab_repo\t-302-honn-2020-team-9\workoutapp\templates\payment" />
+      <recent name="C:\Users\agirm\OneDrive\Documents\HR\3 önn\Hönnun og smíðu hugbúnaðar\gitlab_repo\t-302-honn-2020-team-9\workoutapp\static\checkout\js" />
+    </key>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
@@ -83,6 +121,7 @@
       <workItem from="1599604679547" duration="91000" />
       <workItem from="1599604864642" duration="22000" />
       <workItem from="1600169748904" duration="5041000" />
+      <workItem from="1600343430585" duration="39382000" />
     </task>
     <servers />
   </component>
@@ -99,15 +138,24 @@
         </entry>
       </map>
     </option>
+    <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="WindowStateProjectService">
-    <state x="740" y="275" key="FileChooserDialogImpl" timestamp="1599604883139">
+    <state x="414" y="175" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1600348238772">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="740" y="275" key="FileChooserDialogImpl/0.0.1920.1040@0.0.1920.1040" timestamp="1599604883139" />
-    <state x="461" y="165" key="SettingsEditor" timestamp="1599604659051">
+    <state x="414" y="175" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1600348238772" />
+    <state x="740" y="275" key="FileChooserDialogImpl" timestamp="1600348374871">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="461" y="165" key="SettingsEditor/0.0.1920.1040@0.0.1920.1040" timestamp="1599604659051" />
+    <state x="740" y="275" key="FileChooserDialogImpl/0.0.1920.1040@0.0.1920.1040" timestamp="1600348374871" />
+    <state x="461" y="165" key="SettingsEditor" timestamp="1600348592649">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="461" y="165" key="SettingsEditor/0.0.1920.1040@0.0.1920.1040" timestamp="1600348592649" />
+    <state x="623" y="225" width="672" height="678" key="search.everywhere.popup" timestamp="1600277580117">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="623" y="225" width="672" height="678" key="search.everywhere.popup/0.0.1920.1040@0.0.1920.1040" timestamp="1600277580117" />
   </component>
 </project>

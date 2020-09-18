@@ -38,6 +38,7 @@ INSTALLED_APPS = [
     'user.apps.UserConfig',
     'workout.apps.WorkoutsConfig',
     'wallet.apps.WalletConfig',
+    'payment.apps.PaymentConfig',
 ]
 
 MIDDLEWARE = [
