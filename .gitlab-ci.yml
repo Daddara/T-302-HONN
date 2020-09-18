@@ -17,6 +17,9 @@ before_script:
 test:
   script:
     - cd workoutapp
-    - python manage.py test
+    - python manage.py migrate
+    - coverage erase
+    - coverage manage.py test
+    - coverage report
   only:
     - merge_requests
