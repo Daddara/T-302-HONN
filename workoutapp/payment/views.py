@@ -32,26 +32,26 @@ def payment_complete(request):
     try:
         body = json.loads(request.body)
     except JSONDecodeError:
-        return JsonResponse({'Error': 1}, status=204)
+        return JsonResponse({'Error': 1}, status=400)
     currency = str(body['currency'])
     amount = round(float(body['amount']), 2)
 
     # If someone tampered with currency
     if not currency == 'USD':
         print("currency invalid")
-        return JsonResponse({'Error': 2}, status=204)
+        return JsonResponse({'Error': 2}, status=400)
     product_id = int(body['productID'])
 
     # Get product by id, return 404 if doesn't exist
     try:
         product = Product.objects.get(pk=product_id)
     except Product.DoesNotExist:
-        return JsonResponse({'productID': product_id}, status=203)
+        return JsonResponse({'productID': product_id}, status=404)
 
     # If someone tampered with the price of the product
     if not float(amount) == float(product.price_usd()):
         print("amount invalid")
-        return JsonResponse({'Error': 1}, status=204)
+        return JsonResponse({'Error': 1}, status=400)
 
     # Everything checks out -> Create an order
     new_order = Order.objects.create(product=product, customer=request.user, price=product.price_usd())

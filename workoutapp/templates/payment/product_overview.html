@@ -64,7 +64,7 @@
                     window.location.href = "{% url 'payment-success' order_id=666 %}".replace(/666/, orderID.toString())
                 return;
                 }
-                if(data.status ==204){
+                if(data.status ==400){
                     var invalidID = parseInt(data.body['error']);
                     if(invalidID==1){
                         console.log("Error 1");
@@ -75,7 +75,7 @@
                         window.location.href = "{% url 'invalid-payment' invalid_id=666 %}".replace(/666/, invalidID.toString())
                     }
                 }
-                if(data.status ==203){
+                if(data.status ==404){
                     var productID = parseInt(data.body['productID']);
                     window.location.href = "{% url 'product-404' product_id=666 %}".replace(/666/, productID.toString())
                 }
