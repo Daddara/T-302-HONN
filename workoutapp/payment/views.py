@@ -1,4 +1,6 @@
 import json
+from json import JSONDecodeError
+
 from django.contrib.auth.decorators import login_required
 from django.http import JsonResponse, HttpResponse
 from django.shortcuts import render, get_object_or_404, redirect
@@ -27,26 +29,29 @@ def payment_complete(request):
     """This view is called via javascript method completeOrder in order_overview.html file after the payment has been
     processed in the paypal client. The purpose of this view is to check if all the payment data received from paypal is
     valid, and returns an appropriate response"""
-    body = json.loads(request.body)
+    try:
+        body = json.loads(request.body)
+    except JSONDecodeError:
+        return JsonResponse({'Error': 1}, status=204)
     currency = str(body['currency'])
     amount = round(float(body['amount']), 2)
 
     # If someone tampered with currency
     if not currency == 'USD':
         print("currency invalid")
-        return JsonResponse({'Error': 2}, status=400)
+        return JsonResponse({'Error': 2}, status=204)
     product_id = int(body['productID'])
 
     # Get product by id, return 404 if doesn't exist
     try:
         product = Product.objects.get(pk=product_id)
     except Product.DoesNotExist:
-        return JsonResponse({'productID': product_id}, status=404)
+        return JsonResponse({'productID': product_id}, status=203)
 
     # If someone tampered with the price of the product
     if not float(amount) == float(product.price_usd()):
         print("amount invalid")
-        return JsonResponse({'Error': 1}, status=400)
+        return JsonResponse({'Error': 1}, status=204)
 
     # Everything checks out -> Create an order
     new_order = Order.objects.create(product=product, customer=request.user, price=product.price_usd())
@@ -96,6 +101,7 @@ def donate(request):
     pass
 
 
+@login_required
 def service_payment_complete(request, product_id, error_insertion):
     """This is the service stub for the payment system. It allows bypassing of paypal payments in order to test
     the functionality of the system. Instead of calling the payment_complete view when testing we call this view.
