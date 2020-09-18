@@ -41,7 +41,7 @@ def payment_complete(request):
     try:
         product = Product.objects.get(pk=product_id)
     except Product.DoesNotExist:
-        return JsonResponse({'Error': 404}, status=404)
+        return JsonResponse({'productID': product_id}, status=404)
 
     # If someone tampered with the price of the product
     if not float(amount) == float(product.price_usd()):

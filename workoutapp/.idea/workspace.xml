@@ -26,39 +26,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="cf7a409e-e59f-4519-8061-4b7a2faab5b8" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/static/main/images/cover.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/templates/400.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/templates/404.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/templates/payment/complete.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/templates/payment/fitcoin_product.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/templates/payment/order_details.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/templates/payment/overview.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/templates/payment/product_overview.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/templates/payment/purchase_fitcoin_redirect_button.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/templates/payment/purchase_product_redirect_button.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/templates/payment/shop_fitcoins.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/templates/wallet/user_purchase_history.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/templates/wallet/user_transaction_history.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/templates/wallet/user_wallet.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/templates/wallet/wallet_redirect_button.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/wallet/urls.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workoutapp.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workoutapp.iml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/local_database" beforeDir="false" afterPath="$PROJECT_DIR$/local_database" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/static/main.css" beforeDir="false" afterPath="$PROJECT_DIR$/static/main.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/static/wallet/css/wallet.css" beforeDir="false" afterPath="$PROJECT_DIR$/static/wallet/css/wallet.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/static/wallet/js/payment.js" beforeDir="false" afterPath="$PROJECT_DIR$/payment/urls.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/base.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/base.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/wallet/donation_button.html" beforeDir="false" afterPath="$PROJECT_DIR$/static/payment/css/shop_fitcoins.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/wallet/purchase.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/payment/donation_button.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/wallet/wallet.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/wallet/wallet.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/user/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/user/views.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/wallet/admin.py" beforeDir="false" afterPath="$PROJECT_DIR$/wallet/admin.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/wallet/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/wallet/models.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/wallet/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/wallet/views.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/workout_project/settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/workout_project/settings.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/workout_project/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/workout_project/urls.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/payment/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/payment/views.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/payment/product_overview.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/payment/product_overview.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -121,7 +91,7 @@
       <workItem from="1599604679547" duration="91000" />
       <workItem from="1599604864642" duration="22000" />
       <workItem from="1600169748904" duration="5041000" />
-      <workItem from="1600343430585" duration="39382000" />
+      <workItem from="1600343430585" duration="40570000" />
     </task>
     <servers />
   </component>
