@@ -1,8 +1,7 @@
 from django.shortcuts import render, redirect
 # Create your views here.
 from django.http import HttpResponse
-from .forms.create_workout_form import CreateWorkoutForm
-from .models import Workout, Exercise
+from .forms.create_workout_form import WorkoutForm, WorkoutManagerForm, ExerciseForm
 
 
 def index(request):
@@ -11,16 +10,19 @@ def index(request):
 
 def create_workout(request):
     if request.method == 'POST':
-        form = CreateWorkoutForm(data=request.POST)
-        if form.is_valid():
-            form.save()
-            return redirect('login')
+        workout_form = WorkoutForm(data=request.POST)
+        workout_man_form = WorkoutManagerForm(data=request.POST)
+        exercise_form = ExerciseForm(data=request.POST)
+        if workout_form.is_valid() and workout_man_form.is_valid() and exercise_form.is_valid():
+            workout_form.save()
+            workout_man_form.save()
+            exercise_form.save()
+            workout_man_form.workout = workout_form
+            return redirect('user/placeholder_page.html')
 
-        return render(request, "workoutapp/templates/createWorkout/create_workout.html", {
-            'form': CreateWorkoutForm(), "errors": form.errors
-        })
+        return render(request, 'createWorkout/create_workout.html', {
+            'form': WorkoutForm(), 'errors': workout_form.errors})
 
-    return render(request, "workoutapp/templates/createWorkout/create_workout.html", {
-        'form': CreateWorkoutForm()
-    })
-    return render(request, "workoutapp/templates/dashboard/dashboard.html", {})
+    else:
+        form = WorkoutForm()
+    return render(request, 'createWorkout/create_workout.html', {'form': form})

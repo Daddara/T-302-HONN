@@ -1,31 +1,12 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Workout</title>
-    <link rel="stylesheet" href="../../static/main.css" />
-
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="
-    sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
-</head>
-<body>
-<div class="container">
-
-<h1>Create a public workout</h1>
-    <form>
-        <select name="exercise">
-            <option selected value="base">Add exercise</option>
-            <option value="squats">Squats</option>
-            <option value="box_jumps">Box Jumps</option>
-            <option value="push_up">Push up</option>
-            <option value="run">Run</option>
-        </select>
+{% extends "base.html" %}
+{% block content %}
+{% if user.is_authenticated %}
+    <h1>Create Workout</h1>
+    <form method="post" class="form form-horizontal" >
+        {% csrf_token %}
+        {{ form }}
+        <input type="submit" class="btn btn-primary" value="Create Workout" />
     </form>
-    </div>
-
-
-</body>
-</html>
+    <div class="mt-2 alert alert-warning">{{ errors }}</div>
+{% endif %}
+{% endblock %}

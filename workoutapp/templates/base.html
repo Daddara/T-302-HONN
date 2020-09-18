@@ -1,4 +1,5 @@
-<!DOCTYPE html>
+{% load static %}
+<!doctype html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -7,29 +8,32 @@
     {% block extra_head %}
 
     {% endblock %}
+    <link href="{% static 'main.css' %}" rel="stylesheet" type="text/css">
 </head>
 <body>
 <!--Main Navigation-->
 <header>
+<div class="container">
 <div>
-    <h1>Header & Navbar</h1>
+    <h1>Workout</h1>
 </div>
 
     <div>
         {% if user.is_authenticated %}
         <li><a href="{% url 'logout' %}">Logout</a></li>
+        <li><a href="{% url 'create workout' %}">Create Workout</a></li>
         {% else %}
         <li><a href="{% url 'login' %}">Login</a></li>
         <li><a href="{% url 'register' %}">Sign up</a></li>
         {% endif %}
     </div>
-
+</div>
 </header>
 <!--Main Navigation-->
 
 <!--Main Layout-->
 <main>
-    <div class="m-5">
+    <div class="m-5" id="container">
         {% block content %}
         {% endblock %}
     </div>
