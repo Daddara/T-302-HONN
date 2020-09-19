@@ -1,9 +1,12 @@
 from django.contrib.auth.forms import UserCreationForm
+from django.contrib.auth.models import User
 from django.shortcuts import render, redirect
 from django.contrib.auth import login, authenticate
 from django.shortcuts import render, redirect
 
+from wallet.models import Wallet
 from .forms.create_account_form import CreateAccountForm
+
 
 # Create your views here.
 def register(request):
@@ -11,15 +14,20 @@ def register(request):
         form = CreateAccountForm(data=request.POST)
         if form.is_valid():
             form.save()
+            username = form.cleaned_data['username']
+            new_user = User.objects.get(username=username)
+            wallet = Wallet.objects.create(user=new_user)
+            wallet.save()
             return redirect('login')
 
         return render(request, 'user/register.html', {
-            'form': CreateAccountForm(), "errors": form.errors
+            'form': form, "errors": form.errors
         })
 
     return render(request, 'user/register.html', {
-            'form': CreateAccountForm()
-        })
+        'form': CreateAccountForm()
+    })
+
 
 def placeholder_home(request):
     return render(request, 'user/placeholder_page.html')

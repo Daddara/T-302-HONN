@@ -1,8 +1,15 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=yes">
     <title>Fitness app</title>
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+          integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+
+    <link rel="stylesheet" href="{% static 'main.css' %}">
     <!-- For extra css for specific pages -->
     {% block extra_head %}
 
@@ -11,19 +18,62 @@
 <body>
 <!--Main Navigation-->
 <header>
-<div>
-    <h1>Header & Navbar</h1>
-</div>
+    <!--LOGO HEADER START-->
+    <header>
+        <div class="jumbotron" id="logo-header">
+            <img class="header-image" src="{% static 'main/images/cover.png' %}">
+        </div>
+    </header>
+    <!--LOGO HEADER END-->
 
-    <div>
-        {% if user.is_authenticated %}
-        <li><a href="{% url 'logout' %}">Logout</a></li>
-        {% else %}
-        <li><a href="{% url 'login' %}">Login</a></li>
-        <li><a href="{% url 'register' %}">Sign up</a></li>
-        {% endif %}
-    </div>
+    <!--NAVIGATION BAR START-->
+    <nav id="navigation-bar" class="navbar navbar-expand-lg navbar-light bg-light">
+        <a id='home-nav' class="navbar-brand" href=#>Home</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo02"
+                aria-controls="navbarTogglerDemo02" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+        </button>
 
+        <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
+            <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
+                <li class="nav-item active">
+                    <a id='workout-nav' class="navbar-brand" href=#>Workouts<span class="sr-only">(current)</span></a>
+                </li>
+                <li class="nav-item active">
+                    <a id='exercise-nav' class="navbar-brand" href=#>Exercises<span class="sr-only">(current)</span></a>
+                </li>
+                {% if user.is_authenticated %}
+                    <li class="nav-item active">
+                        <a id='my-listings-nav' class="navbar-brand" href="#">My Dashboard<span class="sr-only">(current)</span></a>
+                    </li>
+                {% endif %}
+            </ul>
+            <ul class="navbar-nav ml-auto mt-2 mt-lg-0">
+                {% if user.is_authenticated %}
+                    <li class="nav-item">
+                        <a id='inbox-nav' class="navbar-brand" href="#">Inbox<span class="sr-only">(current)</span></a>
+                    </li>
+                    <li id="profile-button-container" class="nav-item">
+                        <a id="profile-nav-button" class="navbar-brand" href={% url 'profile' %}>Profile</a>
+                    </li>
+                    <li id="profile-button-container" class="nav-item">
+                        <a id="profile-nav-button" class="navbar-brand" href={% url 'wallet' %}>Wallet</a>
+                    </li>
+                    <li id="logout-button-container" class="nav-item">
+                        <a class="navbar-brand" href="{% url 'logout' %}">Logout</a>
+                    </li>
+                {% else %}
+                    <li id="login-button-container" class="nav-item">
+                        <a id="login-nav-button" class="navbar-brand" href="{% url 'login' %}">Login</a>
+                    </li>
+                    <li id="login-button-container" class="nav-item">
+                        <a id="login-nav-button" class="navbar-brand" href="{% url 'register' %}">Sign Up</a>
+                    </li>
+                {% endif %}
+            </ul>
+        </div>
+    </nav>
+    <!--NAVIGATION BAR END-->
 </header>
 <!--Main Navigation-->
 
@@ -35,19 +85,75 @@
     </div>
 </main>
 <!--Main Layout-->
+<!-- Footer -->
+<footer class="page-footer font-small blue pt-4">
+    <!-- Footer Links -->
+    <div class="container-fluid text-center text-md-left">
 
-<!--Main Footer-->
-<footer>
-<div>
-    <h1>Footer</h1>
-</div>
+        <!-- Grid row -->
+        <div class="row">
+            <!-- Grid column -->
+            <div class="col-md-6 mt-md-0 mt-3">
+                <!-- Content -->
+                <h5 class="text-uppercase">Footer Content</h5>
+                <p>Here you can use rows and columns to organize your footer content.</p>
+            </div>
+            <!-- Grid column -->
 
+            <hr class="clearfix w-100 d-md-none pb-3">
+
+            <!-- Grid column -->
+            <div class="col-md-3 mb-md-0 mb-3">
+                <!-- Links -->
+                <h5 class="text-uppercase">Links</h5>
+                <ul class="list-unstyled">
+                <li><a href="#!">Link 1</a></li>
+                <li><a href="#!">Link 2</a></li>
+                <li><a href="#!">Link 3</a></li>
+                <li><a href="#!">Link 4</a></li>
+                </ul>
+            </div>
+            <!-- Grid column -->
+
+            <!-- Grid column -->
+            <div class="col-md-3 mb-md-0 mb-3">
+                <!-- Links -->
+                <h5 class="text-uppercase">Links</h5>
+                <ul class="list-unstyled">
+                <li><a href="#!">Link 1</a></li>
+                <li><a href="#!">Link 2</a></li>
+                <li><a href="#!">Link 3</a></li>
+                <li><a href="#!">Link 4</a></li>
+                </ul>
+            </div>
+            <!-- Grid column -->
+        </div>
+        <!-- Grid row -->
+    </div>
+    <!-- Footer Links -->
+
+    <!-- Copyright -->
+    <div class="footer-copyright text-center py-3">© 2020 Copyright:
+    <a href="https://mdbootstrap.com/"> MDBootstrap.com</a>
+    </div>
+    <!-- Copyright -->
 </footer>
-<!--Main Footer-->
+<!-- Footer -->
+
 
     <script>
         const crfToken = '{{ csrf_token }}'
     </script>
+
+    <!-- link for Bootstrap -->
+    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
+            integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous">
+    </script>
+
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
+            integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous">
+    </script>
+
     {% block extra_js %}
 
     {% endblock %}

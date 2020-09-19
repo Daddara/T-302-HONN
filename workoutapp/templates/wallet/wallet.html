@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block extra_head %}
+
+{% endblock %}
+
+
+{% block content %}
+<div class="page-content">
+    <div class="wallet">
+        {% include 'wallet/user_wallet.html' with wallet=wallet %}
+    </div>
+
+    <div class="order-history">
+        <!-- include user_history template -->
+    </div>
+
+    <div class="transaction-history">
+        <!-- include user_transaction template -->
+    </div>
+
+
+    <div class="purchase-fitcoin-redirect-button">
+        {% include 'payment/purchase_fitcoin_redirect_button.html' %}
+    </div>
+</div>
+{% endblock %}
+
+
+{% block extra_js %}
+
+{% endblock %}
