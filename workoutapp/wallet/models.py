@@ -23,3 +23,35 @@ class Transaction(models.Model):
 
     def __str__(self):
         return self.sender.username + "-->" + self.receiver.username + " : " + str(self.amount)
+
+
+class Fitcoin:
+    TRANSLATION_CURRENCY = "USD"
+    EXCHANGE_RATE = 50
+
+    @classmethod
+    def to_usd(cls, fitcoins: int) -> float:
+        return round(fitcoins/cls.EXCHANGE_RATE, 2)
+
+    @classmethod
+    def to_fitcoin(cls, usd: float) -> int:
+        return round(cls.EXCHANGE_RATE*usd)
+
+    @classmethod
+    def translation_currency(cls) -> str:
+        return cls.TRANSLATION_CURRENCY
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -108,7 +108,7 @@ def donate(request):
 
 
 @login_required
-def service_payment_complete(request, product_id, error_insertion):
+def service_payment_validation(request, product_id, error_insertion):
     """This is the service stub for the payment system. It allows bypassing of paypal payments in order to test
     the functionality of the system. Instead of calling the payment_complete view when testing we call this view.
     The paypal integration is still available on the client side."""
