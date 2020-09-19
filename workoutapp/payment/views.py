@@ -72,7 +72,7 @@ def payment_validation(request):
 @login_required
 def payment_success(request, order_id):
     try:
-        order = Order.objects.get(pk=order_id)
+        order = Order.objects.get(pk=order_id, customer=request.user)
     except Order.DoesNotExist:
         return render(request, '404.html', context={'error': 'Order does not exist'})
 
