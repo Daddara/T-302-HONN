@@ -78,35 +78,35 @@ We've documented the used design patterns in [`docs/design_patterns`](docs/desig
 
 ## User stories
 The following are user stories to implement agreed by the TA
-* \#2 As a user I would like to be able to create and exercise that I can save and look at later.
-* \#5 As a user, I would like to be able to create a new workout using the website
-* \#9 As a user, I would like to be able to add exercises to my workout
-* \#10 As a user, I want to be able to create an account
-* \#11 As a user, I want to be able to log in and out of my account
-* \#12 As a user I want to be able to add other users to a friends list
-* \#13 As a user I want to be able to create a exercise plan for my exercises
-* \#14 As a user I want to be able to edit my exercise plan and add/remove exercises to/from it.
-* \#15 As a user I want to be able to decide whether my exercise plan is publicly visible or private
-* \#16 As a user I want to be able to view my created exercises
-* \#17 As a user I want to be able to view my create exercise plans
-* \#18 As a user I want to be able to view public exercise plans
-* \#19 As a user I want to be able to view public exercises
-* \#20 As a user I want to be able to create challenges and tag my friends in them.
-* \#23 As a user I want to be able to bookmark other users public plans/exercises 
-* \#24 As a user I want to be able to give a rating to other peoples public plans/exercises
-* \#25 As a user I would like to see which part of the body gets trained by an specific exercise
-* \#27 As a user I want to follow other users to be able to subscribe to their public created exercises/plans
-* \#29 As a user when I log in I want to see my dashboard
-* \#35 As a user I would like to send direct messages to users on my friends list.
-* \#36 As a user I would like to view my friends list.
-* \#37 As a user I would like to see my notification inbox
-* \#38 As a user I would like to be able to comment on a workout plan, so that I can voice my opinion on it.
-* \#39 As a user, I want to be able to delete an exercise plan, so that I can remove plans I'm unhappy with
-* \#40 As a user, I want to see a placeholder for deleted exercise plans that I bookmarked, so that I know that my favorite plan is no longer available
-* \#43 As a user I would like to sort publicly available workouts by popularity (clicks) so that I can see what others like.
-* \#45 As a user I would like to search for workouts by name
-* \#46 As a user I would like to be able to filter for public workouts by category so that I can see only what I'm interested in.
-* \#49 As a developer, I would like have a building pipeline in gitlab, so that I can make sure that my MR doesn't cause any new bugs and doesn't reduce the code coverage
+* #2 As a user I would like to be able to create and exercise that I can save and look at later.
+* #5 As a user, I would like to be able to create a new workout using the website
+* #9 As a user, I would like to be able to add exercises to my workout
+* #10 As a user, I want to be able to create an account
+* #11 As a user, I want to be able to log in and out of my account
+* #12 As a user I want to be able to add other users to a friends list
+* #13 As a user I want to be able to create a exercise plan for my exercises
+* #14 As a user I want to be able to edit my exercise plan and add/remove exercises to/from it.
+* #15 As a user I want to be able to decide whether my exercise plan is publicly visible or private
+* #16 As a user I want to be able to view my created exercises
+* #17 As a user I want to be able to view my create exercise plans
+* #18 As a user I want to be able to view public exercise plans
+* #19 As a user I want to be able to view public exercises
+* #20 As a user I want to be able to create challenges and tag my friends in them.
+* #23 As a user I want to be able to bookmark other users public plans/exercises 
+* #24 As a user I want to be able to give a rating to other peoples public plans/exercises
+* #25 As a user I would like to see which part of the body gets trained by an specific exercise
+* #27 As a user I want to follow other users to be able to subscribe to their public created exercises/plans
+* #29 As a user when I log in I want to see my dashboard
+* #35 As a user I would like to send direct messages to users on my friends list.
+* #36 As a user I would like to view my friends list.
+* #37 As a user I would like to see my notification inbox
+* #38 As a user I would like to be able to comment on a workout plan, so that I can voice my opinion on it.
+* #39 As a user, I want to be able to delete an exercise plan, so that I can remove plans I'm unhappy with
+* #40 As a user, I want to see a placeholder for deleted exercise plans that I bookmarked, so that I know that my favorite plan is no longer available
+* #43 As a user I would like to sort publicly available workouts by popularity (clicks) so that I can see what others like.
+* #45 As a user I would like to search for workouts by name
+* #46 As a user I would like to be able to filter for public workouts by category so that I can see only what I'm interested in.
+* #49 As a developer, I would like have a building pipeline in gitlab, so that I can make sure that my MR doesn't cause any new bugs and doesn't reduce the code coverage
 * #51 As a user I would like to be able to view my profile, so that I can see my relevant information
 * #52 As a user I would like to see what the weather is like today, so I can decide what exercise I'm doing
 * #52 As a user I want to be able to schedule workouts
@@ -114,10 +114,14 @@ The following are user stories to implement agreed by the TA
 
 We've decided to add the task breakdown within the user stories them self. Here is an detailed example: [Example](https://gitlab.com/xFrednet/t-302-honn-2020-team-9/-/issues/56). We've chosen this route because most of our user stories are quite small and splitting them into multiple issues would take some time and make the issues possibly confusing. Larger user stories can still be brocken down into multiple issues and merge requests.
 
-#### Definition of Done
-For this first sprint we have agreed to implement user stories #10, #11 and #29.
+## Definition of Done
 The full definition of done you can read [here](DEFINITION_OF_DONE.md).
 
+### Sprint 1
+For this first sprint we have agreed to implement user stories #10, #11 and #29.
+
+### Sprint 2
+We've planned to implement the following user stories this sprint: #2, #5, #9, #12, #14, #15, #16, #17, #18, #19, #24, #27, #51, #52, #56
 
 # Contributors
 | GitLab Username          | Student name                  |
