@@ -1,0 +1,16 @@
+#forecast-container {
+    border: 1px solid red;
+    display: flex;
+    flex-direction: row;
+}
+
+.weather-status-container {
+    width: 30px;
+    height: 30px;
+    text-align: center;
+}
+.weather-icon {
+    color: #151515;
+    font-size: 20px !important;
+    font-family: Segoe UI Emoji, fantasy;
+}

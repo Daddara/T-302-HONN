@@ -1,7 +1,15 @@
+from django.core import serializers
 from django.http import HttpResponse
-from django.shortcuts import render
+
+from django.http import JsonResponse
+
+from .gateway.weather_gateway import WeatherGateway
+from .gateway.weather_gateway import WeatherApiWeatherGateway
+
 
 # Create your views here.
-def results(request):
-    response = "You're looking at the results of question %s."
-    return HttpResponse(response)
+def forecast(_request):
+    gateway = WeatherApiWeatherGateway()
+    # In order to allow non-dict objects to be serialized set the safe parameter to False.
+    data, err = gateway.get_weather_forecast('Reykjavik')
+    return JsonResponse(data, safe=False)

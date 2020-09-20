@@ -88,7 +88,7 @@ class WeatherApiWeatherGateway(WeatherGateway):
 
     CURRENT_URL = 'https://api.weatherapi.com/v1/current.json?key={}&q={}'
     FORECAST_URL = 'https://api.weatherapi.com/v1/forecast.json?key={}&q={}&days={}'
-    ALERT_URL = 'https://api.weatherapi.com/v1/forecast.json?key={}&q={}&days={}'
+    ALERT_URL = 'https://api.weatherapi.com/v1/forecast.json?key={}&q={}&days=1'
 
     def __init__(self):
         WeatherGateway.__init__(self)
@@ -194,7 +194,16 @@ class WeatherApiWeatherGateway(WeatherGateway):
             )
 
     def get_weather_warnings(self, city: str) -> WeatherWarnings:
-        pass
+        url = WeatherApiWeatherGateway.ALERT_URL.format(
+            self.api_key,
+            city
+        )
+
+        data, error = WeatherApiWeatherGateway._send_request(url)
+        if error is not None:
+            return data, error
+
+        return WeatherApiWeatherGateway._parse_forecast_weather_data(data)
 
     @staticmethod
     def _send_request(url) -> (str, WeatherGatewayError):
