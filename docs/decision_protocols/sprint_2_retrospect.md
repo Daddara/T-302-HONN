@@ -1,6 +1,6 @@
 #Sprint 2 - Retrospective
 20.09.2020
-#####Attendees: Valgerður Ásgeirsdóttir, Katrín Viktoría, Fredtjof Peer Stoldt, Ægir Máni Hauksson, Hafliði Stefánsson, Kristján Már Svavarsson
+#####Attendees: Valgerður Ásgeirsdóttir, Katrín Viktoría, Fredtjof Peer Stoldt, Ægir Máni Hauksson, Hafliði Stefánsson, Kristján Már Svavarsson, Arnar Már Brynjarsson
 ##What went well 
 * We are more cooperative, working well together asking and answering questions
 * Good communication within the team
