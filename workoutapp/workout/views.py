@@ -30,7 +30,8 @@ def create_workout(request):
                   {'workout_form': workout_form , 'workout_man_form': workout_man_form})
 
 
-def edit_workout(request):
+def edit_workout(request, id=None, template_name='update_workout.html'):
+    pass
 
 
 def create_exercise(request):
@@ -46,3 +47,7 @@ def create_exercise(request):
     else:
         form = ExerciseForm()
     return render(request, 'createExercise/create_exercise.html', {'form': form})
+
+
+def edit_exercise(request, id=None, template_name='update_exercise.html'):
+    pass
