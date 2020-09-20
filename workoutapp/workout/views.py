@@ -22,20 +22,20 @@ def create_workout(request):
                 new_wm.save()
             return redirect('../accounts/profile/')
 
-        return render(request, 'createWorkout/create_workout.html', {
+        return render(request, 'Workout/create_workout.html', {
             'form': CreateWorkoutForm(), 'errors': workout_form.errors})
 
     else:
         workout_form = CreateWorkoutForm(instance=Workout)
         workout_man_form = [WorkoutManagerForm(prefix=str(x),
                                                instance=WorkoutManager()) for x in range(0, 3)]
-    return render(request, 'createWorkout/create_workout.html',
+    return render(request, 'Workout/create_workout.html',
                   {'workout_form': workout_form , 'workout_man_form': workout_man_form})
 
 
 def add_exercise(request):
     exercises = Exercise.objects.only('Title')
-    return render(request, 'addExercise/add_exercise.html', {'exercises': exercises})
+    return render(request, 'Workout/add_exercise.html', {'exercises': exercises})
 
 
 def edit_workout(request, id=None, template_name='update_workout.html'):
@@ -55,12 +55,12 @@ def create_exercise(request):
             exercise.save()
             return redirect('../accounts/profile/')
 
-        return render(request, 'createExercise/create_exercise.html', {
+        return render(request, 'Exercise/create_exercise.html', {
             'form': ExerciseForm(), 'errors': exercise_form.errors})
 
     else:
         form = ExerciseForm()
-    return render(request, 'createExercise/create_exercise.html', {'form': form})
+    return render(request, 'Exercise/create_exercise.html', {'form': form})
 
 
 def edit_exercise(request, id=None, template_name='update_exercise.html'):
