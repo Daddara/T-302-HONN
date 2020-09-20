@@ -1,6 +1,6 @@
 from django.contrib.auth.models import User
 from django.db import models
-import datetime
+from django.utils import timezone
 
 
 class Messages(models.Model):
@@ -10,12 +10,16 @@ class Messages(models.Model):
     SendDate = models.DateTimeField(auto_now=True)
     Seen = models.BooleanField(default="")
 
+
 class UserInfo(models.Model):
-    User = models.ForeignKey(User, on_delete=models.CASCADE)
-    FirstName = models.CharField(max_length=20, default="")
-    LastName = models.CharField(max_length=20, default="")
-    BirthYear = models.DateTimeField(default=datetime.date.today)
-    Image = models.CharField(
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    firstName = models.CharField(max_length=20, default="")
+    lastName = models.CharField(max_length=20, default="")
+    age = models.IntegerField(default=20)
+    image = models.CharField(
         max_length=250,
         default="https://www.vhv.rs/dpng/d/256-2569650_men-profile-icon-png-image-free-download-searchpng.png")
-    CreatedAt = models.DateTimeField(auto_now=True)
+    createdAt = models.DateTimeField(auto_now=True)
+
+    def __str__(self):
+        return self.user.username+"'s info"

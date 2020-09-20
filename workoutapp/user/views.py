@@ -1,3 +1,4 @@
+from django.contrib.auth.decorators import login_required
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
 from django.shortcuts import render, redirect
@@ -9,6 +10,9 @@ from .forms.create_account_form import CreateAccountForm
 
 
 # Create your views here.
+from .models import UserInfo
+
+
 def register(request):
     if request.method == 'POST':
         form = CreateAccountForm(data=request.POST)
@@ -16,6 +20,8 @@ def register(request):
             form.save()
             username = form.cleaned_data['username']
             new_user = User.objects.get(username=username)
+            user_info = UserInfo.objects.create(user=new_user)
+            user_info.save()
             wallet = Wallet.objects.create(user=new_user)
             wallet.save()
             return redirect('login')
@@ -28,5 +34,9 @@ def register(request):
         'form': CreateAccountForm()
     })
 
+
+@login_required
 def profile(request):
-    return redirect('dashboard')
+    #  MISSING VIEW TO ACTUALLY EDIT USER INFO!!
+    user_info = UserInfo.objects.get(user=request.user)
+    return render(request, 'user/profile.html', context={'user_info': user_info})
