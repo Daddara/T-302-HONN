@@ -4,9 +4,10 @@ from django.shortcuts import render, redirect
 from django.contrib.auth import login, authenticate
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, redirect
-from user.models import Follow
+from dashboard.views import dashboard
 from wallet.models import Wallet
 from .forms.create_account_form import CreateAccountForm
+from user.models import Follow
 
 
 # Create your views here.
@@ -30,8 +31,8 @@ def register(request):
     })
 
 
-def placeholder_home(request):
-    return render(request, 'user/placeholder_page.html')
+def profile(request):
+    return redirect('dashboard')
 
 
 #@login_required
