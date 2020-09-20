@@ -15,3 +15,11 @@ def forecast(_request):
     data, err = gateway.get_weather_forecast('Reykjavik')
 
     return HttpResponse(data.to_j(), content_type='application/json')
+
+
+def current(_request):
+    gateway = WeatherApiWeatherGateway()
+
+    data, err = gateway.get_weather_current('Reykjavik')
+
+    return JsonResponse(data.__dict__, safe=False)

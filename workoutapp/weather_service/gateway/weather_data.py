@@ -99,5 +99,5 @@ class ForecastDayWeatherData:
         self.chance_snow = chance_snow
 
 
-class WeatherWarnings:
-    pass
+# class WeatherWarnings:
+#     pass

@@ -69,7 +69,7 @@ class TestWeatherApiDataSource(unittest.TestCase):
 
         data, error = WeatherApiWeatherGateway._parse_current_weather_data(test_data)
 
-        self.assertEqual(data.date_time, datetime.datetime.fromtimestamp(int(1599929110)))
+        self.assertEqual(data.date_time, int(1599929110))
         self.assertEqual(data.lat, 64.15)
         self.assertEqual(data.lon, -21.95)
         self.assertEqual(data.name, 'Reykjavik')

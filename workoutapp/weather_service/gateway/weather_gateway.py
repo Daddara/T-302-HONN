@@ -5,7 +5,7 @@ import time
 from .weather_data import CurrentWeatherData
 from .weather_data import ForecastWeatherData
 from .weather_data import ForecastDayWeatherData
-from .weather_data import WeatherWarnings
+# from .weather_data import WeatherWarnings
 
 
 class WeatherGatewayError:
@@ -70,18 +70,18 @@ class WeatherGateway:
         """
         pass
 
-    def get_weather_warnings(self, city: str) -> WeatherWarnings:
-        """Get the weather warnings for the input city
-
-        Parameters
-        ----------
-        city : str
-            The city the weather should be loaded for.
-
-        Returns the weather warnings as a WeatherWarnings
-        -------
-        """
-        pass
+#    def get_weather_warnings(self, city: str) -> WeatherWarnings:
+#        """Get the weather warnings for the input city
+#
+#        Parameters
+#        ----------
+#        city : str
+#            The city the weather should be loaded for.
+#
+#        Returns the weather warnings as a WeatherWarnings
+#        -------
+#        """
+#        pass
 
 
 class WeatherApiWeatherGateway(WeatherGateway):
