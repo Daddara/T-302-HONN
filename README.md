@@ -127,9 +127,9 @@ We've planned to implement the following user stories this sprint: #2, #5, #9, #
 We are using GitLabs issue feature to manage our team and user stories. You can sort feature in most parts of gitlab also to sprint specific board for example:
 
 Boards:
-* [Sprint 1](https://gitlab.com/xFrednet/t-302-honn-2020-team-9/-/boards?scope=all&utf8=%E2%9C%93&milestone_title=Sprint%201)
-* [Sprint 2](https://gitlab.com/xFrednet/t-302-honn-2020-team-9/-/boards?scope=all&utf8=%E2%9C%93&milestone_title=Sprint%202)
-* [Sprint 3](https://gitlab.com/xFrednet/t-302-honn-2020-team-9/-/boards?scope=all&utf8=%E2%9C%93&milestone_title=Sprint%203)
+* [Sprint 1](https://gitlab.com/xFrednet/t-302-honn-2020-team-9/-/boards?scope=all&utf8=%E2%9C%93&milestone_title=Sprint%201) | [Alternative view](https://gitlab.com/xFrednet/t-302-honn-2020-team-9/-/milestones/1)
+* [Sprint 2](https://gitlab.com/xFrednet/t-302-honn-2020-team-9/-/boards?scope=all&utf8=%E2%9C%93&milestone_title=Sprint%202) | [Alternative view](https://gitlab.com/xFrednet/t-302-honn-2020-team-9/-/milestones/2)
+* [Sprint 3](https://gitlab.com/xFrednet/t-302-honn-2020-team-9/-/boards?scope=all&utf8=%E2%9C%93&milestone_title=Sprint%203) | [Alternative view](https://gitlab.com/xFrednet/t-302-honn-2020-team-9/-/milestones/3)
 
 # Contributors
 | GitLab Username          | Student name                  |
