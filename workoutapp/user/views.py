@@ -30,23 +30,9 @@ def register(request):
         'form': CreateAccountForm()
     })
 
-<<<<<<< HEAD
-=======
 
->>>>>>> 0eeb1f1127d83cb8a4dab6d12d08f2c64c9cc5e1
 def profile(request):
     return redirect('dashboard')
-
-
-
-
-<<<<<<< HEAD
-def profile(request):
-    return redirect('dashboard')
-
-=======
->>>>>>> 0eeb1f1127d83cb8a4dab6d12d08f2c64c9cc5e1
-
 
 
 #@login_required
