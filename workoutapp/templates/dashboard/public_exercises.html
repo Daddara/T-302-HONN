@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+{% block content %}
+
+<div>
+        <h2>Exercises</h2>
+    </div>
+    {% if exercises %}
+    <div class="page-content">
+        {% for exercise in exercises %}
+            <li class=" list-group-item align-items-center justify-content-between">
+                <div><a class="text-secondary" href=#>{{exercise.Title}}</a></div>
+            </li>
+        {% endfor %}
+    </div>
+    {% else %}
+    <div class="page-content">
+        <p>There are no public exercises</p>
+    </div>
+    {% endif %}
+
+{% endblock %}

@@ -20,6 +20,7 @@ test:
     - python manage.py migrate
     - coverage erase
     - coverage run manage.py test
+    - coverage run --append -m unittest weather_service.gateway.weather_gateway_test # Note this is a dirty but needed hack right now
     - coverage report
   only:
     - merge_requests

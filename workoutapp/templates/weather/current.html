@@ -1,0 +1,99 @@
+{% load static %}
+
+{% block extra_head %}
+    <link rel="stylesheet" type="text/css" href="{% static 'weather/css/weather.css' %}">
+{% endblock %}
+
+{% block content %}
+<div id="forecast-container">
+    <div id="weather-status-emoji" class="weather-icon">&#9203;</div> <!-- Loading -->
+
+    <div id="weather-degree-display"></div>
+    <div class="weather-icon"> &#127777;</div>
+</div>
+{% endblock %}
+
+{% block extra_js %}
+<script>
+    function onValidDom(func) {
+        if (document.readyState === "loading") {
+            let callback = function () {
+                if (document.readyState !== "loading") {
+                    func();
+
+                    document.removeEventListener("readystatechange", callback);
+                }
+            };
+            document.addEventListener("readystatechange", callback, false);
+        } else {
+            func();
+        }
+    }
+
+    // How have I le xFrednet defined these values?
+    // Mostly guessing I'm a software developer not a weather god
+    const RAIN_LIMIT = 20.0;
+    const CLOUD_SUN_LIMIT = 33
+    const CLOUD_LIMIT = 66
+    const SNOW_LIMIT = 0
+
+    function display_current_weather_data(data) {
+        let emo = document.getElementById('weather-status-emoji')
+        let temp = document.getElementById('weather-degree-display')
+
+        let emos = [
+            "&#10060;" /* Error */,
+            "&#9728;" /* Sun */,
+            "&#9925;" /* Sun with clouds */,
+            "&#9729;" /* Clouds */,
+            "&#127783;" /* Rain */,
+            "&#127784;" /* Snow */,
+        ]
+
+        if (data !== null) {
+            data = JSON.parse(data);
+        }
+
+        if (data === null) {
+            emo.innerHTML = emos[0];
+        } else {
+
+            let mm = data.precipitation_mm;
+            if (mm < RAIN_LIMIT) {
+                if (data.cloud < CLOUD_SUN_LIMIT) {
+                    emo.innerHTML = emos[1];
+                } else if (data.cloud < CLOUD_LIMIT) {
+                    emo.innerHTML = emos[2];
+                } else {
+                    emo.innerHTML = emos[3];
+                }
+            } else {
+                if (data.temp_c > SNOW_LIMIT) {
+                    emo.innerHTML = emos[4];
+                } else {
+                    emo.innerHTML = emos[5];
+                }
+            }
+
+            temp.innerText = `${data.temp_c}°C`;
+        }
+    }
+
+    const current_weather_url = "{% url 'weather_api_v1.current' %}"
+
+    let xmlHttp = new XMLHttpRequest();
+    xmlHttp.onreadystatechange = function() {
+        if (xmlHttp.readyState === 4) {
+            if (xmlHttp.status === 200) {
+                onValidDom(function() { display_current_weather_data(xmlHttp.responseText)})
+            } else {
+                alert("Let's put a better message here: Error while requesting weather data!!!")
+                onValidDom(function() {display_current_weather_data(null)})
+            }
+        }
+    };
+
+    xmlHttp.open("GET", current_weather_url, true); // true for asynchronous
+    xmlHttp.send(null);
+</script>
+{% endblock %}
