@@ -8,8 +8,7 @@ from .forms.create_exercise_form import ExerciseForm
 
 def create_workout(request):
     if request.method == 'POST':
-        workout_form = CreateWorkoutForm(data=request.POST, instance=Workout())
-        # workout_man_form = WorkoutManagerForm(instance=WorkoutManager())
+        workout_form = CreateWorkoutForm(data=request.POST)
         if workout_form.is_valid():
             name = workout_form.cleaned_data['Name']
             category = workout_form.cleaned_data['Category']
@@ -18,15 +17,38 @@ def create_workout(request):
             user = request.user
             workout = Workout(Name=name, Category=category, Image=image, Public=public, User=user)
             workout.save()
-            return redirect('../accounts/profile/')
+            return redirect('./add_exercises', workout_id=workout.id)
 
-        return render(request, 'Workout/create_workout.html', {
-            'form': CreateWorkoutForm(), 'errors': workout_form.errors})
+        else:
+            return render(request, 'Workout/create_workout.html', {
+                'form': CreateWorkoutForm(), 'errors': workout_form.errors})
 
     else:
-        workout_form = CreateWorkoutForm(instance=Workout())
+        workout_form = CreateWorkoutForm()
     return render(request, 'Workout/create_workout.html',
-                  {'workout_form': workout_form})
+                  {'form': workout_form})
+
+
+def add_exercises(request, workout_id=None):
+    if request.method == 'POST':
+        form = WorkoutManagerForm(data=request.POST, instance=WorkoutManager())
+        if form.is_valid():
+            exercise = form.cleaned_data['Exercise']
+            unit = form.cleaned_data['Unit']
+            reps = form.cleaned_data['Reps']
+            quantity = form.cleaned_data['Quantity']
+            workout = Workout.objects.last()
+            workout_man = WorkoutManager(Exercise=exercise, Reps=reps, Unit=unit,
+                                         Quantity=quantity, Workout=workout)
+            workout_man.save()
+            return redirect('./add_exercises', workout_id=workout.id)
+        else:
+            return render(request, 'Workout/add_exercises.html', {
+                'form': WorkoutManagerForm(), 'errors': form.errors})
+    else:
+        form = WorkoutManagerForm(instance=WorkoutManager(Workout=workout_id))
+    return render(request, 'Workout/add_exercises.html',
+                  {'form': form})
 
 
 def edit_workout(request, id=None, template_name='update_workout.html'):
@@ -40,7 +62,7 @@ def create_exercise(request):
             title = exercise_form.cleaned_data['Title']
             description = exercise_form.cleaned_data['Description']
             image = exercise_form.cleaned_data['Image']
-            equipment = exercise_form.cleaned_data['Equipment_id']
+            equipment = exercise_form.cleaned_data['Equipment']
             exercise = Exercise(Title=title, Description=description, Creator=request.user,
                                 Image=image, Equipment=equipment, Public=True)
             exercise.save()

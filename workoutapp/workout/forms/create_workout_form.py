@@ -15,11 +15,12 @@ class CreateWorkoutForm(forms.ModelForm):
 
 
 class WorkoutManagerForm(forms.ModelForm):
-    Unit = forms.ModelChoiceField(queryset=UnitType.objects.all())
+    Exercise = forms.ModelChoiceField(queryset=Exercise.objects.all(), required=False)
+    Unit = forms.ModelChoiceField(queryset=UnitType.objects.all(), required=False)
     Reps = forms.IntegerField(required=True)
     Quantity = forms.IntegerField(required=True)
 
     class Meta:
         model = WorkoutManager
-        exclude = ['Workout', 'Exercise', ]
+        exclude = ['Workout', ]
         fields = ('Exercise', 'Unit', 'Reps', 'Quantity', )
