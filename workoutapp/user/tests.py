@@ -1,6 +1,7 @@
 from django.test import TestCase, Client
 from django.contrib.auth.models import User
 from django.urls import reverse
+from user.models import Follow
 
 # Create your tests here.
 class UserViewTests(TestCase):
@@ -38,6 +39,13 @@ class UserViewTests(TestCase):
                 'password1': 'iampassword', 'password2': 'iampassword'}
         response = self.client.post(reverse('register'), data)
         self.assertEqual(response.status_code, 200)
+        print("200, OK")
+
+    def test_following_view_get(self):
+        print("Testing following page: ", end="")
+        response = self.client.get(reverse('following'))
+        self.assertEqual(response.status_code, 200)
+        self.assertTemplateUsed(response, 'user/followerlist.html')
         print("200, OK")
 
 

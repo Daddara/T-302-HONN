@@ -26,4 +26,4 @@ class Follow(models.Model):
     FollowedAt = models.DateTimeField(auto_now=True)
 
     def __str__(self):
-        return self.Following
+        return self.Username.username
