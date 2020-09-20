@@ -25,7 +25,7 @@ Here is how: https://docs.github.com/en/github/creating-cloning-and-archiving-re
 * Download the Django extension by running the command `pip install django`
 ### Migrating the database setup
 * While in the workoutapp directory type in terminal:
-`py manage.py makemigrations`
+`py manage.py migrate`
 * This should load all the database settings and Dependencies to your own local_database sqlite file
 ### Populating the database
 * While in the workoutapp directory type in terminal:
