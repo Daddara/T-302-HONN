@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block extra_head %}
+    <link rel="stylesheet" type="text/css" href="{% static 'payment/css/shop_fitcoins.css' %}">
+{% endblock %}
+
+
+{% block content %}
+<div class="page-content">
+    {% for product in products %}
+        {% include 'payment/fitcoin_product.html' with product=product %}
+        {% include 'payment/purchase_product_redirect_button.html' with product=product %}
+    {% endfor %}
+</div>
+{% endblock %}
+
+
+{% block extra_js %}
+{% endblock %}

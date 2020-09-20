@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block extra_head %}
+{% endblock %}
+
+
+{% block content %}
+<div class="page-content">
+    <div><h1>Payment Complete!</h1></div>
+    <div class="order-details">
+        {% include 'payment/order_details.html' with order=order %}
+    </div>
+    <div class="wallet-redirect">
+        <h3>Back to wallet</h3>
+        {% include 'wallet/wallet_redirect_button.html' %}
+    </div>
+</div>
+{% endblock %}
+
+

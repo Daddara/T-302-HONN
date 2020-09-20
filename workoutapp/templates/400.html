@@ -1,0 +1,8 @@
+{% extends 'base.html' %}
+{% block content %}
+    <div class="error-message">
+        {% if error %}
+            <h3 id="custom-error">{{ error }}</h3>
+        {% endif %}
+    </div>
+{% endblock %}
