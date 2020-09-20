@@ -1,6 +1,6 @@
 import urllib.request, urllib.error
 import json
-import datetime
+import time
 
 from .weather_data import CurrentWeatherData
 from .weather_data import ForecastWeatherData
@@ -117,7 +117,7 @@ class WeatherApiWeatherGateway(WeatherGateway):
             current_data = response["current"]
 
             return CurrentWeatherData(
-                date_time=datetime.datetime.fromtimestamp(int(current_data["last_updated_epoch"])),
+                date_time=int(current_data["last_updated_epoch"]),
                 lat=float(location_data["lat"]),
                 lon=float(location_data["lon"]),
                 name=location_data["name"],
@@ -179,7 +179,7 @@ class WeatherApiWeatherGateway(WeatherGateway):
                     ))
 
             return ForecastWeatherData(
-                date_time=datetime.datetime.now(),
+                date_time=int(time.time()),
                 lat=float(location_data["lat"]),
                 lon=float(location_data["lon"]),
                 name=location_data["name"],
@@ -192,18 +192,6 @@ class WeatherApiWeatherGateway(WeatherGateway):
                 0,
                 "IDK, bad documentation an such, you should never see this (Hello @Test)"
             )
-
-    def get_weather_warnings(self, city: str) -> WeatherWarnings:
-        url = WeatherApiWeatherGateway.ALERT_URL.format(
-            self.api_key,
-            city
-        )
-
-        data, error = WeatherApiWeatherGateway._send_request(url)
-        if error is not None:
-            return data, error
-
-        return WeatherApiWeatherGateway._parse_forecast_weather_data(data)
 
     @staticmethod
     def _send_request(url) -> (str, WeatherGatewayError):

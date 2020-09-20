@@ -1,8 +1,12 @@
+import json
+from json import JSONEncoder
+from typing import Any
+
 
 class CommonWeatherData:
     def __init__(
             self,
-            date_time,
+            date_time: int,
             lat: float,
             lon: float,
             name: str):
@@ -15,7 +19,7 @@ class CommonWeatherData:
 class CurrentWeatherData(CommonWeatherData):
     def __init__(
             self,
-            date_time,
+            date_time: int,
             lat: float,
             lon: float,
             name: str,
@@ -47,6 +51,28 @@ class ForecastWeatherData(CommonWeatherData):
 
         self.days = days
 
+    def to_j(self) -> str:
+        j_v = "\"{}\": {},"
+        j_str = "\"{}\": \"{}\","
+
+        first = True
+        j_days = ""
+        for day in self.days:
+            if first:
+                first = False
+            else:
+                j_days += ", "
+
+            j_days += json.dumps(day.__dict__)
+
+        return ("{" +
+                (j_v.format("date_time", self.date_time)) +
+                (j_v.format("lat", self.lat)) +
+                (j_v.format("lon", self.lon)) +
+                (j_str.format("name", self.name)) +
+                "\"days\": [" + j_days + "]"
+                "}")
+
 
 class ForecastDayWeatherData:
     def __init__(
@@ -61,6 +87,7 @@ class ForecastDayWeatherData:
             chance_rain: float,
             chance_snow: float):
 
+        super().__init__()
         self.date_time = date_time
         self.min_temp_c = min_temp_c
         self.max_temp_c = max_temp_c

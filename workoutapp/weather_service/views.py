@@ -1,3 +1,4 @@
+import json
 from django.core import serializers
 from django.http import HttpResponse
 
@@ -12,4 +13,5 @@ def forecast(_request):
     gateway = WeatherApiWeatherGateway()
     # In order to allow non-dict objects to be serialized set the safe parameter to False.
     data, err = gateway.get_weather_forecast('Reykjavik')
-    return JsonResponse(data, safe=False)
+
+    return HttpResponse(data.to_j(), content_type='application/json')
