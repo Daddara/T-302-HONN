@@ -1,0 +1,121 @@
+[
+{
+  "model": "admin.logentry",
+  "pk": 1,
+  "fields": {
+    "action_time": "2020-09-20T15:01:23.591Z",
+    "user": 1,
+    "content_type": 18,
+    "object_id": "1",
+    "object_repr": "1500 Fitcoins",
+    "action_flag": 1,
+    "change_message": "[{\"added\": {}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 2,
+  "fields": {
+    "action_time": "2020-09-20T15:01:26.411Z",
+    "user": 1,
+    "content_type": 18,
+    "object_id": "2",
+    "object_repr": "3500 Fitcoins",
+    "action_flag": 1,
+    "change_message": "[{\"added\": {}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 3,
+  "fields": {
+    "action_time": "2020-09-20T15:01:31.503Z",
+    "user": 1,
+    "content_type": 18,
+    "object_id": "3",
+    "object_repr": "5000 Fitcoins",
+    "action_flag": 1,
+    "change_message": "[{\"added\": {}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 4,
+  "fields": {
+    "action_time": "2020-09-20T15:01:37.242Z",
+    "user": 1,
+    "content_type": 18,
+    "object_id": "4",
+    "object_repr": "10000 Fitcoins",
+    "action_flag": 1,
+    "change_message": "[{\"added\": {}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 5,
+  "fields": {
+    "action_time": "2020-09-20T15:01:51.480Z",
+    "user": 1,
+    "content_type": 16,
+    "object_id": "1",
+    "object_repr": "demoadmin: 0",
+    "action_flag": 1,
+    "change_message": "[{\"added\": {}}]"
+  }
+},
+{
+  "model": "auth.user",
+  "pk": 1,
+  "fields": {
+    "password": "pbkdf2_sha256$216000$J4oJeScBbRXC$9nPyDuF3Zx8UwqXh9sDHXyanBLMnnGnYD9938JcY974=",
+    "last_login": "2020-09-20T15:01:12.826Z",
+    "is_superuser": true,
+    "username": "demoadmin",
+    "first_name": "",
+    "last_name": "",
+    "email": "demoadmin@gmail.com",
+    "is_staff": true,
+    "is_active": true,
+    "date_joined": "2020-09-20T15:00:42.451Z",
+    "groups": [],
+    "user_permissions": []
+  }
+},
+{
+  "model": "wallet.wallet",
+  "pk": 1,
+  "fields": {
+    "user": 1,
+    "fitcoin": 0
+  }
+},
+{
+  "model": "payment.product",
+  "pk": 1,
+  "fields": {
+    "fitcoins": 1500
+  }
+},
+{
+  "model": "payment.product",
+  "pk": 2,
+  "fields": {
+    "fitcoins": 3500
+  }
+},
+{
+  "model": "payment.product",
+  "pk": 3,
+  "fields": {
+    "fitcoins": 5000
+  }
+},
+{
+  "model": "payment.product",
+  "pk": 4,
+  "fields": {
+    "fitcoins": 10000
+  }
+}
+]
