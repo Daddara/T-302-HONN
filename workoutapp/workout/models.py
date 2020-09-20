@@ -45,8 +45,9 @@ class Exercise(models.Model):
         default="https://www.vhv.rs/dpng/d/256-2569650_men-profile-icon-png-image-free-download-searchpng.png")
     Equipment = models.ForeignKey(Equipment, null=True, on_delete=models.SET_NULL)
     Public = models.BooleanField(default=False)
+
     class Meta:
-        unique_together = ('Creator', 'Title',)
+        unique_together = ('Creator', 'Title', )
 
 
 class UnitType(models.Model):

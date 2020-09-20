@@ -3,22 +3,23 @@ from ..models import Workout, Exercise, WorkoutManager, UnitType, Category, User
 
 
 class CreateWorkoutForm(forms.ModelForm):
-    workout_name = forms.CharField(max_length=30, required=True)
-    category = forms.ModelChoiceField(queryset=Category.objects.all())
-    image = forms.ImageField()
+    Name = forms.CharField(max_length=30, required=True)
+    Category = forms.ModelChoiceField(queryset=Category.objects.all())
+    Image = forms.CharField(max_length=999)
+    Public = forms.BooleanField()
 
     class Meta:
         model = Workout
-        fields = ('workout_name', 'category', 'image')
+        exclude = ['User', 'CreatedAt', 'Likes', 'Dislikes', ]
+        fields = ('Name', 'Category', 'Image', 'Public', )
 
 
 class WorkoutManagerForm(forms.ModelForm):
-    exercise = forms.ModelChoiceField(queryset=Exercise.objects.all())
-    unit = forms.ModelChoiceField(queryset=UnitType.objects.all())
-    reps = forms.IntegerField(required=True)
-    quantity = forms.IntegerField(required=True)
+    Unit = forms.ModelChoiceField(queryset=UnitType.objects.all())
+    Reps = forms.IntegerField(required=True)
+    Quantity = forms.IntegerField(required=True)
 
     class Meta:
         model = WorkoutManager
-        exclude = ('workout', )
-        fields = ('exercise', 'unit', 'reps', 'quantity')
+        exclude = ['Workout', 'Exercise', ]
+        fields = ('Exercise', 'Unit', 'Reps', 'Quantity', )
