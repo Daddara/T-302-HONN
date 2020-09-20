@@ -22,6 +22,7 @@
         {% if user.is_authenticated %}
         <li><a href="{% url 'logout' %}">Logout</a></li>
         <li><a href="{% url 'create workout' %}">Create Workout</a></li>
+        <li><a href="{% url 'create exercise' %}">Create Exercise</a></li>
         {% else %}
         <li><a href="{% url 'login' %}">Login</a></li>
         <li><a href="{% url 'register' %}">Sign up</a></li>

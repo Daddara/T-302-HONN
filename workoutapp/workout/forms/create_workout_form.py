@@ -1,10 +1,12 @@
 from django import forms
-from ..models import Workout, Exercise, WorkoutManager
+from ..models import Workout, Exercise, WorkoutManager, UnitType, Category, User
 
 
-class WorkoutForm(forms.Form):
-    name = forms.CharField(max_length=30, required=True, help_text='Required.')
-    created_at = forms.DateField(required=True)
+
+class CreateWorkoutForm(forms.Form):
+    workout_name = forms.CharField(max_length=30, required=True)
+    category = forms.ModelChoiceField(queryset=Category.objects.all())
+    image = forms.ImageField()
 
     class Meta:
         model = Workout
@@ -12,12 +14,12 @@ class WorkoutForm(forms.Form):
 
 
 class WorkoutManagerForm(forms.Form):
+    workout = forms.ModelChoiceField(queryset=Workout.objects.all())
+    exercise = forms.ModelChoiceField(queryset=Exercise.objects.all())
+    unit = forms.ModelChoiceField(queryset=UnitType.objects.all())
+    reps = forms.IntegerField(required=True)
+    quantity = forms.IntegerField(required=True)
+
     class Meta:
         model = WorkoutManager
         fields = ('workout', 'exercise', 'unit', 'reps', 'quantity')
-
-
-class ExerciseForm(forms.Form):
-    class Meta:
-        model = Exercise
-        fields = ('title', 'description', 'image', 'equipment')
