@@ -1,12 +1,18 @@
 {% extends "base.html" %}
 {% block content %}
 {% if user.is_authenticated %}
+<div class="page-content">
     <h1>Create Workout</h1>
     <form method="post" class="form form-horizontal" >
         {% csrf_token %}
         {{ form.as_p }}
         <input type="submit" class="btn btn-primary" value="Create Workout" />
     </form>
-    <div class="mt-2 alert alert-warning">{{ errors }}</div>
+    {% if errors %}
+        {% for error in errors %}
+            <div class="mt-2 alert alert-warning">{{ errors }}</div>
+        {% endfor %}
+    {% endif %}
 {% endif %}
+</div>
 {% endblock %}

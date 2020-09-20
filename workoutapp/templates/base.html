@@ -17,23 +17,7 @@
 </head>
 <body>
 <!--Main Navigation-->
-<header>
-<div class="container">
-<div>
-    <h1>Workout</h1>
-</div>
 
-    <div>
-        {% if user.is_authenticated %}
-        <li><a href="{% url 'logout' %}">Logout</a></li>
-        <li><a href="{% url 'create workout' %}">Create Workout</a></li>
-        <li><a href="{% url 'create exercise' %}">Create Exercise</a></li>
-        {% else %}
-        <li><a href="{% url 'login' %}">Login</a></li>
-        <li><a href="{% url 'register' %}">Sign up</a></li>
-        {% endif %}
-    </div>
-</div>
     <!--LOGO HEADER START-->
     <header>
         <div class="jumbotron" id="logo-header">
@@ -53,14 +37,20 @@
         <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
             <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
                 <li class="nav-item active">
-                    <a id='workout-nav' class="navbar-brand" href="{% url 'public_workouts' %}">Workouts<span class="sr-only">(current)</span></a>
+                    <a id='workout-nav' class="navbar-brand" href="{% url 'public_workouts' %}">Workouts<span class="sr-only"></span></a>
                 </li>
                 <li class="nav-item active">
-                    <a id='exercise-nav' class="navbar-brand" href="{% url 'public_exercises' %}">Exercises<span class="sr-only">(current)</span></a>
+                    <a id='exercise-nav' class="navbar-brand" href="{% url 'public_exercises' %}">Exercises<span class="sr-only"></span></a>
                 </li>
                 {% if user.is_authenticated %}
                     <li class="nav-item active">
-                        <a id='my-listings-nav' class="navbar-brand" href="{% url 'dashboard' %}">My Dashboard<span class="sr-only">(current)</span></a>
+                        <a id='my-dashboard-nav' class="navbar-brand" href="{% url 'dashboard' %}">My Dashboard<span class="sr-only">(current)</span></a>
+                    </li>
+                    <li class="nav-item active">
+                        <a id='create-exercise-temp-nav' class="navbar-brand" href="{% url 'create exercise' %}">Create exercise<span class="sr-only"></span></a>
+                    </li>
+                    <li class="nav-item active">
+                        <a id='create-workout-temp-nav' class="navbar-brand" href="{% url 'create workout' %}">Create workout<span class="sr-only"></span></a>
                     </li>
                 {% endif %}
             </ul>
@@ -160,9 +150,6 @@
 <!-- Footer -->
 
 
-    <script>
-        const crfToken = '{{ csrf_token }}'
-    </script>
 
     <!-- link for Bootstrap -->
     <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"

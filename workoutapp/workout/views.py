@@ -20,12 +20,12 @@ def create_workout(request):
             return redirect('./add_exercises', workout_id=workout.id)
 
         else:
-            return render(request, 'Workout/create_workout.html', {
+            return render(request, 'workout/create_workout.html', {
                 'form': CreateWorkoutForm(), 'errors': workout_form.errors})
 
     else:
         workout_form = CreateWorkoutForm()
-    return render(request, 'Workout/create_workout.html',
+    return render(request, 'workout/create_workout.html',
                   {'form': workout_form})
 
 
@@ -43,11 +43,11 @@ def add_exercises(request, workout_id=None):
             workout_man.save()
             return redirect('./add_exercises', workout_id=workout.id)
         else:
-            return render(request, 'Workout/add_exercises.html', {
+            return render(request, 'workout/add_exercises.html', {
                 'form': WorkoutManagerForm(), 'errors': form.errors})
     else:
         form = WorkoutManagerForm(instance=WorkoutManager(Workout=workout_id))
-    return render(request, 'Workout/add_exercises.html',
+    return render(request, 'workout/add_exercises.html',
                   {'form': form})
 
 
@@ -66,14 +66,14 @@ def create_exercise(request):
             exercise = Exercise(Title=title, Description=description, Creator=request.user,
                                 Image=image, Equipment=equipment, Public=True)
             exercise.save()
-            return redirect('../accounts/profile/')
+            return redirect('profile')
 
-        return render(request, 'Exercise/create_exercise.html', {
-            'form': ExerciseForm(), 'errors': exercise_form.errors})
+        return render(request, 'exercise/create_exercise.html', {
+            'form': exercise_form, 'errors': exercise_form.errors})
 
     else:
         form = ExerciseForm()
-    return render(request, 'Exercise/create_exercise.html', {'form': form})
+    return render(request, 'exercise/create_exercise.html', {'form': form})
 
 
 def edit_exercise(request, id=None, template_name='update_exercise.html'):
