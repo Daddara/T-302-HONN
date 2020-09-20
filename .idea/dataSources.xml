@@ -13,5 +13,11 @@
       <jdbc-driver>org.postgresql.Driver</jdbc-driver>
       <jdbc-url>jdbc:postgresql://rogue.db.elephantsql.com:5432/xhomxrmi</jdbc-url>
     </data-source>
+    <data-source source="LOCAL" name="local_database" uuid="de12673c-2d87-4aa9-a820-cd3c6e8b246a">
+      <driver-ref>sqlite.xerial</driver-ref>
+      <synchronize>true</synchronize>
+      <jdbc-driver>org.sqlite.JDBC</jdbc-driver>
+      <jdbc-url>jdbc:sqlite:C:\Users\Saken\OneDrive\Nám\Nám - Haust20\honnun og sm\VERKEFNI\t-302-honn-2020-team-9\workoutapp\local_database</jdbc-url>
+    </data-source>
   </component>
 </project>

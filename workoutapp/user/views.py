@@ -3,7 +3,7 @@ from django.contrib.auth.models import User
 from django.shortcuts import render, redirect
 from django.contrib.auth import login, authenticate
 from django.shortcuts import render, redirect
-
+from user.models import Follow
 from wallet.models import Wallet
 from .forms.create_account_form import CreateAccountForm
 
@@ -31,3 +31,7 @@ def register(request):
 
 def placeholder_home(request):
     return render(request, 'user/placeholder_page.html')
+
+def following(request):
+    context = {'follow': Follow.objects.all()}
+    return render(request, 'user/followerlist.html', context)

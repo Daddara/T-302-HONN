@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+{% block content %}
+
+    <div class="row">
+        <div class="col-lg-3" style="background-color: azure">
+            <h2>Placeholder</h2>
+            {% for fol in follow %}
+                <h1>{{ fol.following }}</h1>
+                <h2>Placeholder</h2>
+            {% endfor %}
+        </div>
+    </div>
+
+{% endblock %}
