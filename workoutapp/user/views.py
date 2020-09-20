@@ -37,6 +37,6 @@ def profile(request):
 
 #@login_required
 def following(request):
-    #user = Follow.objects.get(Username=request.user)
-    #context = {'follow': user}
+    user = Follow.objects.get(Username=request.user)
+    context = {'follow': user}
     return render(request, 'user/followerlist.html')

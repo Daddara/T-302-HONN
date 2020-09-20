@@ -83,6 +83,32 @@
   }
 },
 {
+  "model": "auth.user",
+  "pk": 2,
+  "fields": {
+    "password": "pbkdf2_sha256$216000$hsfpCoMo5Heg$6T43CWITzvd4jGp8/8JGeNNSqCKGb63Jlz/0yKmq6GQ=",
+    "last_login": "2020-09-20T19:30:48.671Z",
+    "is_superuser": true,
+    "username": "saken",
+    "first_name": "",
+    "last_name": "",
+    "email": "test@test.is",
+    "is_staff": true,
+    "is_active": true,
+    "date_joined": "2020-09-20T16:18:53.029Z",
+    "groups": [],
+    "user_permissions": []
+  }
+},
+{
+  "model": "sessions.session",
+  "pk": "57mt6mskkqvcv3jashj6yvmhczf9t3bn",
+  "fields": {
+    "session_data": ".eJxVjDsOwjAQBe_iGllx1rGzlPQ5g7XrDw4gW4qTCnF3EikFtG_mzVs42tbsthYXNwdxFb24_G5M_hnLAcKDyr1KX8u6zCwPRZ60yamG-Lqd7l8gU8v72-iAGkdGO_iuSylaj5ZRW5OsAaXA-m6vMUROYCLigD0FMmBGIAVefL7aHjfA:1kK52u:i9957LUawY9XYTcf3fZz7QqtNFGC5ZOqeFHoQwg3kg0",
+    "expire_date": "2020-10-04T19:30:48.679Z"
+  }
+},
+{
   "model": "wallet.wallet",
   "pk": 1,
   "fields": {
@@ -116,6 +142,15 @@
   "pk": 4,
   "fields": {
     "fitcoins": 10000
+  }
+},
+{
+  "model": "user.follow",
+  "pk": 1,
+  "fields": {
+    "Username": 1,
+    "Following": 2,
+    "FollowedAt": "2020-09-20T16:18:53.029Z"
   }
 }
 ]
