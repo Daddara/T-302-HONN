@@ -7,9 +7,6 @@
         {{ form.as_p }}
         <input type="submit" class="btn btn-primary" value="Create Workout" />
     </form>
-    <div>
-        <li><a href="{% url 'add exercise' %}">Add Exercise</a></li>
-    </div>
     <div class="mt-2 alert alert-warning">{{ errors }}</div>
 {% endif %}
 {% endblock %}

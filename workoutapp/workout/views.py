@@ -9,13 +9,15 @@ from .forms.create_exercise_form import ExerciseForm
 def create_workout(request):
     if request.method == 'POST':
         workout_form = CreateWorkoutForm(data=request.POST, instance=Workout())
-        workout_man_form = WorkoutManagerForm(data=request.POST, instance=WorkoutManager())
+        # workout_man_form = WorkoutManagerForm(instance=WorkoutManager())
         if workout_form.is_valid():
-            new_workout = workout_form.save()
-            new_workout.user = request.user
-            new_wm = workout_man_form.save(commit=False)
-            new_wm.workout = new_workout
-            new_wm.save()
+            name = workout_form.cleaned_data['Name']
+            category = workout_form.cleaned_data['Category']
+            image = workout_form.cleaned_data['Image']
+            public = workout_form.cleaned_data['Public']
+            user = request.user
+            workout = Workout(Name=name, Category=category, Image=image, Public=public, User=user)
+            workout.save()
             return redirect('../accounts/profile/')
 
         return render(request, 'Workout/create_workout.html', {
@@ -23,9 +25,8 @@ def create_workout(request):
 
     else:
         workout_form = CreateWorkoutForm(instance=Workout())
-        workout_man_form = WorkoutManagerForm(instance=WorkoutManager())
     return render(request, 'Workout/create_workout.html',
-                  {'workout_form': workout_form , 'workout_man_form': workout_man_form})
+                  {'workout_form': workout_form})
 
 
 def edit_workout(request, id=None, template_name='update_workout.html'):

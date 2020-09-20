@@ -7,7 +7,7 @@ class ExerciseForm(forms.ModelForm):
     Description = forms.CharField(max_length=30)
     Image = forms.CharField(max_length=999, required=False)
     Equipment = forms.ModelChoiceField(queryset=Equipment.objects.all(), required=False)
-    Public = forms.BooleanField()
+    Public = forms.BooleanField(required=False)
 
     class Meta:
         model = Exercise
