@@ -1,11 +1,11 @@
 {% extends "base.html" %}
 {% block content %}
 {% if user.is_authenticated %}
-    <h1>Create Workout</h1>
+    <h1>Update Exercise</h1>
     <form method="post" class="form form-horizontal" >
         {% csrf_token %}
         {{ form.as_p }}
-        <input type="submit" class="btn btn-primary" value="Create Workout" />
+        <input type="submit" class="btn btn-primary" value="Update Exercise" />
     </form>
     <div class="mt-2 alert alert-warning">{{ errors }}</div>
 {% endif %}
