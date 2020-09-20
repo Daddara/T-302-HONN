@@ -23,12 +23,17 @@ Here is how: https://docs.github.com/en/github/creating-cloning-and-archiving-re
     9. If not, navigate into the folder venv/Scripts from terminal, type activate and press enter
 * Install requirements (Should be prompted by IDE, if not install manually with `pip install -r requirements.txt`)
 * Download the Django extension by running the command `pip install django`
+# Migrating the database setup
+* While in the workoutapp directory type in terminal:
+`py manage.py makemigrations`
+* This should load all the database settings and Dependencies to your own local_database sqlite file
 # Populating the database
 * While in the workoutapp directory type in terminal:
 `py manage.py loaddata db.json`
+* You should now have access to an adminstrator account if you wish to use one.
+* Username: demoadmin Password: demoadmin
 * If your database is no longer empty you must first run:
-`py manage.py flush`&
-`yes`
+`py manage.py flush`&`yes`
 # Running the server
 * While in the workoutapp directory type in terminal: `py manage.py runserver`     
 * If no errors pop up and the localhost link is displayed you are good to go
