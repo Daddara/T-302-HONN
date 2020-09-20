@@ -1,4 +1,4 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 # Create your views here.
 from django.http import HttpResponse
 from .models import Workout, WorkoutManager, Exercise
@@ -8,10 +8,12 @@ from .forms.create_exercise_form import ExerciseForm
 
 def create_workout(request):
     if request.method == 'POST':
+        exercises = Exercise.objects.all()
         workout_form = CreateWorkoutForm(data=request.POST, instance=Workout())
         workout_man_form = [WorkoutManagerForm(data=request.POST, prefix=str(x),
                                                instance=WorkoutManager()) for x in range(0, 3)]
         if workout_form.is_valid() and all[(wm.is_valid() for wm in workout_man_form)]:
+            exercise = get_object_or_404(Exercise, pk=request.POST.get('Title'))
             new_workout = workout_form.save()
             new_workout.user = request.user
             for wm in workout_man_form:
@@ -21,7 +23,7 @@ def create_workout(request):
             return redirect('../accounts/profile/')
 
         return render(request, 'createWorkout/create_workout.html', {
-            'workout_form': CreateWorkoutForm(), 'workout_man_form': WorkoutManagerForm(), 'errors': workout_form.errors})
+            'form': CreateWorkoutForm(), 'errors': workout_form.errors})
 
     else:
         workout_form = CreateWorkoutForm(instance=Workout)
@@ -29,6 +31,11 @@ def create_workout(request):
                                                instance=WorkoutManager()) for x in range(0, 3)]
     return render(request, 'createWorkout/create_workout.html',
                   {'workout_form': workout_form , 'workout_man_form': workout_man_form})
+
+
+def add_exercise(request):
+    exercises = Exercise.objects.only('Title')
+    return render(request, 'addExercise/add_exercise.html', {'exercises': exercises})
 
 
 def edit_workout(request, id=None, template_name='update_workout.html'):

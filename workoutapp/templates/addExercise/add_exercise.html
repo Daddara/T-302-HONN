@@ -1,0 +1,9 @@
+{% extends "create_workout.html" %}
+{% block content %}
+    <label>Choose exercise</label>
+    <select id="exercise">
+        {% for exercise in exercises %}
+        <option value="{{ exercise }}">{{ exercise }}</option>
+        {% endfor %}
+    </select>
+{% endblock %}
