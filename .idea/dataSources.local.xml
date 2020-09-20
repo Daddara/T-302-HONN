@@ -15,8 +15,8 @@
       <user-name>xhomxrmi</user-name>
       <schema-mapping>
         <introspection-scope>
-          <node kind="database" qname="xhomxrmi">
-            <node kind="schema" negative="1" />
+          <node kind="database" qname="@">
+            <node kind="schema" qname="@" />
           </node>
         </introspection-scope>
       </schema-mapping>

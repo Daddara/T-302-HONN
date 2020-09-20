@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+{% block content %}
+
+<div>
+        <h2>Workouts</h2>
+    </div>
+    {% if workouts %}
+    <div class="page-content">
+        {% for workout in workouts %}
+            <li class=" list-group-item align-items-center justify-content-between">
+                <div><a class="text-secondary" href=#>{{workout.Name}}</a></div>
+            </li>
+        {% endfor %}
+    </div>
+    {% else %}
+    <div class="page-content">
+        <p>There are no public workouts</p>
+    </div>
+    {% endif %}
+
+{% endblock %}

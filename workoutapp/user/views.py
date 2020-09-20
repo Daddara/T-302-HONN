@@ -30,7 +30,6 @@ def register(request):
         'form': CreateAccountForm()
     })
 
-
 def profile(request):
     return redirect('dashboard')
 
@@ -40,4 +39,7 @@ def following(request):
     #user = Follow.objects.get(Username=request.user)
     #context = {'follow': user}
     return render(request, 'user/followerlist.html')
+
+def profile(request):
+    return redirect('dashboard')
 

@@ -1,15 +1,15 @@
 from django.contrib.auth.models import User
 from django.db import models
+from wallet.models import Fitcoin
 
 
 # Create your models here.
-
 class Product(models.Model):
     fitcoins = models.IntegerField(default=0)
 
     def price_usd(self):
-        # USD EXCHANGE RATE IS 1/50
-        return round(float(self.fitcoins/50), 2)
+        # RETRIEVING FROM MONEY OBJECT
+        return Fitcoin.to_usd(self.fitcoins)
 
     def __str__(self):
         return str(self.fitcoins) + " Fitcoins"
@@ -22,4 +22,4 @@ class Order(models.Model):
     date = models.DateTimeField(auto_now=True)
 
     def __str__(self):
-        return str(self.customer.username) + ": " + str(self.product)+" : [PAID: "+str(self.paid)+"]"
+        return str(self.customer.username) + ": " + str(self.product) + " : [PAID: " + str(self.paid) + "]"
