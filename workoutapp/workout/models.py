@@ -8,7 +8,6 @@ import datetime
 class Category(models.Model):
     Name = models.CharField(max_length=20, default="", unique=True)
 
-
     def __str__(self):
         return self.Name
 
@@ -26,8 +25,7 @@ class Workout(models.Model):
     Public = models.BooleanField(default=False)
 
     def __str__(self):
-        return self.User.username+": "+self.Name
-
+        return self.User.username + ": " + self.Name
 
 
 class Comment(models.Model):
@@ -35,10 +33,8 @@ class Comment(models.Model):
     Commenter = models.ForeignKey(User, on_delete=models.CASCADE)
     Message = models.CharField(max_length=250, default="")
 
-
     def __str__(self):
-        return self.Commenter.username + "'s comment on workout #"+str(self.Workout.id)
-
+        return self.Commenter.username + "'s comment on workout #" + str(self.Workout.id)
 
 
 class Equipment(models.Model):
@@ -48,10 +44,8 @@ class Equipment(models.Model):
         max_length=250,
         default="https://www.vhv.rs/dpng/d/256-2569650_men-profile-icon-png-image-free-download-searchpng.png")
 
-
     def __str__(self):
         return self.Name
-
 
 
 class Exercise(models.Model):
@@ -65,11 +59,10 @@ class Exercise(models.Model):
     Public = models.BooleanField(default=False)
 
     class Meta:
-        unique_together = ('Creator', 'Title', )
-
+        unique_together = ('Creator', 'Title',)
 
     def __str__(self):
-        return self.Creator.username+"'s exercise: "+self.Title
+        return self.Creator.username + "'s exercise: " + self.Title
 
 
 class UnitType(models.Model):
