@@ -346,14 +346,6 @@
   }
 },
 {
-  "model": "sessions.session",
-  "pk": "57mt6mskkqvcv3jashj6yvmhczf9t3bn",
-  "fields": {
-    "session_data": ".eJxVjDsOwjAQBe_iGllx1rGzlPQ5g7XrDw4gW4qTCnF3EikFtG_mzVs42tbsthYXNwdxFb24_G5M_hnLAcKDyr1KX8u6zCwPRZ60yamG-Lqd7l8gU8v72-iAGkdGO_iuSylaj5ZRW5OsAaXA-m6vMUROYCLigD0FMmBGIAVefL7aHjfA:1kK52u:i9957LUawY9XYTcf3fZz7QqtNFGC5ZOqeFHoQwg3kg0",
-    "expire_date": "2020-10-04T19:30:48.679Z"
-  }
-},
-{
   "model": "wallet.wallet",
   "pk": 1,
   "fields": {
