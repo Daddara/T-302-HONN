@@ -7,4 +7,4 @@ TO LOAD THE POPULATION FILE INTO THE DATABASE:
 
 (For developers)
 TO DUMP THE DATABASE INTO A FILE:
-    py manage.py dumpdata --exclude auth.permission --exclude contenttypes --indent 2 > db.json
+    py manage.py dumpdata --exclude auth.permission --exclude contenttypes --exclude sessions --indent 2 > db.json
