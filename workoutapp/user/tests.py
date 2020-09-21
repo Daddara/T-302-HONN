@@ -41,6 +41,19 @@ class UserViewTests(TestCase):
         self.assertEqual(response.status_code, 200)
         print("200, OK")
 
+
+    def test_profile_page(self):
+        print("Testing profile page: ", end="")
+        data = {'username': 'TestUser',
+                'email': 'test_user@test.com',
+                'password1': 'iampassword', 'password2': 'iampassword'}
+        if User.objects.filter(username=data['username']).exists():
+            response = self.client.get(reverse('profile'))
+            self.assertEqual(response.status_code, 200)
+            self.assertTemplateUsed(response, 'user/profile.html')
+            print("200, OK")
+
+
 class FollowTest(TestCase):
     def setUp(self):
         # Initialize client
@@ -73,4 +86,5 @@ class FollowTest(TestCase):
         follow = Follow.objects.get(Following=self.user2)
         self.assertEqual(follow, pk=2)
         print("200, OK")
+
 

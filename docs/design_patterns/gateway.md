@@ -3,7 +3,7 @@
 ## Definition
 > The intent of a gateway is to wrap all the special API code of external services into a class whose interface looks like a regular object. Other objects access the resource through this Gateway, which translates the simple method calls into the appropriate specialized API.
 
-@hauks96 from [Design_Patterns_Fitcoin_Implementation.pdf](Design_Patterns_Fitcoin_Implementation.pdf)
+@hauks96 from [Design_Patterns_Fitcoin_Implementation.pdf](docs/design_patterns/Design_Patterns_Fitcoin_Implementation.pdf)
 
 ## Use within the project
 

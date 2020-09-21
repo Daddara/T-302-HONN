@@ -1,0 +1,86 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block extra_head %}
+
+{% endblock %}
+
+{% block content %}
+
+<div class="page-content">
+<div class="container">
+    <div class="row my-1">
+        <div class="col-lg-8 order-lg-2">
+            <div class="tab-content py-4">
+                <div class="tab-pane active" id="profile">
+                    <h1 class="mb-3">{{ user.username }}</h1>
+                    <div class="row">
+                        <div class="col-md-3">
+                            <h2>About</h2>
+                            <h6>{{ user_info.firstName }}</h6>
+                            <h6>{{ user_info.lastName }}</h6>
+                            <h6>Email Address: {{ user.email }}</h6>
+                            <h6>Age: {{ user_info.age }}</h6>
+                            <h6>Weight: Maybe add this feature? </h6>
+                            <h6>Bio Maybe add this feature?</h6>
+                            <h6>Member since: {{ user_info.createdAt }}</h6>
+                        </div>
+
+                        <div class="col-md-12">
+                            <h5 class="mt-2">Recent Competitions / something to implement?</h5>
+                            <table class="table table-sm table-hover table-striped">
+                                <tbody>
+                                    <tr>
+                                        <td> 22.10.20: Won Bob in a running contest </td>
+                                    </tr>
+                                    <tr>
+                                        <td> 22.10.20: Won Bob in a running contest </td>
+                                    </tr>
+                                    <tr>
+                                        <td> 22.10.20: Won Bob in a running contest </td>
+                                    </tr>
+                                    <tr>
+                                        <td> 22.10.20: Won Bob in a running contest </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                             <h5 class="mt-2">Created Workouts</h5>
+                            <table class="table table-sm table-hover table-striped">
+                                <tbody>
+                                    <tr>
+                                        <td> Workout 1 <button type="button" class="btn btn-primary">Edit</button>
+                                    </tr>
+                                    <tr>
+                                        <td> Workout 2 <button type="button" class="btn btn-primary">Edit</button>
+                                    </tr>
+                                    <tr>
+                                        <td> Workout 3 <button type="button" class="btn btn-primary">Edit</button>
+                                    </tr>
+                                    <tr>
+                                        <td> Workout 4 <button type="button" class="btn btn-primary">Edit</button></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-4 order-lg-1 text-center">
+            <img src="{{ user_info.image }}" class="mx-auto img-fluid img-circle d-block" alt="avatar">
+            <button class="btn btn-primary" type="button"><span>Change Photo</span></button>
+            <label class="custom-file">
+                <input type="file" id="file" class="custom-file-input">
+            </label>
+        </div>
+    </div>
+</div>
+
+</div>
+
+{% endblock %}
+
+
+{% block extra_js %}
+
+{% endblock %}
