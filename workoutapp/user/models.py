@@ -19,7 +19,19 @@ class UserInfo(models.Model):
     image = models.CharField(
         max_length=250,
         default="https://www.vhv.rs/dpng/d/256-2569650_men-profile-icon-png-image-free-download-searchpng.png")
-    createdAt = models.DateTimeField(auto_now=True)
-
+    CreatedAt = models.DateTimeField(auto_now=True)
+    
     def __str__(self):
         return self.user.username+"'s info"
+
+class Follow(models.Model):
+    Username = models.ForeignKey(User, on_delete=models.CASCADE, related_name='Username')
+    Following = models.ForeignKey(User, on_delete=models.CASCADE, related_name='Following')
+    FollowedAt = models.DateTimeField(auto_now=True)
+
+    def __str__(self):
+        return self.Username.username
+
+
+    
+
