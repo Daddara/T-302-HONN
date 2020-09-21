@@ -65,11 +65,180 @@
   }
 },
 {
+  "model": "admin.logentry",
+  "pk": 6,
+  "fields": {
+    "action_time": "2020-09-20T21:11:06.110Z",
+    "user": 1,
+    "content_type": 8,
+    "object_id": "1",
+    "object_repr": "UserInfo object (1)",
+    "action_flag": 1,
+    "change_message": "[{\"added\": {}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 7,
+  "fields": {
+    "action_time": "2020-09-20T21:13:34.477Z",
+    "user": 1,
+    "content_type": 8,
+    "object_id": "1",
+    "object_repr": "demoadmin's info",
+    "action_flag": 2,
+    "change_message": "[{\"changed\": {\"fields\": [\"BirthYear\"]}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 8,
+  "fields": {
+    "action_time": "2020-09-20T21:14:07.209Z",
+    "user": 1,
+    "content_type": 8,
+    "object_id": "1",
+    "object_repr": "demoadmin's info",
+    "action_flag": 2,
+    "change_message": "[{\"changed\": {\"fields\": [\"BirthYear\"]}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 9,
+  "fields": {
+    "action_time": "2020-09-20T21:14:12.755Z",
+    "user": 1,
+    "content_type": 8,
+    "object_id": "1",
+    "object_repr": "demoadmin's info",
+    "action_flag": 2,
+    "change_message": "[{\"changed\": {\"fields\": [\"BirthYear\"]}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 10,
+  "fields": {
+    "action_time": "2020-09-20T21:15:24.142Z",
+    "user": 1,
+    "content_type": 8,
+    "object_id": "1",
+    "object_repr": "demoadmin's info",
+    "action_flag": 2,
+    "change_message": "[{\"changed\": {\"fields\": [\"Age\"]}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 11,
+  "fields": {
+    "action_time": "2020-09-20T21:42:35.427Z",
+    "user": 1,
+    "content_type": 9,
+    "object_id": "1",
+    "object_repr": "Category object (1)",
+    "action_flag": 1,
+    "change_message": "[{\"added\": {}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 12,
+  "fields": {
+    "action_time": "2020-09-20T21:42:42.630Z",
+    "user": 1,
+    "content_type": 9,
+    "object_id": "2",
+    "object_repr": "Category object (2)",
+    "action_flag": 1,
+    "change_message": "[{\"added\": {}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 13,
+  "fields": {
+    "action_time": "2020-09-20T21:42:48.457Z",
+    "user": 1,
+    "content_type": 9,
+    "object_id": "3",
+    "object_repr": "Category object (3)",
+    "action_flag": 1,
+    "change_message": "[{\"added\": {}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 14,
+  "fields": {
+    "action_time": "2020-09-20T21:42:55.424Z",
+    "user": 1,
+    "content_type": 9,
+    "object_id": "4",
+    "object_repr": "Category object (4)",
+    "action_flag": 1,
+    "change_message": "[{\"added\": {}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 15,
+  "fields": {
+    "action_time": "2020-09-20T21:43:56.842Z",
+    "user": 1,
+    "content_type": 12,
+    "object_id": "1",
+    "object_repr": "Equipment object (1)",
+    "action_flag": 1,
+    "change_message": "[{\"added\": {}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 16,
+  "fields": {
+    "action_time": "2020-09-20T21:51:47.238Z",
+    "user": 1,
+    "content_type": 13,
+    "object_id": "1",
+    "object_repr": "demoadmin's exercise: Pushups",
+    "action_flag": 1,
+    "change_message": "[{\"added\": {}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 17,
+  "fields": {
+    "action_time": "2020-09-20T21:51:52.853Z",
+    "user": 1,
+    "content_type": 13,
+    "object_id": "1",
+    "object_repr": "demoadmin's exercise: Pushups",
+    "action_flag": 2,
+    "change_message": "[]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 18,
+  "fields": {
+    "action_time": "2020-09-20T21:52:41.549Z",
+    "user": 1,
+    "content_type": 10,
+    "object_id": "1",
+    "object_repr": "demoadmin: Covid Home Workout",
+    "action_flag": 1,
+    "change_message": "[{\"added\": {}}]"
+  }
+},
+{
   "model": "auth.user",
   "pk": 1,
   "fields": {
     "password": "pbkdf2_sha256$216000$J4oJeScBbRXC$9nPyDuF3Zx8UwqXh9sDHXyanBLMnnGnYD9938JcY974=",
-    "last_login": "2020-09-20T15:01:12.826Z",
+    "last_login": "2020-09-20T20:59:16.271Z",
     "is_superuser": true,
     "username": "demoadmin",
     "first_name": "",
@@ -80,6 +249,82 @@
     "date_joined": "2020-09-20T15:00:42.451Z",
     "groups": [],
     "user_permissions": []
+  }
+},
+
+{
+  "model": "user.userinfo",
+  "pk": 1,
+  "fields": {
+    "user": 1,
+    "firstName": "Demo",
+    "lastName": "Admin",
+    "age": 25,
+    "image": "https://www.vhv.rs/dpng/d/256-2569650_men-profile-icon-png-image-free-download-searchpng.png",
+    "createdAt": "2020-09-20T21:15:24.141Z"
+  }
+},
+{
+  "model": "workout.category",
+  "pk": 1,
+  "fields": {
+    "Name": "Running"
+  }
+},
+{
+  "model": "workout.category",
+  "pk": 2,
+  "fields": {
+    "Name": "Bodyweight"
+  }
+},
+{
+  "model": "workout.category",
+  "pk": 3,
+  "fields": {
+    "Name": "Bodybuilding"
+  }
+},
+{
+  "model": "workout.category",
+  "pk": 4,
+  "fields": {
+    "Name": "Powerlifting"
+  }
+},
+{
+  "model": "workout.workout",
+  "pk": 1,
+  "fields": {
+    "User": 1,
+    "Category": 2,
+    "Name": "Covid Home Workout",
+    "CreatedAt": "2020-09-20T21:52:41.548Z",
+    "Image": "https://www.vhv.rs/dpng/d/256-2569650_men-profile-icon-png-image-free-download-searchpng.png",
+    "Likes": 5656,
+    "Dislikes": 120,
+    "Public": true
+  }
+},
+{
+  "model": "workout.equipment",
+  "pk": 1,
+  "fields": {
+    "Name": "Dumbbells",
+    "Description": "Handheld weights",
+    "Image": "https://cdn2.coachmag.co.uk/sites/coachmag/files/shutterstock_151938761.jpg"
+  }
+},
+{
+  "model": "workout.exercise",
+  "pk": 1,
+  "fields": {
+    "Title": "Pushups",
+    "Creator": 1,
+    "Description": "STEPS: Get down on all fours, placing your hands slightly wider than your shoulders. Straighten your arms and legs. Lower your body until your chest nearly touches the floor. Pause, then push yourself back up. Repeat.",
+    "Image": "https://hips.hearstapps.com/hmg-prod.s3.amazonaws.com/images/basic-pushup-0-1446644701.jpg",
+    "Equipment": null,
+    "Public": true
   }
 },
 {
