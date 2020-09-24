@@ -12,7 +12,7 @@ pylint:
   stage: analysis
   allow_failure: true
   script:
-    - pylint workoutapp/*.py
+    - pylint workoutapp/*
   rules:
     - if: '$CI_PIPELINE_SOURCE == "merge_request_event"'
 

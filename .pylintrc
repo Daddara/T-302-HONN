@@ -2,6 +2,8 @@
 max-line-length=120
 
 [MASTER]
+ignore=migrations
+ignore-patterns=**/test.py
 disable=
     C0114,
     C0115,
