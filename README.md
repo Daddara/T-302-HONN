@@ -1,4 +1,4 @@
-# Workout with 
+# Workout with Team9
 [![pipeline status](https://gitlab.com/xFrednet/t-302-honn-2020-team-9/badges/master/pipeline.svg)](https://gitlab.com/xFrednet/t-302-honn-2020-team-9/-/commits/master)
 [![coverage report](https://gitlab.com/xFrednet/t-302-honn-2020-team-9/badges/master/coverage.svg)](https://gitlab.com/xFrednet/t-302-honn-2020-team-9/-/commits/master)
 
