@@ -1,0 +1,15 @@
+[FORMAT]
+max-line-length=120
+
+[MASTER]
+disable=
+    C0114,
+    C0115,
+    C0116,
+    C0303,
+    C0304,
+    C0305,
+    C0325,
+    C0326,
+    R0903,
+    R1705

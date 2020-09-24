@@ -1,26 +1,40 @@
 image: python:latest
 
-services:
-  - postgres:latest
-
-variables:
-  POSTGRES_DB: ci
-
-cache:
-  paths:
-  - ~/.cache/pip/
+stages:
+  - analysis
+  - test
 
 before_script:
   - python -V
   - pip install -r requirements.txt
 
-test:
+pylint:
+  stage: analysis
+  allow_failure: true
   script:
     - cd workoutapp
-    - python manage.py migrate
-    - coverage erase
-    - coverage run manage.py test
-    - coverage run --append -m unittest weather_service.gateway.weather_gateway_test # Note this is a dirty but needed hack right now
-    - coverage report
-  only:
-    - merge_requests
+    - pylint --ignore-patterns=*test.py
+  rules:
+    - if: '$CI_PIPELINE_SOURCE == "merge_request_event"'
+
+test_mr:
+  stage: test
+  script:
+    - sh run-coverage.sh
+  rules:
+    - if: '$CI_PIPELINE_SOURCE == "merge_request_event"'
+  artifacts:
+    paths:
+      - htmlcov/
+    expire_in: 2 week
+
+test_master:
+  stage: test
+  script:
+    - sh run-coverage.sh
+  rules:
+    - if: '$CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH'
+  artifacts:
+    paths:
+      - htmlcov/
+    expire_in: 52 weeks
