@@ -1,20 +1,11 @@
 image: python:latest
 
 stages:
-  - analysis
   - test
 
 before_script:
   - python -V
   - pip install -r requirements.txt
-
-pylint:
-  stage: analysis
-  allow_failure: true
-  script:
-    - pylint workoutapp/*
-  rules:
-    - if: '$CI_PIPELINE_SOURCE == "merge_request_event"'
 
 test_mr:
   stage: test
