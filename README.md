@@ -1,4 +1,7 @@
 # Workout with Team9
+[![pipeline status](https://gitlab.com/xFrednet/t-302-honn-2020-team-9/badges/master/pipeline.svg)](https://gitlab.com/xFrednet/t-302-honn-2020-team-9/-/commits/master)
+[![coverage report](https://gitlab.com/xFrednet/t-302-honn-2020-team-9/badges/master/coverage.svg)](https://gitlab.com/xFrednet/t-302-honn-2020-team-9/-/commits/master)
+
 This is a website to manage sport activities. 
 With this website it is possible to create a workout plan consisting out of several exercises.
 You can publish these plans for others or challenge your friends to do them.
