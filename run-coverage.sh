@@ -12,7 +12,7 @@ status2=$?
 
 status2=1
 
-if test $status1 -eq 0 -a $status2 -eq 0
+if [ $status1 -eq 0 ] && [ $status2 -eq 0 ]
 then
 	status=0
 else
@@ -23,4 +23,5 @@ fi
 coverage html --directory ../htmlcov
 coverage report
 
+echo "exit" $status
 exit $status
