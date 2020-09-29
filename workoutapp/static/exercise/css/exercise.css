@@ -1,0 +1,31 @@
+.exercise-creator {
+    margin:0px;
+    padding: 0px;
+    display: flex;
+    font-size: small;
+    align-self: flex-end;
+}
+
+.exercise-container {
+    padding: 5px;
+    display: inline-block;
+    justify-content: center;
+    width: 300px;
+    min-height: 100px;
+    height: fit-content;
+    background-color: #c5d3da;
+    border: 1px solid black;
+    border-radius: 4px;
+}
+
+.exercise-background-shadow{
+-webkit-box-shadow: 10px 9px 10px -1px rgba(102,102,102,1);
+-moz-box-shadow: 10px 9px 10px -1px rgba(102,102,102,1);
+box-shadow: 10px 9px 10px -1px rgba(102,102,102,1);
+    margin: 10px;
+    margin-bottom: 30px;
+}
+
+.exercise-container:hover {
+    transform: scale(1.05);
+}

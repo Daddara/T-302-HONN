@@ -1,6 +1,7 @@
 body{
     background-image: url("https://images.everydayhealth.com/images/healthy-living-landing-header-1920x1080.jpg?sfvrsn=3f546a95_1");
     background-size: cover;
+    min-width: 600px;
     background-position: inherit;
     background-attachment: fixed;
 }
@@ -64,4 +65,44 @@ a.navbar-brand:hover {
     padding: 20px;
     background-color: white;
     border: 1px solid black;
+}
+
+.center-page-content {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.item-title {
+    font-family: Arial;
+    font-size: large;
+    color: black;
+    font-weight: bold;
+}
+
+.social-stats {
+    justify-content: center;
+    display: flex;
+    flex-direction: row;
+}
+.likes, .dislikes{
+    margin-left: 5px;
+    margin-right: 5px;
+    display: inline-flex;
+}
+.likes:hover {
+    transform: scale(1.07);
+    color: #2b63da;
+}
+.dislikes:hover {
+    transform: scale(1.07);
+    color: #da292d;
+}
+
+.social-span {
+    padding: 2px;
+}
+
+.social-link a{
+    text-decoration: inherit;
 }

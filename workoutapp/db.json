@@ -234,11 +234,375 @@
   }
 },
 {
+  "model": "admin.logentry",
+  "pk": 19,
+  "fields": {
+    "action_time": "2020-09-29T19:17:22.719Z",
+    "user": 1,
+    "content_type": 13,
+    "object_id": "2",
+    "object_repr": "demoadmin's exercise: Situps",
+    "action_flag": 1,
+    "change_message": "[{\"added\": {}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 20,
+  "fields": {
+    "action_time": "2020-09-29T19:23:41.350Z",
+    "user": 1,
+    "content_type": 13,
+    "object_id": "3",
+    "object_repr": "demoadmin's exercise: Pullups",
+    "action_flag": 1,
+    "change_message": "[{\"added\": {}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 21,
+  "fields": {
+    "action_time": "2020-09-29T19:30:19.250Z",
+    "user": 1,
+    "content_type": 21,
+    "object_id": "1",
+    "object_repr": "MuscleGroup object (1)",
+    "action_flag": 1,
+    "change_message": "[{\"added\": {}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 22,
+  "fields": {
+    "action_time": "2020-09-29T19:30:25.573Z",
+    "user": 1,
+    "content_type": 21,
+    "object_id": "2",
+    "object_repr": "MuscleGroup object (2)",
+    "action_flag": 1,
+    "change_message": "[{\"added\": {}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 23,
+  "fields": {
+    "action_time": "2020-09-29T19:30:28.746Z",
+    "user": 1,
+    "content_type": 21,
+    "object_id": "3",
+    "object_repr": "MuscleGroup object (3)",
+    "action_flag": 1,
+    "change_message": "[{\"added\": {}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 24,
+  "fields": {
+    "action_time": "2020-09-29T19:30:34.126Z",
+    "user": 1,
+    "content_type": 21,
+    "object_id": "4",
+    "object_repr": "MuscleGroup object (4)",
+    "action_flag": 1,
+    "change_message": "[{\"added\": {}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 25,
+  "fields": {
+    "action_time": "2020-09-29T19:30:39.499Z",
+    "user": 1,
+    "content_type": 21,
+    "object_id": "5",
+    "object_repr": "MuscleGroup object (5)",
+    "action_flag": 1,
+    "change_message": "[{\"added\": {}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 26,
+  "fields": {
+    "action_time": "2020-09-29T19:30:42.261Z",
+    "user": 1,
+    "content_type": 21,
+    "object_id": "6",
+    "object_repr": "MuscleGroup object (6)",
+    "action_flag": 1,
+    "change_message": "[{\"added\": {}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 27,
+  "fields": {
+    "action_time": "2020-09-29T19:30:46.258Z",
+    "user": 1,
+    "content_type": 21,
+    "object_id": "7",
+    "object_repr": "MuscleGroup object (7)",
+    "action_flag": 1,
+    "change_message": "[{\"added\": {}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 28,
+  "fields": {
+    "action_time": "2020-09-29T19:30:53.152Z",
+    "user": 1,
+    "content_type": 21,
+    "object_id": "8",
+    "object_repr": "MuscleGroup object (8)",
+    "action_flag": 1,
+    "change_message": "[{\"added\": {}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 29,
+  "fields": {
+    "action_time": "2020-09-29T19:31:05.961Z",
+    "user": 1,
+    "content_type": 21,
+    "object_id": "9",
+    "object_repr": "MuscleGroup object (9)",
+    "action_flag": 1,
+    "change_message": "[{\"added\": {}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 30,
+  "fields": {
+    "action_time": "2020-09-29T19:32:12.233Z",
+    "user": 1,
+    "content_type": 21,
+    "object_id": "10",
+    "object_repr": "Back & Biceps",
+    "action_flag": 1,
+    "change_message": "[{\"added\": {}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 31,
+  "fields": {
+    "action_time": "2020-09-29T19:32:17.948Z",
+    "user": 1,
+    "content_type": 21,
+    "object_id": "11",
+    "object_repr": "Chest & Triceps",
+    "action_flag": 1,
+    "change_message": "[{\"added\": {}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 32,
+  "fields": {
+    "action_time": "2020-09-29T19:32:29.323Z",
+    "user": 1,
+    "content_type": 13,
+    "object_id": "3",
+    "object_repr": "demoadmin's exercise: Pullups",
+    "action_flag": 2,
+    "change_message": "[{\"changed\": {\"fields\": [\"Muscle group\"]}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 33,
+  "fields": {
+    "action_time": "2020-09-29T19:32:42.402Z",
+    "user": 1,
+    "content_type": 21,
+    "object_id": "12",
+    "object_repr": "Abs",
+    "action_flag": 1,
+    "change_message": "[{\"added\": {}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 34,
+  "fields": {
+    "action_time": "2020-09-29T19:32:45.018Z",
+    "user": 1,
+    "content_type": 13,
+    "object_id": "2",
+    "object_repr": "demoadmin's exercise: Situps",
+    "action_flag": 2,
+    "change_message": "[{\"changed\": {\"fields\": [\"Muscle group\"]}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 35,
+  "fields": {
+    "action_time": "2020-09-29T19:32:51.406Z",
+    "user": 1,
+    "content_type": 13,
+    "object_id": "1",
+    "object_repr": "demoadmin's exercise: Pushups",
+    "action_flag": 2,
+    "change_message": "[{\"changed\": {\"fields\": [\"Muscle group\"]}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 36,
+  "fields": {
+    "action_time": "2020-09-29T19:57:52.882Z",
+    "user": 1,
+    "content_type": 4,
+    "object_id": "2",
+    "object_repr": "System",
+    "action_flag": 1,
+    "change_message": "[{\"added\": {}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 37,
+  "fields": {
+    "action_time": "2020-09-29T19:58:10.739Z",
+    "user": 1,
+    "content_type": 13,
+    "object_id": "3",
+    "object_repr": "System's exercise: Pullups",
+    "action_flag": 2,
+    "change_message": "[{\"changed\": {\"fields\": [\"Creator\"]}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 38,
+  "fields": {
+    "action_time": "2020-09-29T19:58:24.745Z",
+    "user": 1,
+    "content_type": 16,
+    "object_id": "2",
+    "object_repr": "System: 0",
+    "action_flag": 1,
+    "change_message": "[{\"added\": {}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 39,
+  "fields": {
+    "action_time": "2020-09-29T19:58:57.082Z",
+    "user": 1,
+    "content_type": 8,
+    "object_id": "2",
+    "object_repr": "System's info",
+    "action_flag": 1,
+    "change_message": "[{\"added\": {}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 40,
+  "fields": {
+    "action_time": "2020-09-29T20:21:53.795Z",
+    "user": 1,
+    "content_type": 13,
+    "object_id": "2",
+    "object_repr": "System's exercise: Situps",
+    "action_flag": 2,
+    "change_message": "[{\"changed\": {\"fields\": [\"Creator\"]}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 41,
+  "fields": {
+    "action_time": "2020-09-29T20:23:37.820Z",
+    "user": 1,
+    "content_type": 13,
+    "object_id": "1",
+    "object_repr": "System's exercise: Pushups",
+    "action_flag": 2,
+    "change_message": "[{\"changed\": {\"fields\": [\"Creator\"]}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 42,
+  "fields": {
+    "action_time": "2020-09-29T20:23:41.361Z",
+    "user": 1,
+    "content_type": 13,
+    "object_id": "1",
+    "object_repr": "demoadmin's exercise: Pushups",
+    "action_flag": 2,
+    "change_message": "[{\"changed\": {\"fields\": [\"Creator\"]}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 43,
+  "fields": {
+    "action_time": "2020-09-29T20:34:15.286Z",
+    "user": 1,
+    "content_type": 13,
+    "object_id": "4",
+    "object_repr": "System's exercise: Bodyweight Squats",
+    "action_flag": 1,
+    "change_message": "[{\"added\": {}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 44,
+  "fields": {
+    "action_time": "2020-09-29T20:47:00.596Z",
+    "user": 1,
+    "content_type": 13,
+    "object_id": "3",
+    "object_repr": "System's exercise: Pullups",
+    "action_flag": 2,
+    "change_message": "[{\"changed\": {\"fields\": [\"Likes\", \"Dislikes\"]}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 45,
+  "fields": {
+    "action_time": "2020-09-29T20:47:13.190Z",
+    "user": 1,
+    "content_type": 13,
+    "object_id": "2",
+    "object_repr": "System's exercise: Situps",
+    "action_flag": 2,
+    "change_message": "[{\"changed\": {\"fields\": [\"Likes\", \"Dislikes\"]}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 46,
+  "fields": {
+    "action_time": "2020-09-29T20:47:23.476Z",
+    "user": 1,
+    "content_type": 13,
+    "object_id": "1",
+    "object_repr": "demoadmin's exercise: Pushups",
+    "action_flag": 2,
+    "change_message": "[{\"changed\": {\"fields\": [\"Likes\", \"Dislikes\"]}}]"
+  }
+},
+{
   "model": "auth.user",
   "pk": 1,
   "fields": {
     "password": "pbkdf2_sha256$216000$J4oJeScBbRXC$9nPyDuF3Zx8UwqXh9sDHXyanBLMnnGnYD9938JcY974=",
-    "last_login": "2020-09-20T20:59:16.271Z",
+    "last_login": "2020-09-29T19:52:02.010Z",
     "is_superuser": true,
     "username": "demoadmin",
     "first_name": "",
@@ -251,7 +615,24 @@
     "user_permissions": []
   }
 },
-
+{
+  "model": "auth.user",
+  "pk": 2,
+  "fields": {
+    "password": "pbkdf2_sha256$216000$QK3GTRN7C8ci$9gUI66PGc3/11mUruKvVP3hl3X2W4ml2/sqJCZtVV6c=",
+    "last_login": null,
+    "is_superuser": false,
+    "username": "System",
+    "first_name": "",
+    "last_name": "",
+    "email": "",
+    "is_staff": false,
+    "is_active": true,
+    "date_joined": "2020-09-29T19:57:52.724Z",
+    "groups": [],
+    "user_permissions": []
+  }
+},
 {
   "model": "user.userinfo",
   "pk": 1,
@@ -261,7 +642,19 @@
     "lastName": "Admin",
     "age": 25,
     "image": "https://www.vhv.rs/dpng/d/256-2569650_men-profile-icon-png-image-free-download-searchpng.png",
-    "createdAt": "2020-09-20T21:15:24.141Z"
+    "CreatedAt": "2020-09-20T21:15:24.141Z"
+  }
+},
+{
+  "model": "user.userinfo",
+  "pk": 2,
+  "fields": {
+    "user": 2,
+    "firstName": "Fit",
+    "lastName": "Connect",
+    "age": 0,
+    "image": "https://www.vhv.rs/dpng/d/256-2569650_men-profile-icon-png-image-free-download-searchpng.png",
+    "CreatedAt": "2020-09-29T19:58:57.082Z"
   }
 },
 {
@@ -316,6 +709,90 @@
   }
 },
 {
+  "model": "workout.musclegroup",
+  "pk": 1,
+  "fields": {
+    "name": "Back"
+  }
+},
+{
+  "model": "workout.musclegroup",
+  "pk": 2,
+  "fields": {
+    "name": "Triceps"
+  }
+},
+{
+  "model": "workout.musclegroup",
+  "pk": 3,
+  "fields": {
+    "name": "Legs"
+  }
+},
+{
+  "model": "workout.musclegroup",
+  "pk": 4,
+  "fields": {
+    "name": "Butt"
+  }
+},
+{
+  "model": "workout.musclegroup",
+  "pk": 5,
+  "fields": {
+    "name": "Biceps"
+  }
+},
+{
+  "model": "workout.musclegroup",
+  "pk": 6,
+  "fields": {
+    "name": "Arms"
+  }
+},
+{
+  "model": "workout.musclegroup",
+  "pk": 7,
+  "fields": {
+    "name": "Chest"
+  }
+},
+{
+  "model": "workout.musclegroup",
+  "pk": 8,
+  "fields": {
+    "name": "Calves"
+  }
+},
+{
+  "model": "workout.musclegroup",
+  "pk": 9,
+  "fields": {
+    "name": "Forearm"
+  }
+},
+{
+  "model": "workout.musclegroup",
+  "pk": 10,
+  "fields": {
+    "name": "Back & Biceps"
+  }
+},
+{
+  "model": "workout.musclegroup",
+  "pk": 11,
+  "fields": {
+    "name": "Chest & Triceps"
+  }
+},
+{
+  "model": "workout.musclegroup",
+  "pk": 12,
+  "fields": {
+    "name": "Abs"
+  }
+},
+{
   "model": "workout.exercise",
   "pk": 1,
   "fields": {
@@ -324,25 +801,55 @@
     "Description": "STEPS: Get down on all fours, placing your hands slightly wider than your shoulders. Straighten your arms and legs. Lower your body until your chest nearly touches the floor. Pause, then push yourself back up. Repeat.",
     "Image": "https://hips.hearstapps.com/hmg-prod.s3.amazonaws.com/images/basic-pushup-0-1446644701.jpg",
     "Equipment": null,
-    "Public": true
+    "Public": true,
+    "muscle_group": 11,
+    "Likes": 284,
+    "Dislikes": 45
   }
 },
 {
-  "model": "auth.user",
+  "model": "workout.exercise",
   "pk": 2,
   "fields": {
-    "password": "pbkdf2_sha256$216000$hsfpCoMo5Heg$6T43CWITzvd4jGp8/8JGeNNSqCKGb63Jlz/0yKmq6GQ=",
-    "last_login": "2020-09-20T19:30:48.671Z",
-    "is_superuser": true,
-    "username": "saken",
-    "first_name": "",
-    "last_name": "",
-    "email": "test@test.is",
-    "is_staff": true,
-    "is_active": true,
-    "date_joined": "2020-09-20T16:18:53.029Z",
-    "groups": [],
-    "user_permissions": []
+    "Title": "Situps",
+    "Creator": 2,
+    "Description": "Lie down on your back, keep your knees bent and your back and feet flat on the mat. Slowly lift your torso and sit up. Return to the starting position by rolling down one vertebrae at a time. Repeat the exercise until set is complete. PROPER FORM AND",
+    "Image": "https://www.onefitstop.com/community/wp-content/uploads/2017/06/goodform_l-400x400.jpg",
+    "Equipment": null,
+    "Public": true,
+    "muscle_group": 12,
+    "Likes": 10,
+    "Dislikes": 5
+  }
+},
+{
+  "model": "workout.exercise",
+  "pk": 3,
+  "fields": {
+    "Title": "Pullups",
+    "Creator": 2,
+    "Description": "A pull-up is an upper-body strength exercise.",
+    "Image": "https://www.vhv.rs/dpng/d/256-2569650_men-profile-icon-png-image-free-download-searchpng.png",
+    "Equipment": null,
+    "Public": true,
+    "muscle_group": 10,
+    "Likes": 120,
+    "Dislikes": 5
+  }
+},
+{
+  "model": "workout.exercise",
+  "pk": 4,
+  "fields": {
+    "Title": "Bodyweight Squats",
+    "Creator": 2,
+    "Description": "Squat like a champ.",
+    "Image": "https://upload.wikimedia.org/wikipedia/commons/thumb/8/82/Squats.svg/1200px-Squats.svg.png",
+    "Equipment": null,
+    "Public": true,
+    "muscle_group": 3,
+    "Likes": 45,
+    "Dislikes": 5
   }
 },
 {
@@ -350,6 +857,14 @@
   "pk": 1,
   "fields": {
     "user": 1,
+    "fitcoin": 5000
+  }
+},
+{
+  "model": "wallet.wallet",
+  "pk": 2,
+  "fields": {
+    "user": 2,
     "fitcoin": 0
   }
 },
@@ -382,12 +897,13 @@
   }
 },
 {
-  "model": "user.follow",
+  "model": "payment.order",
   "pk": 1,
   "fields": {
-    "Username": 1,
-    "Following": 2,
-    "FollowedAt": "2020-09-20T16:18:53.029Z"
+    "product": 3,
+    "customer": 1,
+    "price": 100.0,
+    "date": "2020-09-21T00:07:19.059Z"
   }
 }
 ]

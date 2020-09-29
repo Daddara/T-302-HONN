@@ -1,16 +1,48 @@
 {% extends "base.html" %}
-{% block content %}
+{% load static %}
+{% block extra_head %}
+    <link rel="stylesheet" href="{% static "exercise/css/exercise.css" %}">
+{% endblock %}
 
+{% block content %}
 <div>
-        <h2>Exercises</h2>
+<h2>Exercises</h2>
     </div>
     {% if exercises %}
     <div class="page-content">
-        {% for exercise in exercises %}
-            <li class=" list-group-item align-items-center justify-content-between">
-                <div><a class="text-secondary" href=#>{{exercise.Title}}</a></div>
-            </li>
-        {% endfor %}
+        <div class="center-page-content">
+            {% for exercise in exercises %}
+                <div class="exercise-background-shadow">
+                    <div class="exercise-container">
+                        <div class="item-title">
+                            <a href=#>{{exercise.Title}}</a>
+                        </div>
+                        <div><b>Trains:</b> {{exercise.muscle_group}}</div>
+                        {% if exercise.equipent == None %}
+                            <div><b>Equipment:</b> None</div>
+                        {% else %}
+                            <div><b>Equipment:</b> {{exercise.equipment}}</div>
+                        {% endif %}
+                        <div class="social-stats">
+                            <div class="likes">
+                                <span class="social-span">{{ exercise.Likes }}</span><i class="fa fa-thumbs-up"></i>
+                            </div>
+                            <div class="dislikes">
+                                <span class="social-span">{{ exercise.Dislikes }}</span><i class="fa fa-thumbs-down"></i>
+                            </div>
+                        </div>
+                        <div class="exercise-creator">
+                            {% if exercise.Creator.username == 'System' %}
+                                By {{ exercise.Creator }}
+                            {% else %}
+                                <!-- Link to user profile -->
+                                <a href="#"><span style="color: black;">By</span> {{ exercise.Creator }}</a>
+                            {% endif %}
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
     </div>
     {% else %}
     <div class="page-content">
