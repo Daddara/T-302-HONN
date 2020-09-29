@@ -10,8 +10,6 @@ status1=$?
 coverage run --append -m unittest discover -p *_test.py
 status2=$?
 
-status1=1
-
 if [ $status1 -eq 0 ] && [ $status2 -eq 0 ]
 then
 	status=0
