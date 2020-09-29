@@ -69,12 +69,12 @@ coverage report
 The current list can be found in the [requirements.txt](requirements.txt)
 
 ## Framework
-Django framework, see architecture [here](docs/project_overview/project_architecture.png)
+Django framework, see architecture [here](docs/sprint_1/project_overview/project_architecture.png)
 
 ## Lecture Aspects
 * We are using the three-tier architecture taught in Lecture 03: Software Architecture
 
-We've documented the used design patterns in [`docs/design_patterns`](docs/design_patterns).
+We've documented the used design patterns in [`docs/sprint_2/design_patterns`](docs/sprint_2/design_patterns).
 
 ## User stories
 The following are user stories to implement agreed by the TA
@@ -121,7 +121,15 @@ The full definition of done you can read [here](DEFINITION_OF_DONE.md).
 For this first sprint we have agreed to implement user stories #10, #11 and #29.
 
 ### Sprint 2
-We've planned to implement the following user stories this sprint: #2, #5, #9, #12, #14, #15, #16, #17, #18, #19, #24, #27, #51, #52, #56
+We've planned to implement the following user stories this sprint: 
+* #2, #5, #9, #12, #14, #15, #16, #17, #18, #19, #24, #27, #51, #52, #56
+
+### Sprint 3
+We plan to document and implement the required lecture aspects. These tasks are tracked in the following issues: 
+* #62, #63, #64, #65, #66, #67, #68, #69, #70, #71, #72, #73, #74, #75, #76, #77
+
+In addition we plan to implement the following user stories this sprint: 
+* #2, #5, #9, #12, #14, #15, #16, #17, #18, #19, #24, #27, #51, #52, #56
 
 ## Sprint backlog and stuff
 We are using GitLabs issue feature to manage our team and user stories. You can sort feature in most parts of gitlab also to sprint specific board for example:
