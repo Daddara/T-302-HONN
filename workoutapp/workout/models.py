@@ -48,6 +48,13 @@ class Equipment(models.Model):
         return self.Name
 
 
+class MuscleGroup(models.Model):
+    name = models.CharField(max_length=50)
+
+    def __str__(self):
+        return self.name
+
+
 class Exercise(models.Model):
     Title = models.CharField(max_length=20, default="")
     Creator = models.ForeignKey(User, null=True, on_delete=models.SET_NULL)
@@ -57,6 +64,9 @@ class Exercise(models.Model):
         default="https://www.vhv.rs/dpng/d/256-2569650_men-profile-icon-png-image-free-download-searchpng.png")
     Equipment = models.ForeignKey(Equipment, null=True, blank=True, on_delete=models.SET_NULL)
     Public = models.BooleanField(default=False)
+    muscle_group = models.ForeignKey(MuscleGroup, null=True, blank=True, on_delete=models.SET_NULL)
+    Likes = models.IntegerField(default=0)
+    Dislikes = models.IntegerField(default=0)
 
     class Meta:
         unique_together = ('Creator', 'Title',)
