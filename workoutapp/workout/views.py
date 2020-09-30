@@ -107,6 +107,13 @@ def rate_exercise(request):
         if rating_value != RatingValue.LIKE and rating_value != RatingValue.DISLIKE:
             return HttpResponse(status=400)
 
+        try:
+            ExerciseRating.objects.get(Exercise=exercise_id, Judge=request.user).delete()
+        except ExerciseRating.DoesNotExist:
+            pass
+        except ExerciseRating.MultipleObjectsReturned:
+            pass
+
         rating = ExerciseRating()
         rating.Judge = request.user
         rating.Exercise = exercise
