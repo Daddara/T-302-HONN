@@ -1,9 +1,12 @@
+from django.views.decorators.csrf import csrf_exempt
 from django.shortcuts import render, redirect, get_object_or_404
 # Create your views here.
 from django.http import HttpResponse
-from .models import Workout, WorkoutManager, Exercise
+import datetime
+from .models import Workout, WorkoutManager, Exercise, ExerciseRating, RatingValue
 from .forms.create_workout_form import CreateWorkoutForm, WorkoutManagerForm
 from .forms.create_exercise_form import ExerciseForm
+from .forms.rate_exercise_form import RateExerciseForm
 
 
 def create_workout(request):
@@ -78,3 +81,39 @@ def create_exercise(request):
 
 def edit_exercise(request, id=None, template_name='update_exercise.html'):
     pass
+
+@csrf_exempt
+def rate_exercise(request):
+    if not request.user.is_authenticated:
+        print("request.user.is_authenticated")
+        return HttpResponse(status=401)
+
+    if request.method == 'POST':
+        form = RateExerciseForm(data=request.POST)
+        if (not form.is_valid()):
+            return HttpResponse(status=400)
+        
+        # Get values
+        exercise_id = form.cleaned_data['exercise_id']
+        rating_value = form.cleaned_data['rating']
+        
+        # Test if exercise exists
+        exercise = None
+        try:
+            exercise = Exercise.objects.get(id=exercise_id)
+        except Exercise.DoesNotExist:
+            return HttpResponse(status=404)
+
+        # Get or create rating
+        rating = ExerciseRating.objects.get_or_create(
+            Exercise=exercise,
+            Judge=request.user
+        )[0]
+
+        # Save rating
+        rating.Rating = rating_value
+        rating.SubmittedAt = datetime.datetime.now()
+        rating.save()
+
+        # Be Happy 
+        return HttpResponse(status=200)

@@ -1,3 +1,4 @@
+from django.utils.translation import gettext_lazy as gt
 from django.contrib.auth.models import User
 from django.db import models
 import datetime
@@ -65,8 +66,6 @@ class Exercise(models.Model):
     Equipment = models.ForeignKey(Equipment, null=True, blank=True, on_delete=models.SET_NULL)
     Public = models.BooleanField(default=False)
     muscle_group = models.ForeignKey(MuscleGroup, null=True, blank=True, on_delete=models.SET_NULL)
-    Likes = models.IntegerField(default=0)
-    Dislikes = models.IntegerField(default=0)
 
     class Meta:
         unique_together = ('Creator', 'Title',)
@@ -92,3 +91,22 @@ class WorkoutManager(models.Model):
 
     def __str__(self):
         return self.Workout.Name + ", " + self.Exercise.Title
+
+class RatingValue(models.TextChoices):
+    LIKE = '+1', gt('LIKE')
+    IDK = '*0', gt('IDK')
+    DISLIKE = '-1', gt('DISLIKE')
+
+
+class ExerciseRating(models.Model):
+    Judge = models.ForeignKey(User, null=False, on_delete=models.CASCADE)
+    Exercise = models.ForeignKey(Exercise, null=False, on_delete=models.CASCADE)
+    SubmittedAt = models.DateTimeField(auto_now=True)
+    Rating = models.IntegerField(choices=RatingValue.choices, default=0)
+
+
+class WorkoutRating(models.Model):
+    Judge = models.ForeignKey(User, null=False, on_delete=models.CASCADE)
+    Exercise = models.ForeignKey(Exercise, null=False, on_delete=models.CASCADE)
+    SubmittedAt = models.DateTimeField(auto_now=True)
+    Rating = models.IntegerField(choices=RatingValue.choices)
