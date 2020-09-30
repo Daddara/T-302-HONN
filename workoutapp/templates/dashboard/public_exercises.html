@@ -62,7 +62,11 @@
         console.log("Exercise update " + exercise_id + " " + new_status)
     }
 
-    function post_exercise_rating(exercise_id_input, new_status) {
+    function post_exercise_rating(exercise_id, rating) {
+        let data = new FormData()
+        data.append('exercise_id', exercise_id)
+        data.append('rating', rating)
+        
         let xmlHttp = new XMLHttpRequest();
         xmlHttp.onreadystatechange = function() {
             if (xmlHttp.readyState === 4) {
@@ -73,8 +77,7 @@
         };
 
         xmlHttp.open("POST", "{% url 'rate_exercise' %}", true); // true for asynchronous
-        xmlHttp.setRequestHeader("Content-Type", "application/json");
-        xmlHttp.send(JSON.stringify({exercise_id: exercise_id_input, rating: new_status}));
+        xmlHttp.send(data);
     }
 
     function handle_exercise_rating(exercise_id, new_status) {

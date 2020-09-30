@@ -1,6 +1,9 @@
 from django.test import TestCase, Client
 from django.urls import reverse
 
+from workout.models import Exercise, ExerciseRating, RatingValue
+from django.contrib.auth.models import User
+
 
 class CreateWorkoutTest(TestCase):
     def init(self):
@@ -12,3 +15,70 @@ class CreateWorkoutTest(TestCase):
         self.assertEqual(response.status_code, 200)
         self.assertTemplateUsed(response, 'workout/create_workout.html')
         print("200, OK")
+
+class RateExerciseTest(TestCase):
+    def setUp(self):
+        self.client = Client()
+        
+        self._setup_user()
+        self.user1 = User.objects.get(pk=1)
+        
+        self._setup_exercise()
+        self.exercise1 = Exercise.objects.get(pk=1)
+
+    def _setup_user(self):
+        data1 = {'username': 'TestUser',
+                'email': 'test_user@test.com',
+                'password1': 'iampassword', 'password2': 'iampassword'}
+        self.client.post(reverse('register'), data1)
+        
+    def _setup_exercise(self):
+        Exercise(Public=True, Title="I'm super tired", Creator=self.user1).save()
+    
+    def test_post_like(self):
+        self.client.force_login(self.user1)
+        response = self.client.post('/workout/rate_exercise', {'exercise_id': self.exercise1.id, 'rating': "+1"})
+        self.assertEqual(response.status_code, 200)
+        try:
+            rating = ExerciseRating.objects.get(Judge=self.user1, Exercise=self.exercise1)
+            self.assertEqual(rating.Judge, self.user1)
+            self.assertEqual(rating.Exercise, self.exercise1)
+            self.assertEqual(rating.Rating, 1)
+        except ExerciseRating.DoesNotExist:
+            self.assertTrue(False)
+    
+    def test_update_dislike(self):
+        self.client.force_login(self.user1)
+        response1 = self.client.post('/workout/rate_exercise', {'exercise_id': self.exercise1.id, 'rating': "+1"})
+        self.assertEqual(response1.status_code, 200)
+        try:
+            rating = ExerciseRating.objects.get(Judge=self.user1, Exercise=self.exercise1)
+        except ExerciseRating.DoesNotExist:
+            self.assertTrue(False)
+
+        self.client.force_login(self.user1)
+        response2 = self.client.post('/workout/rate_exercise', {'exercise_id': self.exercise1.id, 'rating': "-1"})
+        self.assertEqual(response2.status_code, 200)
+        try:
+            rating = ExerciseRating.objects.get(Judge=self.user1, Exercise=self.exercise1)
+            self.assertEqual(rating.Judge, self.user1)
+            self.assertEqual(rating.Exercise, self.exercise1)
+            self.assertEqual(rating.Rating, -1)
+        except ExerciseRating.DoesNotExist:
+            self.assertTrue(False)
+    
+    def test_fails(self):
+        # Unauthorized
+        response1 = self.client.post('/workout/rate_exercise', {'exercise_id': self.exercise1.id, 'rating': "+1"})
+        self.assertEqual(response1.status_code, 401)
+
+        # invalid
+        self.client.force_login(self.user1)
+        response1 = self.client.post('/workout/rate_exercise', {'exercise_id': self.exercise1.id, 'rating': "17"})
+        self.assertEqual(response1.status_code, 400)
+        response1 = self.client.post('/workout/rate_exercise', {'exercise_id': "Me", 'rating': "+1"})
+        self.assertEqual(response1.status_code, 400)
+        
+        # Exercise not found
+        response1 = self.client.post('/workout/rate_exercise', {'exercise_id': 21921212, 'rating': "+1"})
+        self.assertEqual(response1.status_code, 404)

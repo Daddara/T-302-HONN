@@ -94,6 +94,7 @@ class WorkoutManager(models.Model):
 
 class RatingValue(models.TextChoices):
     LIKE = '+1', gt('LIKE')
+    IDK = '*0', gt('IDK')
     DISLIKE = '-1', gt('DISLIKE')
 
 
@@ -101,7 +102,7 @@ class ExerciseRating(models.Model):
     Judge = models.ForeignKey(User, null=False, on_delete=models.CASCADE)
     Exercise = models.ForeignKey(Exercise, null=False, on_delete=models.CASCADE)
     SubmittedAt = models.DateTimeField(auto_now=True)
-    Rating = models.IntegerField(choices=RatingValue.choices)
+    Rating = models.IntegerField(choices=RatingValue.choices, default=0)
 
 
 class WorkoutRating(models.Model):

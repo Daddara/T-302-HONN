@@ -2,10 +2,11 @@ from django.views.decorators.csrf import csrf_exempt
 from django.shortcuts import render, redirect, get_object_or_404
 # Create your views here.
 from django.http import HttpResponse
-import json
+import datetime
 from .models import Workout, WorkoutManager, Exercise, ExerciseRating, RatingValue
 from .forms.create_workout_form import CreateWorkoutForm, WorkoutManagerForm
 from .forms.create_exercise_form import ExerciseForm
+from .forms.rate_exercise_form import RateExerciseForm
 
 
 def create_workout(request):
@@ -84,40 +85,35 @@ def edit_exercise(request, id=None, template_name='update_exercise.html'):
 @csrf_exempt
 def rate_exercise(request):
     if not request.user.is_authenticated:
-        return redirect('/accounts/login/')
+        print("request.user.is_authenticated")
+        return HttpResponse(status=401)
 
     if request.method == 'POST':
-
-        exercise_id = None
-        rating_value = None
-        try:
-            json_data = json.loads(request.body)
-            exercise_id = json_data['exercise_id']
-            rating_value = json_data['rating']
-        except KeyError:
+        form = RateExerciseForm(data=request.POST)
+        if (not form.is_valid()):
             return HttpResponse(status=400)
-        except json.JSONDecodeError:
-            return HttpResponse(status=400)
-
+        
+        # Get values
+        exercise_id = form.cleaned_data['exercise_id']
+        rating_value = form.cleaned_data['rating']
+        
+        # Test if exercise exists
+        exercise = None
         try:
             exercise = Exercise.objects.get(id=exercise_id)
         except Exercise.DoesNotExist:
-            return HttpResponse(status=400)
-        
-        if rating_value != RatingValue.LIKE and rating_value != RatingValue.DISLIKE:
-            return HttpResponse(status=400)
+            return HttpResponse(status=404)
 
-        try:
-            ExerciseRating.objects.get(Exercise=exercise_id, Judge=request.user).delete()
-        except ExerciseRating.DoesNotExist:
-            pass
-        except ExerciseRating.MultipleObjectsReturned:
-            pass
+        # Get or create rating
+        rating = ExerciseRating.objects.get_or_create(
+            Exercise=exercise,
+            Judge=request.user
+        )[0]
 
-        rating = ExerciseRating()
-        rating.Judge = request.user
-        rating.Exercise = exercise
+        # Save rating
         rating.Rating = rating_value
+        rating.SubmittedAt = datetime.datetime.now()
         rating.save()
 
+        # Be Happy 
         return HttpResponse(status=200)
