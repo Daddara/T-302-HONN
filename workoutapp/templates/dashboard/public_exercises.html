@@ -24,11 +24,13 @@
                             <div><b>Equipment:</b> {{exercise.equipment}}</div>
                         {% endif %}
                         <div class="social-stats">
-                            <div class="likes">
-                                <span class="social-span">{{ exercise.Likes }}</span><i class="fa fa-thumbs-up"></i>
+                            <div class="likes" exercise-id="{{ exercise.id }}">
+                                <span class="social-span">{{ exercise.Likes }}</span>
+                                <i class="fa fa-thumbs-up"></i>
                             </div>
-                            <div class="dislikes">
-                                <span class="social-span">{{ exercise.Dislikes }}</span><i class="fa fa-thumbs-down"></i>
+                            <div class="dislikes"  exercise-id="{{ exercise.id }}">
+                                <span class="social-span">{{ exercise.Dislikes }}</span>
+                                <i class="fa fa-thumbs-down"></i>
                             </div>
                         </div>
                         <div class="exercise-creator">
@@ -50,4 +52,57 @@
     </div>
     {% endif %}
 
+{% endblock %}
+
+{% block extra_js %}
+<script>
+    
+    {% if user.is_authenticated %}
+    function display_exercise_rating(exercise_id, new_status) {
+        console.log("Exercise update " + exercise_id + " " + new_status)
+    }
+
+    function post_exercise_rating(exercise_id_input, new_status) {
+        let xmlHttp = new XMLHttpRequest();
+        xmlHttp.onreadystatechange = function() {
+            if (xmlHttp.readyState === 4) {
+                if (xmlHttp.status !== 200) {
+                    alert("Your rating could not be saved")
+                }
+            }
+        };
+
+        xmlHttp.open("POST", "{% url 'rate_exercise' %}", true); // true for asynchronous
+        xmlHttp.setRequestHeader("Content-Type", "application/json");
+        xmlHttp.send(JSON.stringify({exercise_id: exercise_id_input, rating: new_status}));
+    }
+
+    function handle_exercise_rating(exercise_id, new_status) {
+        display_exercise_rating(exercise_id, new_status)
+        post_exercise_rating(exercise_id, new_status)
+    }
+    {% else %}
+    
+    function handle_exercise_rating(exercise_id, new_status) {
+        alert("Please login to rate a workout");
+    }
+
+    {% endif %}
+
+    // Attach on clicks thingies
+    $( ".likes" ).each(function( index ) {
+        this.onclick = function() {
+            exercise_id = Number(this.getAttribute("exercise-id"));
+            handle_exercise_rating(exercise_id, "+1")
+        };
+    });
+    $( ".dislikes" ).each(function( index ) {
+        this.onclick = function() {
+            exercise_id = Number(this.getAttribute("exercise-id"));
+            handle_exercise_rating(exercise_id, "-1")
+        };
+    });
+
+    
+</script>
 {% endblock %}
