@@ -602,7 +602,7 @@
   "pk": 1,
   "fields": {
     "password": "pbkdf2_sha256$216000$J4oJeScBbRXC$9nPyDuF3Zx8UwqXh9sDHXyanBLMnnGnYD9938JcY974=",
-    "last_login": "2020-09-29T19:52:02.010Z",
+    "last_login": "2020-09-30T15:52:15.689Z",
     "is_superuser": true,
     "username": "demoadmin",
     "first_name": "",
@@ -696,7 +696,9 @@
     "Image": "https://www.vhv.rs/dpng/d/256-2569650_men-profile-icon-png-image-free-download-searchpng.png",
     "Likes": 5656,
     "Dislikes": 120,
-    "Public": true
+    "Public": true,
+    "Has_Liked": false,
+    "Has_Disliked": false
   }
 },
 {
@@ -802,7 +804,11 @@
     "Image": "https://hips.hearstapps.com/hmg-prod.s3.amazonaws.com/images/basic-pushup-0-1446644701.jpg",
     "Equipment": null,
     "Public": true,
-    "muscle_group": 11
+    "muscle_group": 11,
+    "Likes": 0,
+    "Dislikes": 0,
+    "Has_Liked": false,
+    "Has_Disliked": false
   }
 },
 {
@@ -815,7 +821,11 @@
     "Image": "https://www.onefitstop.com/community/wp-content/uploads/2017/06/goodform_l-400x400.jpg",
     "Equipment": null,
     "Public": true,
-    "muscle_group": 12
+    "muscle_group": 12,
+    "Likes": 0,
+    "Dislikes": 0,
+    "Has_Liked": false,
+    "Has_Disliked": false
   }
 },
 {
@@ -828,7 +838,11 @@
     "Image": "https://www.vhv.rs/dpng/d/256-2569650_men-profile-icon-png-image-free-download-searchpng.png",
     "Equipment": null,
     "Public": true,
-    "muscle_group": 10
+    "muscle_group": 10,
+    "Likes": 0,
+    "Dislikes": 0,
+    "Has_Liked": false,
+    "Has_Disliked": false
   }
 },
 {
@@ -841,7 +855,51 @@
     "Image": "https://upload.wikimedia.org/wikipedia/commons/thumb/8/82/Squats.svg/1200px-Squats.svg.png",
     "Equipment": null,
     "Public": true,
-    "muscle_group": 3
+    "muscle_group": 3,
+    "Likes": 0,
+    "Dislikes": 0,
+    "Has_Liked": false,
+    "Has_Disliked": false
+  }
+},
+{
+  "model": "workout.exerciserating",
+  "pk": 1,
+  "fields": {
+    "Judge": 1,
+    "Exercise": 1,
+    "SubmittedAt": "2020-09-30T16:48:33.023Z",
+    "Rating": 1
+  }
+},
+{
+  "model": "workout.exerciserating",
+  "pk": 2,
+  "fields": {
+    "Judge": 1,
+    "Exercise": 2,
+    "SubmittedAt": "2020-09-30T16:48:27.702Z",
+    "Rating": 1
+  }
+},
+{
+  "model": "workout.exerciserating",
+  "pk": 3,
+  "fields": {
+    "Judge": 1,
+    "Exercise": 3,
+    "SubmittedAt": "2020-09-30T16:48:10.090Z",
+    "Rating": 1
+  }
+},
+{
+  "model": "workout.exerciserating",
+  "pk": 4,
+  "fields": {
+    "Judge": 1,
+    "Exercise": 4,
+    "SubmittedAt": "2020-09-30T16:40:39.232Z",
+    "Rating": 1
   }
 },
 {
