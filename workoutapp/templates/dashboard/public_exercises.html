@@ -38,7 +38,7 @@
                                 {% if exercise.Has_Disliked %}
                                     <i class="fa fa-thumbs-down dislike-idf disliked"></i>
                                 {% else %}
-                                    <i class="fa fa-thumbs-down like-idf"></i>
+                                    <i class="fa fa-thumbs-down dislike-idf"></i>
                                 {% endif %}
                             </div>
                         </div>
@@ -113,15 +113,13 @@
             let dislikes_value_element = dislike_div.children('.social-span');
             let dislikes = Number(dislikes_value_element.text());
 
+            // If not already liked
             if(!(like_icon.hasClass('liked'))){
                 like_icon.addClass('liked');
                 likes_value_element.text((likes+1).toString());
                 dislikes_value_element.text((Number(dislikes-1)).toString());
                 exercise_id = Number(this.getAttribute("exercise-id"));
                 handle_exercise_rating(exercise_id, "+1")
-            }
-
-            if(dislike_icon.hasClass('disliked')){
                 dislike_icon.removeClass('disliked');
             }
         };
@@ -137,18 +135,17 @@
             let likes_value_element = like_div.children('.social-span');
             let likes = Number(likes_value_element.text());
 
-
+            // If not already disliked
             if(!(dislike_icon.hasClass('disliked'))){
                 dislike_icon.addClass('disliked');
                 dislikes_value_element.text((dislikes+1).toString());
                 likes_value_element.text((Number(likes-1)).toString());
                 exercise_id = Number(this.getAttribute("exercise-id"));
                 handle_exercise_rating(exercise_id, "-1")
-            }
-
-            if(like_icon.hasClass('liked')){
                 like_icon.removeClass('liked');
             }
+
+
         };
     });
 
