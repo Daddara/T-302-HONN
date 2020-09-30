@@ -24,6 +24,8 @@ class Workout(models.Model):
     Likes = models.IntegerField(default=0)
     Dislikes = models.IntegerField(default=0)
     Public = models.BooleanField(default=False)
+    Has_Liked = models.BooleanField(default=False)
+    Has_Disliked = models.BooleanField(default=False)
 
     def __str__(self):
         return self.User.username + ": " + self.Name
@@ -66,6 +68,10 @@ class Exercise(models.Model):
     Equipment = models.ForeignKey(Equipment, null=True, blank=True, on_delete=models.SET_NULL)
     Public = models.BooleanField(default=False)
     muscle_group = models.ForeignKey(MuscleGroup, null=True, blank=True, on_delete=models.SET_NULL)
+    Likes = models.IntegerField(default=0)
+    Dislikes = models.IntegerField(default=0)
+    Has_Liked = models.BooleanField(default=False)
+    Has_Disliked = models.BooleanField(default=False)
 
     class Meta:
         unique_together = ('Creator', 'Title',)
@@ -92,6 +98,7 @@ class WorkoutManager(models.Model):
     def __str__(self):
         return self.Workout.Name + ", " + self.Exercise.Title
 
+
 class RatingValue(models.TextChoices):
     LIKE = '+1', gt('LIKE')
     IDK = '*0', gt('IDK')
@@ -104,9 +111,31 @@ class ExerciseRating(models.Model):
     SubmittedAt = models.DateTimeField(auto_now=True)
     Rating = models.IntegerField(choices=RatingValue.choices, default=0)
 
+    def __str__(self):
+        rating = ""
+        if self.Rating == 1:
+            rating = " likes "
+        elif self.Rating == -1:
+            rating = " dislikes "
+        else:
+            rating = "Doesn't know if he likes "
+
+        return self.Judge.username + rating + self.Exercise.Title
+
 
 class WorkoutRating(models.Model):
     Judge = models.ForeignKey(User, null=False, on_delete=models.CASCADE)
-    Exercise = models.ForeignKey(Exercise, null=False, on_delete=models.CASCADE)
+    Workout = models.ForeignKey(Workout, blank=True, null=True, on_delete=models.CASCADE)
     SubmittedAt = models.DateTimeField(auto_now=True)
     Rating = models.IntegerField(choices=RatingValue.choices)
+
+    def __str__(self):
+        rating = ""
+        if self.Rating == "+1":
+            rating = "Likes "
+        elif self.Rating == "-1":
+            rating = "Dislikes "
+        else:
+            rating = "Doesn't know if he likes "
+
+        return self.Judge.username + rating + self.Workout.Name

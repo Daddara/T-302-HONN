@@ -82,6 +82,7 @@ def create_exercise(request):
 def edit_exercise(request, id=None, template_name='update_exercise.html'):
     pass
 
+
 @csrf_exempt
 def rate_exercise(request):
     if not request.user.is_authenticated:
@@ -90,7 +91,7 @@ def rate_exercise(request):
 
     if request.method == 'POST':
         form = RateExerciseForm(data=request.POST)
-        if (not form.is_valid()):
+        if not form.is_valid():
             return HttpResponse(status=400)
         
         # Get values
