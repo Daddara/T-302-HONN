@@ -1,0 +1,5 @@
+The wallet model implements the single responsibility concept.
+It's sole purpose is to keep track of a users balance.
+
+Furthermore the Fitcoin class implements the single responsibility concept.
+It's sole purpose is to manage the exchange rate of the currency.
