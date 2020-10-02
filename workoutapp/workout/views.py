@@ -78,3 +78,8 @@ def create_exercise(request):
 
 def edit_exercise(request, id=None, template_name='update_exercise.html'):
     pass
+
+
+def view_created_exercises(request):
+    context = {'exercises': Exercise.objects.filter(Creator=request.user)}
+    return render(request, 'workout/user_exercises.html', context)
