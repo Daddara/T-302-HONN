@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     'payment.apps.PaymentConfig',
     'weather_service.apps.WeatherServiceConfig',
     'dashboard.apps.DashboardConfig',
+    'django_extensions',
 ]
 
 MIDDLEWARE = [
