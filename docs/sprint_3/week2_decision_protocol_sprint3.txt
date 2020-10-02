@@ -9,3 +9,9 @@ TA Meeting 29.09.20 on Google Meet:
 Team Meeting 29.09.20 on Discord:
  - Who shoved up:
    + All but Katrín.
+
+Team Meeting 02.10.20 on Discord:
+ - Who shoved up:
+   + All.
+ - Retrospective meeting on Discord at 15:00-04.10.20.
+ - Everyone has to write up tests to keep the coverage above 80%.
