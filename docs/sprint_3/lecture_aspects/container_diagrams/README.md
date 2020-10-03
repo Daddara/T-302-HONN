@@ -33,3 +33,6 @@ We were unsure how to create two reasonable container diagrams from our applicat
 
 * [Diagram 1](https://www.hostpapa.ca/blog/blog/wp-content/uploads/2019/05/image5.png)
 * [Diagram 2](docs/sprint_3/lecture_aspects/container_diagrams/container_diagram_2.png)
+
+### Diagram 2
+![Diagram 2](docs/sprint_3/lecture_aspects/container_diagrams/container_diagram_2.png)
