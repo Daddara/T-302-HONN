@@ -131,6 +131,8 @@ We've planned to implement the following user stories this sprint:
 We plan to document and implement the required lecture aspects. These tasks are tracked in the following issues: 
 * #62, #63, #64, #65, #66, #67, #68, #69, #70, #71, #72, #73, #74, #75, #76, #77
 
+The documentation can be found here: [docs/sprint_3/lecture_aspects/](docs/sprint_3/lecture_aspects/)
+
 In addition we plan to implement the following user stories this sprint: 
 * #2, #5, #9, #12, #14, #15, #16, #17, #18, #19, #24, #27, #51, #52, #56
 
