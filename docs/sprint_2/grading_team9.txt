@@ -1,0 +1,38 @@
+1. Definition of done:
+     - pass 
+
+2. Sprint planning:
+    - pass 
+
+3. Task breakdown:
+    - pass
+
+4. Test coverage:
+    - pass
+
+5. Comments/readability:
+    - pass 
+        -Could be commented better
+
+6. Standup/decision protocol:
+    - Conditional pass 
+        - Where is your standup/decision protocol? you need to either do it or specify 
+          where I can find it in the README, need to fix this before sprint 3
+
+7. Retrospective/reflection:
+    - pass
+
+8. Technical requirements:
+    - pass
+
+9. README.md:
+    - pass
+        - Getting error when running python manage.py loaddata db.json -> "django.core.exceptions.FieldDoesNotExist: UserInfo has no field named 'createdAt'"
+
+10. Lecture aspects:
+    - Conditional pass:
+        - Registry: I find it a stretch to call settings.py a Registry even though it might roughly fit the description.
+        - Service stub: a service stub is not just a single function it is usually a class, 
+                        what you should have done instead is created something like a gateway for the paypal interface 
+                        and then had two/three implementations, one for the sandbox, one for production and one as a stub.
+        - The Gateway pattern is not the Mapper pattern. 
