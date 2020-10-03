@@ -12,7 +12,7 @@ This has focussed on a single class but it can be widened to larger scopes like 
 ### Weather gateway class
 The [WeatherApiWeatherGateway](workoutapp/weather_service/gateway/weather_gateway.py) class is an implementation of the [gateway design pattern](docs/sprint_2/design_patterns/gateway.md). In this role it has the the responsibility of
 
-> Wrapping the functionality of weatherAPI.com into a class interface that can be sued by the rest of the application
+* _Wrapping the functionality of weatherAPI.com into a class interface that can be sued by the rest of the application_
 
 The responsibility of this class includes the connection and translation between our application and the WeatherAPI.com. This is a fairly large responsibility for a single class by the single responsibility principle. This should also still fall in the frame because:
 * This is the only responsibility of the class it does nothing besides it's responsibility
@@ -22,7 +22,7 @@ The responsibility of this class includes the connection and translation between
 ### Weather service module
 The weather service module it self also follows the single responsibility pattern. It's responsibility is a bit larger than the one of the weather gateway but still focussed on just one function:
 
-> Provide a single defined interface to retrieve current weather data for the frontend
+* _Provide a single defined interface to retrieve current weather data for the frontend_
 
 This responsibility includes the functions of the weather gateway as well as the handling of http requests and responding in the correct way. This would way to large for a single class but is reasonable for a module like this one. 
 
