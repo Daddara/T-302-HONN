@@ -39,4 +39,4 @@ Note: This was created afterwards as it seams like we've lost track of this task
 - No new decisions
 
 ## **Retrospective** on Sunday 20.09.2020 at 14:00
-- [Protocol](docs\sprint_2\sprint_2_retrospect.md)
+- [Protocol](docs/sprint_2/sprint_2_retrospect.md)
