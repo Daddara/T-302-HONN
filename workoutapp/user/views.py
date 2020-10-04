@@ -1,12 +1,13 @@
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth import login, authenticate
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, redirect
 from dashboard.views import dashboard
 from wallet.models import Wallet
+from workout.models import Exercise
 from .forms.create_account_form import CreateAccountForm
 from user.models import Follow
 from workout.models import Exercise
@@ -40,17 +41,14 @@ def register(request):
 
 @login_required
 def profile(request):
-    #  MISSING VIEW TO ACTUALLY EDIT USER INFO!!
     exercise_models = None
     try:
         exercise_models = Exercise.objects.filter(Creator=request.user)
         exercise_models = add_like_information_to_exercises(request, exercise_models)
     except Exercise.DoesNotExist:
         pass
-
     user_info = UserInfo.objects.get(user=request.user)
     return render(request, 'user/profile.html', context={'user_info': user_info, 'exercises': exercise_models})
-
 
 @login_required
 def following(request):
@@ -61,6 +59,13 @@ def following(request):
     if poster:
         return render(request, 'user/followerlist.html', context={'follow': poster})
 
+
+@login_required
+def delete_exercise(request, exercise_id):
+    exercise = get_object_or_404(Exercise, Creator=request.user, pk=exercise_id)
+    exercise.delete()
+
+    return redirect('profile')
 
 @login_required
 def searchbarUsers(request):
