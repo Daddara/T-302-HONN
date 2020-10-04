@@ -6,6 +6,9 @@ stages:
 before_script:
   - python -V
   - pip install -r requirements.txt
+  - cd workoutapp
+  - sh reset_db.sh
+  - cd ..
 
 test_mr:
   stage: test
