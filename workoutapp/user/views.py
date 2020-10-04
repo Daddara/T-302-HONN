@@ -10,7 +10,7 @@ from wallet.models import Wallet
 from .forms.create_account_form import CreateAccountForm
 from user.models import Follow
 from workout.models import Exercise
-
+from dashboard.views import add_like_information_to_exercises
 
 # Create your views here.
 from .models import UserInfo
@@ -40,12 +40,16 @@ def register(request):
 
 @login_required
 def profile(request):
+    #  MISSING VIEW TO ACTUALLY EDIT USER INFO!!
+    exercise_models = None
     try:
-        exercises = Exercise.objects.filter(Creator=request.user)
+        exercise_models = Exercise.objects.filter(Creator=request.user)
+        exercise_models = add_like_information_to_exercises(request, exercise_models)
     except Exercise.DoesNotExist:
-        exercises = None
+        pass
+
     user_info = UserInfo.objects.get(user=request.user)
-    return render(request, 'user/profile.html', context={'user_info': user_info, 'exercises': exercises})
+    return render(request, 'user/profile.html', context={'user_info': user_info, 'exercises': exercise_models})
 
 
 @login_required
