@@ -32,7 +32,7 @@ def dashboard(request):
 
         return render(request, 'dashboard/dashboard.html', context={'user_exercises': exercise_models, 'user_workouts': workout_models})
     else:
-        return render(request, 'dashboard/dashboard.html')
+        return redirect('login')
 
 def workouts(request):
     context = {'workouts': get_workouts_with_likes(request)}
