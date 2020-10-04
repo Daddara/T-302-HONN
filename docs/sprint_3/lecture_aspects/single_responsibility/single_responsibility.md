@@ -31,3 +31,4 @@ The single responsibility of the payment system have been documented by _Ægir M
 
 ### Forms
 The single responsibility of the form have been documented by _Kristján Mar Svavarsson_(@Kristjamar) in [single_responsibility_forms.txt]
+(docs/sprint_3/lecture_aspects/single_responsibility/single_responsibility_forms.txt)
