@@ -1,0 +1,27 @@
+.exercise-creator {
+    margin:0px;
+    padding: 0px;
+    display: flex;
+    font-size: small;
+    align-self: flex-end;
+}
+
+.exercise-container {
+    padding: 5px;
+    display: inline-block;
+    justify-content: center;
+    width: 300px;
+    min-height: 100px;
+    height: fit-content;
+    background-color: #c5d3da;
+    border: 1px solid black;
+    border-radius: 4px;
+}
+
+.exercise-container:hover {
+    transform: scale(1.05);
+}
+
+.page-title {
+    background-color: #c5d3da;
+}
