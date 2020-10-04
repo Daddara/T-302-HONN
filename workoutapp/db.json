@@ -598,11 +598,388 @@
   }
 },
 {
+  "model": "admin.logentry",
+  "pk": 47,
+  "fields": {
+    "action_time": "2020-10-03T17:53:46.345Z",
+    "user": 1,
+    "content_type": 13,
+    "object_id": "2",
+    "object_repr": "System's exercise: Situps",
+    "action_flag": 2,
+    "change_message": "[{\"changed\": {\"fields\": [\"Muscle group\"]}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 48,
+  "fields": {
+    "action_time": "2020-10-03T17:53:57.907Z",
+    "user": 1,
+    "content_type": 13,
+    "object_id": "2",
+    "object_repr": "System's exercise: Situps",
+    "action_flag": 2,
+    "change_message": "[{\"changed\": {\"fields\": [\"Muscle group\"]}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 49,
+  "fields": {
+    "action_time": "2020-10-03T17:58:16.264Z",
+    "user": 1,
+    "content_type": 14,
+    "object_id": "1",
+    "object_repr": "Distance: Km",
+    "action_flag": 1,
+    "change_message": "[{\"added\": {}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 50,
+  "fields": {
+    "action_time": "2020-10-03T17:58:35.048Z",
+    "user": 1,
+    "content_type": 14,
+    "object_id": "2",
+    "object_repr": "Distance: Miles",
+    "action_flag": 1,
+    "change_message": "[{\"added\": {}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 51,
+  "fields": {
+    "action_time": "2020-10-03T17:58:56.803Z",
+    "user": 1,
+    "content_type": 14,
+    "object_id": "3",
+    "object_repr": "Repetitions: Reps",
+    "action_flag": 1,
+    "change_message": "[{\"added\": {}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 52,
+  "fields": {
+    "action_time": "2020-10-03T17:59:21.772Z",
+    "user": 1,
+    "content_type": 14,
+    "object_id": "4",
+    "object_repr": "Sets: x",
+    "action_flag": 1,
+    "change_message": "[{\"added\": {}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 53,
+  "fields": {
+    "action_time": "2020-10-03T17:59:30.567Z",
+    "user": 1,
+    "content_type": 14,
+    "object_id": "3",
+    "object_repr": "Repetitions: x",
+    "action_flag": 2,
+    "change_message": "[{\"changed\": {\"fields\": [\"Unit\"]}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 54,
+  "fields": {
+    "action_time": "2020-10-03T18:00:31.333Z",
+    "user": 1,
+    "content_type": 14,
+    "object_id": "5",
+    "object_repr": "Rounds: x",
+    "action_flag": 1,
+    "change_message": "[{\"added\": {}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 55,
+  "fields": {
+    "action_time": "2020-10-03T18:01:05.301Z",
+    "user": 1,
+    "content_type": 14,
+    "object_id": "6",
+    "object_repr": "Distance: m",
+    "action_flag": 1,
+    "change_message": "[{\"added\": {}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 56,
+  "fields": {
+    "action_time": "2020-10-03T18:01:20.743Z",
+    "user": 1,
+    "content_type": 14,
+    "object_id": "7",
+    "object_repr": "Weight: Kg",
+    "action_flag": 1,
+    "change_message": "[{\"added\": {}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 57,
+  "fields": {
+    "action_time": "2020-10-03T18:01:54.189Z",
+    "user": 1,
+    "content_type": 14,
+    "object_id": "8",
+    "object_repr": "Time: min",
+    "action_flag": 1,
+    "change_message": "[{\"added\": {}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 58,
+  "fields": {
+    "action_time": "2020-10-03T18:01:58.527Z",
+    "user": 1,
+    "content_type": 14,
+    "object_id": "9",
+    "object_repr": "Time: sec",
+    "action_flag": 1,
+    "change_message": "[{\"added\": {}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 59,
+  "fields": {
+    "action_time": "2020-10-03T18:02:18.064Z",
+    "user": 1,
+    "content_type": 14,
+    "object_id": "10",
+    "object_repr": "Time: hrs",
+    "action_flag": 1,
+    "change_message": "[{\"added\": {}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 60,
+  "fields": {
+    "action_time": "2020-10-03T18:02:46.650Z",
+    "user": 1,
+    "content_type": 14,
+    "object_id": "2",
+    "object_repr": "Distance: Mi",
+    "action_flag": 2,
+    "change_message": "[{\"changed\": {\"fields\": [\"Unit\"]}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 61,
+  "fields": {
+    "action_time": "2020-10-03T18:03:15.395Z",
+    "user": 1,
+    "content_type": 14,
+    "object_id": "11",
+    "object_repr": "Weight: Pounds",
+    "action_flag": 1,
+    "change_message": "[{\"added\": {}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 62,
+  "fields": {
+    "action_time": "2020-10-03T18:08:58.597Z",
+    "user": 1,
+    "content_type": 15,
+    "object_id": "1",
+    "object_repr": "Covid Home Workout, Pushups",
+    "action_flag": 1,
+    "change_message": "[{\"added\": {}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 63,
+  "fields": {
+    "action_time": "2020-10-03T18:09:18.561Z",
+    "user": 1,
+    "content_type": 15,
+    "object_id": "2",
+    "object_repr": "Covid Home Workout, Situps",
+    "action_flag": 1,
+    "change_message": "[{\"added\": {}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 64,
+  "fields": {
+    "action_time": "2020-10-03T18:09:34.995Z",
+    "user": 1,
+    "content_type": 15,
+    "object_id": "3",
+    "object_repr": "Covid Home Workout, Pullups",
+    "action_flag": 1,
+    "change_message": "[{\"added\": {}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 65,
+  "fields": {
+    "action_time": "2020-10-03T18:09:52.298Z",
+    "user": 1,
+    "content_type": 15,
+    "object_id": "4",
+    "object_repr": "Covid Home Workout, Bodyweight Squats",
+    "action_flag": 1,
+    "change_message": "[{\"added\": {}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 66,
+  "fields": {
+    "action_time": "2020-10-03T18:10:19.091Z",
+    "user": 1,
+    "content_type": 10,
+    "object_id": "1",
+    "object_repr": "demoadmin: Covid Home Workout",
+    "action_flag": 2,
+    "change_message": "[{\"changed\": {\"fields\": [\"Repetitions\"]}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 67,
+  "fields": {
+    "action_time": "2020-10-03T19:13:07.194Z",
+    "user": 1,
+    "content_type": 10,
+    "object_id": "1",
+    "object_repr": "demoadmin: Covid Home Workout",
+    "action_flag": 2,
+    "change_message": "[{\"changed\": {\"fields\": [\"Likes\", \"Dislikes\"]}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 68,
+  "fields": {
+    "action_time": "2020-10-03T19:38:35.586Z",
+    "user": 1,
+    "content_type": 22,
+    "object_id": "1",
+    "object_repr": "demoadminDoesn't know if he likes Covid Home Workout",
+    "action_flag": 3,
+    "change_message": ""
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 69,
+  "fields": {
+    "action_time": "2020-10-03T19:40:15.089Z",
+    "user": 1,
+    "content_type": 22,
+    "object_id": "2",
+    "object_repr": "demoadminDoesn't know if he likes Covid Home Workout",
+    "action_flag": 3,
+    "change_message": ""
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 70,
+  "fields": {
+    "action_time": "2020-10-03T23:29:17.472Z",
+    "user": 1,
+    "content_type": 10,
+    "object_id": "1",
+    "object_repr": "demoadmin: Covid Home Workout",
+    "action_flag": 2,
+    "change_message": "[{\"changed\": {\"fields\": [\"Short description\"]}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 71,
+  "fields": {
+    "action_time": "2020-10-03T23:35:24.677Z",
+    "user": 1,
+    "content_type": 10,
+    "object_id": "1",
+    "object_repr": "demoadmin: Covid Home Workout",
+    "action_flag": 2,
+    "change_message": "[{\"changed\": {\"fields\": [\"Workout goal\"]}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 72,
+  "fields": {
+    "action_time": "2020-10-03T23:54:49.032Z",
+    "user": 1,
+    "content_type": 10,
+    "object_id": "2",
+    "object_repr": "System: Running Champion",
+    "action_flag": 1,
+    "change_message": "[{\"added\": {}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 73,
+  "fields": {
+    "action_time": "2020-10-03T23:57:57.882Z",
+    "user": 1,
+    "content_type": 12,
+    "object_id": "2",
+    "object_repr": "Running shoes",
+    "action_flag": 1,
+    "change_message": "[{\"added\": {}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 74,
+  "fields": {
+    "action_time": "2020-10-03T23:58:16.851Z",
+    "user": 1,
+    "content_type": 13,
+    "object_id": "5",
+    "object_repr": "System's exercise: 3K Run",
+    "action_flag": 1,
+    "change_message": "[{\"added\": {}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 75,
+  "fields": {
+    "action_time": "2020-10-04T00:00:17.998Z",
+    "user": 1,
+    "content_type": 10,
+    "object_id": "3",
+    "object_repr": "demoadmin: 3K Every Day!",
+    "action_flag": 1,
+    "change_message": "[{\"added\": {}}]"
+  }
+},
+{
   "model": "auth.user",
   "pk": 1,
   "fields": {
     "password": "pbkdf2_sha256$216000$J4oJeScBbRXC$9nPyDuF3Zx8UwqXh9sDHXyanBLMnnGnYD9938JcY974=",
-    "last_login": "2020-09-30T15:52:15.689Z",
+    "last_login": "2020-10-04T00:04:56.284Z",
     "is_superuser": true,
     "username": "demoadmin",
     "first_name": "",
@@ -691,14 +1068,55 @@
   "fields": {
     "User": 1,
     "Category": 2,
+    "short_description": "This workout will help you get through covid in shape! No gym, no problem!",
     "Name": "Covid Home Workout",
-    "CreatedAt": "2020-09-20T21:52:41.548Z",
+    "workout_goal": "Overall Fitness",
+    "CreatedAt": "2020-10-03",
     "Image": "https://www.vhv.rs/dpng/d/256-2569650_men-profile-icon-png-image-free-download-searchpng.png",
-    "Likes": 5656,
-    "Dislikes": 120,
+    "Likes": 0,
+    "Dislikes": 0,
     "Public": true,
     "Has_Liked": false,
-    "Has_Disliked": false
+    "Has_Disliked": false,
+    "Repetitions": 3
+  }
+},
+{
+  "model": "workout.workout",
+  "pk": 2,
+  "fields": {
+    "User": 2,
+    "Category": 1,
+    "short_description": "Forest Gump wont stand a chance!\r\nIn one month, you will be a running champion.",
+    "Name": "Running Champion",
+    "workout_goal": "Running Condition",
+    "CreatedAt": "2020-10-03",
+    "Image": "https://www.vhv.rs/dpng/d/256-2569650_men-profile-icon-png-image-free-download-searchpng.png",
+    "Likes": 0,
+    "Dislikes": 0,
+    "Public": true,
+    "Has_Liked": false,
+    "Has_Disliked": false,
+    "Repetitions": 1
+  }
+},
+{
+  "model": "workout.workout",
+  "pk": 3,
+  "fields": {
+    "User": 1,
+    "Category": 1,
+    "short_description": "What's the best way to get better at running 3k? By running a 3k!",
+    "Name": "3K Every Day!",
+    "workout_goal": "3K pace",
+    "CreatedAt": "2020-10-04",
+    "Image": "https://post.healthline.com/wp-content/uploads/2020/01/Runner-training-on-running-track-1200x628-facebook.jpg",
+    "Likes": 0,
+    "Dislikes": 0,
+    "Public": true,
+    "Has_Liked": false,
+    "Has_Disliked": false,
+    "Repetitions": 1
   }
 },
 {
@@ -708,6 +1126,15 @@
     "Name": "Dumbbells",
     "Description": "Handheld weights",
     "Image": "https://cdn2.coachmag.co.uk/sites/coachmag/files/shutterstock_151938761.jpg"
+  }
+},
+{
+  "model": "workout.equipment",
+  "pk": 2,
+  "fields": {
+    "Name": "Running shoes",
+    "Description": "A pair of good running shoes!",
+    "Image": "https://www.rei.com/dam/content_team_010818_52427_htc_running_shoes_hero2_lg.jpg"
   }
 },
 {
@@ -863,13 +1290,158 @@
   }
 },
 {
+  "model": "workout.exercise",
+  "pk": 5,
+  "fields": {
+    "Title": "3K Run",
+    "Creator": 2,
+    "Description": "Run 3km as fast as you can while timing yourself!",
+    "Image": "https://post.healthline.com/wp-content/uploads/2020/01/Runner-training-on-running-track-1200x628-facebook.jpg",
+    "Equipment": 2,
+    "Public": true,
+    "muscle_group": null,
+    "Likes": 0,
+    "Dislikes": 0,
+    "Has_Liked": false,
+    "Has_Disliked": false
+  }
+},
+{
+  "model": "workout.unittype",
+  "pk": 1,
+  "fields": {
+    "Name": "Distance",
+    "Unit": "Km"
+  }
+},
+{
+  "model": "workout.unittype",
+  "pk": 2,
+  "fields": {
+    "Name": "Distance",
+    "Unit": "Mi"
+  }
+},
+{
+  "model": "workout.unittype",
+  "pk": 3,
+  "fields": {
+    "Name": "Repetitions",
+    "Unit": "x"
+  }
+},
+{
+  "model": "workout.unittype",
+  "pk": 4,
+  "fields": {
+    "Name": "Sets",
+    "Unit": "x"
+  }
+},
+{
+  "model": "workout.unittype",
+  "pk": 5,
+  "fields": {
+    "Name": "Rounds",
+    "Unit": "x"
+  }
+},
+{
+  "model": "workout.unittype",
+  "pk": 6,
+  "fields": {
+    "Name": "Distance",
+    "Unit": "m"
+  }
+},
+{
+  "model": "workout.unittype",
+  "pk": 7,
+  "fields": {
+    "Name": "Weight",
+    "Unit": "Kg"
+  }
+},
+{
+  "model": "workout.unittype",
+  "pk": 8,
+  "fields": {
+    "Name": "Time",
+    "Unit": "min"
+  }
+},
+{
+  "model": "workout.unittype",
+  "pk": 9,
+  "fields": {
+    "Name": "Time",
+    "Unit": "sec"
+  }
+},
+{
+  "model": "workout.unittype",
+  "pk": 10,
+  "fields": {
+    "Name": "Time",
+    "Unit": "hrs"
+  }
+},
+{
+  "model": "workout.unittype",
+  "pk": 11,
+  "fields": {
+    "Name": "Weight",
+    "Unit": "Pounds"
+  }
+},
+{
+  "model": "workout.workoutmanager",
+  "pk": 1,
+  "fields": {
+    "Workout": 1,
+    "Exercise": 1,
+    "Unit": 3,
+    "Quantity": 25
+  }
+},
+{
+  "model": "workout.workoutmanager",
+  "pk": 2,
+  "fields": {
+    "Workout": 1,
+    "Exercise": 2,
+    "Unit": 3,
+    "Quantity": 25
+  }
+},
+{
+  "model": "workout.workoutmanager",
+  "pk": 3,
+  "fields": {
+    "Workout": 1,
+    "Exercise": 3,
+    "Unit": 3,
+    "Quantity": 10
+  }
+},
+{
+  "model": "workout.workoutmanager",
+  "pk": 4,
+  "fields": {
+    "Workout": 1,
+    "Exercise": 4,
+    "Unit": 4,
+    "Quantity": 50
+  }
+},
+{
   "model": "workout.exerciserating",
   "pk": 1,
   "fields": {
     "Judge": 1,
     "Exercise": 1,
-    "SubmittedAt": "2020-09-30T16:48:33.023Z",
-    "Rating": 1
+    "SubmittedAt": "2020-10-03T19:41:57.039Z",
+    "Rating": -1
   }
 },
 {
@@ -878,7 +1450,7 @@
   "fields": {
     "Judge": 1,
     "Exercise": 2,
-    "SubmittedAt": "2020-09-30T16:48:27.702Z",
+    "SubmittedAt": "2020-10-03T19:41:59.384Z",
     "Rating": 1
   }
 },
@@ -888,7 +1460,7 @@
   "fields": {
     "Judge": 1,
     "Exercise": 3,
-    "SubmittedAt": "2020-09-30T16:48:10.090Z",
+    "SubmittedAt": "2020-10-03T17:45:45.971Z",
     "Rating": 1
   }
 },
@@ -898,7 +1470,17 @@
   "fields": {
     "Judge": 1,
     "Exercise": 4,
-    "SubmittedAt": "2020-09-30T16:40:39.232Z",
+    "SubmittedAt": "2020-10-03T17:12:09.907Z",
+    "Rating": 1
+  }
+},
+{
+  "model": "workout.workoutrating",
+  "pk": 3,
+  "fields": {
+    "Judge": 1,
+    "Workout": 1,
+    "SubmittedAt": "2020-10-03T23:52:17.775Z",
     "Rating": 1
   }
 },

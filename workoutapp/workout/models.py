@@ -16,8 +16,10 @@ class Category(models.Model):
 class Workout(models.Model):
     User = models.ForeignKey(User, on_delete=models.CASCADE)
     Category = models.ForeignKey(Category, null=True, on_delete=models.SET_NULL)
+    short_description = models.TextField(max_length=150, default="", blank=False)
     Name = models.CharField(max_length=20, default="")
-    CreatedAt = models.DateTimeField(auto_now=True)
+    workout_goal = models.CharField(max_length=80, default="")
+    CreatedAt = models.DateField(auto_now=True)
     Image = models.CharField(
         max_length=250,
         default="https://www.vhv.rs/dpng/d/256-2569650_men-profile-icon-png-image-free-download-searchpng.png")
@@ -26,6 +28,7 @@ class Workout(models.Model):
     Public = models.BooleanField(default=False)
     Has_Liked = models.BooleanField(default=False)
     Has_Disliked = models.BooleanField(default=False)
+    Repetitions = models.IntegerField(default=1, blank=True)
 
     def __str__(self):
         return self.User.username + ": " + self.Name
@@ -92,7 +95,6 @@ class WorkoutManager(models.Model):
     Workout = models.ForeignKey(Workout, on_delete=models.CASCADE)
     Exercise = models.ForeignKey(Exercise, null=True, on_delete=models.SET_NULL)
     Unit = models.ForeignKey(UnitType, null=True, on_delete=models.SET_NULL)
-    Reps = models.IntegerField(default=0)
     Quantity = models.IntegerField(default=0)
 
     def __str__(self):
@@ -125,9 +127,9 @@ class ExerciseRating(models.Model):
 
 class WorkoutRating(models.Model):
     Judge = models.ForeignKey(User, null=False, on_delete=models.CASCADE)
-    Workout = models.ForeignKey(Workout, blank=True, null=True, on_delete=models.CASCADE)
+    Workout = models.ForeignKey(Workout, null=False, on_delete=models.CASCADE)
     SubmittedAt = models.DateTimeField(auto_now=True)
-    Rating = models.IntegerField(choices=RatingValue.choices)
+    Rating = models.IntegerField(choices=RatingValue.choices, default=0)
 
     def __str__(self):
         rating = ""

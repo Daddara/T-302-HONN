@@ -19,13 +19,17 @@
 }
 
 .exercise-background-shadow{
--webkit-box-shadow: 10px 9px 10px -1px rgba(102,102,102,1);
--moz-box-shadow: 10px 9px 10px -1px rgba(102,102,102,1);
-box-shadow: 10px 9px 10px -1px rgba(102,102,102,1);
+    -webkit-box-shadow: 10px 9px 10px -1px rgba(102,102,102,1);
+    -moz-box-shadow: 10px 9px 10px -1px rgba(102,102,102,1);
+    box-shadow: 10px 9px 10px -1px rgba(102,102,102,1);
     margin: 10px;
     margin-bottom: 30px;
 }
 
 .exercise-container:hover {
     transform: scale(1.05);
+}
+
+.page-title {
+    background-color: #c5d3da;
 }
