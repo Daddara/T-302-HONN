@@ -2,6 +2,11 @@ from django.test import TestCase, Client
 from django.contrib.auth.models import User
 from django.urls import reverse
 
+import datetime
+
+from workout.models import Workout
+from dashboard.views import creation_time_passed, get_workouts_with_likes
+
 # Create your tests here.
 class UserViewTests(TestCase):
     def init(self):
@@ -27,3 +32,62 @@ class UserViewTests(TestCase):
         self.assertEqual(response.status_code, 200)
         self.assertTemplateUsed(response, 'dashboard/public_exercises.html')
         print("200, OK")
+    
+    def test_creation_time_passed(self):
+        print("Testing exercise creation time: ", end="")
+        
+        class DummyData:
+            def __init__(self, time):
+                self.CreatedAt = time
+
+        data = DummyData(datetime.datetime.now(datetime.timezone.utc) - datetime.timedelta(minutes=15))
+        data = creation_time_passed(data)
+        self.assertEqual(data.time_passed, "15 min ago")
+
+        data = DummyData(datetime.datetime.now(datetime.timezone.utc) - datetime.timedelta(hours=3))
+        data = creation_time_passed(data)
+        self.assertEqual(data.time_passed, "3 hours ago")
+
+        data = DummyData(datetime.datetime.now(datetime.timezone.utc) - datetime.timedelta(days=2))
+        data = creation_time_passed(data)
+        self.assertEqual(data.time_passed, "2 days ago")
+
+        data = DummyData(datetime.datetime.now(datetime.timezone.utc) - datetime.timedelta(days=9))
+        data = creation_time_passed(data)
+        self.assertEqual(data.time_passed, "1 weeks ago")
+
+        data = DummyData(datetime.datetime.now(datetime.timezone.utc) - datetime.timedelta(weeks=9))
+        data = creation_time_passed(data)
+        self.assertEqual(data.time_passed, "2 months ago")
+
+        data = DummyData(datetime.datetime.now(datetime.timezone.utc) - datetime.timedelta(weeks=130))
+        data = creation_time_passed(data)
+        self.assertEqual(data.time_passed, "3 years ago")
+
+    def test_get_workouts_with_likes(self):
+        self._setup_user()
+        user1 = User.objects.get(pk=1)
+        
+        self._setup_workout(user1)
+
+        self.client.force_login(user1)
+        user1 = User.objects.get(pk=1)
+        workout = Workout.objects.get(pk=1)
+        response = self.client.post(reverse('rate_workout'), {'exercise_id': workout.id, 'rating': "+1"})
+
+        response = self.client.post(reverse('public_exercises'))
+        self.assertEqual(response.status_code, 200)
+        self.assertTemplateUsed(response, 'dashboard/public_exercises.html')
+        print("200, OK")
+
+    def _setup_user(self):
+        data1 = {'username': 'TestUser',
+                'email': 'test_user@test.com',
+                'password1': 'iampassword', 'password2': 'iampassword'}
+        self.client.post(reverse('register'), data1)
+        
+    def _setup_workout(self, user1):
+        Workout(
+            Name="iNSaNiTY",
+            User=user1,
+            short_description="I don't know who I am").save()

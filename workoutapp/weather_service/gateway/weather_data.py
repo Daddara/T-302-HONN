@@ -51,28 +51,6 @@ class ForecastWeatherData(CommonWeatherData):
 
         self.days = days
 
-    def to_j(self) -> str:
-        j_v = "\"{}\": {},"
-        j_str = "\"{}\": \"{}\","
-
-        first = True
-        j_days = ""
-        for day in self.days:
-            if first:
-                first = False
-            else:
-                j_days += ", "
-
-            j_days += json.dumps(day.__dict__)
-
-        return ("{" +
-                (j_v.format("date_time", self.date_time)) +
-                (j_v.format("lat", self.lat)) +
-                (j_v.format("lon", self.lon)) +
-                (j_str.format("name", self.name)) +
-                "\"days\": [" + j_days + "]"
-                "}")
-
 
 class ForecastDayWeatherData:
     def __init__(
@@ -97,7 +75,3 @@ class ForecastDayWeatherData:
         self.avg_visibility_km = avg_visibility_km
         self.chance_rain = chance_rain
         self.chance_snow = chance_snow
-
-
-# class WeatherWarnings:
-#     pass

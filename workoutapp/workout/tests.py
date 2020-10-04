@@ -34,7 +34,10 @@ class RateExerciseTest(TestCase):
         self.client.post(reverse('register'), data1)
         
     def _setup_exercise(self):
-        Exercise(Public=True, Title="I'm super tired", Creator=self.user1).save()
+        Exercise(
+            Public=True,
+            Title="I'm super tired",
+            Creator=self.user1).save()
     
     def test_post_like(self):
         self.client.force_login(self.user1)
