@@ -9,6 +9,7 @@ from dashboard.views import dashboard
 from wallet.models import Wallet
 from .forms.create_account_form import CreateAccountForm
 from user.models import Follow
+from workout.models import Exercise
 
 
 # Create your views here.
@@ -41,7 +42,9 @@ def register(request):
 def profile(request):
     #  MISSING VIEW TO ACTUALLY EDIT USER INFO!!
     user_info = UserInfo.objects.get(user=request.user)
-    return render(request, 'user/profile.html', context={'user_info': user_info})
+    user_exercises = {'exercises': Exercise.objects.get(Creator=request.user)}
+    return render(request, 'user/profile.html', context={'user_info': user_info,
+                                                         'user_exercises': user_exercises})
 
 
 @login_required

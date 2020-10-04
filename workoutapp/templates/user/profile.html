@@ -61,6 +61,15 @@
                                     </tr>
                                 </tbody>
                             </table>
+                            <h5 class="mt-2">Created Exercises</h5>
+                            <table class="table table-sm table-hover table-striped">
+                                <tbody>
+                                    {% for exercise in user_exercises %}
+                                        <tr > {{ exercise.Title }}</tr>
+                                        <tr > {{ exercise.Description }}</tr>
+                                    {% endfor %}
+                                </tbody>
+                            </table>
                         </div>
                     </div>
                 </div>
