@@ -7,6 +7,7 @@ from django.urls import reverse
 
 from payment.models import Product
 from wallet.models import Wallet
+from wallet.models import Fitcoin
 
 
 # noinspection DuplicatedCode
@@ -30,7 +31,7 @@ class TestWallet(TestCase):
         self.client.login(username="TestUser", password="iampassword")
 
     def test_create_view_get(self):
-        print("Testing that wallet returns a view", end="")
+        print("Testing that wallet returns a view: ", end="")
         response = self.client.get(reverse('wallet'))
         self.assertEqual(response.status_code, 200)
         self.assertTemplateUsed(response, 'wallet/wallet.html')
@@ -51,6 +52,7 @@ class TestWallet(TestCase):
         wallet = Wallet.objects.get(user=self.user)
         wallet.add_balance(5000)
         self.assertEqual(wallet.fitcoin, 5000)
+        self.assertEqual(str(wallet), "TestUser: 5000")
         print("200, OK")
 
     def test_wallet_funding(self):
@@ -60,5 +62,13 @@ class TestWallet(TestCase):
         wallet = Wallet.objects.get(user=self.user)
         self.assertEqual(wallet.fitcoin, 4000)
         print("200, OK")
+    
+    def test_fitcoin_info(self):
+        print("Testing Fitcoin information like the exchange rate", end="")
+        self.assertEqual(Fitcoin.translation_currency(), "USD")
+        self.assertEqual(Fitcoin.to_fitcoin(50), 2500)
+        self.assertEqual(Fitcoin.to_fitcoin(100), 5000)
+        self.assertEqual(Fitcoin.to_usd(2500), 50)
+        self.assertEqual(Fitcoin.to_usd(5000), 100)
 
 
