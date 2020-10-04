@@ -37,8 +37,7 @@ class RateExerciseTest(TestCase):
         Exercise(
             Public=True,
             Title="I'm super tired",
-            Creator=self.user1,
-            short_description="Please tell me you are actually reviewing this").save()
+            Creator=self.user1).save()
     
     def test_post_like(self):
         self.client.force_login(self.user1)
