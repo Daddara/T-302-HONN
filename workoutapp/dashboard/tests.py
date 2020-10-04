@@ -13,12 +13,11 @@ class UserViewTests(TestCase):
     def init(self):
         self.client = Client()
 
-    def test_dashboard_view_get(self):
+    def test_dashboard_view_get_unauthenticated(self):
         print("Testing dashboard page: ", end="")
         response = self.client.get(reverse('dashboard'))
-        self.assertEqual(response.status_code, 200)
-        self.assertTemplateUsed(response, 'dashboard/dashboard.html')
-        print("200, OK")
+        self.assertEqual(response.status_code, 302)
+        print("302, OK")
 
     def test_get_created_exercises(self):
         print("Testing created exercises: ", end="")
@@ -30,7 +29,15 @@ class UserViewTests(TestCase):
             self.assertTemplateUsed(response, 'dashboard/dashboard.html')
             print("200, OK")
 
-
+    def test_get_created_workouts(self):
+        print("Testing created workouts: ", end="")
+        test_user = User.objects.create_user(username="TestUser", password="iampassword", email="randomemail@gmail.com")
+        data = {'User': test_user}
+        if Workout.objects.filter(User=data['User']).exists():
+            response = self.client.get(reverse('dashboard'))
+            self.assertEqual(response.status_code, 200)
+            self.assertTemplateUsed(response, 'dashboard/dashboard.html')
+            print("200, OK")
 
     def test_public_workout_view_get(self):
         print("Testing workouts page: ", end="")
