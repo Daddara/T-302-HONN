@@ -40,6 +40,7 @@ def register(request):
 
 @login_required
 def profile(request):
+    #  MISSING VIEW TO ACTUALLY EDIT USER INFO!!
     try:
         exercises = Exercise.objects.filter(Creator=request.user)
     except Exercise.DoesNotExist:
