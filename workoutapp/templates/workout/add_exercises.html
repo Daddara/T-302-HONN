@@ -1,8 +1,9 @@
 {% extends "base.html" %}
+{% load static %}
 {% block content %}
 {% if user.is_authenticated %}
     <h1>Add Exercises</h1>
-    <form method="post" class="form form-horizontal" >
+    <form method="post" action="{% url 'add exercises' workout_id %}" class="form form-horizontal" >
         {% csrf_token %}
         {{ form.as_p }}
         <input type="submit" class="btn btn-primary" value="Add Exercises" />

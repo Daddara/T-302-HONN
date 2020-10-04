@@ -2,6 +2,8 @@ from django.shortcuts import render, redirect
 from django.contrib.auth.models import User
 from workout.models import Workout, Exercise, WorkoutRating, ExerciseRating
 from django.contrib.auth.decorators import login_required
+from datetime import timedelta, datetime
+import pytz
 
 
 # Create your views here.
@@ -82,6 +84,7 @@ def get_workouts_with_likes(request):
 
     if workout_models:
         for model in workout_models:
+            model = creation_time_passed(model)
             # Get the count of all likes on current exercise
             try:
                 likes = WorkoutRating.objects.filter(Workout=model, Rating=1).count()
@@ -116,3 +119,38 @@ def get_workouts_with_likes(request):
                         model.Has_Disliked = True
 
         return workout_models
+
+
+def creation_time_passed(workout_model):
+    date_time_now = datetime.now()
+    timezone = pytz.timezone("UCT")
+    date_time_now = timezone.localize(date_time_now)
+    time_diff = date_time_now - workout_model.CreatedAt
+    time_delta = time_diff.total_seconds()
+    minutes = time_delta / 60
+    time_passed_value = round(minutes)
+    time_passed_unit = "min"
+    if minutes >= 60:
+        hours = time_delta / 3600
+        time_passed_unit = "hours"
+        time_passed_value = round(hours)
+        if hours >= 24:
+            days = time_delta / 3600 * 24
+            time_passed_unit = "days"
+            time_passed_value = round(days)
+            if days >= 7:
+                weeks = time_delta / 3600 * 24 * 7
+                time_passed_unit = "weeks"
+                time_passed_value = round(weeks)
+                if weeks >= 4:
+                    months = time_delta / 3600 * 24 * 30
+                    time_passed_unit = "months"
+                    time_passed_value = round(months)
+                    if months >= 12:
+                        years = time_delta / 3600 * 24 * 365
+                        time_passed_unit = "years"
+                        time_passed_value = round(years)
+
+    time_passed_string = '{} {} ago'.format(time_passed_value, time_passed_unit)
+    workout_model.time_passed = time_passed_string
+    return workout_model

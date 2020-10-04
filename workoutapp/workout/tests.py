@@ -9,12 +9,13 @@ class CreateWorkoutTest(TestCase):
     def init(self):
         self.client = Client()
 
-    def test_create_view_get(self):
-        print("Testing create workout page: ", end="")
-        response = self.client.get(reverse('create workout'))
+    def test_create_view_get_not_logged_in(self):
+        print("Testing create workout unauthorized: ", end="")
+        response = self.client.get(reverse('create workout'), follow=True)
         self.assertEqual(response.status_code, 200)
-        self.assertTemplateUsed(response, 'workout/create_workout.html')
+        self.assertTemplateUsed(response, 'user/login.html')
         print("200, OK")
+
 
 class RateExerciseTest(TestCase):
     def setUp(self):

@@ -1,7 +1,7 @@
 cd workoutapp
 
 # Setup
-python manage.py migrate
+echo Note: Don\'t forget to migrate your database \(workoutapp/reset_db.sh\)
 coverage erase
 
 # Run tests
@@ -21,5 +21,6 @@ fi
 coverage html --directory ../htmlcov
 coverage report
 
+cd ..
 echo "exit with status: " $status
 exit $status

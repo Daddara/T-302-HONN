@@ -1,0 +1,65 @@
+.workout-background-shadow{
+    -webkit-box-shadow: 10px 9px 10px -1px rgba(102,102,102,1);
+    -moz-box-shadow: 10px 9px 10px -1px rgba(102,102,102,1);
+    box-shadow: 10px 9px 10px -1px rgba(102,102,102,1);
+    margin: 10px;
+    margin-bottom: 30px;
+}
+
+.workout-container {
+    padding: 5px;
+    display: inline-block;
+    justify-content: center;
+    width: 400px;
+    min-height: 200px;
+    height: fit-content;
+    background-color: #ffa474;
+    border: 1px solid black;
+    border-radius: 4px;
+    position: relative;
+}
+
+.workout-container:hover {
+    transform: scale(1.05);
+}
+
+.workout-creator {
+    margin:0px;
+    padding: 0px;
+    display: flex;
+    font-size: small;
+    align-self: flex-end;
+    position: absolute;
+    bottom: 0;
+}
+
+.social-stats {
+    position: absolute;
+    bottom: 10%;
+    left: 39%;
+}
+
+.creation-date {
+    position: absolute;
+    top: 0;
+    right: 1%;
+}
+
+.short-description {
+    width: 90%;
+    margin: auto;
+    padding-top: 5px;
+    padding-bottom: 10px;
+}
+
+a {
+    color: #b03717;
+}
+
+a:hover {
+    color: black;
+}
+
+.page-title {
+    background-color: #ffa474;
+}
