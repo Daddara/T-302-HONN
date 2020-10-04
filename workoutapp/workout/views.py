@@ -89,7 +89,6 @@ def create_exercise(request):
 def edit_exercise(request, id=None, template_name='update_exercise.html'):
     pass
 
-
 @csrf_exempt
 def rate_exercise(request):
     if not request.user.is_authenticated:

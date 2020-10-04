@@ -1,6 +1,7 @@
 from django.contrib.auth.models import User
 from django.db import models
 from django.utils import timezone
+from workout.models import Exercise
 
 
 class Messages(models.Model):
@@ -23,6 +24,7 @@ class UserInfo(models.Model):
     
     def __str__(self):
         return self.user.username+"'s info"
+
 
 class Follow(models.Model):
     Username = models.ForeignKey(User, on_delete=models.CASCADE, related_name='Username')

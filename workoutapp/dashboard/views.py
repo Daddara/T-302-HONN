@@ -15,8 +15,17 @@ def placeholder_home(request):
 
 
 def dashboard(request):
-    return render(request, 'dashboard/dashboard.html')
+    if request.user.is_authenticated:
+        exercise_models = None
+        try:
+            exercise_models = Exercise.objects.filter(Creator=request.user)
+            exercise_models = add_like_information_to_exercises(request, exercise_models)
+        except Exercise.DoesNotExist:
+            pass
 
+        return render(request, 'dashboard/dashboard.html', context={'user_exercises': exercise_models})
+    else:
+        return render(request, 'dashboard/dashboard.html')
 
 def workouts(request):
     context = {'workouts': get_workouts_with_likes(request)}
@@ -36,7 +45,10 @@ def get_exercises_with_likes(request):
         exercise_models = Exercise.objects.filter(Public=True)
     except Exercise.DoesNotExist:
         return None
+    
+    return add_like_information_to_exercises(request, exercise_models)
 
+def add_like_information_to_exercises(request, exercise_models):
     if exercise_models:
         for model in exercise_models:
             # Get the count of all likes on current exercise
@@ -131,23 +143,23 @@ def creation_time_passed(workout_model):
     time_passed_value = round(minutes)
     time_passed_unit = "min"
     if minutes >= 60:
-        hours = time_delta / 3600
+        hours = minutes / 60
         time_passed_unit = "hours"
         time_passed_value = round(hours)
         if hours >= 24:
-            days = time_delta / 3600 * 24
+            days = hours / 24
             time_passed_unit = "days"
             time_passed_value = round(days)
             if days >= 7:
-                weeks = time_delta / 3600 * 24 * 7
+                weeks = days / 7
                 time_passed_unit = "weeks"
                 time_passed_value = round(weeks)
                 if weeks >= 4:
-                    months = time_delta / 3600 * 24 * 30
+                    months = weeks / 4
                     time_passed_unit = "months"
                     time_passed_value = round(months)
                     if months >= 12:
-                        years = time_delta / 3600 * 24 * 365
+                        years = months / 12
                         time_passed_unit = "years"
                         time_passed_value = round(years)
 

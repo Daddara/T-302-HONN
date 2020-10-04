@@ -10,7 +10,8 @@ from wallet.models import Wallet
 from workout.models import Exercise
 from .forms.create_account_form import CreateAccountForm
 from user.models import Follow
-
+from workout.models import Exercise
+from dashboard.views import add_like_information_to_exercises
 
 # Create your views here.
 from .models import UserInfo
@@ -40,20 +41,24 @@ def register(request):
 
 @login_required
 def profile(request):
+    exercise_models = None
     try:
-        exercises = Exercise.objects.filter(Creator=request.user)
+        exercise_models = Exercise.objects.filter(Creator=request.user)
+        exercise_models = add_like_information_to_exercises(request, exercise_models)
     except Exercise.DoesNotExist:
-        exercises = None
+        pass
     user_info = UserInfo.objects.get(user=request.user)
-    return render(request, 'user/profile.html', context={'user_info': user_info, 'exercises': exercises})
-
-
+    return render(request, 'user/profile.html', context={'user_info': user_info, 'exercises': exercise_models})
 
 @login_required
 def following(request):
-    user = Follow.objects.get(Username=request.user)
-    context = {'follow': user}
-    return render(request, 'user/followerlist.html')
+    try:
+        poster = Follow.objects.filter(Username=request.user)
+    except Follow.DoesNotExist:
+        return render(request, 'user/followerlist.html')
+    if poster:
+        return render(request, 'user/followerlist.html', context={'follow': poster})
+
 
 @login_required
 def delete_exercise(request, exercise_id):
@@ -61,3 +66,22 @@ def delete_exercise(request, exercise_id):
     exercise.delete()
 
     return redirect('profile')
+
+@login_required
+def searchbarUsers(request):
+    if request.method == 'GET':
+        search = request.GET.get('search')
+        post = User.objects.all().filter(username=search)
+        if post:
+            return render(request, 'user/searchResults.html', context={'sr_user': post})
+        else:
+            return render(request, 'user/searchResults.html')
+
+    if request.method == 'POST':
+        search = request.GET.get('search')
+        post = User.objects.all().filter(username=search)
+        poster = post.get(username=search)
+        current_user = User.objects.get(username=request.user)
+        follow = Follow(Username=current_user, Following=poster, FollowedAt="")
+        follow.save()
+        return redirect(following)
