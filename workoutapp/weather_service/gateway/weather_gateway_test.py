@@ -9,7 +9,6 @@ class TestWeatherApiDataSource(unittest.TestCase):
     def test_get_current_weather(self):
         data_source = WeatherApiWeatherGateway()
         data, error = data_source.get_weather_current('Reykjavik')
-
         self.assertIsNotNone(data)
         self.assertIsNone(error)
         self.assertEqual(data.name, 'Reykjavik')
@@ -18,8 +17,11 @@ class TestWeatherApiDataSource(unittest.TestCase):
         # Well we could test for rain to get a 50% success rate xD ~xFrednet 2020.09.16
 
     def test_get_current_weather_invalid_key(self):
-        data_source = WeatherApiWeatherGateway().api_key('asd')
+        data_source = WeatherApiWeatherGateway()
+        data_source.api_key = 'invalid_key'
+
         data, error = data_source.get_weather_current('Reykjavik')
+
         self.assertIsNone(data)
         self.assertIsNotNone(error)
         self.assertEqual(error.err_type, WeatherGatewayError.ERR_TYPE_HTTP)
@@ -28,6 +30,7 @@ class TestWeatherApiDataSource(unittest.TestCase):
 
     def test_get_current_weather_invalid_city(self):
         data_source = WeatherApiWeatherGateway()
+
         # You don't like this name? What are you gonna do about it *music*
         # ... I should really, really stop listening to music during development
         # and stop listening the voices in my head that say that this is funny...
@@ -95,10 +98,8 @@ class TestWeatherApiDataSource(unittest.TestCase):
     def test_get_forecast_data(self):
         data_source = WeatherApiWeatherGateway()
         data, error = data_source.get_weather_forecast('Reykjavik', days=4)
-
         self.assertIsNotNone(data)
         self.assertIsNone(error)
-
         self.assertEqual(data.name, 'Reykjavik')
         # Funny story explained in the API class. The api is broken and will always return
         # three days ^^. Tracked by #58 ~xFrednet
