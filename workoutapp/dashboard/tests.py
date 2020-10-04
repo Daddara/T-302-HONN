@@ -15,6 +15,8 @@ class UserViewTests(TestCase):
 
     def test_dashboard_view_get(self):
         print("Testing dashboard page: ", end="")
+        test_user = User.objects.create_user(username="TestUser", password="iampassword", email="randomemail@gmail.com")
+        self.client.login(username="TestUser", password="iampassword")
         response = self.client.get(reverse('dashboard'))
         self.assertEqual(response.status_code, 200)
         self.assertTemplateUsed(response, 'dashboard/dashboard.html')
