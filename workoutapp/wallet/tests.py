@@ -29,6 +29,13 @@ class TestWallet(TestCase):
         self.assertEqual(self.user.username, 'TestUser')
         self.client.login(username="TestUser", password="iampassword")
 
+    def test_create_view_get(self):
+        print("Testing that wallet returns a view", end="")
+        response = self.client.get(reverse('wallet'))
+        self.assertEqual(response.status_code, 200)
+        self.assertTemplateUsed(response, 'wallet/wallet.html')
+        print("200, OK")
+
     def tearDown(self):
         # Clean up run after every test method.
         self.client.logout()
