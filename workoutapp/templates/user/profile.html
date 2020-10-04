@@ -53,6 +53,9 @@
                                 <table class="table table-hover table-striped text-left">
                                     {% for exercise in exercises %}
                                         {% include 'exercise/single_exercise_minimal.html' with exercise=exercise %}
+                                        <a href="{% url 'delete-exercise' exercise.id %}">
+                                            <button class="btn btn-primary" type="button"><span>Delete exercise</span></button>
+                                        </a>
                                     {% endfor %}
                                 </table>
                         </div>
@@ -79,4 +82,5 @@
 
 {% block extra_js %}
 
+<script src="{% static 'workout/js/rate_exercise.js' %}"></script>
 {% endblock %}

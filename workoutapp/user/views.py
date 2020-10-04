@@ -6,6 +6,7 @@ from wallet.models import Wallet
 from .forms.create_account_form import CreateAccountForm
 from workout.models import Exercise
 from .models import UserInfo, FriendRequest, Follow
+from dashboard.views import add_like_information_to_exercises
 
 
 # Create your views here.
@@ -45,28 +46,32 @@ def profile_view(request, slug):
         if len(FriendRequest.objects.filter(FromUser=request.user).filter(ToUser=user)) == 1:
             status = 'sent'
 
+    exercise_models = None
     # If user is viewing own profile
     if request.user == user:
+
         try:
-            exercises = Exercise.objects.filter(Creator=user)
+            exercise_models = Exercise.objects.filter(Creator=request.user)
+            exercise_models = add_like_information_to_exercises(request, exercise_models)
         except Exercise.DoesNotExist:
-            exercises = None
+            pass
     # Otherwise only get public exercises
     else:
         try:
             exercises = Exercise.objects.filter(Creator=user).filter(Public=True)
+            exercise_models = add_like_information_to_exercises(request, exercise_models)
         except Exercise.DoesNotExist:
-            exercises = None
+           pass
 
     context = {
         'user': user,
         'user_info': profile,
-        'exercises': exercises,
+        'exercises': exercise_models,
         'status': status
     }
     return render(request, 'user/profile.html', context)
 
-
+@login_required
 def view_friend_and_requests(request):
     user = request.user
     user_info = UserInfo.objects.get(user=user)
@@ -87,6 +92,13 @@ def following(request):
     if poster:
         return render(request, 'user/followerlist.html', context={'follow': poster})
 
+
+@login_required
+def delete_exercise(request, exercise_id):
+    exercise = get_object_or_404(Exercise, Creator=request.user, pk=exercise_id)
+    exercise.delete()
+
+    return redirect('profile')
 
 @login_required
 def searchbarUsers(request):

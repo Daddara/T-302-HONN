@@ -8,6 +8,7 @@ urlpatterns = [
     path('logout/', LogoutView.as_view(next_page='/'), name="logout"),
     path('profile/<slug:slug>', views.profile_view, name='profile'),
     path('following/', views.following, name='following'),
+    path('delete-exercise/<int:exercise_id>/', views.delete_exercise, name="delete-exercise"),
     path('searchbarUsers/', views.searchbarUsers, name='searchbarUsers'),
     path('friends/', views.view_friend_and_requests, name='user_friends'),
 
