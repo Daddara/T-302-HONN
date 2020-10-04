@@ -3,3 +3,6 @@ It's sole purpose is to keep track of a users balance.
 
 Furthermore the Fitcoin class implements the single responsibility concept.
 It's sole purpose is to manage the exchange rate of the currency.
+
+This documentation from sprint 2, at the bottom page explains their functionality in further detail.
+https://gitlab.com/xFrednet/t-302-honn-2020-team-9/-/blob/master/docs/sprint_2/design_patterns/Design_Patterns_Fitcoin_Implementation.pdf
