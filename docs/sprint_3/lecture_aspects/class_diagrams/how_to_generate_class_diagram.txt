@@ -1,0 +1,6 @@
+To create a model diagram directly through django extensions, you first
+need to "pip install django-extensions" and add 'django_extensions' to
+installed apps inside off setting.py in your django project. Then you have
+install pydotplus "pip install pydotplus". Pydotplus will then generate
+a class diagram of your modelclasses with this command: 
+	"manage.py graph_models -a -o myapp_models.png"
