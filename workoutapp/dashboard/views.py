@@ -15,8 +15,11 @@ def placeholder_home(request):
 
 
 def dashboard(request):
-    return render(request, 'dashboard/dashboard.html')
-
+    if request.user.is_authenticated:
+        user_exercises = Exercise.objects.filter(Creator=request.user).values()
+        return render(request, 'dashboard/dashboard.html', context={'user_exercises': user_exercises})
+    else:
+        return render(request, 'dashboard/dashboard.html')
 
 def workouts(request):
     context = {'workouts': get_workouts_with_likes(request)}

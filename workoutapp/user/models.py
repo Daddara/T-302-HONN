@@ -25,13 +25,6 @@ class UserInfo(models.Model):
     def __str__(self):
         return self.user.username+"'s info"
 
-class UserExercise(models.Model):
-    user = models.ForeignKey(User, on_delete=models.CASCADE)
-    exercise = models.ForeignKey(Exercise, on_delete=models.CASCADE)
-
-    def __str__(self):
-        return self.user.username+"'s exercises"
-
 class Follow(models.Model):
     Username = models.ForeignKey(User, on_delete=models.CASCADE, related_name='Username')
     Following = models.ForeignKey(User, on_delete=models.CASCADE, related_name='Following')

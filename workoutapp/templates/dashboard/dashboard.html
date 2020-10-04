@@ -2,8 +2,26 @@
 {% block content %}
 <div class="container">
         <h1>Your dashboard</h1>
+<div class="page-content">
     <div class="boxed">
-        <h2>Here are your workouts</h2>
+        <div class="col-md-12">
+     <h3 class="mt-2">Created Exercises</h3>
+        <table class="table table-sm table-hover table-striped">
+            <tbody>
+                {% for exercise in user_exercises %}
+                    <tr >
+                        <td><h6>{{ exercise.Title }} </h6> </td>
+                        <td> {{ exercise.Description }}</td>
+                        <td> {{ exercise.Equipment }}</td>
+                        <td> {{ exercise.muscle_group }}</td>
+                        <td>  <button type="button" class="btn btn-primary">Edit</button></td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
     </div>
     </div>
+
+    </div>
+</div>
 {% endblock %}
