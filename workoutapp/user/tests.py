@@ -87,4 +87,10 @@ class FollowTest(TestCase):
         self.assertEqual(follow, pk=2)
         print("200, OK")
 
+    def test_search_result_view_get_no_search(self):
+        print("Testing search page: ", end="")
+        response = self.client.get(reverse('searchbarUsers'), search='TestUser2')
+        self.assertEqual(response.status_code, 200)
+        self.assertTemplateUsed(response, 'user/searchResults.html')
+        print("200, OK")
 
