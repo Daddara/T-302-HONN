@@ -21,5 +21,6 @@ fi
 coverage html --directory ../htmlcov
 coverage report
 
+cd ..
 echo "exit with status: " $status
 exit $status
