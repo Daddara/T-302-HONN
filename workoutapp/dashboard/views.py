@@ -16,16 +16,14 @@ def placeholder_home(request):
 
 def dashboard(request):
     if request.user.is_authenticated:
-        user_exercises = Exercise.objects.filter(Creator=request.user).values()
-        
         exercise_models = None
         try:
             exercise_models = Exercise.objects.filter(Creator=request.user)
-            exercises = add_like_information_to_exercises(request, exercise_models)
+            exercise_models = add_like_information_to_exercises(request, exercise_models)
         except Exercise.DoesNotExist:
             pass
 
-        return render(request, 'dashboard/dashboard.html', context={'user_exercises': exercises})
+        return render(request, 'dashboard/dashboard.html', context={'user_exercises': exercise_models})
     else:
         return render(request, 'dashboard/dashboard.html')
 
