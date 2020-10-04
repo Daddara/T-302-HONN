@@ -30,5 +30,4 @@ This responsibility includes the functions of the weather gateway as well as the
 The single responsibility of the payment system have been documented by _Ægir Máni Hauksson_(@hauks96) in [single_responsibility_payment.txt](docs/sprint_3/lecture_aspects/single_responsibility/single_responsibility_payment.txt)
 
 ### Forms
-The single responsibility of the form have been documented by _Kristján Mar Svavarsson_(@Kristjamar) in [single_responsibility_forms.txt]
-(docs/sprint_3/lecture_aspects/single_responsibility/single_responsibility_forms.txt)
+The single responsibility of the form have been documented by _Kristján Mar Svavarsson_(@Kristjamar) in [single_responsibility_forms.txt](docs/sprint_3/lecture_aspects/single_responsibility/single_responsibility_forms.txt)
