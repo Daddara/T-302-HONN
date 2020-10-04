@@ -18,8 +18,8 @@ class Workout(models.Model):
     Category = models.ForeignKey(Category, null=True, on_delete=models.SET_NULL)
     short_description = models.TextField(max_length=150, default="", blank=False)
     Name = models.CharField(max_length=20, default="")
+    CreatedAt = models.DateTimeField(auto_now=True)
     workout_goal = models.CharField(max_length=80, default="")
-    CreatedAt = models.DateField(auto_now=True)
     Image = models.CharField(
         max_length=250,
         default="https://www.vhv.rs/dpng/d/256-2569650_men-profile-icon-png-image-free-download-searchpng.png")
@@ -29,6 +29,7 @@ class Workout(models.Model):
     Has_Liked = models.BooleanField(default=False)
     Has_Disliked = models.BooleanField(default=False)
     Repetitions = models.IntegerField(default=1, blank=True)
+    time_passed = models.CharField(max_length=40, default="1 Day ago")
 
     def __str__(self):
         return self.User.username + ": " + self.Name
@@ -64,7 +65,7 @@ class MuscleGroup(models.Model):
 class Exercise(models.Model):
     Title = models.CharField(max_length=20, default="")
     Creator = models.ForeignKey(User, null=True, on_delete=models.SET_NULL)
-    Description = models.CharField(max_length=250, default="")
+    Description = models.TextField(max_length=350, default="")
     Image = models.CharField(
         max_length=250,
         default="https://www.vhv.rs/dpng/d/256-2569650_men-profile-icon-png-image-free-download-searchpng.png")

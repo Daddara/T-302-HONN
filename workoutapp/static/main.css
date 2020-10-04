@@ -89,6 +89,7 @@ a.navbar-brand:hover {
     font-size: large;
     color: black;
     font-weight: bold;
+    padding-top: 10px;
 }
 
 .social-stats {

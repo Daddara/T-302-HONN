@@ -979,7 +979,7 @@
   "pk": 1,
   "fields": {
     "password": "pbkdf2_sha256$216000$J4oJeScBbRXC$9nPyDuF3Zx8UwqXh9sDHXyanBLMnnGnYD9938JcY974=",
-    "last_login": "2020-10-04T00:04:56.284Z",
+    "last_login": "2020-10-04T12:38:25.603Z",
     "is_superuser": true,
     "username": "demoadmin",
     "first_name": "",
@@ -1070,15 +1070,16 @@
     "Category": 2,
     "short_description": "This workout will help you get through covid in shape! No gym, no problem!",
     "Name": "Covid Home Workout",
+    "CreatedAt": "2020-10-04T12:11:43.490Z",
     "workout_goal": "Overall Fitness",
-    "CreatedAt": "2020-10-03",
     "Image": "https://www.vhv.rs/dpng/d/256-2569650_men-profile-icon-png-image-free-download-searchpng.png",
     "Likes": 0,
     "Dislikes": 0,
     "Public": true,
     "Has_Liked": false,
     "Has_Disliked": false,
-    "Repetitions": 3
+    "Repetitions": 3,
+    "time_passed": "1 Day ago"
   }
 },
 {
@@ -1089,15 +1090,16 @@
     "Category": 1,
     "short_description": "Forest Gump wont stand a chance!\r\nIn one month, you will be a running champion.",
     "Name": "Running Champion",
+    "CreatedAt": "2020-10-04T12:11:43.490Z",
     "workout_goal": "Running Condition",
-    "CreatedAt": "2020-10-03",
     "Image": "https://www.vhv.rs/dpng/d/256-2569650_men-profile-icon-png-image-free-download-searchpng.png",
     "Likes": 0,
     "Dislikes": 0,
     "Public": true,
     "Has_Liked": false,
     "Has_Disliked": false,
-    "Repetitions": 1
+    "Repetitions": 1,
+    "time_passed": "1 Day ago"
   }
 },
 {
@@ -1108,15 +1110,16 @@
     "Category": 1,
     "short_description": "What's the best way to get better at running 3k? By running a 3k!",
     "Name": "3K Every Day!",
+    "CreatedAt": "2020-10-04T12:11:43.490Z",
     "workout_goal": "3K pace",
-    "CreatedAt": "2020-10-04",
     "Image": "https://post.healthline.com/wp-content/uploads/2020/01/Runner-training-on-running-track-1200x628-facebook.jpg",
     "Likes": 0,
     "Dislikes": 0,
     "Public": true,
     "Has_Liked": false,
     "Has_Disliked": false,
-    "Repetitions": 1
+    "Repetitions": 1,
+    "time_passed": "1 Day ago"
   }
 },
 {

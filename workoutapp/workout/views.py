@@ -148,7 +148,6 @@ def rate_workout(request):
             return HttpResponse(status=404)
 
         # Get or create rating
-        print()
         rating = WorkoutRating.objects.get_or_create(
             Workout=workout,
             Judge=request.user
