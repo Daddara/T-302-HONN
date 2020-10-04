@@ -92,9 +92,9 @@ class WeatherApiWeatherGateway(WeatherGateway):
 
     def __init__(self):
         WeatherGateway.__init__(self)
+        self.api_key = 'b0cf0f6686224ec6a9f164627201209'
 
         # TODO xFrednet 2020.09.12: Load the API key from somewhere else this isn't the nicest way
-        self.api_key = 'b0cf0f6686224ec6a9f164627201209'
 
     def get_weather_current(self, city: str) -> (CurrentWeatherData, WeatherGatewayError):
         url = WeatherApiWeatherGateway.CURRENT_URL.format(
