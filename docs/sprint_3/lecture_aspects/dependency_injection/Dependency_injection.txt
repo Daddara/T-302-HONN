@@ -2,4 +2,6 @@ We implemented the setter injection into the view file in weather_gateway.
 How it works is that the instance of WeatherApiWeatherGateway() is
 initialized in the __init__.py and access in views. Views doesn't know what
 GATEWAY is and it doesn't need to know. That way, GATEWAY is set outside of
-views.
+views. This can't be done with a global variable since Djanga doesn't use
+classes, thats why we had to import the variable instead of using a setter
+inside of views.
