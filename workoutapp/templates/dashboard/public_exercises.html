@@ -2,56 +2,23 @@
 {% load static %}
 {% block extra_head %}
     <link rel="stylesheet" href="{% static "exercise/css/exercise.css" %}">
+    <link rel="stylesheet" href="{% static "scrollbars.css" %}">
 {% endblock %}
 
 {% block content %}
-<div>
-<h2>Exercises</h2>
-    </div>
     {% if exercises %}
-    <div class="page-content">
+    <div class="page-title">
+        <h2>Exercises</h2>
+        <div class="search-bar">
+            {% include 'dashboard/search-input.html' %}
+            <!-- Add PUBLIC/MY Workouts. Add category dropdown filter. Add pagination max x per page.
+            Make sure selected filter are sent to view.-->
+        </div>
+    </div>
+    <div class="page-content scrollbar-info">
         <div class="center-page-content">
             {% for exercise in exercises %}
-                <div class="exercise-background-shadow">
-                    <div class="exercise-container">
-                        <div class="item-title">
-                            <a href=#>{{exercise.Title}}</a>
-                        </div>
-                        <div><b>Trains:</b> {{exercise.muscle_group}}</div>
-                        {% if exercise.equipent == None %}
-                            <div><b>Equipment:</b> None</div>
-                        {% else %}
-                            <div><b>Equipment:</b> {{exercise.equipment}}</div>
-                        {% endif %}
-                        <div class="social-stats">
-                            <div class="likes" exercise-id="{{ exercise.id }}">
-                                <span class="social-span">{{ exercise.Likes }}</span>
-                                <!-- Needs javascript implementation for user changing his rating on page (+/- 1) -->
-                                {% if exercise.Has_Liked %}
-                                    <i class="fa fa-thumbs-up like-idf liked"></i>
-                                {% else %}
-                                    <i class="fa fa-thumbs-up like-idf"></i>
-                                {% endif %}
-                            </div>
-                            <div class="dislikes"  exercise-id="{{ exercise.id }}">
-                                <span class="social-span">{{ exercise.Dislikes }}</span>
-                                {% if exercise.Has_Disliked %}
-                                    <i class="fa fa-thumbs-down dislike-idf disliked"></i>
-                                {% else %}
-                                    <i class="fa fa-thumbs-down dislike-idf"></i>
-                                {% endif %}
-                            </div>
-                        </div>
-                        <div class="exercise-creator">
-                            {% if exercise.Creator.username == 'System' %}
-                                By {{ exercise.Creator }}
-                            {% else %}
-                                <!-- Link to user profile -->
-                                <a href="#"><span style="color: black;">By</span> {{ exercise.Creator }}</a>
-                            {% endif %}
-                        </div>
-                    </div>
-                </div>
+                {% include 'exercise/single_exercise_minimal.html' with exercise=exercise %}
             {% endfor %}
         </div>
     </div>
@@ -64,6 +31,8 @@
 {% endblock %}
 
 {% block extra_js %}
+<script>let search_class="exercise-container"</script>
+<script src="{% static 'search_page_content_filter.js' %}"></script>
 <script>
     
     {% if user.is_authenticated %}
@@ -95,19 +64,21 @@
     }
     {% else %}
     
-    function handle_exercise_rating(exercise_id, new_status) {
+    function redirect_to_login() {
+        window.location.href = "{% url 'login' %}";
         alert("Please login to rate a workout");
     }
 
     {% endif %}
 
     // Attach on clicks thingies
+
     $( ".likes" ).each(function( index ) {
         this.onclick = function() {
+            {% if user.is_authenticated %}
             let like_icon = $(this).children('.like-idf');
             let likes_value_element = $(this).children('.social-span');
             let likes = Number(likes_value_element.text());
-
             let dislike_div = $(this).parent().children('.dislikes');
             let dislike_icon = dislike_div.children('.dislike-idf');
             let dislikes_value_element = dislike_div.children('.social-span');
@@ -117,15 +88,21 @@
             if(!(like_icon.hasClass('liked'))){
                 like_icon.addClass('liked');
                 likes_value_element.text((likes+1).toString());
-                dislikes_value_element.text((Number(dislikes-1)).toString());
+                if(dislike_icon.hasClass('disliked')){
+                    dislikes_value_element.text((Number(dislikes-1)).toString());
+                }
                 exercise_id = Number(this.getAttribute("exercise-id"));
                 handle_exercise_rating(exercise_id, "+1")
                 dislike_icon.removeClass('disliked');
             }
+            {% else %}
+                redirect_to_login()
+            {% endif %}
         };
     });
     $( ".dislikes" ).each(function( index ) {
         this.onclick = function() {
+            {% if user.is_authenticated %}
             let dislike_icon = $(this).children('.dislike-idf');
             let dislikes_value_element = $(this).children('.social-span');
             let dislikes = Number(dislikes_value_element.text());
@@ -139,13 +116,16 @@
             if(!(dislike_icon.hasClass('disliked'))){
                 dislike_icon.addClass('disliked');
                 dislikes_value_element.text((dislikes+1).toString());
-                likes_value_element.text((Number(likes-1)).toString());
+                if (like_icon.hasClass('liked')){
+                    likes_value_element.text((Number(likes-1)).toString());
+                }
                 exercise_id = Number(this.getAttribute("exercise-id"));
                 handle_exercise_rating(exercise_id, "-1")
                 like_icon.removeClass('liked');
             }
-
-
+            {% else %}
+                redirect_to_login()
+            {% endif %}
         };
     });
 

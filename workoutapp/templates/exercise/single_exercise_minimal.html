@@ -1,0 +1,40 @@
+<div class="exercise-background-shadow">
+    <div class="exercise-container">
+        <div class="item-title">
+            <a href=#>{{exercise.Title}}</a>
+        </div>
+        <div><b>Trains:</b> {{exercise.muscle_group}}</div>
+        {% if exercise.equipment == None %}
+            <div><b>Equipment:</b> None</div>
+        {% else %}
+            <div><b>Equipment:</b> {{exercise.equipment}}</div>
+        {% endif %}
+        <div class="social-stats">
+            <div class="likes" exercise-id="{{ exercise.id }}">
+                <span class="social-span">{{ exercise.Likes }}</span>
+                <!-- Needs javascript implementation for user changing his rating on page (+/- 1) -->
+                {% if exercise.Has_Liked %}
+                    <i class="fa fa-thumbs-up like-idf liked"></i>
+                {% else %}
+                    <i class="fa fa-thumbs-up like-idf"></i>
+                {% endif %}
+            </div>
+            <div class="dislikes"  exercise-id="{{ exercise.id }}">
+                <span class="social-span">{{ exercise.Dislikes }}</span>
+                {% if exercise.Has_Disliked %}
+                    <i class="fa fa-thumbs-down dislike-idf disliked"></i>
+                {% else %}
+                    <i class="fa fa-thumbs-down dislike-idf"></i>
+                {% endif %}
+            </div>
+        </div>
+        <div class="exercise-creator">
+            {% if exercise.Creator.username == 'System' %}
+                By {{ exercise.Creator }}
+            {% else %}
+                <!-- Link to user profile -->
+                <a href="#"><span style="color: black;">By</span> {{ exercise.Creator }}</a>
+            {% endif %}
+        </div>
+    </div>
+</div>
