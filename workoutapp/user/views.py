@@ -98,7 +98,7 @@ def delete_exercise(request, exercise_id):
     exercise = get_object_or_404(Exercise, Creator=request.user, pk=exercise_id)
     exercise.delete()
 
-    return redirect('profile')
+    return redirect('profile', slug=request.user.username)
 
 @login_required
 def searchbarUsers(request):

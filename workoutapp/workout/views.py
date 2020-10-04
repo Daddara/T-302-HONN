@@ -76,7 +76,7 @@ def create_exercise(request):
             exercise = Exercise(Title=title, Description=description, Creator=request.user,
                                 Image=image, Equipment=equipment, Public=True)
             exercise.save()
-            return redirect('profile')
+            return redirect('profile', slug=request.user.username)
 
         return render(request, 'exercise/create_exercise.html', {
             'form': exercise_form, 'errors': exercise_form.errors})
