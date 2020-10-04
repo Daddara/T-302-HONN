@@ -3,27 +3,22 @@ import datetime
 
 from .weather_gateway import WeatherApiWeatherGateway
 from .weather_gateway import WeatherGatewayError
-from .service import Service
 
 
 class TestWeatherApiDataSource(unittest.TestCase):
     def test_get_current_weather(self):
-        service1 = Service('b0cf0f6686224ec6a9f164627201209')
-        data_source = WeatherApiWeatherGateway(service1)
-
+        data_source = WeatherApiWeatherGateway()
         data, error = data_source.get_weather_current('Reykjavik')
 
         self.assertIsNotNone(data)
         self.assertIsNone(error)
-
         self.assertEqual(data.name, 'Reykjavik')
         # I can't test the rest because well look out the window the
         # weather in Reykjavik is constantly changing ^^
         # Well we could test for rain to get a 50% success rate xD ~xFrednet 2020.09.16
 
     def test_get_current_weather_invalid_key(self):
-        service1 = Service('b0cf0f66862')
-        data_source = WeatherApiWeatherGateway(service1)
+        data_source = WeatherApiWeatherGateway().api_key('asd')
         data, error = data_source.get_weather_current('Reykjavik')
         self.assertIsNone(data)
         self.assertIsNotNone(error)
@@ -32,9 +27,7 @@ class TestWeatherApiDataSource(unittest.TestCase):
         self.assertNotEqual(error.err_text, '<NO TEXT>')
 
     def test_get_current_weather_invalid_city(self):
-        service1 = Service('b0cf0f6686224ec6a9f164627201209')
-        data_source = WeatherApiWeatherGateway(service1)
-
+        data_source = WeatherApiWeatherGateway()
         # You don't like this name? What are you gonna do about it *music*
         # ... I should really, really stop listening to music during development
         # and stop listening the voices in my head that say that this is funny...
@@ -100,9 +93,7 @@ class TestWeatherApiDataSource(unittest.TestCase):
         self.assertEqual(error.err_sub_id, 0)
 
     def test_get_forecast_data(self):
-        service1 = Service('b0cf0f6686224ec6a9f164627201209')
-        data_source = WeatherApiWeatherGateway(service1)
-
+        data_source = WeatherApiWeatherGateway()
         data, error = data_source.get_weather_forecast('Reykjavik', days=4)
 
         self.assertIsNotNone(data)
@@ -112,6 +103,7 @@ class TestWeatherApiDataSource(unittest.TestCase):
         # Funny story explained in the API class. The api is broken and will always return
         # three days ^^. Tracked by #58 ~xFrednet
         # self.assertEqual(len(data.days), 4)
+
 
 if __name__ == '__main__':
     unittest.main()

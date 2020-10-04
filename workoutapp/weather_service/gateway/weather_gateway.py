@@ -5,7 +5,6 @@ import time
 from .weather_data import CurrentWeatherData
 from .weather_data import ForecastWeatherData
 from .weather_data import ForecastDayWeatherData
-from .service import Service
 # from .weather_data import WeatherWarnings
 
 
@@ -91,11 +90,9 @@ class WeatherApiWeatherGateway(WeatherGateway):
     FORECAST_URL = 'https://api.weatherapi.com/v1/forecast.json?key={}&q={}&days={}'
     ALERT_URL = 'https://api.weatherapi.com/v1/forecast.json?key={}&q={}&days=1'
 
-    def __init__(self, service):
-
-        self.service = service
-        self.api_key = self.service.return_key()
+    def __init__(self):
         WeatherGateway.__init__(self)
+        self.api_key = 'b0cf0f6686224ec6a9f164627201209'
 
         # TODO xFrednet 2020.09.12: Load the API key from somewhere else this isn't the nicest way
 
