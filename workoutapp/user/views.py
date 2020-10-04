@@ -7,9 +7,9 @@ from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, redirect
 from dashboard.views import dashboard
 from wallet.models import Wallet
+from workout.models import Exercise
 from .forms.create_account_form import CreateAccountForm
 from user.models import Follow
-
 
 # Create your views here.
 from .models import UserInfo
@@ -39,9 +39,12 @@ def register(request):
 
 @login_required
 def profile(request):
-    #  MISSING VIEW TO ACTUALLY EDIT USER INFO!!
+    ##exercises = Exercise.object.get(Creator=request.user)
     user_info = UserInfo.objects.get(user=request.user)
     return render(request, 'user/profile.html', context={'user_info': user_info})
+    ##, 'exercises': exercises
+
+
 
 
 @login_required
@@ -49,4 +52,3 @@ def following(request):
     user = Follow.objects.get(Username=request.user)
     context = {'follow': user}
     return render(request, 'user/followerlist.html')
-
