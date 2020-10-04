@@ -1,7 +1,7 @@
 from django.test import TestCase, Client
 from django.contrib.auth.models import User
 from django.urls import reverse
-from user.models import Follow
+from user.models import Follow, UserInfo, FriendRequest
 
 # Create your tests here.
 class UserViewTests(TestCase):
@@ -41,14 +41,16 @@ class UserViewTests(TestCase):
         self.assertEqual(response.status_code, 200)
         print("200, OK")
 
-
     def test_profile_page(self):
         print("Testing profile page: ", end="")
         data = {'username': 'TestUser',
                 'email': 'test_user@test.com',
                 'password1': 'iampassword', 'password2': 'iampassword'}
+        response = self.client.post(reverse('register'), data)
+        self.assertRedirects(response, reverse('login'), target_status_code=200)
         if User.objects.filter(username=data['username']).exists():
-            response = self.client.get(reverse('profile'))
+            self.client.login(username="TestUser", password="iampassword")
+            response = self.client.get('/accounts/profile/TestUser')
             self.assertEqual(response.status_code, 200)
             self.assertTemplateUsed(response, 'user/profile.html')
             print("200, OK")
@@ -94,3 +96,78 @@ class FollowTest(TestCase):
         self.assertTemplateUsed(response, 'user/searchResults.html')
         print("200, OK")
 
+
+class FriendsTest(TestCase):
+    def setUp(self):
+        # Initialize client
+        self.client = Client()
+
+        # Create user
+        data = {'username': 'TestUser',
+                'email': 'test_user@test.com',
+                'password1': 'iampassword', 'password2': 'iampassword'}
+        data2 = {'username': 'TestUser2',
+                 'email': 'test_user@test.com',
+                 'password1': 'iampassword2', 'password2': 'iampassword2'}
+        response = self.client.post(reverse('register'), data)
+        response = self.client.post(reverse('register'), data2)
+        self.assertRedirects(response, '/accounts/login/', target_status_code=200)
+        self.user = User.objects.get(pk=1)
+        self.user2 = User.objects.get(pk=2)
+        self.user_info = UserInfo.objects.get(user=self.user)
+        self.user_info2 = UserInfo.objects.get(user=self.user2)
+        self.assertEqual(self.user.username, 'TestUser')
+        self.client.login(username="TestUser", password="iampassword")
+
+    def test_friend_list_view_get(self):
+        print("Testing following page: ", end="")
+        response = self.client.get(reverse('user_friends'))
+        self.assertEqual(response.status_code, 200)
+        self.assertTemplateUsed(response, 'user/user_friends.html')
+        print("200, OK")
+
+    def test_new_friend_request(self):
+        print("Testing if friend request is created: ", end="")
+        # friend_request = FriendRequest.objects.create(FromUser=self.user, ToUser=self.user2)
+        response = self.client.get('/accounts/friend-request/send/2')
+        self.assertRedirects(response, '/accounts/profile/TestUser2', target_status_code=200)
+
+        self.assertEqual(len(FriendRequest.objects.all()), 1)
+        find_request = FriendRequest.objects.get(FromUser=self.user, ToUser=self.user2)
+        self.assertEqual(find_request.ToUser, self.user2)
+        self.assertEqual(find_request.FromUser, self.user)
+        print("200, OK")
+
+    def test_cancel_friend_request(self):
+        print("Testing friend request cancel: ", end="")
+        friend_request = FriendRequest.objects.create(FromUser=self.user, ToUser=self.user2)
+        self.assertEqual(len(FriendRequest.objects.all()), 1)
+
+        response = self.client.get('/accounts/friend-request/cancel/2')
+        self.assertRedirects(response, '/accounts/profile/TestUser2', target_status_code=200)
+        self.assertEqual(len(FriendRequest.objects.all()), 0)
+        self.assertNotIn(self.user_info, self.user_info2.friends.all())
+        print("200, OK")
+
+    def test_accept_friend_request(self):
+        print("Testing friend request accept: ", end="")
+        friend_request = FriendRequest.objects.create(FromUser=self.user2, ToUser=self.user)
+        self.assertEqual(len(FriendRequest.objects.all()), 1)
+
+        response = self.client.get('/accounts/friend-request/accept/2')
+        self.assertRedirects(response, '/accounts/profile/TestUser', target_status_code=200)
+        self.assertEqual(len(FriendRequest.objects.all()), 0)
+        self.assertIn(self.user_info2, self.user_info.friends.all())
+        print("200, OK")
+
+
+    def test_delete_friend_request(self):
+        print("Testing friend request delete: ", end="")
+        friend_request = FriendRequest.objects.create(FromUser=self.user2, ToUser=self.user)
+        self.assertEqual(len(FriendRequest.objects.all()), 1)
+
+        response = self.client.get('/accounts/friend-request/delete/2')
+        self.assertRedirects(response, '/accounts/profile/TestUser', target_status_code=200)
+        self.assertEqual(len(FriendRequest.objects.all()), 0)
+        self.assertNotIn(self.user_info2, self.user_info.friends.all())
+        print("200, OK")

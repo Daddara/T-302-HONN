@@ -18,6 +18,7 @@
                         <div class="col-md-auto text-left">
                             <h1 class="text-left text-uppercase">{{ user.username }}</h1>
                         </div>
+                        {% if request.user == user %}
                         <div class="col-md-auto text-right">
                             <h3>Find a user to follow</h3>
                             <form action="{% url 'searchbarUsers' %}" method="get">
@@ -25,6 +26,18 @@
                                 <button type="submit">Search</button>
                             </form>
                         </div>
+                        {% endif %}
+                    </div>
+                    <div class="col-md-auto text-right">
+                        {% if request.user == user %}
+                            <a class='btn btn-primary' href="{% url 'user_friends' %}">My Friends</a>
+                        {% else %}
+                            {% if status == 'not_friends' %}
+                                <a class='btn btn-primary' href="/friend-request/send/{{ user.id }}">Add Friend</a>
+                            {% elif status == 'sent' %}
+                                <a class="btn btn-warning" href="/friend-request/cancel/{{ user.id }}">Cancel Request</a>
+                            {% endif %}
+                        {% endif %}
                     </div>
                     <div class="row">
                         <div class="col-md-auto text-left">

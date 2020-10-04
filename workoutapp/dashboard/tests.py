@@ -13,11 +13,21 @@ class UserViewTests(TestCase):
     def init(self):
         self.client = Client()
 
-    def test_dashboard_view_get_unauthenticated(self):
+    def test_dashboard_view(self):
         print("Testing dashboard page: ", end="")
-        response = self.client.get(reverse('dashboard'))
-        self.assertEqual(response.status_code, 302)
-        print("302, OK")
+        test_user = User.objects.create_user(username="TestUser", password="iampassword", email="randomemail@gmail.com")
+        self.client.login(username="TestUser", password="iampassword")
+        response = self.client.get(reverse('dashboard'), follow=True)
+        self.assertEqual(response.status_code, 200)
+        self.assertTemplateUsed(response, 'dashboard/dashboard.html')
+        print("200, OK")
+
+    def test_dashboard_view_get_unauthenticated(self):
+        print("Testing dashboard unauthenticated: ", end="")
+        response = self.client.get(reverse('dashboard'), follow=True)
+        self.assertEqual(response.status_code, 200)
+        self.assertTemplateUsed(response, 'user/login.html')
+        print("200, OK")
 
     def test_get_created_exercises(self):
         print("Testing created exercises: ", end="")

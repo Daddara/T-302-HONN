@@ -13,7 +13,7 @@ def placeholder_home(request):
     else:
         return render(request, 'user/placeholder_page.html')
 
-
+@login_required()
 def dashboard(request):
     if request.user.is_authenticated:
         exercise_models = None
