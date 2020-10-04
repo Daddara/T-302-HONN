@@ -975,11 +975,89 @@
   }
 },
 {
+  "model": "admin.logentry",
+  "pk": 76,
+  "fields": {
+    "action_time": "2020-10-04T14:11:54.259Z",
+    "user": 1,
+    "content_type": 15,
+    "object_id": "5",
+    "object_repr": "dfgasdfg, Bodyweight Squats",
+    "action_flag": 3,
+    "change_message": ""
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 77,
+  "fields": {
+    "action_time": "2020-10-04T14:12:03.509Z",
+    "user": 1,
+    "content_type": 10,
+    "object_id": "9",
+    "object_repr": "demoadmin: dfgasdfg",
+    "action_flag": 3,
+    "change_message": ""
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 78,
+  "fields": {
+    "action_time": "2020-10-04T14:12:03.515Z",
+    "user": 1,
+    "content_type": 10,
+    "object_id": "8",
+    "object_repr": "demoadmin: SADFSAF",
+    "action_flag": 3,
+    "change_message": ""
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 79,
+  "fields": {
+    "action_time": "2020-10-04T14:12:03.521Z",
+    "user": 1,
+    "content_type": 10,
+    "object_id": "7",
+    "object_repr": "demoadmin: gasdfgadsfgsadASDh",
+    "action_flag": 3,
+    "change_message": ""
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 80,
+  "fields": {
+    "action_time": "2020-10-04T14:12:03.526Z",
+    "user": 1,
+    "content_type": 10,
+    "object_id": "6",
+    "object_repr": "demoadmin: asdfdasf",
+    "action_flag": 3,
+    "change_message": ""
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 81,
+  "fields": {
+    "action_time": "2020-10-04T14:12:13.648Z",
+    "user": 1,
+    "content_type": 13,
+    "object_id": "6",
+    "object_repr": "demoadmin's exercise: Test Exercise",
+    "action_flag": 3,
+    "change_message": ""
+  }
+},
+{
   "model": "auth.user",
   "pk": 1,
   "fields": {
     "password": "pbkdf2_sha256$216000$J4oJeScBbRXC$9nPyDuF3Zx8UwqXh9sDHXyanBLMnnGnYD9938JcY974=",
-    "last_login": "2020-10-04T12:38:25.603Z",
+    "last_login": "2020-10-04T13:57:16.698Z",
     "is_superuser": true,
     "username": "demoadmin",
     "first_name": "",
@@ -1113,6 +1191,46 @@
     "CreatedAt": "2020-10-04T12:11:43.490Z",
     "workout_goal": "3K pace",
     "Image": "https://post.healthline.com/wp-content/uploads/2020/01/Runner-training-on-running-track-1200x628-facebook.jpg",
+    "Likes": 0,
+    "Dislikes": 0,
+    "Public": true,
+    "Has_Liked": false,
+    "Has_Disliked": false,
+    "Repetitions": 1,
+    "time_passed": "1 Day ago"
+  }
+},
+{
+  "model": "workout.workout",
+  "pk": 4,
+  "fields": {
+    "User": 1,
+    "Category": 2,
+    "short_description": "Test Workout",
+    "Name": "Time",
+    "CreatedAt": "2020-10-04T13:11:03.804Z",
+    "workout_goal": "Test the workout",
+    "Image": "https://www.vhv.rs/dpng/d/256-2569650_men-profile-icon-png-image-free-download-searchpng.png",
+    "Likes": 0,
+    "Dislikes": 0,
+    "Public": true,
+    "Has_Liked": false,
+    "Has_Disliked": false,
+    "Repetitions": 1,
+    "time_passed": "1 Day ago"
+  }
+},
+{
+  "model": "workout.workout",
+  "pk": 5,
+  "fields": {
+    "User": 1,
+    "Category": 1,
+    "short_description": "Peepee",
+    "Name": "Test workout",
+    "CreatedAt": "2020-10-04T13:32:08.851Z",
+    "workout_goal": "Peeee",
+    "Image": "https://www.vhv.rs/dpng/d/256-2569650_men-profile-icon-png-image-free-download-searchpng.png",
     "Likes": 0,
     "Dislikes": 0,
     "Public": true,

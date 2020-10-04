@@ -9,12 +9,9 @@ class CreateWorkoutForm(forms.ModelForm):
 
 
 class WorkoutManagerForm(forms.ModelForm):
-    Exercise = forms.ModelChoiceField(queryset=Exercise.objects.all(), required=False)
-    Unit = forms.ModelChoiceField(queryset=UnitType.objects.all(), required=False)
-    Reps = forms.IntegerField(required=True)
-    Quantity = forms.IntegerField(required=True)
-
     class Meta:
         model = WorkoutManager
-        exclude = ['Workout', ]
-        fields = ('Exercise', 'Unit', 'Reps', 'Quantity', )
+        exclude = []
+        widgets = {
+            'Workout': forms.HiddenInput(attrs={'readonly': 'True'})
+        }
