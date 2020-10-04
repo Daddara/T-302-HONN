@@ -17,7 +17,15 @@ def placeholder_home(request):
 def dashboard(request):
     if request.user.is_authenticated:
         user_exercises = Exercise.objects.filter(Creator=request.user).values()
-        return render(request, 'dashboard/dashboard.html', context={'user_exercises': user_exercises})
+        
+        exercise_models = None
+        try:
+            exercise_models = Exercise.objects.filter(Creator=request.user)
+            exercises = add_like_information_to_exercises(request, exercise_models)
+        except Exercise.DoesNotExist:
+            pass
+
+        return render(request, 'dashboard/dashboard.html', context={'user_exercises': exercises})
     else:
         return render(request, 'dashboard/dashboard.html')
 
@@ -39,7 +47,10 @@ def get_exercises_with_likes(request):
         exercise_models = Exercise.objects.filter(Public=True)
     except Exercise.DoesNotExist:
         return None
+    
+    return add_like_information_to_exercises(request, exercise_models)
 
+def add_like_information_to_exercises(request, exercise_models):
     if exercise_models:
         for model in exercise_models:
             # Get the count of all likes on current exercise

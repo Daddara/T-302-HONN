@@ -1,27 +1,30 @@
 {% extends "base.html" %}
+{% load static %}
+
+{% block extra_head %}
+    <link rel="stylesheet" href="{% static "exercise/css/exercise.css" %}">
+{% endblock %}
+
 {% block content %}
 <div class="container">
         <h1>Your dashboard</h1>
 <div class="page-content">
     <div class="boxed">
         <div class="col-md-12">
-     <h3 class="mt-2">Created Exercises</h3>
-        <table class="table table-sm table-hover table-striped">
-            <tbody>
+            <h3 class="mt-2">Created Exercises</h3>
+            
+            <div class="center-page-content">
                 {% for exercise in user_exercises %}
-                    <tr >
-                        <td><h6>{{ exercise.Title }} </h6> </td>
-                        <td> {{ exercise.Description }}</td>
-                        <td> {{ exercise.Equipment }}</td>
-                        <td> {{ exercise.muscle_group }}</td>
-                        <td>  <button type="button" class="btn btn-primary">Edit</button></td>
-                    </tr>
+                    {% include 'exercise/single_exercise_minimal.html' with exercise=exercise %}
                 {% endfor %}
-            </tbody>
-        </table>
-    </div>
+            </div>
+        </div>
     </div>
 
     </div>
 </div>
+{% endblock %}
+
+{% block extra_js %}
+<script src="{% static 'workout/js/rate_exercise.js' %}"></script>
 {% endblock %}
