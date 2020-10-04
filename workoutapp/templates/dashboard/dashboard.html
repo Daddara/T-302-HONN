@@ -9,16 +9,11 @@
         <table class="table table-sm table-hover table-striped">
             <tbody>
                 {% for exercise in user_exercises %}
-                    <tr >
-                        <td><h6>{{ exercise.Title }} </h6> </td>
-                        <td> {{ exercise.Description }}</td>
-                        <td> {{ exercise.Equipment }}</td>
-                        <td> {{ exercise.muscle_group }}</td>
-                        <td>  <button type="button" class="btn btn-primary">Edit</button></td>
-                    </tr>
+                    {% include 'exercise/single_exercise_minimal.html' with exercise=exercise %}
                 {% endfor %}
             </tbody>
         </table>
+
     </div>
     </div>
 
