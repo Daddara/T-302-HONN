@@ -65,6 +65,8 @@ def searchbarUsers(request):
         post = User.objects.all().filter(username=search)
         if post:
             return render(request, 'user/searchResults.html', context={'sr_user': post})
+        else:
+            return render(request, 'user/searchResults.html')
 
     if request.method == 'POST':
         search = request.GET.get('search')
