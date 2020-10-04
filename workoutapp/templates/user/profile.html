@@ -25,7 +25,12 @@
                             <h6>Bio Maybe add this feature?</h6>
                             <h6>Member since: {{ user_info.createdAt }}</h6>
                         </div>
-
+                        <div>
+                            <form action="{% url 'searchbarUsers' %}" method="get">
+                                <input type="text" name="search"/>
+                                <button type="submit">Search</button>
+                            </form>
+                        </div>
                         <div class="col-md-12">
                             <h5 class="mt-2">Recent Competitions / something to implement?</h5>
                             <table class="table table-sm table-hover table-striped">

@@ -46,7 +46,21 @@ def profile(request):
 
 @login_required
 def following(request):
-    user = Follow.objects.get(Username=request.user)
-    context = {'follow': user}
-    return render(request, 'user/followerlist.html')
+    try:
+        user = Follow.objects.get(Following=request.user)
+        context = {'follow': user}
+    except Follow.DoesNotExist:
+        return render(request, 'user/followerlist.html')
 
+    if user:
+        return render(request, 'user/followerlist.html', context)
+
+@login_required
+def searchbarUsers(request):
+    if request.method == 'GET':
+        search = request.GET.get('search')
+        post = User.objects.all().filter(username=search)
+
+        if post:
+            userinfo = UserInfo.objects.all().filter(user=request.GET.get('id'))
+        return render(request, 'user/searchResults.html', context={'sr_user': post, 'sr_info_user': userinfo})
