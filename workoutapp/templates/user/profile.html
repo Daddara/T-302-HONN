@@ -1,7 +1,10 @@
 {% extends 'base.html' %}
 {% load static %}
 {% block extra_head %}
+    <link rel=stylesheet href={% static 'profile/css/profile.css' %}>
 {% endblock %}
+
+
 
 {% block content %}
 
@@ -14,31 +17,21 @@
                     <h1 class="text-left text-uppercase">{{ user.username }}</h1>
                     <div class="row">
                         <div class="col-md-auto text-left">
-                            <h6>{{ user_info.firstName }}</h6>
-                            <h6>{{ user_info.lastName }}</h6>
+                            <h6>{{ user_info.firstName }} {{ user_info.lastName }}</h6>
                             <h6>Email Address: {{ user.email }}</h6>
                             <h6>Age: {{ user_info.age }}</h6>
-                            <h6>Member since: {{ user_info.createdAt }}</h6>
+                            <h6>Member since: {{ user_info.CreatedAt }}</h6>
                         </div>
 
                         <div class="col-md-12 mt-4">
                              <h5 class="text-left">My Exercises</h5>
                                 <table class="table table-hover table-striped text-left">
-                                    <tbody>
-                                        <tr>
-                                            <h6>Test exercise: {{ exercise.Title }}</h6>
-                                            <td> Workout 1 <button type="button" class="btn btn-primary">Edit</button>
-                                        </tr>
-                                        <tr>
-                                            <td> Workout 2 <button type="button" class="btn btn-primary">Edit</button>
-                                        </tr>
-                                        <tr>
-                                            <td> Workout 3 <button type="button" class="btn btn-primary">Edit</button>
-                                        </tr>
-                                        <tr>
-                                            <td> Workout 4 <button type="button" class="btn btn-primary">Edit</button>
-                                        </tr>
-                                    </tbody>
+                                    {% for exercise in exercises %}
+                                        {% include 'exercise/single_exercise_minimal.html' with exercise=exercise %}
+                                        <a href="{% url 'delete-exercise' exercise.id %}">
+                                            <button class="btn btn-primary" type="button"><span>Delete exercise</span></button>
+                                        </a>
+                                    {% endfor %}
                                 </table>
                         </div>
                     </div>
