@@ -9,4 +9,5 @@ urlpatterns = [
     path('test-product-404/<int:product_id>/', views.service_product_not_found, name="product-404"),
     path('test-invalid-payment/<int:invalid_id>/', views.service_payment_invalid, name="invalid-payment"),
     path('test-payment-confirmation/<int:product_id>/<int:error_insertion>/', views.service_payment_validation, name='test-payment')
+
 ]
