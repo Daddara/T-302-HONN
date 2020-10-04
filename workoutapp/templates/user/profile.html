@@ -65,8 +65,9 @@
                             <table class="table table-sm table-hover table-striped">
                                 <tbody>
                                     {% for exercise in user_exercises %}
-                                        <tr > {{ exercise.Title }}</tr>
-                                        <tr > {{ exercise.Description }}</tr>
+                                        <tr >
+                                            <td><h6>{{ exercise.Title }} </h6> <button type="button" class="btn btn-primary">Edit</button>
+                                        </tr>
                                     {% endfor %}
                                 </tbody>
                             </table>

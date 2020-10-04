@@ -41,8 +41,9 @@ def register(request):
 @login_required
 def profile(request):
     #  MISSING VIEW TO ACTUALLY EDIT USER INFO!!
-    user_info = UserInfo.objects.get(user=request.user)
-    user_exercises = {'exercises': Exercise.objects.get(Creator=request.user)}
+    if request.user.is_authenticated:
+        user_info = UserInfo.objects.get(user=request.user)
+        user_exercises = Exercise.objects.filter(Creator=request.user).values()
     return render(request, 'user/profile.html', context={'user_info': user_info,
                                                          'user_exercises': user_exercises})
 
