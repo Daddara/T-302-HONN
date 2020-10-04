@@ -13,12 +13,11 @@ class UserViewTests(TestCase):
     def init(self):
         self.client = Client()
 
-    def test_dashboard_view_get(self):
+    def test_dashboard_view_get_unauthenticated(self):
         print("Testing dashboard page: ", end="")
         response = self.client.get(reverse('dashboard'))
-        self.assertEqual(response.status_code, 200)
-        self.assertTemplateUsed(response, 'dashboard/dashboard.html')
-        print("200, OK")
+        self.assertEqual(response.status_code, 302)
+        print("302, OK")
 
     def test_get_created_exercises(self):
         print("Testing created exercises: ", end="")
