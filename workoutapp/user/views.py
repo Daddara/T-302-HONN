@@ -9,6 +9,7 @@ from dashboard.views import dashboard
 from wallet.models import Wallet
 from .forms.create_account_form import CreateAccountForm
 from user.models import Follow
+from workout.models import Exercise
 
 
 # Create your views here.
@@ -39,28 +40,37 @@ def register(request):
 
 @login_required
 def profile(request):
-    #  MISSING VIEW TO ACTUALLY EDIT USER INFO!!
+    try:
+        exercises = Exercise.objects.filter(Creator=request.user)
+    except Exercise.DoesNotExist:
+        exercises = None
     user_info = UserInfo.objects.get(user=request.user)
-    return render(request, 'user/profile.html', context={'user_info': user_info})
+    return render(request, 'user/profile.html', context={'user_info': user_info, 'exercises': exercises})
 
 
 @login_required
 def following(request):
     try:
-        user = Follow.objects.get(Following=request.user)
-        context = {'follow': user}
+        poster = Follow.objects.filter(Username=request.user)
     except Follow.DoesNotExist:
         return render(request, 'user/followerlist.html')
+    if poster:
+        return render(request, 'user/followerlist.html', context={'follow': poster})
 
-    if user:
-        return render(request, 'user/followerlist.html', context)
 
 @login_required
 def searchbarUsers(request):
     if request.method == 'GET':
         search = request.GET.get('search')
         post = User.objects.all().filter(username=search)
-
         if post:
-            userinfo = UserInfo.objects.all().filter(user=request.GET.get('id'))
-        return render(request, 'user/searchResults.html', context={'sr_user': post, 'sr_info_user': userinfo})
+            return render(request, 'user/searchResults.html', context={'sr_user': post})
+
+    if request.method == 'POST':
+        search = request.GET.get('search')
+        post = User.objects.all().filter(username=search)
+        poster = post.get(username=search)
+        current_user = User.objects.get(username=request.user)
+        follow = Follow(Username=current_user, Following=poster, FollowedAt="")
+        follow.save()
+        return redirect(following)
