@@ -11,8 +11,8 @@
 ### Created tasks based on the sprint 4 overview
 
 * Lecture aspects: 
-	-   [#85](../-/issues/85) Conway’s Law
-	-   [#86](../xFrednet/t-302-honn-2020-team-9/-/issues/86) Identify or implement, two components in your application
+	-   #85 Conway’s Law
+	-   [#86] Identify or implement, two components in your application
 	-   [#87](../xFrednet/t-302-honn-2020-team-9/-/issues/87) Non-Functional requirements and constraints of your project. 
 	-   [#88](../xFrednet/t-302-honn-2020-team-9/-/issues/88) Logging in backend
 	-   [#89](../xFrednet/t-302-honn-2020-team-9/-/issues/89) Risk management [10 - 20 Risks]
