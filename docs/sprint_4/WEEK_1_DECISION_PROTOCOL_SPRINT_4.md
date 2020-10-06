@@ -1,7 +1,8 @@
 # WEEK 1 DECISION PROTOCOL SPRINT 4
 
 ## TA Meeting 06.10.20 on Google Meet:
-* All but Arnar
+* Who showed up:
+	* All but Arnar
 
 ## Team Meeting 06.10.20 on Discord:
 * Who showed up:
