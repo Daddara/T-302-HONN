@@ -8,7 +8,7 @@
 * Who showed up:
     * All but Arnar
 
-###Created tasks based on the sprint 4 overview
+### Created tasks based on the sprint 4 overview
 
 * Lecture aspects: 
 	-   [#85](../-/issues/85) Conway’s Law
