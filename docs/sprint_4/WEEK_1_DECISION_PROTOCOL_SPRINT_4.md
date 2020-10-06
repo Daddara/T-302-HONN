@@ -7,7 +7,7 @@
 ## Team Meeting 06.10.20 on Discord:
 * Who showed up:
     * All but Arnar
-    
+
 * Created tasks based on the sprint 4 overview
 * Lecture aspects: 
 	-   [#85](../xFrednet/t-302-honn-2020-team-9/-/issues/85) Conway’s Law
