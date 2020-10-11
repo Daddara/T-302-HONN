@@ -89,6 +89,15 @@ def create_exercise(request):
 def edit_exercise(request, id=None, template_name='update_exercise.html'):
     pass
 
+
+def exercise_details(request, creator, title):
+    try:
+        exercise = get_object_or_404(Exercise, Creator=creator, Title=title)
+    except Exercise.DoesNotExist:
+        return None
+    return render(request, 'exercise/exercise_details.html', context={'exercise_details': exercise})
+
+
 @csrf_exempt
 def rate_exercise(request):
     if not request.user.is_authenticated:
