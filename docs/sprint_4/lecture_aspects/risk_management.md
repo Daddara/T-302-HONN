@@ -60,12 +60,12 @@ Template:
 
 ----------------------------------------------------------------------------------------------------------------------------
 1.
-**Risk:** Team member leaves the team.
-**Category:** Physical 
-**Likelihood and scale [3]:** not too likely that a team member leaves the team.
-**Impact and scale[4]:** depends on the size of the team, since we are a team of 8, the impact will be noticeable.
-**Preventions:** have group meetings and often or daily to see the morale of the group
-**Mitigations:** don’t have people in very specialized jobs so they can’t be replaced, if that happens have a well documented “how to” for each job.
+- **Risk:** Team member leaves the team.
+- **Category:** Physical 
+- **Likelihood and scale [3]:** not too likely that a team member leaves the team.
+- **Impact and scale[4]:** depends on the size of the team, since we are a team of 8, the impact will be noticeable.
+- **Preventions:** have group meetings and often or daily to see the morale of the group
+- **Mitigations:** don’t have people in very specialized jobs so they can’t be replaced, if that happens have a well documented “how to” for each job.
 
 2.
 **Risk:** Database gets deleted 
