@@ -150,3 +150,7 @@ The retrospective protocol is assigned at the meeting it self. This protocol is 
     * We're creating a social network to create and share workouts. We have a like and dislike feature to receive feedback and only suggest workouts with a good like/dislike ratio. We would also like to log the access to this feature to again insure that there are no irregularities like bots liking a lot of workouts.
     * **Metric:**
         * **Ratings/User:** This metric should only be recorded for users with a high amount of ratings. This could indicate some kind of abuse.  
+
+
+* Sources
+  * [sumologic.com](https://www.sumologic.com/blog/logs-metrics-overview/)
