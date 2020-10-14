@@ -4,43 +4,43 @@
 
 ### Categories:
 
-### Physical:
+#### Physical:
 - Something happening to team members, their computers, gitlab servers explode!
 
-### Technical:
+#### Technical:
 - gitlab delete, wrong merge, corrupted data, DB goes down, skynet takes over.
 
-### Nature:
+#### Nature:
 - Phenomenon in nature, earthquakes, pandemic, super storms freeze the planet.
     
-### Business:
+#### Business:
 - direct financial loss, damage to brand or reputation, violation of customer or
 - regulatory constraints, potential liability, and increase in development costs.
 
-### Likelihood scale 1-10:
+#### Likelihood scale 1-10:
 - 1 = almost never happens
 - 10 = most certainly will happen
 
-### Impact scale 1-10
+#### Impact scale 1-10
 - 1 = almost no impact at all
 - 10 = website needs reworking from the ground up.
 
 ### Here are a couple of guidelines that can help quantifying likelihood, impact, prevention, mitigations:
 
-### Likelihood:     	
+#### Likelihood:     	
 - How likely is it that the risk will happen? Do you think that the chance is remote, or very likely to happen?
 
-### Impact:     	
+#### Impact:     	
 - What is the negative impact if the risk does occur? Is there general discomfort for the team, or is it back to the drawing board for some significant rework?
 
-### Preventions:
+#### Preventions:
 - Have backups for data loss, have well documented code if another team member has to continue other members gode.
 
-### Mitigations:
+#### Mitigations:
 - What is the best allocation of resources?
 
 
-### Example:
+#### Example:
 
 - **Risk:** Team member gets sick (normal sick)
 - **Category:** Physical
