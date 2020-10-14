@@ -88,7 +88,7 @@ This log contains the message origin by default. This is a functionality in Fire
 ### Testing
 The test in our application write a minimal amount of messages to the console. A message usually states what is being tested, the result code of the request and an `OK` if the result was expected. A full test run using [`run-coverage.sh`](run-coverage.sh) adds a coverage report to the end of the run. This console output is kept as a part of the GitLab pipeline. Here is a shortened example of such a log:
 
-```sh
+```
 $ sh run-coverage.sh
 Note: Don't forget to migrate your database (workoutapp/reset_db.sh)
 Creating test database for alias 'default'...
@@ -128,10 +128,13 @@ The decision log has to be created manually. We usually assign one member of the
 The retrospective protocol is assigned at the meeting it self. This protocol is reviewed in the same fashion like the decision protocol.
 
 ## Top 5 components to monitor and their metrics
-
-1. Frontend
-2. Payment (critical)
-3. Data creation
-4. Access logging
-5. Like and Dislike system
-6. IDK and IDC
+1. **Frontend**
+    * The goal of your project is to create a web application that gets the user engaged in sport activities. Our frontend is therefor a crucial part of our application. If we would deploy this application for the public we would like to have a way to log user interactions. An example for such logging application is [Cloud Logging](https://cloud.google.com/logging/docs). This would enable us to see the common navigation in the frontend as well as common error causes. We would off course make sure that our _privacy policy_ allows such logging. 
+2. **Payment (critical)**
+    * The payment system is one of the most critical modules in the backend. We have no income if the payment system fails. Therefor we would like to have extensive logging in this module and be informed if some critical error occurs within this component to fix it as fast as possible.
+3. **Access logging**
+    * Our application allows users to create a user account and to log in. The user account holds private information and editing rights to some workouts. It is therefor important that only the user it self can log into his/her/their account. Logging when which user logs in from where can give us the ability to check irregularities and possible prevent unauthorized access. 
+4. **Data creation**
+    * Our application allows users to create their own workouts and exercises. We would like to log such creations to ensure that this system is not abused to upload and save unrelated data. Logging this information would allow us to notice irregularities.  
+5. **Like and Dislike system**
+    * We're creating a social network to create and share workouts. We have a like and dislike feature to receive feedback and only suggest workouts with a good like/dislike ratio. We would also like to log the access to this feature to again insure that there are no irregularities like bots liking a lot of workouts.
