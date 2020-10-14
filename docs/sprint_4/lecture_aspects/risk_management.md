@@ -45,7 +45,7 @@
 - **Risk:** Team member gets sick (normal sick)
 - **Category:** Physical
 - **Likelihood and scale [3]:** It’s not uncommon for people to get sick.
-- **Impact and scale[3]:** One team member is off for a few days is not that big of a deal.
+- **Impact and scale[2-4]:** One team member is off for a few days is not that big of a deal, but depending on the workload it can strain others
 - **Preventions:** daily stand-ups, well documented progress, clear and clean code, code properly committed to the repo
 - **Mitigations:** workload from the sick member need to be distributed evenly among the others, depending on the workload.
 
