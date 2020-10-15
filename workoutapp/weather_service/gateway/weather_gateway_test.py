@@ -8,12 +8,9 @@ from .weather_gateway import WeatherGatewayError
 class TestWeatherApiDataSource(unittest.TestCase):
     def test_get_current_weather(self):
         data_source = WeatherApiWeatherGateway()
-
         data, error = data_source.get_weather_current('Reykjavik')
-
         self.assertIsNotNone(data)
         self.assertIsNone(error)
-
         self.assertEqual(data.name, 'Reykjavik')
         # I can't test the rest because well look out the window the
         # weather in Reykjavik is constantly changing ^^
@@ -100,16 +97,14 @@ class TestWeatherApiDataSource(unittest.TestCase):
 
     def test_get_forecast_data(self):
         data_source = WeatherApiWeatherGateway()
-
         data, error = data_source.get_weather_forecast('Reykjavik', days=4)
-
         self.assertIsNotNone(data)
         self.assertIsNone(error)
-
         self.assertEqual(data.name, 'Reykjavik')
         # Funny story explained in the API class. The api is broken and will always return
         # three days ^^. Tracked by #58 ~xFrednet
         # self.assertEqual(len(data.days), 4)
+
 
 if __name__ == '__main__':
     unittest.main()

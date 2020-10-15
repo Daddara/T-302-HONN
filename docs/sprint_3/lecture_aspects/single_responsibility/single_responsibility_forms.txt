@@ -1,0 +1,3 @@
+The form model implements the single responsibility concept.
+Its sole purpose is to take data from the front end and bring it to the backend or the database.
+Forms can be used all sorts of applications, but it only ever does one thing, take data and bringing it to the backend.
