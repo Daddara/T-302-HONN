@@ -91,6 +91,14 @@ class TestPayment(TestCase):
         self.assertRedirects(response, reverse('invalid-payment', kwargs={'invalid_id': 1}), target_status_code=200)
         print("400, OK")
 
+        print("Testing invalid order id payment: ", end="")
+        response = self.client.get(reverse('test-payment', kwargs={'product_id': self.product.id, 'error_insertion': 0}))
+        order = Order.objects.get(pk=1)
+        self.assertRedirects(response, reverse('payment-success', kwargs={'order_id': order.id}),
+                             target_status_code=200)
+        print("200, OK")
+
+
     def test_invalid_payment(self):
         product_id = self.product.id
         print("Testing order creation on invalid payment: ", end="")
@@ -107,6 +115,11 @@ class TestPayment(TestCase):
         print("400, OK")
 
         print("Testing invalid error id: ", end="")
+        response = self.client.get(reverse('test-payment', kwargs={'product_id': product_id, 'error_insertion': 5}))
+        self.assertRedirects(response, reverse('invalid-payment', kwargs={'invalid_id': 5}), target_status_code=200)
+        print("400, OK")
+
+        print("Testing invalid order id: ", end="")
         response = self.client.get(reverse('test-payment', kwargs={'product_id': product_id, 'error_insertion': 5}))
         self.assertRedirects(response, reverse('invalid-payment', kwargs={'invalid_id': 5}), target_status_code=200)
         print("400, OK")
