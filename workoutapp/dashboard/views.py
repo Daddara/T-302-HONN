@@ -1,41 +1,13 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth.models import User
-from workout.models import Workout, Exercise, WorkoutRating, ExerciseRating
+from workout.models import Workout, Exercise, WorkoutRating, ExerciseRating, Category, MuscleGroup
 from django.contrib.auth.decorators import login_required
 from datetime import timedelta, datetime
 import pytz
 
 
-# Create your views here.
-def placeholder_home(request):
-    if request.user.is_authenticated:
-        return redirect('dashboard')
-    else:
-        return render(request, 'user/placeholder_page.html')
-
-
-@login_required
 def dashboard(request):
-    if request.user.is_authenticated:
-        exercise_models = None
-        workout_models = None
-        try:
-            exercise_models = Exercise.objects.filter(Creator=request.user)
-            exercise_models = add_like_information_to_exercises(request, exercise_models)
-        except Exercise.DoesNotExist:
-            pass
-
-        try:
-            workout_models = Workout.objects.filter(User=request.user)
-
-        except Workout.DoesNotExist:
-            pass
-
-        return render(request, 'dashboard/dashboard.html', context={'user_exercises': exercise_models,
-                                                                    'user_workouts': workout_models})
-    else:
-        return redirect('login')
-
+    return redirect('public_workouts')
 
 @login_required
 def user_exercises(request):
@@ -44,29 +16,63 @@ def user_exercises(request):
     except Exercise.DoesNotExist:
         user_exercises = []
 
+    muscle_groups = MuscleGroup.objects.all()
     exercise_updated = add_like_information_to_exercises(request, user_exercises)
-    return render(request, 'dashboard/dashboard_exercise.html', context={'exercises': exercise_updated})
+    return render(request, 'dashboard/dashboard_exercise.html', context={'exercises': exercise_updated,
+                                                                         'muscle_groups': muscle_groups})
 
 
 @login_required
 def user_workouts(request):
     try:
-        user_pumps = Workout.objects.filter(User=request.user)
+        user_wo = Workout.objects.filter(User=request.user)
     except Exercise.DoesNotExist:
-        user_pumps = []
+        user_wo = []
 
-    workouts_updated = add_like_information_to_workouts(request, user_pumps)
-    return render(request, 'dashboard/dashboard_workout.html', context={'workouts': workouts_updated})
+    categories = Category.objects.all()
+    workouts_updated = add_like_information_to_workouts(request, user_wo)
+    return render(request, 'dashboard/dashboard_workout.html', context={'workouts': workouts_updated,
+                                                                        'categories': categories})
 
 
 def workouts(request):
-    context = {'workouts': get_workouts_with_likes(request)}
+    categories = Category.objects.all()
+    context = {'workouts': get_workouts_with_likes(request), 'categories': categories}
     return render(request, 'dashboard/dashboard_workout.html', context)
 
 
 def exercises(request):
-    context = {'exercises': get_exercises_with_likes(request)}
+    muscle_groups = MuscleGroup.objects.all()
+    context = {'exercises': get_exercises_with_likes(request), 'muscle_groups': muscle_groups}
     return render(request, 'dashboard/dashboard_exercise.html', context)
+
+
+def filter_ex_public(request, muscle_group):
+    muscle_groups = MuscleGroup.objects.all()
+    filtered_exercises = filter_exercise_category(muscle_group)
+    context = {'exercises': add_like_information_to_exercises(request, filtered_exercises), 'muscle_groups': muscle_groups}
+    return render(request, 'dashboard/dashboard_exercise.html', context)
+
+
+def filter_exercise_category(muscle_group_id: int) -> list:
+    try:
+        return Exercise.objects.filter(muscle_group=muscle_group_id, Public=True)
+    except Exercise.DoesNotExist:
+        return []
+
+
+def filter_wo_public(request, category_id):
+    categories = Category.objects.all()
+    filtered_workouts = filter_workout_category(category_id)
+    context = {'workouts': add_like_information_to_workouts(request, filtered_workouts), 'categories': categories}
+    return render(request, 'dashboard/dashboard_workout.html', context)
+
+
+def filter_workout_category(category: int) -> list:
+    try:
+        return Workout.objects.filter(Category=category, Public=True)
+    except Workout.DoesNotExist:
+        return []
 
 
 def get_exercises_with_likes(request):

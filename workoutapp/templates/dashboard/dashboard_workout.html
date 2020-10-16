@@ -7,21 +7,21 @@
     <link rel="stylesheet" type="text/css" href="{% static 'dashboard/css/dashboard_header.css' %}">
 {% endblock %}
 {% block content %}
-    {% if workouts %}
     {% include 'dashboard/dashboard_header_workout.html' %}
     <div class="search-bar">
-        {% include 'dashboard/dashboard_nav_workout.html' %}
+        {% include 'dashboard/dashboard_nav_workout.html' with categories=categories %}
     </div>
     <div class="page-content scrollbar-warning">
         <div class="center-page-content">
+            {% if workouts %}
             {% for workout in workouts %}
                 {% include 'workout/single_workout_minified.html' with workout=workout %}
             {% endfor %}
         </div>
     </div>
-    {% else %}
-    <div class="page-content">
-        <p>There are no public wsfdgs</p>
+            {% else %}
+            <p>No content to show...</p>
+        </div>
     </div>
     {% endif %}
 

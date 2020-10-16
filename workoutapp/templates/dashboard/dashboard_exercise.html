@@ -8,10 +8,9 @@
 {% endblock %}
 
 {% block content %}
-
      {% include 'dashboard/dashboard_header_exercise.html' %}
     <div class="search-bar">
-    {% include 'dashboard/dashboard_nav_exercise.html' %}
+    {% include 'dashboard/dashboard_nav_exercise.html' with muscle_groups=muscle_groups %}
     </div>
     <div class="page-content scrollbar-info">
         <div class="center-page-content">

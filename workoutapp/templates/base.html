@@ -28,7 +28,7 @@
 
     <!--NAVIGATION BAR START-->
     <nav id="navigation-bar" class="navbar navbar-expand-lg navbar-light bg-light">
-        <a id='home-nav' class="navbar-brand" href="{% url 'placeholder_home' %}">Home</a>
+        <a id='home-nav' class="navbar-brand" href="{% url 'public_workouts' %}">Dashboard</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo02"
                 aria-controls="navbarTogglerDemo02" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
@@ -36,22 +36,7 @@
 
         <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
             <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
-                <li class="nav-item">
-                    <a id='workout-nav' class="navbar-brand" href="{% url 'public_workouts' %}">Workouts<span class="sr-only"></span></a>
-                </li>
-                <li class="nav-item">
-                    <a id='exercise-nav' class="navbar-brand" href="{% url 'public_exercises' %}">Exercises<span class="sr-only"></span></a>
-                </li>
                 {% if user.is_authenticated %}
-                    <li class="nav-item">
-                        <a id='my-dashboard-nav' class="navbar-brand" href="{% url 'dashboard' %}">My Dashboard<span class="sr-only">(current)</span></a>
-                    </li>
-                    <li class="nav-item">
-                        <a id='create-exercise-temp-nav' class="navbar-brand" href="{% url 'create exercise' %}">Create exercise<span class="sr-only"></span></a>
-                    </li>
-                    <li class="nav-item">
-                        <a id='create-workout-temp-nav' class="navbar-brand" href="{% url 'create workout' %}">Create workout<span class="sr-only"></span></a>
-                    </li>
                     <li class="nav-item">
                         <a id='following-nav' class="navbar-brand" href="{% url 'following' %}">Following<span class="sr-only">(current)</span></a>
                     </li>

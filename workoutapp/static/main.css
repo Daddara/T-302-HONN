@@ -1,7 +1,6 @@
 body {
     background-image: url("https://images.everydayhealth.com/images/healthy-living-landing-header-1920x1080.jpg?sfvrsn=3f546a95_1");
     background-size: cover;
-    min-width: 600px;
     background-position: inherit;
     background-attachment: fixed;
 }
@@ -76,7 +75,6 @@ a.navbar-brand:hover {
     position: relative;
     width: 80%;
     margin: auto;
-    min-width: 590px;
 }
 
 .center-page-content {
@@ -134,13 +132,13 @@ a.navbar-brand:hover {
     border-radius: 5px 5px 0px 0px;
     width: 80%;
     margin: auto;
-    min-width: 590px;
     position: relative;
 }
 
 .search-bar {
     width: 80%;
     margin: auto;
+    position: relative;
 }
 
 .exercise-btn {
