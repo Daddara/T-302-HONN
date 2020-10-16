@@ -1,10 +1,16 @@
 {% extends 'base.html' %}
 {% load static %}
 
+{% block content %}
+
+<div class="page-content">
+<div class="container">
 <div class="exercise-background-shadow">
     <div class="exercise-container">
         <div class="item-title">
-            <h1>{{exercise.Title}}</h1>
+            <div class="col-md-auto text-left">
+                <h1 class="text-left text-uppercase">{{ exercise.Title }}</h1>
+            </div>
         </div>
         <div><b>Trains:</b> {{exercise.muscle_group}}</div>
         {% if exercise.equipment == None %}
@@ -41,4 +47,9 @@
         </div>
     </div>
 </div>
+</div>
+
+</div>
+
+{% endblock %}
 
