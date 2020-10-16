@@ -85,12 +85,11 @@ def view_friend_and_requests(request):
 
 @login_required
 def following(request):
+    poster = Follow.objects.filter(Username=request.user)
     try:
-        poster = Follow.objects.filter(Username=request.user)
-    except Follow.DoesNotExist:
-        return render(request, 'user/followerlist.html')
-    if poster:
         return render(request, 'user/followerlist.html', context={'follow': poster})
+    except ValueError:
+        return render(request, 'user/followerlist.html')
 
 
 @login_required
@@ -100,13 +99,22 @@ def delete_exercise(request, exercise_id):
 
     return redirect('profile', slug=request.user.username)
 
+
 @login_required
 def searchbarUsers(request):
     if request.method == 'GET':
+        isFollowing = False
         search = request.GET.get('search')
         post = User.objects.all().filter(username=search)
+        user = User.objects.get(username=request.user)
+        followers = Follow.objects.all().filter(Username=request.user)
+        for i in followers:
+            for j in post:
+                if i.Following.username == j.username:
+                    isFollowing = True
         if post:
-            return render(request, 'user/searchResults.html', context={'sr_user': post})
+            return render(request, 'user/searchResults.html', context={'sr_user': post, 'current_user': user,
+                                                                       'is_following': isFollowing})
         else:
             return render(request, 'user/searchResults.html')
 
