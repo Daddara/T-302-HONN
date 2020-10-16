@@ -90,12 +90,13 @@ def edit_exercise(request, id=None, template_name='update_exercise.html'):
     pass
 
 
-def exercise_details(request, creator, title):
+def exercise_details(request, exercise_id):
     try:
-        exercise = get_object_or_404(Exercise, Creator=creator, Title=title)
+        exercise = get_object_or_404(Exercise, pk=exercise_id)
     except Exercise.DoesNotExist:
-        return None
-    return render(request, 'exercise/exercise_details.html', context={'exercise_details': exercise})
+        return HttpResponse(status=404)
+    return render(request, 'exercise/exercise_details.html', context={'exercise_details': exercise,
+                                                                      'exercise_id': exercise_id})
 
 
 @csrf_exempt

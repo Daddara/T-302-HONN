@@ -1,7 +1,7 @@
 <div class="exercise-background-shadow">
     <div class="exercise-container">
         <div class="item-title">
-            <a href=#>{{exercise.Title}}</a>
+            <a href="{% url 'exercise_details' exercise.id %}">{{exercise.Title}}</a>
         </div>
         <div><b>Trains:</b> {{exercise.muscle_group}}</div>
         {% if exercise.equipment == None %}
