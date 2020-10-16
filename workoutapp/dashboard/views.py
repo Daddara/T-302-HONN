@@ -13,7 +13,8 @@ def placeholder_home(request):
     else:
         return render(request, 'user/placeholder_page.html')
 
-@login_required()
+
+@login_required
 def dashboard(request):
     if request.user.is_authenticated:
         exercise_models = None
@@ -30,18 +31,42 @@ def dashboard(request):
         except Workout.DoesNotExist:
             pass
 
-        return render(request, 'dashboard/dashboard.html', context={'user_exercises': exercise_models, 'user_workouts': workout_models})
+        return render(request, 'dashboard/dashboard.html', context={'user_exercises': exercise_models,
+                                                                    'user_workouts': workout_models})
     else:
         return redirect('login')
 
+
+@login_required
+def user_exercises(request):
+    try:
+        user_exercises = Exercise.objects.filter(Creator=request.user)
+    except Exercise.DoesNotExist:
+        user_exercises = []
+
+    exercise_updated = add_like_information_to_exercises(request, user_exercises)
+    return render(request, 'dashboard/dashboard_exercise.html', context={'exercises': exercise_updated})
+
+
+@login_required
+def user_workouts(request):
+    try:
+        user_pumps = Workout.objects.filter(User=request.user)
+    except Exercise.DoesNotExist:
+        user_pumps = []
+
+    workouts_updated = add_like_information_to_workouts(request, user_pumps)
+    return render(request, 'dashboard/dashboard_workout.html', context={'workouts': workouts_updated})
+
+
 def workouts(request):
     context = {'workouts': get_workouts_with_likes(request)}
-    return render(request, 'dashboard/public_workouts.html', context)
+    return render(request, 'dashboard/dashboard_workout.html', context)
 
 
 def exercises(request):
     context = {'exercises': get_exercises_with_likes(request)}
-    return render(request, 'dashboard/public_exercises.html', context)
+    return render(request, 'dashboard/dashboard_exercise.html', context)
 
 
 def get_exercises_with_likes(request):
@@ -52,8 +77,9 @@ def get_exercises_with_likes(request):
         exercise_models = Exercise.objects.filter(Public=True)
     except Exercise.DoesNotExist:
         return None
-    
+
     return add_like_information_to_exercises(request, exercise_models)
+
 
 def add_like_information_to_exercises(request, exercise_models):
     if exercise_models:
@@ -100,7 +126,10 @@ def get_workouts_with_likes(request):
         workout_models = Workout.objects.filter(Public=True)
     except Workout.DoesNotExist:
         return None
+    return add_like_information_to_workouts(request, workout_models)
 
+
+def add_like_information_to_workouts(request, workout_models):
     if workout_models:
         for model in workout_models:
             model = creation_time_passed(model)

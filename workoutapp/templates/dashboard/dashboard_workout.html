@@ -3,16 +3,14 @@
 {% block extra_head %}
     <link rel="stylesheet" type="text/css" href="{% static 'workout/css/workout.css' %}">
     <link rel="stylesheet" type="text/css" href="{% static 'scrollbars.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'dashboard/css/dashboard_nav.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'dashboard/css/dashboard_header.css' %}">
 {% endblock %}
 {% block content %}
     {% if workouts %}
-    <div class="page-title">
-        <h2>Workouts</h2>
-        <div class="search-bar">
-            <!-- Add PUBLIC/MY Workouts. Add category dropdown filter. Add pagination max x per page.
-            Make sure selected filter are sent to view.-->
-            {% include 'dashboard/search-input.html' %}
-        </div>
+    {% include 'dashboard/dashboard_header_workout.html' %}
+    <div class="search-bar">
+        {% include 'dashboard/dashboard_nav_workout.html' %}
     </div>
     <div class="page-content scrollbar-warning">
         <div class="center-page-content">
@@ -23,7 +21,7 @@
     </div>
     {% else %}
     <div class="page-content">
-        <p>There are no public workouts</p>
+        <p>There are no public wsfdgs</p>
     </div>
     {% endif %}
 
@@ -34,7 +32,6 @@
 <script>let search_class="workout-container"</script>
 <script src="{% static 'search_page_content_filter.js' %}"></script>
 <script>
-
     {% if user.is_authenticated %}
     function display_workout_rating(workout_id, new_status) {
         console.log("Workout update " + workout_id + " " + new_status)

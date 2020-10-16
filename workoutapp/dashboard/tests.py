@@ -53,14 +53,14 @@ class UserViewTests(TestCase):
         print("Testing workouts page: ", end="")
         response = self.client.get(reverse('public_workouts'))
         self.assertEqual(response.status_code, 200)
-        self.assertTemplateUsed(response, 'dashboard/public_workouts.html')
+        self.assertTemplateUsed(response, 'dashboard/dashboard_workout.html')
         print("200, OK")
 
     def test_public_exercise_view_get(self):
         print("Testing Exercises page: ", end="")
         response = self.client.get(reverse('public_exercises'))
         self.assertEqual(response.status_code, 200)
-        self.assertTemplateUsed(response, 'dashboard/public_exercises.html')
+        self.assertTemplateUsed(response, 'dashboard/dashboard_exercise.html')
         print("200, OK")
     
     def test_creation_time_passed(self):
@@ -107,7 +107,7 @@ class UserViewTests(TestCase):
 
         response = self.client.post(reverse('public_exercises'))
         self.assertEqual(response.status_code, 200)
-        self.assertTemplateUsed(response, 'dashboard/public_exercises.html')
+        self.assertTemplateUsed(response, 'dashboard/dashboard_exercise.html')
         print("200, OK")
 
     def _setup_user(self):
