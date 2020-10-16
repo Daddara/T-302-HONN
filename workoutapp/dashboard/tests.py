@@ -1,71 +1,96 @@
 from django.test import TestCase, Client
 from django.contrib.auth.models import User
 from django.urls import reverse
-from workout.models import Exercise
+from workout.models import Exercise, MuscleGroup, Category, ExerciseRating, WorkoutRating
 
 import datetime
 
 from workout.models import Workout
 from dashboard.views import creation_time_passed, get_workouts_with_likes
 
+
 # Create your tests here.
 class UserViewTests(TestCase):
+    # The missing coverage is just error prevetion code...
     def init(self):
         self.client = Client()
 
     def test_dashboard_view(self):
-        print("Testing dashboard page: ", end="")
-        test_user = User.objects.create_user(username="TestUser", password="iampassword", email="randomemail@gmail.com")
-        self.client.login(username="TestUser", password="iampassword")
         response = self.client.get(reverse('dashboard'), follow=True)
         self.assertEqual(response.status_code, 200)
-        self.assertTemplateUsed(response, 'dashboard/dashboard.html')
+        self.assertRedirects(response, reverse('public_workouts'))
+
+    def test_workouts_view(self):
+        print("Testing public workout dashboard: ", end="")
+        test_user = User.objects.create_user(username="TestUser", password="iampassword", email="randomemail@gmail.com")
+        category = Category.objects.create(Name="Penis")
+        new_workout = Workout.objects.create(User=test_user, Name="Test Workout", Public=True, Category=category)
+        WorkoutRating.objects.create(Workout=new_workout, Judge=test_user)
+        self.client.login(username="TestUser", password="iampassword")
+        response = self.client.get(reverse('public_workouts'), follow=True)
+        self.assertEqual(response.status_code, 200)
+        self.assertTemplateUsed(response, 'dashboard/dashboard_workout.html')
         print("200, OK")
 
-    def test_dashboard_view_get_unauthenticated(self):
-        print("Testing dashboard unauthenticated: ", end="")
-        response = self.client.get(reverse('dashboard'), follow=True)
+    def test_user_workout_view(self):
+        print("Testing private workout dashboard: ", end="")
+        test_user = User.objects.create_user(username="TestUser", password="iampassword", email="randomemail@gmail.com")
+        self.client.login(username="TestUser", password="iampassword")
+        response = self.client.get(reverse('user_workouts'), follow=True)
+        self.assertEqual(response.status_code, 200)
+        self.assertTemplateUsed(response, 'dashboard/dashboard_workout.html')
+        print("200, OK")
+
+    def test_user_exercise_view_unauthenticated(self):
+        print("Testing private exercise dashboard unauthenticated: ", end="")
+        response = self.client.get(reverse('user_exercises'), follow=True)
         self.assertEqual(response.status_code, 200)
         self.assertTemplateUsed(response, 'user/login.html')
         print("200, OK")
 
-    def test_get_created_exercises(self):
-        print("Testing created exercises: ", end="")
+    def test_user_exercise_view(self):
+        print("Testing private exercise dashboard: ", end="")
         test_user = User.objects.create_user(username="TestUser", password="iampassword", email="randomemail@gmail.com")
-        data = {'Creator': test_user}
-        if Exercise.objects.filter(Creator=data['Creator']).exists():
-            response = self.client.get(reverse('dashboard'))
-            self.assertEqual(response.status_code, 200)
-            self.assertTemplateUsed(response, 'dashboard/dashboard.html')
-            print("200, OK")
-
-    def test_get_created_workouts(self):
-        print("Testing created workouts: ", end="")
-        test_user = User.objects.create_user(username="TestUser", password="iampassword", email="randomemail@gmail.com")
-        data = {'User': test_user}
-        if Workout.objects.filter(User=data['User']).exists():
-            response = self.client.get(reverse('dashboard'))
-            self.assertEqual(response.status_code, 200)
-            self.assertTemplateUsed(response, 'dashboard/dashboard.html')
-            print("200, OK")
-
-    def test_public_workout_view_get(self):
-        print("Testing workouts page: ", end="")
-        response = self.client.get(reverse('public_workouts'))
+        muscle_group = MuscleGroup.objects.create(name="Penis")
+        exercise = Exercise.objects.create(Title="Test", Creator=test_user, muscle_group=muscle_group, Public=True)
+        ExerciseRating.objects.create(Judge=test_user, Exercise=exercise)
+        self.client.login(username="TestUser", password="iampassword")
+        response = self.client.get(reverse('user_exercises'), follow=True)
         self.assertEqual(response.status_code, 200)
-        self.assertTemplateUsed(response, 'dashboard/public_workouts.html')
+        self.assertTemplateUsed(response, 'dashboard/dashboard_exercise.html')
         print("200, OK")
 
-    def test_public_exercise_view_get(self):
-        print("Testing Exercises page: ", end="")
-        response = self.client.get(reverse('public_exercises'))
+    def test_exercises_view(self):
+        print("Testing public exercise dashboard: ", end="")
+        test_user = User.objects.create_user(username="TestUser", password="iampassword", email="randomemail@gmail.com")
+        muscle_group = MuscleGroup.objects.create(name="Penis")
+        exercise = Exercise.objects.create(Title="Test", Creator=test_user, muscle_group=muscle_group, Public=True)
+        ExerciseRating.objects.create(Judge=test_user, Exercise=exercise)
+        self.client.login(username="TestUser", password="iampassword")
+        response = self.client.get(reverse('public_exercises'), follow=True)
         self.assertEqual(response.status_code, 200)
-        self.assertTemplateUsed(response, 'dashboard/public_exercises.html')
+        self.assertTemplateUsed(response, 'dashboard/dashboard_exercise.html')
         print("200, OK")
-    
+
+    def test_filter_exercises(self):
+        muscle_group = MuscleGroup.objects.create(name="Penis")
+        print("Testing category filter in public exercises: ", end="")
+        response = self.client.get(reverse('public-filter-e', kwargs={'muscle_group': muscle_group.id}))
+        self.assertEqual(response.status_code, 200)
+        self.assertTemplateUsed(response, 'dashboard/dashboard_exercise.html')
+        print("200, OK")
+
+    def test_filter_workouts(self):
+        category = Category.objects.create(Name="Penis")
+        print("Testing category filter in public workouts: ", end="")
+        response = self.client.get(reverse('public-filter-w', kwargs={'category_id': category.id}))
+        self.assertEqual(response.status_code, 200)
+        self.assertTemplateUsed(response, 'dashboard/dashboard_workout.html')
+        print("200, OK")
+
     def test_creation_time_passed(self):
         print("Testing exercise creation time: ", end="")
-        
+
         class DummyData:
             def __init__(self, time):
                 self.CreatedAt = time
@@ -97,7 +122,7 @@ class UserViewTests(TestCase):
     def test_get_workouts_with_likes(self):
         self._setup_user()
         user1 = User.objects.get(pk=1)
-        
+
         self._setup_workout(user1)
 
         self.client.force_login(user1)
@@ -107,15 +132,15 @@ class UserViewTests(TestCase):
 
         response = self.client.post(reverse('public_exercises'))
         self.assertEqual(response.status_code, 200)
-        self.assertTemplateUsed(response, 'dashboard/public_exercises.html')
+        self.assertTemplateUsed(response, 'dashboard/dashboard_exercise.html')
         print("200, OK")
 
     def _setup_user(self):
         data1 = {'username': 'TestUser',
-                'email': 'test_user@test.com',
-                'password1': 'iampassword', 'password2': 'iampassword'}
+                 'email': 'test_user@test.com',
+                 'password1': 'iampassword', 'password2': 'iampassword'}
         self.client.post(reverse('register'), data1)
-        
+
     def _setup_workout(self, user1):
         Workout(
             Name="iNSaNiTY",

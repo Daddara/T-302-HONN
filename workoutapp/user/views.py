@@ -127,6 +127,7 @@ def new_friend_request(request, id):
     friend_request, created = FriendRequest.objects.get_or_create(FromUser=request.user, ToUser=recipient)
     return HttpResponseRedirect(user_info.get_abs_url())
 
+
 @login_required
 def cancel_friend_request(request, id):
     recipient = get_object_or_404(User, id=id)
@@ -135,6 +136,7 @@ def cancel_friend_request(request, id):
     friend_request.delete()
     return HttpResponseRedirect(user_info.get_abs_url())
 
+
 @login_required
 def delete_friend_request(request, id):
     request_user = UserInfo.objects.get(user=request.user)
@@ -142,6 +144,7 @@ def delete_friend_request(request, id):
     friend_request = FriendRequest.objects.get(FromUser=sender, ToUser=request.user)
     friend_request.delete()
     return HttpResponseRedirect(request_user.get_abs_url())
+
 
 @login_required
 def accept_friend_request(request, id):
