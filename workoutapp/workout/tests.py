@@ -1,7 +1,7 @@
 from django.test import TestCase, Client
 from django.urls import reverse
 
-from workout.models import Exercise, ExerciseRating, RatingValue
+from workout.models import Exercise, ExerciseRating, RatingValue, MuscleGroup
 from django.contrib.auth.models import User
 
 
@@ -16,6 +16,23 @@ class CreateWorkoutTest(TestCase):
         self.assertTemplateUsed(response, 'user/login.html')
         print("200, OK")
 
+
+class ViewExerciseTest(TestCase):
+    def init(self):
+        self.client = Client()
+
+    def test_get_exercise_details(self):
+        print("Testing view exercise details: ", end="")
+        test_user = User.objects.create_user(
+            username="TestUser", password="iampassword", email="randomemail@gmail.com")
+        muscle_group = MuscleGroup.objects.create(name="Penis")
+        exercise = Exercise.objects.create(Title="Test", Creator=test_user, muscle_group=muscle_group, Public=True)
+        ExerciseRating.objects.create(Judge=test_user, Exercise=exercise)
+        self.client.login(username="TestUser", password="iampassword")
+        response = self.client.get(reverse('exercise_details', kwargs={'exercise_id': exercise.id}), follow=True)
+        self.assertEqual(response.status_code, 200)
+        self.assertTemplateUsed(response, 'exercise/exercise_details.html')
+        print("200, OK")
 
 class RateExerciseTest(TestCase):
     def setUp(self):
