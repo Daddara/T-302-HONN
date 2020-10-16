@@ -3,28 +3,25 @@
 {% block extra_head %}
     <link rel="stylesheet" href="{% static "exercise/css/exercise.css" %}">
     <link rel="stylesheet" href="{% static "scrollbars.css" %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'dashboard/css/dashboard_nav.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'dashboard/css/dashboard_header.css' %}">
 {% endblock %}
 
 {% block content %}
-    {% if exercises %}
-    <div class="page-title">
-        <h2>Exercises</h2>
-        <div class="search-bar">
-            {% include 'dashboard/search-input.html' %}
-            <!-- Add PUBLIC/MY Workouts. Add category dropdown filter. Add pagination max x per page.
-            Make sure selected filter are sent to view.-->
-        </div>
+     {% include 'dashboard/dashboard_header_exercise.html' %}
+    <div class="search-bar">
+    {% include 'dashboard/dashboard_nav_exercise.html' with muscle_groups=muscle_groups %}
     </div>
     <div class="page-content scrollbar-info">
         <div class="center-page-content">
+            {% if exercises %}
             {% for exercise in exercises %}
                 {% include 'exercise/single_exercise_minimal.html' with exercise=exercise %}
             {% endfor %}
         </div>
     </div>
     {% else %}
-    <div class="page-content">
-        <p>There are no public exercises</p>
+        <p>No exercises to show, perhaps create a new one?</p>
     </div>
     {% endif %}
 

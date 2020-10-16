@@ -73,8 +73,9 @@ def create_exercise(request):
             description = exercise_form.cleaned_data['Description']
             image = exercise_form.cleaned_data['Image']
             equipment = exercise_form.cleaned_data['Equipment']
+            public = exercise_form.cleaned_data['Public']
             exercise = Exercise(Title=title, Description=description, Creator=request.user,
-                                Image=image, Equipment=equipment, Public=True)
+                                Image=image, Equipment=equipment, Public=public)
             exercise.save()
             return redirect('profile', slug=request.user.username)
 

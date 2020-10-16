@@ -111,6 +111,11 @@ class TestPayment(TestCase):
         self.assertRedirects(response, reverse('invalid-payment', kwargs={'invalid_id': 5}), target_status_code=200)
         print("400, OK")
 
+        print("Testing invalid order id: ", end="")
+        response = self.client.get(reverse('test-payment', kwargs={'product_id': product_id, 'error_insertion': 5}))
+        self.assertRedirects(response, reverse('invalid-payment', kwargs={'invalid_id': 5}), target_status_code=200)
+        print("400, OK")
+
     def assert_login_redirect(self, next_page, response):
         """Checks whether user was redirected to login page because he was unauthorized"""
         login_url = reverse('login')

@@ -1,0 +1,21 @@
+#toggle-w-e {
+    margin-top: 5px;
+    margin-bottom: 5px;
+}
+
+.btn-secondary {
+    font-size: x-large;
+    color: black;
+    font-weight: 550;
+    background-color: #7695b0!important;
+}
+.active {
+    border: 1px solid white!important;
+}
+
+.btn-warning {
+    background-color: #f4a910!important;
+    font-size: x-large;
+    color: black;
+    font-weight: 550;
+}
