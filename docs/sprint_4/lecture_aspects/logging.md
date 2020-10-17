@@ -84,6 +84,14 @@ Workout update 5 +1                                 workouts:448:17
 
 This log contains the message origin by default. This is a functionality in Firefox and Chromium.
 
+**Update**
+We added a __logging_server__ after writing this documentation. This logging server is a second component that can run along side out main application server. It accepts event updates from the frontend and logs them into a database. This feature is super useful to track exceptions in the frontend and the action leading up to it. This feature was also suggested in the "__Top 5 components to monitor and their metrics__" section. We've only implemented the logging part the metic along with other reports are still missing.
+
+The component added the following the functions to the frontend:
+* `logButtonPress`: Used to log UI button presses that might be useful for debugging as well as the current url
+* `logErrorMsg`: Used to log a manual message along with the current URL
+* `logException`: Used to log an exception with the content of it
+
 ### Testing
 The test in our application write a minimal amount of messages to the console. A message usually states _what_ is being tested, the _result_ code of the request and an `OK` if the result was expected. A full test run using [`run-coverage.sh`](run-coverage.sh) adds a coverage report to the end of the run. This console output is kept as a part of the GitLab pipeline. Here is a shortened example of such a log:
 
