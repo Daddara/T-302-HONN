@@ -1,16 +1,19 @@
 from django.shortcuts import render
 from django.http import HttpResponse
+from django.views.decorators.csrf import csrf_exempt
 
 from frontend_logger.forms.frontend_event_form import FrontendEventForm
 from frontend_logger.models import FrontendEvent, FRONTEND_EVENT_TYPES
 # Create your views here.
 
+@csrf_exempt
 def log_frontend_event(request):
     if request.method != 'POST':
         return HttpResponse(status=200)
     
     form = FrontendEventForm(data=request.POST)
     if not form.is_valid():
+        print(form.errors)
         return HttpResponse(status=400)
     if form.cleaned_data['event_type'] not in FRONTEND_EVENT_TYPES:
         return HttpResponse(status=400)
