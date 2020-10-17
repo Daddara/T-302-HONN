@@ -8,9 +8,15 @@
 {% endblock %}
 
 {% block content %}
-    
+    {% include 'dashboard/dashboard_header_exercise.html' %}
+    <div class="search-bar">
+    {% include 'dashboard/dashboard_nav_exercise.html' with muscle_groups=muscle_groups %}
+    </div>
     <div class="exercise-background-shadow">
         <div class="exercise-container">
+            {% if exercise_details.Creator == request.user %}
+                <a href="{% url 'update_exercise' exercise_details.id %}">Edit</a>
+            {% endif %}
             <div class="item-title">
                     <h1 class="text-center text-uppercase">{{ exercise_details.Title }}</h1>
             </div>
