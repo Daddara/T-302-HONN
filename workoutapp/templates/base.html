@@ -28,7 +28,7 @@
 
     <!--NAVIGATION BAR START-->
     <nav id="navigation-bar" class="navbar navbar-expand-lg navbar-light bg-light">
-        <a id='home-nav' class="navbar-brand" href="{% url 'public_workouts' %}">Dashboard</a>
+        <a id='home-nav' class="navbar-brand" lid="DashboardButton" href="{% url 'public_workouts' %}">Dashboard</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo02"
                 aria-controls="navbarTogglerDemo02" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
@@ -137,8 +137,6 @@
 </footer>
 <!-- Footer -->
 
-
-
     <!-- link for Bootstrap -->
     <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
             integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous">
@@ -149,7 +147,9 @@
     </script>
     <!-- link for font awesome -->
     <script src="https://use.fontawesome.com/releases/v5.14.0/js/all.js" data-auto-replace-svg="nest"></script>
-    <script src="{% static 'main.css' %}"></script>
+
+    <script src="{% static 'logging.js' %}"></script>
+
     {% block extra_js %}
 
     {% endblock %}
