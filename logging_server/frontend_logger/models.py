@@ -12,6 +12,7 @@ FRONTEND_EVENT_TYPES = [
     # We could add stuff like DISCONNECT, CONNECT etc but this is enough for now :)
 ]
 
+
 # Create your models here.
 class FrontendEvent(models.Model):
     event_time = models.DateTimeField(auto_now=True)
@@ -20,3 +21,6 @@ class FrontendEvent(models.Model):
     current_url = models.CharField(max_length=256)
     event_meta = models.CharField(max_length=1024)
     session_meta = models.CharField(null=True, max_length=1024, default=None)
+
+    def __str__(self):
+        return str(self.event_type)
