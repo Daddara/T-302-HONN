@@ -1,0 +1,26 @@
+1. Definition of done:
+    - pass 
+2. Sprint planning:
+    - pass
+3. Task breakdown:
+     - pass
+4. Test coverage:
+
+5. Comments/readability:
+     - pass 
+6. Standup/decision protocol:
+    - pass 
+7. Retrospective/reflection:
+    - pass 
+8. Technical requirements:
+    - pass 
+9. README.md:
+    - pass 
+10. Lecture aspects:
+    - pass 
+        - Diagrams:
+            - ok
+        - Single responsibility principle:
+            - ok
+        - DI:
+            - this is not DI

@@ -136,6 +136,17 @@ The documentation can be found here: [docs/sprint_3/lecture_aspects/](docs/sprin
 In addition we plan to implement the following user stories this sprint: 
 * #2, #5, #9, #12, #14, #15, #16, #17, #18, #19, #24, #27, #51, #52, #56
 
+### Sprint 4
+We plan to document and implement the required lecture aspects. These tasks are tracked in the following issues: 
+* #85, #86, #87, #88, #89 
+
+The documentation can be found here: [docs/sprint_3/lecture_aspects/](docs/sprint_4/lecture_aspects/)
+
+In addition we plan to implement the following user stories and bugfixes this sprint: 
+* #90, #91, #95, #81, #83, #43, #92, #93, #27, #45, #23
+
+We also included some screenshots of our website from the end of the sprint. The images with a short description can be found here: [Awesome screenshot gallery](docs/sprint_4/interface_demo/interface_demo.md)
+
 ## Sprint backlog and stuff
 We are using GitLabs issue feature to manage our team and user stories. You can sort feature in most parts of gitlab also to sprint specific board for example:
 
@@ -143,6 +154,7 @@ Boards:
 * [Sprint 1](https://gitlab.com/xFrednet/t-302-honn-2020-team-9/-/boards?scope=all&utf8=%E2%9C%93&milestone_title=Sprint%201) | [Alternative view](https://gitlab.com/xFrednet/t-302-honn-2020-team-9/-/milestones/1)
 * [Sprint 2](https://gitlab.com/xFrednet/t-302-honn-2020-team-9/-/boards?scope=all&utf8=%E2%9C%93&milestone_title=Sprint%202) | [Alternative view](https://gitlab.com/xFrednet/t-302-honn-2020-team-9/-/milestones/2)
 * [Sprint 3](https://gitlab.com/xFrednet/t-302-honn-2020-team-9/-/boards?scope=all&utf8=%E2%9C%93&milestone_title=Sprint%203) | [Alternative view](https://gitlab.com/xFrednet/t-302-honn-2020-team-9/-/milestones/3)
+* [Sprint 3](https://gitlab.com/xFrednet/t-302-honn-2020-team-9/-/boards?scope=all&utf8=%E2%9C%93&milestone_title=Sprint%204) | [Alternative view](https://gitlab.com/xFrednet/t-302-honn-2020-team-9/-/milestones/4)
 
 # Contributors
 | GitLab Username          | Student name                  |
