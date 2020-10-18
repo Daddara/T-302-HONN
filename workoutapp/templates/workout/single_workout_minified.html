@@ -2,7 +2,7 @@
     <div class="workout-container">
         <div class="creation-date">{{ workout.time_passed }}</div>
         <div class="item-title">
-            <a href=#>{{workout.Name}}</a>
+            <a href="{% url 'workout_details' workout.id %}">{{workout.Name}}</a>
         </div>
         <div class="short-description">{{ workout.short_description }}</div>
         <div><b>Goal:</b> {{workout.workout_goal}}</div>
