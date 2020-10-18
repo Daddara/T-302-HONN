@@ -24,13 +24,12 @@ class UserInfo(models.Model):
         default="https://www.vhv.rs/dpng/d/256-2569650_men-profile-icon-png-image-free-download-searchpng.png")
     CreatedAt = models.DateTimeField(auto_now=True)
     friends = models.ManyToManyField("UserInfo", blank=True)
-    
+
     def __str__(self):
         return str(self.user.username)
 
     def get_abs_url(self):
         return "/accounts/profile/{}".format(self.slug)
-
 
 
 class Follow(models.Model):
