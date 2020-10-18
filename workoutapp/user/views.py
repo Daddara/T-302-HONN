@@ -5,8 +5,11 @@ from django.contrib.auth.decorators import login_required
 from wallet.models import Wallet
 from .forms.create_account_form import CreateAccountForm
 from workout.models import Exercise
+from workout.models import Workout
 from .models import UserInfo, FriendRequest, Follow
 from dashboard.views import add_like_information_to_exercises
+from dashboard.views import add_like_information_to_workouts
+from user.forms.create_account_form import EditUserInfoForm
 
 
 # Create your views here.
@@ -51,25 +54,50 @@ def profile_view(request, slug):
     if request.user == user:
 
         try:
+            workout_models = Workout.objects.filter(User=request.user)
+            workout_models = add_like_information_to_workouts(request, workout_models)
             exercise_models = Exercise.objects.filter(Creator=request.user)
             exercise_models = add_like_information_to_exercises(request, exercise_models)
-        except Exercise.DoesNotExist:
+
+        except Exercise.DoesNotExist or Workout.DoesNotExist:
             pass
     # Otherwise only get public exercises
     else:
         try:
+            workout_models = Workout.objects.filter(User=request.user)
+            workout_models = add_like_information_to_workouts(request, workout_models)
             exercises = Exercise.objects.filter(Creator=user).filter(Public=True)
             exercise_models = add_like_information_to_exercises(request, exercise_models)
-        except Exercise.DoesNotExist:
+        except Exercise.DoesNotExist or Workout.DoesNotExist:
            pass
 
     context = {
         'user': user,
         'user_info': profile,
         'exercises': exercise_models,
-        'status': status
+        'workouts': workout_models,
+        'status': status,
+        'form': EditUserInfoForm(),
     }
     return render(request, 'user/profile.html', context)
+
+@login_required
+def edit_profile_view(request):
+    if request.method == 'POST':
+        form = EditUserInfoForm(request.POST)
+        if form.is_valid():
+            request_user_info = UserInfo.objects.get(user_id=request.user.id)
+            request_user_info.age = form.cleaned_data['age']
+            request_user_info.firstName = form.cleaned_data['firstName']
+            request_user_info.lastName = form.cleaned_data['lastName']
+            request_user_info.bio = form.cleaned_data['bio']
+            request_user_info.save()
+            return redirect('profile', slug=request.user.username)
+    else:
+        form = EditUserInfoForm()
+
+    return render(request, 'user/edit_profile.html', {'form': form})
+
 
 @login_required
 def view_friend_and_requests(request):
@@ -97,6 +125,13 @@ def following(request):
 def delete_exercise(request, exercise_id):
     exercise = get_object_or_404(Exercise, Creator=request.user, pk=exercise_id)
     exercise.delete()
+
+    return redirect('profile', slug=request.user.username)
+
+@login_required
+def delete_workout(request, workout_id):
+    workout = get_object_or_404(Workout, User=request.user, pk=workout_id)
+    workout.delete()
 
     return redirect('profile', slug=request.user.username)
 
@@ -158,3 +193,5 @@ def accept_friend_request(request, id):
     receiver_info.friends.add(sender_info)
     friend_request.delete()
     return HttpResponseRedirect(request_user.get_abs_url())
+
+

@@ -11,3 +11,18 @@ class CreateAccountForm(UserCreationForm):
     class Meta:
         model = User
         fields = ('username', 'first_name', 'last_name', 'email', 'password1', 'password2', )
+
+
+class EditUserInfoForm(forms.Form):
+
+    firstName = forms.CharField(label='First Name')
+    lastName = forms.CharField(label='Last Name')
+    age = forms.IntegerField(label='Age')
+    bio = forms.CharField(label='Bio')
+
+
+
+
+
+
+

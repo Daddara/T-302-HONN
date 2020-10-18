@@ -1,11 +1,3 @@
-.exercise-creator {
-    margin:0px;
-    padding: 0px;
-    display: flex;
-    font-size: small;
-    align-self: flex-end;
-}
-
 .exercise-container {
     padding: 5px;
     display: inline-block;
@@ -18,8 +10,31 @@
     border-radius: 4px;
 }
 
-.exercise-container:hover {
+.workout-container {
+    padding: 5px;
+    display: inline-block;
+    justify-content: center;
+    width: 400px;
+    min-height: 200px;
+    height: fit-content;
+    background-color: #ffa474;
+    border: 1px solid black;
+    border-radius: 4px;
+    position: relative;
+}
+
+.workout-container:hover {
     transform: scale(1.05);
+}
+
+.workout-creator {
+    margin:0px;
+    padding: 0px;
+    display: flex;
+    font-size: small;
+    align-self: flex-end;
+    position: absolute;
+    bottom: 0;
 }
 
 .page-title {
