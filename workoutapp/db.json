@@ -1411,8 +1411,8 @@
   "fields": {
     "user": 1,
     "slug": "demoadmin",
-    "firstName": "Demo",
-    "lastName": "Admin",
+    "first_name": "Demo",
+    "last_name": "Admin",
     "age": 25,
     "image": "https://www.vhv.rs/dpng/d/256-2569650_men-profile-icon-png-image-free-download-searchpng.png",
     "CreatedAt": "2020-09-20T21:15:24.141Z",
@@ -1425,8 +1425,8 @@
   "fields": {
     "user": 2,
     "slug": "System",
-    "firstName": "Fit",
-    "lastName": "Connect",
+    "first_name": "Fit",
+    "last_name": "Connect",
     "age": 0,
     "image": "https://www.vhv.rs/dpng/d/256-2569650_men-profile-icon-png-image-free-download-searchpng.png",
     "CreatedAt": "2020-09-29T19:58:57.082Z",
@@ -1439,8 +1439,8 @@
   "fields": {
     "user": 3,
     "slug": "demouser",
-    "firstName": "Demo",
-    "lastName": "User",
+    "first_name": "Demo",
+    "last_name": "User",
     "age": 20,
     "image": "https://www.vhv.rs/dpng/d/256-2569650_men-profile-icon-png-image-free-download-searchpng.png",
     "CreatedAt": "2020-10-18T20:02:22.190Z",

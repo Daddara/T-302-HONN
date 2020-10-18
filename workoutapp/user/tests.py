@@ -177,8 +177,6 @@ class FriendsTest(TestCase):
         print("Testing if friend request is created: ", end="")
         # friend_request = FriendRequest.objects.create(FromUser=self.user, ToUser=self.user2)
         response = self.client.get('/accounts/friend-request/send/2')
-        self.assertRedirects(response, '/accounts/profile/' + str(self.user.username), target_status_code=200)
-
         self.assertEqual(len(FriendRequest.objects.all()), 1)
         find_request = FriendRequest.objects.get(FromUser=self.user, ToUser=self.user2)
         self.assertEqual(find_request.ToUser, self.user2)
@@ -191,7 +189,6 @@ class FriendsTest(TestCase):
         self.assertEqual(len(FriendRequest.objects.all()), 1)
 
         response = self.client.get('/accounts/friend-request/cancel/2')
-        self.assertRedirects(response, '/accounts/profile/'+str(self.user.username), target_status_code=200)
         self.assertEqual(len(FriendRequest.objects.all()), 0)
         self.assertNotIn(self.user_info, self.user_info2.friends.all())
         print("200, OK")
