@@ -24,7 +24,7 @@ class UserInfo(models.Model):
     image = models.CharField(
         max_length=250,
         default="https://www.vhv.rs/dpng/d/256-2569650_men-profile-icon-png-image-free-download-searchpng.png")
-    CreatedAt = models.DateTimeField(auto_now=True)
+    CreatedAt = models.DateTimeField(auto_now_add=True)
     friends = models.ManyToManyField("UserInfo", blank=True)
 
     def __str__(self):
