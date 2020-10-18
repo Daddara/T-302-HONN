@@ -20,6 +20,7 @@ class UserInfo(models.Model):
     lastName = models.CharField(max_length=20, default="")
     age = models.IntegerField(default=20)
     bio = models.CharField(max_length=250, default="")
+    email = models.EmailField(max_length=254, default="")
     image = models.CharField(
         max_length=250,
         default="https://www.vhv.rs/dpng/d/256-2569650_men-profile-icon-png-image-free-download-searchpng.png")

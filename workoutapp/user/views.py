@@ -54,8 +54,7 @@ def profile_view(request, slug):
     if request.user == user:
 
         try:
-            workout_models = Workout.objects.filter(User=request.user)
-            workout_models = add_like_information_to_workouts(request, workout_models)
+            #user = UserInfo.objects.filter(user=request.user)
             exercise_models = Exercise.objects.filter(Creator=request.user)
             exercise_models = add_like_information_to_exercises(request, exercise_models)
 
@@ -64,12 +63,19 @@ def profile_view(request, slug):
     # Otherwise only get public exercises
     else:
         try:
-            workout_models = Workout.objects.filter(User=request.user)
-            workout_models = add_like_information_to_workouts(request, workout_models)
+            #user = UserInfo.objects.filter(user=request.user)
             exercises = Exercise.objects.filter(Creator=user).filter(Public=True)
             exercise_models = add_like_information_to_exercises(request, exercise_models)
-        except Exercise.DoesNotExist or Workout.DoesNotExist:
+        except Exercise.DoesNotExist:
            pass
+
+        try:
+            workout_models = Workout.objects.filter(User=request.user)
+            workout_models = add_like_information_to_workouts(request, workout_models)
+        except Workout.DoesNotExist:
+            workout_models = None
+
+        
 
     context = {
         'user': user,
@@ -83,6 +89,7 @@ def profile_view(request, slug):
 
 @login_required
 def edit_profile_view(request):
+
     if request.method == 'POST':
         form = EditUserInfoForm(request.POST)
         if form.is_valid():
@@ -91,6 +98,7 @@ def edit_profile_view(request):
             request_user_info.firstName = form.cleaned_data['firstName']
             request_user_info.lastName = form.cleaned_data['lastName']
             request_user_info.bio = form.cleaned_data['bio']
+            request_user_info.email = form.cleaned_data['email']
             request_user_info.save()
             return redirect('profile', slug=request.user.username)
     else:

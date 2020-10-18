@@ -55,6 +55,42 @@ class UserViewTests(TestCase):
             self.assertTemplateUsed(response, 'user/profile.html')
             print("200, OK")
 
+    def test_profile_edit_get(self):
+        print("Testing profile page edit (get): ", end="")
+        data = {'username': 'TestUser',
+                'email': 'test_user@test.com',
+                'password1': 'iampassword', 'password2': 'iampassword'}
+        response = self.client.post(reverse('register'), data)
+        self.assertRedirects(response, reverse('login'), target_status_code=200)
+        if User.objects.filter(username=data['username']).exists():
+            self.client.login(username="TestUser", password="iampassword")
+            response = self.client.get(reverse('edit-user'))
+            self.assertEqual(response.status_code, 200)
+            self.assertTemplateUsed(response, 'user/edit_profile.html')
+            print("200, OK")
+
+    def test_profile_edit_post(self):
+        print("Testing profile page edit (post): ", end="")
+        data1 = {'username': 'TestUser',
+                'email': 'test_user@test.com',
+                'password1': 'iampassword', 'password2': 'iampassword'}
+        response = self.client.post(reverse('register'), data1)
+        self.assertRedirects(response, reverse('login'), target_status_code=200)
+        if User.objects.filter(username=data1['username']).exists():
+            self.client.login(username="TestUser", password="iampassword")
+            data = {'firstName': 'TestUser2',
+                    'lastName': 'TestUser2',
+                    'age': '30',
+                    'email': 'test_user@test.com',
+                    'bio': 'blabla'}
+            response = self.client.post(reverse('edit-user'),data)
+            self.assertRedirects(response, reverse('profile', kwargs={'slug': data1['username']}), target_status_code=200),
+            #self.assertTemplateUsed(response, 'user/profile.html')
+            user = UserInfo.objects.get(pk=1)
+            self.assertEqual(user.firstName, data['firstName'])
+            print("200, OK")
+
+
 
 class FollowTest(TestCase):
     def setUp(self):
@@ -171,3 +207,4 @@ class FriendsTest(TestCase):
         self.assertEqual(len(FriendRequest.objects.all()), 0)
         self.assertNotIn(self.user_info2, self.user_info.friends.all())
         print("200, OK")
+
