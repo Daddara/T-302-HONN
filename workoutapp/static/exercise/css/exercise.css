@@ -16,6 +16,7 @@
     background-color: #c5d3da;
     border: 1px solid black;
     border-radius: 4px;
+    position: relative;
 }
 
 .exercise-background-shadow{
@@ -32,4 +33,10 @@
 
 .page-title {
     background-color: #c5d3da;
+}
+
+.creation-date {
+    position: absolute;
+    top: 0;
+    right: 1%;
 }

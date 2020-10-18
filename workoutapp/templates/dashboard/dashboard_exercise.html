@@ -29,7 +29,16 @@
 
 {% block extra_js %}
 
-<script>let search_class="exercise-container"</script>
+<script>
+    // This is for the search input
+    let search_class="exercise-container"
+</script>
+<script>
+    // This is for the order by methods
+    let target_order_element = "exercise-background-shadow";
+    let render_inside_element = "center-page-content";
+</script>
+<script src="{% static 'order_by.js' %}"></script>
 <script src="{% static 'search_page_content_filter.js' %}"></script>
 <script src="{% static 'workout/js/rate_exercise.js' %}"></script>
 
