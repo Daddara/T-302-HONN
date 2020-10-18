@@ -30,8 +30,9 @@
                 By {{ workout.User.username }}
             {% else %}
                 <!-- Link to user profile -->
-                <a href="#"><span style="color: black;">By</span> {{ workout.User.username }}</a>
+                <a href="{% url 'profile' workout.User.username %}"><span style="color: black;">By</span> {{ workout.User.username }}</a>
             {% endif %}
         </div>
+        <div class="created-at" style="display: none;">{{ workout.CreatedAt.timestamp }}</div>
     </div>
 </div>

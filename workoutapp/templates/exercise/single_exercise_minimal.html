@@ -1,6 +1,7 @@
 {% load static %}
 <div class="exercise-background-shadow">
     <div class="exercise-container">
+        <div class="creation-date">{{ exercise.time_passed }}</div>
         <div class="item-title">
             <a href=#>{{exercise.Title}}</a>
         </div>
@@ -34,8 +35,9 @@
                 By {{ exercise.Creator }}
             {% else %}
                 <!-- Link to user profile -->
-                <a href="#"><span style="color: black;">By</span> {{ exercise.Creator }}</a>
+                <a href="{% url 'profile' exercise.Creator.username %}"><span style="color: black;">By</span> {{ exercise.Creator }}</a>
             {% endif %}
         </div>
+        <div class="created-at" style="display: none;">{{ exercise.CreatedAt.timestamp }}</div>
     </div>
 </div>

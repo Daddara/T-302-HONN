@@ -29,8 +29,17 @@
 
 
 {% block extra_js %}
-<script>let search_class="workout-container"</script>
+<script>
+    // This is for the search input
+    let search_class="workout-container"
+</script>
+<script>
+    // This is for the order by methods
+    let target_order_element = "workout-background-shadow";
+    let render_inside_element = "center-page-content";
+</script>
 <script src="{% static 'search_page_content_filter.js' %}"></script>
+<script src="{% static 'order_by.js' %}"></script>
 <script>
     {% if user.is_authenticated %}
     function display_workout_rating(workout_id, new_status) {

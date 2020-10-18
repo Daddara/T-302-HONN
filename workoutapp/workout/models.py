@@ -65,6 +65,7 @@ class MuscleGroup(models.Model):
 class Exercise(models.Model):
     Title = models.CharField(max_length=20, default="")
     Creator = models.ForeignKey(User, null=True, on_delete=models.SET_NULL)
+    CreatedAt = models.DateTimeField(auto_now=True)
     Description = models.TextField(max_length=350, default="")
     Image = models.CharField(
         max_length=250,
@@ -76,6 +77,7 @@ class Exercise(models.Model):
     Dislikes = models.IntegerField(default=0)
     Has_Liked = models.BooleanField(default=False)
     Has_Disliked = models.BooleanField(default=False)
+    time_passed = models.CharField(max_length=40, default="1 Day ago")
 
     class Meta:
         unique_together = ('Creator', 'Title',)
