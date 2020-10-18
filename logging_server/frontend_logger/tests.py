@@ -1,13 +1,12 @@
 import datetime
-
-from django.test import TestCase
-
+from django.test import TestCase, Client
 from frontend_logger.models import FrontendEvent
+
 
 class TestFrontendEvent(TestCase):
     def init(self):
         self.client = Client()
-    
+
     # Create your tests here.
     def test_button_press_minimal(self):
         current = datetime.datetime.now().ctime()
