@@ -5,11 +5,11 @@ address. The current version supports front end logging integration into HTML te
 ## Front end logger
 The front end logger logs button presses and the meta data associated with the action performed on it. The following
 is an example of data stored by the server after a button click that has been associated with the front end module.
-[!image](log_example.PNG)
+![image](logging_server/log_example.PNG)
 
 #### Default integration
 To integrate the frontend logger you must add the attribute `lid` to an html element, assign it a value and add the 
-javascript [logging.js](logging.js) to your template.
+javascript [logging.js](logging_server/logging.js) to your template.
 
 #### Stored data
 1. **event_time**\
