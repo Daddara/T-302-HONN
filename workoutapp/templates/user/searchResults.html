@@ -7,10 +7,17 @@
 
 {% block content %}
 
-<div class="page-content">
-    <div class="container">
-        <div class="row my-1">
-            <div class="col-lg-8 order-lg-2">
+<div class="container">
+    <div class="page-title" style="background-color: #ffa474;">
+        <div class="row">
+            <div class="col-md-auto mx-auto">
+                <h2>Results:</h2>
+            </div>
+        </div>
+    </div>
+    <div class="page-content">
+        <div class="row">
+            <div class="col-md-auto mx-auto">
                 <div class="tab-content py-4">
                     <div class="tab-pane active" id="profile">
                         {% for i in sr_user %}

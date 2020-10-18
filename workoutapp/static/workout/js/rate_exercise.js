@@ -17,12 +17,13 @@ function post_exercise_rating(exercise_id, rating) {
                 if (xmlHttp.status === 401) {
                     redirect_to_login();
                 } else {
+                    logErrorMsg(document.currentScript, "The saving of a rating has failed")
                     alert("Your rating could not be saved")
                 }
             }
         }
     };
-
+    
     xmlHttp.open("POST", rate_exercise_url, true); // true for asynchronous
     xmlHttp.send(data);
 }
