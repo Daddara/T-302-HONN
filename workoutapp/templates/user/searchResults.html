@@ -7,26 +7,38 @@
 
 {% block content %}
 
-<div class="page-content">
 <div class="container">
-    <div class="row my-1">
-        <div class="col-lg-8 order-lg-2">
-            <div class="tab-content py-4">
-                <div class="tab-pane active" id="profile">
-                    {% for i in sr_user %}
-                        <h1 class="mb-3">{{ i.username }}</h1>
-                        <h4 class="mb-3">Date joined: {{ i.date_joined }}</h4>
-                        <form method="post">
-                            {% csrf_token %}
-                            <input type="submit" class="btn btn-primary" value="Follow" />
-                        </form>
-                    {% endfor %}
+    <div class="page-title" style="background-color: #ffa474;">
+        <div class="row">
+            <div class="col-md-auto mx-auto">
+                <h2>Results:</h2>
+            </div>
+        </div>
+    </div>
+    <div class="page-content">
+        <div class="row">
+            <div class="col-md-auto mx-auto">
+                <div class="tab-content py-4">
+                    <div class="tab-pane active" id="profile">
+                        {% for i in sr_user %}
+                            {% if current_user.username != i.username %}
+                                <h1 class="mb-3">{{ i.username }}</h1>
+                                <h4 class="mb-3">Date joined: {{ i.date_joined }}</h4>
+                                {% if is_following == False %}
+                                    <form method="post">
+                                        {% csrf_token %}
+                                        <input type="submit" class="btn btn-primary" value="Follow" />
+                                    </form>
+                                {% else %}
+                                    <p><b>Your are already following this person</b></p>
+                                {% endif %}
+                            {% endif %}
+                        {% endfor %}
+                    </div>
                 </div>
             </div>
         </div>
-
     </div>
-</div>
 </div>
 
 {% endblock %}

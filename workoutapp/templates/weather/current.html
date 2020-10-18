@@ -87,8 +87,8 @@
             if (xmlHttp.status === 200) {
                 onValidDom(function() { display_current_weather_data(xmlHttp.responseText)})
             } else {
-                console.log("Let's put a better message here: Error while requesting weather data!!!")
-                onValidDom(function() {display_current_weather_data(null)})
+                onValidDom(function() {display_current_weather_data(null)});
+                logErrorMsg(document.currentScript, "Load weather data has failed");
             }
         }
     };
