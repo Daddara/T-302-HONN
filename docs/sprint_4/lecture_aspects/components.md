@@ -21,7 +21,7 @@ It's functionality is documented through the weather api class.
 - Communication through interface
 - Documented functionality
 
-![image](docs/sprint_4/weatherservice_component.png)
+![image](res/weatherservice_component.png)
 
 
 # Implementation 2: Logging Server
