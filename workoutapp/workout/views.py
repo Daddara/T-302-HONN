@@ -162,3 +162,14 @@ def rate_workout(request):
 
         # Be Happy
         return HttpResponse(status=200)
+
+def workout_details(request, workout_id):
+    try:
+        workout = get_object_or_404(Workout, pk=workout_id)
+    except Workout.DoesNotExist:
+        return HttpResponse(status=404)
+    try:
+        managers = WorkoutManager.objects.filter(Workout=workout)
+    except Workout.DoesNotExist:
+        return HttpResponse(status=404)
+    return render(request, 'workout/workout_details.html', context={'workout':workout, 'managers':managers})
