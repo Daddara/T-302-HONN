@@ -35,7 +35,7 @@ class ViewExerciseTest(TestCase):
         print("200, OK")
 
     def test_get_exercise_details_unauthorized(self):
-        print("Testing view exercise details authorized: ", end="")
+        print("Testing view exercise details unauthorized: ", end="")
         test_user = User.objects.create_user(
             username="TestUser", password="iampassword", email="randomemail@gmail.com")
         muscle_group = MuscleGroup.objects.create(name="Penis")
@@ -84,9 +84,24 @@ class EditExerciseTest(TestCase):
         self.client.login(username="TestUser", password="iampassword")
         exercise = Exercise.objects.create(Title="Test", Creator=test_user, muscle_group=muscle_group, Public=True)
         response = self.client.get(reverse('update_exercise', kwargs={'exercise_id': exercise.id}), follow=True)
-        self.assertEqual(response.status_code, 200)
+        self.assertEqual(response.status_code, 301)
         self.assertTemplateUsed(response, 'exercise/update_exercise.html')
         print("200, OK")
+
+    def test_post_edit_created_exercise(self):
+        print("Testing edit exercise: ", end="")
+        test_user = User.objects.create_user(
+            username="TestUser", password="iampassword", email="randomemail@gmail.com")
+        muscle_group = MuscleGroup.objects.create(name="Arms")
+        self.client.login(username="TestUser", password="iampassword")
+        exercise = Exercise.objects.create(Title="TestExercise", Creator=test_user, muscle_group=muscle_group, Public=True)
+        data = {'Title': 'TestExercise',
+                'Description': 'this is the description'}
+        response = self.client.post(reverse('update_exercise', kwargs={'exercise_id': exercise.id}), data)
+        self.assertEqual(response.status_code, 301)
+        self.assertEqual(exercise.Description, 'this is the description')
+        self.assertTemplateUsed(response, 'exercise/exercise_details.html')
+        print("301, OK")
 
 
 class RateExerciseTest(TestCase):
