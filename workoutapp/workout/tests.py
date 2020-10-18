@@ -84,7 +84,7 @@ class EditExerciseTest(TestCase):
         self.client.login(username="TestUser", password="iampassword")
         exercise = Exercise.objects.create(Title="Test", Creator=test_user, muscle_group=muscle_group, Public=True)
         response = self.client.get(reverse('update_exercise', kwargs={'exercise_id': exercise.id}), follow=True)
-        self.assertEqual(response.status_code, 301)
+        self.assertEqual(response.status_code, 200)
         self.assertTemplateUsed(response, 'exercise/update_exercise.html')
         print("200, OK")
 
@@ -95,12 +95,19 @@ class EditExerciseTest(TestCase):
         muscle_group = MuscleGroup.objects.create(name="Arms")
         self.client.login(username="TestUser", password="iampassword")
         exercise = Exercise.objects.create(Title="TestExercise", Creator=test_user, muscle_group=muscle_group, Public=True)
+        
+        # Execution
         data = {'Title': 'TestExercise',
-                'Description': 'this is the description'}
-        response = self.client.post(reverse('update_exercise', kwargs={'exercise_id': exercise.id}), data)
-        self.assertEqual(response.status_code, 301)
+                'Description': 'this is the description',
+                'Image': exercise.Image,
+                'muscle_group': exercise.muscle_group.pk,
+                'Public': exercise.Public }
+        response = self.client.post(reverse('update_exercise', kwargs={'exercise_id': exercise.id}), data, follow=True)
+        
+        # Testing
+        self.assertEqual(response.status_code, 200)
+        exercise = Exercise.objects.get(Title="TestExercise")
         self.assertEqual(exercise.Description, 'this is the description')
-        self.assertTemplateUsed(response, 'exercise/exercise_details.html')
         print("301, OK")
 
 

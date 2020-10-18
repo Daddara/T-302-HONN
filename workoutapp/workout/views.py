@@ -91,10 +91,14 @@ def update_exercise(request, exercise_id):
     exercise = get_object_or_404(Exercise, pk=exercise_id)
     if request.user != exercise.Creator:
         return render(request, '404.html', status=404)
+    
     form = ExerciseForm(request.POST or None, instance=exercise)
-    if form.is_valid():
-        form.save()
-        return redirect('exercise_details', exercise_id=exercise_id)
+    if request.method == 'POST':
+        if form.is_valid():
+            form.save()
+            return redirect('exercise_details', exercise_id=exercise_id)
+        else:
+            print(form.errors)
     return render(request, 'exercise/update_exercise.html', {'form': form})
 
 
