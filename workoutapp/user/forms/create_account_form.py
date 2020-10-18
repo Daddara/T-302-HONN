@@ -1,6 +1,9 @@
 from django import forms
+from django.db import models
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
+
+from user.models import UserInfo
 
 
 class CreateAccountForm(UserCreationForm):
@@ -11,3 +14,16 @@ class CreateAccountForm(UserCreationForm):
     class Meta:
         model = User
         fields = ('username', 'first_name', 'last_name', 'email', 'password1', 'password2', )
+
+
+class EditUserInfoForm(forms.ModelForm):
+    class Meta:
+        model = UserInfo
+        exclude = ['user', 'slug', 'friends']
+
+
+
+
+
+
+

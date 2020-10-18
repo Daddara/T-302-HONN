@@ -5,8 +5,11 @@ from django.contrib.auth.decorators import login_required
 from wallet.models import Wallet
 from .forms.create_account_form import CreateAccountForm
 from workout.models import Exercise
+from workout.models import Workout
 from .models import UserInfo, FriendRequest, Follow
 from dashboard.views import add_like_information_to_exercises
+from dashboard.views import add_like_information_to_workouts
+from user.forms.create_account_form import EditUserInfoForm
 
 
 # Create your views here.
@@ -35,41 +38,79 @@ def register(request):
 @login_required
 def profile_view(request, slug):
     request_user_info = UserInfo.objects.get(user=request.user)
-    profile = UserInfo.objects.get(slug=slug)
-    user = User.objects.get(username=profile)
+    user_info = UserInfo.objects.get(slug=slug)
+    user = User.objects.get(username=user_info)
 
     # Check if viewed user is logged in user's friend
     status = None
-    if profile not in request_user_info.friends.all():
+    if user_info not in request_user_info.friends.all():
         status = 'not_friends'
         # Has a friend request been sent
         if len(FriendRequest.objects.filter(FromUser=request.user).filter(ToUser=user)) == 1:
             status = 'sent'
 
     exercise_models = None
-    # If user is viewing own profile
-    if request.user == user:
 
+    # If user is viewing own user_info
+    if request.user == user:
         try:
             exercise_models = Exercise.objects.filter(Creator=request.user)
             exercise_models = add_like_information_to_exercises(request, exercise_models)
-        except Exercise.DoesNotExist:
-            pass
-    # Otherwise only get public exercises
+
+        except Exercise.DoesNotExist or Workout.DoesNotExist:
+            exercise_models = None
+
+        try:
+            workout_models = Workout.objects.filter(User=request.user)
+            workout_models = add_like_information_to_workouts(request, workout_models)
+        except Workout.DoesNotExist:
+            workout_models = None
+
+    # Otherwise only get the slug's public exercises
     else:
         try:
-            exercises = Exercise.objects.filter(Creator=user).filter(Public=True)
+            exercises = Exercise.objects.filter(Creator=slug).filter(Public=True)
             exercise_models = add_like_information_to_exercises(request, exercise_models)
         except Exercise.DoesNotExist:
-           pass
+            exercises = None
+
+        try:
+            workout_models = Workout.objects.filter(User=slug)
+            workout_models = add_like_information_to_workouts(request, workout_models)
+        except Workout.DoesNotExist:
+            workout_models = None
 
     context = {
         'user': user,
-        'user_info': profile,
+        'user_info': user_info,
         'exercises': exercise_models,
+        'workouts': workout_models,
         'status': status
     }
     return render(request, 'user/profile.html', context)
+
+
+@login_required
+def edit_profile_view(request):
+    # User info instance of user
+    user_info = UserInfo.objects.get(user=request.user)
+    # If the request is to edit user info
+    if request.method == 'POST':
+        form = EditUserInfoForm(request.POST)
+        if form.is_valid():
+            user_info.age = form.cleaned_data['age']
+            user_info.first_name = form.cleaned_data['first_name']
+            user_info.last_name = form.cleaned_data['last_name']
+            user_info.bio = form.cleaned_data['bio']
+            user_info.email = form.cleaned_data['email']
+            user_info.image = form.cleaned_data['image']
+            user_info.save()
+            return redirect('profile', slug=request.user.username)
+
+    # If the request is to get user info / Or the user info was incorrect on submission
+    form = EditUserInfoForm(instance=user_info)
+    return render(request, 'user/edit_profile.html', {'form': form})
+
 
 @login_required
 def view_friend_and_requests(request):
@@ -96,6 +137,14 @@ def following(request):
 def delete_exercise(request, exercise_id):
     exercise = get_object_or_404(Exercise, Creator=request.user, pk=exercise_id)
     exercise.delete()
+
+    return redirect('profile', slug=request.user.username)
+
+
+@login_required
+def delete_workout(request, workout_id):
+    workout = get_object_or_404(Workout, User=request.user, pk=workout_id)
+    workout.delete()
 
     return redirect('profile', slug=request.user.username)
 

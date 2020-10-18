@@ -3,6 +3,7 @@ from django.contrib.auth.models import User
 from django.urls import reverse
 from user.models import Follow, UserInfo, FriendRequest
 
+
 # Create your tests here.
 class UserViewTests(TestCase):
     def init(self):
@@ -18,8 +19,8 @@ class UserViewTests(TestCase):
     def test_register_view_post(self):
         print("Testing user registration: ", end="")
         data = {'username': 'TestUser',
-               'email': 'test_user@test.com',
-               'password1': 'iampassword', 'password2': 'iampassword'}
+                'email': 'test_user@test.com',
+                'password1': 'iampassword', 'password2': 'iampassword'}
 
         response = self.client.post(reverse('register'), data)
         self.assertRedirects(response, reverse('login'), target_status_code=200)
@@ -55,6 +56,52 @@ class UserViewTests(TestCase):
             self.assertTemplateUsed(response, 'user/profile.html')
             print("200, OK")
 
+    def test_profile_edit_get(self):
+        print("Testing profile page edit (get): ", end="")
+        data = {'username': 'TestUser',
+                'email': 'test_user@test.com',
+                'password1': 'iampassword', 'password2': 'iampassword'}
+        response = self.client.post(reverse('register'), data)
+        self.assertRedirects(response, reverse('login'), target_status_code=200)
+        if User.objects.filter(username=data['username']).exists():
+            self.client.login(username="TestUser", password="iampassword")
+            response = self.client.get(reverse('edit-user'))
+            self.assertEqual(response.status_code, 200)
+            self.assertTemplateUsed(response, 'user/edit_profile.html')
+            print("200, OK")
+
+    def test_profile_edit_post(self):
+        print("Testing profile page edit (post): ", end="")
+        user_data = {'username': 'TestUser',
+                     'email': 'test_user@test.com',
+                     'password1': 'iampassword', 'password2': 'iampassword'}
+        # Create user
+        self.client.post(reverse('register'), user_data)
+
+        # Get user
+        user = User.objects.get(username=user_data['username'])
+
+        # Login
+        self.client.login(username="TestUser", password="iampassword")
+
+        # Set up data to insert into form
+        mod_user_info = {'first_name': 'New first name',
+                         'last_name': 'New last name',
+                         'age': '30',
+                         'email': 'test_user@test.com',
+                         'bio': 'blabla',
+                         'image': 'newimageurl'}
+        # Post the data
+        response = self.client.post(reverse('edit-user'), mod_user_info)
+
+        # Check that it redirected to profile (happens on success)
+        self.assertRedirects(response, reverse('profile', kwargs={'slug': user.username}), target_status_code=200)
+
+        # Get the user info and check that it changed
+        users_info = UserInfo.objects.get(user=user)
+        self.assertEqual(users_info.first_name, mod_user_info['first_name'])
+        print("200, OK")
+
 
 class FollowTest(TestCase):
     def setUp(self):
@@ -65,8 +112,8 @@ class FollowTest(TestCase):
                 'email': 'test_user@test.com',
                 'password1': 'iampassword', 'password2': 'iampassword'}
         data2 = {'username': 'TestUser2',
-                'email': 'test_user@test.com',
-                'password1': 'iampassword2', 'password2': 'iampassword2'}
+                 'email': 'test_user@test.com',
+                 'password1': 'iampassword2', 'password2': 'iampassword2'}
         response = self.client.post(reverse('register'), data)
         response = self.client.post(reverse('register'), data2)
         self.assertRedirects(response, '/accounts/login/', target_status_code=200)
@@ -111,7 +158,7 @@ class FriendsTest(TestCase):
                  'password1': 'iampassword2', 'password2': 'iampassword2'}
         response = self.client.post(reverse('register'), data)
         response = self.client.post(reverse('register'), data2)
-        self.assertRedirects(response, '/accounts/login/', target_status_code=200)
+        self.assertRedirects(response, reverse('login'), target_status_code=200)
         self.user = User.objects.get(pk=1)
         self.user2 = User.objects.get(pk=2)
         self.user_info = UserInfo.objects.get(user=self.user)
@@ -130,8 +177,6 @@ class FriendsTest(TestCase):
         print("Testing if friend request is created: ", end="")
         # friend_request = FriendRequest.objects.create(FromUser=self.user, ToUser=self.user2)
         response = self.client.get('/accounts/friend-request/send/2')
-        self.assertRedirects(response, '/accounts/profile/TestUser2', target_status_code=200)
-
         self.assertEqual(len(FriendRequest.objects.all()), 1)
         find_request = FriendRequest.objects.get(FromUser=self.user, ToUser=self.user2)
         self.assertEqual(find_request.ToUser, self.user2)
@@ -144,7 +189,6 @@ class FriendsTest(TestCase):
         self.assertEqual(len(FriendRequest.objects.all()), 1)
 
         response = self.client.get('/accounts/friend-request/cancel/2')
-        self.assertRedirects(response, '/accounts/profile/TestUser2', target_status_code=200)
         self.assertEqual(len(FriendRequest.objects.all()), 0)
         self.assertNotIn(self.user_info, self.user_info2.friends.all())
         print("200, OK")
@@ -159,7 +203,6 @@ class FriendsTest(TestCase):
         self.assertEqual(len(FriendRequest.objects.all()), 0)
         self.assertIn(self.user_info2, self.user_info.friends.all())
         print("200, OK")
-
 
     def test_delete_friend_request(self):
         print("Testing friend request delete: ", end="")
