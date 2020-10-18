@@ -26,7 +26,7 @@ It's functionality is documented through the weather api class.
 
 # Implementation 2: Logging Server
 In the most recent version of our system we have a completely separated component which functions
-as a logging server. In it's current stage it allows for logging actions made in the front end to a database.
+as a logging server. In it's current state it allows for logging actions made in the front end to a database.
 It can be used where desired in the frontend by adding an 'lid' attribute to an html element and
 including the [supplemented javascript](workoutapp/static/logging.js). This has been further documented in the logging 
 readme [README.md](logging_server/README.md). It is very reusable and can be decoupled by either removing the js or the 
