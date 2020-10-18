@@ -20,8 +20,11 @@ like Conway warns us about. Each team member also has a better overview of our a
 and understands it better since the team is not split into groups that work in their own space.
 
 ### Conway's law in our application
-With our team being so large and communication taking place remotely we
-have had some technical debt in our project.
+Conway's law is not reflected in our application for the reasons described in the
+section above. But with our team being so large and communication taking place remotely we
+have had some technical debt in our project. I will describe the issues we had here
+because even though they're not directly Conway's law they do relate to it.
+
 The web application’s UI was not fully decided in advance so the team members have
 had the freedom to decide for themselves where and how the element or function that
 they’re implementing appears on the website. This has caused two team members to
