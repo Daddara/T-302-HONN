@@ -1,7 +1,7 @@
 # Database
 
 ## Migrate
-`$ python migrate.py migrate`
+`$ python manage.py migrate`
 
 ## Populate the database
 1. **Delete Data**(optional): delete all data in the database via: `$ python manage.py flush` (Confirm with `$ yes`)
@@ -16,6 +16,14 @@ This should only be done when you want to reset your entire database including t
 ## Dump the current database into a file
 `python manage.py dumpdata --exclude auth.permission --exclude contenttypes --exclude sessions --indent 2 > db.json`
 
-The system user has the following credentials:
+The system has the following credentials:
 * **Username**: `System`
 * **Password**: `adminadmin`
+
+The demo admin has the following credentials:
+* **Username**: `demoadmin`
+* **Password**: `demoadmin`
+
+The demo user has the following credentials:
+* **Username**: `demouser`
+* **Password**: `peepee123`

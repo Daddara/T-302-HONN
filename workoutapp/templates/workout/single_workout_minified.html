@@ -2,13 +2,13 @@
     <div class="workout-container">
         <div class="creation-date">{{ workout.time_passed }}</div>
         <div class="item-title">
-            <a href=#>{{workout.Name}}</a>
+            <a href="{% url 'workout_details' workout.id %}">{{workout.Name}}</a>
         </div>
         <div class="short-description">{{ workout.short_description }}</div>
         <div><b>Goal:</b> {{workout.workout_goal}}</div>
         <div><b>Category:</b> {{workout.Category}}</div>
         <div class="social-stats">
-            <div class="likes" workout-id="{{ workout.id }}">
+            <div class="likes" lid="LikeButton" workout-id="{{ workout.id }}">
                 <span class="social-span">{{ workout.Likes }}</span>
                 {% if workout.Has_Liked %}
                     <i class="fa fa-thumbs-up like-idf liked"></i>
@@ -16,7 +16,7 @@
                     <i class="fa fa-thumbs-up like-idf"></i>
                 {% endif %}
             </div>
-            <div class="dislikes" workout-id="{{ workout.id }}">
+            <div class="dislikes" lid="DislikeButton" workout-id="{{ workout.id }}">
                 <span class="social-span">{{ workout.Dislikes }}</span>
                 {% if workout.Has_Disliked %}
                     <i class="fa fa-thumbs-down dislike-idf disliked"></i>
@@ -30,8 +30,9 @@
                 By {{ workout.User.username }}
             {% else %}
                 <!-- Link to user profile -->
-                <a href="#"><span style="color: black;">By</span> {{ workout.User.username }}</a>
+                <a href="{% url 'profile' workout.User.username %}"><span style="color: black;">By</span> {{ workout.User.username }}</a>
             {% endif %}
         </div>
+        <div class="created-at" style="display: none;">{{ workout.CreatedAt.timestamp }}</div>
     </div>
 </div>

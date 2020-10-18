@@ -1,7 +1,6 @@
 from django.contrib.auth.decorators import login_required
 from django.views.decorators.csrf import csrf_exempt
 from django.shortcuts import render, redirect, get_object_or_404
-# Create your views here.
 from django.http import HttpResponse
 import datetime
 
@@ -87,8 +86,27 @@ def create_exercise(request):
     return render(request, 'exercise/create_exercise.html', {'form': form})
 
 
-def edit_exercise(request, id=None, template_name='update_exercise.html'):
-    pass
+def update_exercise(request, exercise_id):
+    exercise = get_object_or_404(Exercise, pk=exercise_id)
+    if request.user != exercise.Creator:
+        return render(request, '404.html', status=404)
+    
+    form = ExerciseForm(request.POST or None, instance=exercise)
+    if request.method == 'POST':
+        if form.is_valid():
+            form.save()
+            return redirect('exercise_details', exercise_id=exercise_id)
+        else:
+            print(form.errors)
+    return render(request, 'exercise/update_exercise.html', {'form': form})
+
+
+def exercise_details(request, exercise_id):
+    try:
+        exercise = get_object_or_404(Exercise, pk=exercise_id)
+    except Exercise.DoesNotExist:
+        return HttpResponse(status=404)
+    return render(request, 'exercise/exercise_details.html', context={'exercise_details': exercise})
 
 
 @csrf_exempt
@@ -163,3 +181,14 @@ def rate_workout(request):
 
         # Be Happy
         return HttpResponse(status=200)
+
+def workout_details(request, workout_id):
+    try:
+        workout = get_object_or_404(Workout, pk=workout_id)
+    except Workout.DoesNotExist:
+        return HttpResponse(status=404)
+    try:
+        managers = WorkoutManager.objects.filter(Workout=workout)
+    except Workout.DoesNotExist:
+        return HttpResponse(status=404)
+    return render(request, 'workout/workout_details.html', context={'workout':workout, 'managers':managers})

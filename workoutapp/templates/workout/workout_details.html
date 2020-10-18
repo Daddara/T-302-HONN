@@ -1,0 +1,68 @@
+{% extends "base.html" %}
+{% load static %}
+{% block extra_head %}
+    <link rel="stylesheet" type="text/css" href="{% static 'workout/css/workout.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'scrollbars.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'dashboard/css/dashboard_nav.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'dashboard/css/dashboard_header.css' %}">
+{% endblock %}
+
+{% block content %}
+
+<div class="workout-background-shadow">
+    <div class="workout-container">
+        <div class="creation-date">{{ workout.time_passed }}</div>
+        <div class="item-title">{{workout.Name}}</div>
+
+        <div class="short-description">{{ workout.short_description }}</div>
+        <div><b>Goal:</b> {{workout.workout_goal}}</div>
+        <div><b>Category:</b> {{workout.Category}}</div>
+
+        {% for manager in managers %}
+            <div><b>{{ manager.Exercise }}: </b>{{ manager.Quantity }}</div>
+        {% endfor %}
+
+        {% if workout.Image != None %}
+            <img heigt="200px" width="200px" src="{{workout.Image}}" class="mx-auto img-fluid" alt="no image">
+        {% endif %}
+
+        <div class="social-stats">
+            <div class="likes" workout-id="{{ workout.id }}">
+                <span class="social-span">{{ workout.Likes }}</span>
+                {% if workout.Has_Liked %}
+                    <i class="fa fa-thumbs-up like-idf liked"></i>
+                {% else %}
+                    <i class="fa fa-thumbs-up like-idf"></i>
+                {% endif %}
+            </div>
+            <div class="dislikes" workout-id="{{ workout.id }}">
+                <span class="social-span">{{ workout.Dislikes }}</span>
+                {% if workout.Has_Disliked %}
+                    <i class="fa fa-thumbs-down dislike-idf disliked"></i>
+                {% else %}
+                    <i class="fa fa-thumbs-down dislike-idf"></i>
+                {% endif %}
+            </div>
+        </div>
+        <div class="workout-creator">
+            {% if workout.User.username == 'System' %}
+                {% if workout.Public == False %}
+                    A private workout by {{ workout.User.username }}
+                {% else %}
+                    A public workout by {{ workout.User.username }}
+                {% endif %}
+
+            {% else %}
+                <!-- Link to user profile -->
+                {% if workout.Public == False %}
+                    <a href="#"><span style="color: black;">A private workout by</span> {{ workout.User.username }}</a>
+                {% else %}
+                    <a href="#"><span style="color: black;">A public workout by</span> {{ workout.User.username }}</a>
+                {% endif %}
+
+            {% endif %}
+        </div>
+    </div>
+</div>
+
+{% endblock %}

@@ -90,6 +90,7 @@ def get_exercises_with_likes(request):
 def add_like_information_to_exercises(request, exercise_models):
     if exercise_models:
         for model in exercise_models:
+            model = creation_time_passed(model)
             # Get the count of all likes on current exercise
             try:
                 likes = ExerciseRating.objects.filter(Exercise=model, Rating=1).count()
@@ -175,11 +176,11 @@ def add_like_information_to_workouts(request, workout_models):
         return workout_models
 
 
-def creation_time_passed(workout_model):
+def creation_time_passed(model):
     date_time_now = datetime.now()
     timezone = pytz.timezone("UCT")
     date_time_now = timezone.localize(date_time_now)
-    time_diff = date_time_now - workout_model.CreatedAt
+    time_diff = date_time_now - model.CreatedAt
     time_delta = time_diff.total_seconds()
     minutes = time_delta / 60
     time_passed_value = round(minutes)
@@ -206,5 +207,5 @@ def creation_time_passed(workout_model):
                         time_passed_value = round(years)
 
     time_passed_string = '{} {} ago'.format(time_passed_value, time_passed_unit)
-    workout_model.time_passed = time_passed_string
-    return workout_model
+    model.time_passed = time_passed_string
+    return model

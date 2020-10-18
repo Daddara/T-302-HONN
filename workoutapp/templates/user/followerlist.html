@@ -1,19 +1,34 @@
 {% extends 'base.html' %}
-{% block content %}
 
-    <div class="row">
-        <div class="col-lg-3" style="background-color: azure">
-            <h2>The people you follow:</h2>
-            {% if follow %}
-                {% for fol in follow %}
-                    <h3>{{ fol.Following }}</h3>
-                {% endfor %}
-            {% else %}
-                <div class="page-content">
-                    <p>You are not following anyone</p>
-                </div>
-            {% endif %}
+{% load static %}
+
+{% block extra_head %}
+
+{% endblock %}
+
+{% block content %}
+<div class="container">
+    <div class="page-title" style="background-color: #ffa474;">
+        <div class="row">
+            <div class="col-md-auto mx-auto">
+                <h2>The people you follow:</h2>
+            </div>
         </div>
     </div>
-
+    <div class="page-content">
+        <div class="row">
+            <div class="col-md-auto mx-auto">
+                {% if follow %}
+                    {% for fol in follow %}
+                        <h1><a href="/accounts/profile/{{ fol.Following }}"
+                               style="text-decoration:none; color: black;">{{ fol.Following }}</a></h1>
+                        <h4>Followed on: {{ fol.FollowedAt }}</h4>
+                    {% endfor %}
+                {% else %}
+                    <p>You are not following anyone</p>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</div>
 {% endblock %}
