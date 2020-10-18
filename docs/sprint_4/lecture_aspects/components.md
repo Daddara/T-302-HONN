@@ -8,7 +8,7 @@ An important feature of components is the emphasis on separation of concern.
 They are a reuse-based approach to defining, implementing and composing loosely coupled independent software
 into systems. This allows for better management, easier decoupling and simpler future upgradability.
 
-### Implementation 1: Weather Service
+# Implementation 1: Weather Service
 The weather service is a software package that serves up it's functionality using an interface. It's purpose is to 
 fetch weather data from an external web service and offering methods of retrieving them. The weather service can be
 easily decoupled since it is very much independent and directly unrelated to other applications of the system.
@@ -21,10 +21,10 @@ It's functionality is documented through the weather api class.
 - Communication through interface
 - Documented functionality
 
-[!image](..weatherservice_component.png)
+![image](docs/sprint_4/weatherservice_component.png)
 
 
-### Implementation 2: Logging Server
+# Implementation 2: Logging Server
 In the most recent version of our system we have a completely separated component which functions
 as a logging server. In it's current stage it allows for logging actions made in the front end to a database.
 It can be used where desired in the frontend by adding an 'lid' attribute to an html element and
@@ -39,3 +39,4 @@ using it's services.
 - Web service
 - Easily decoupled
 - Simple integration
+- Documented functionality
