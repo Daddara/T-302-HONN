@@ -1,7 +1,7 @@
 # Database
 
 ## Migrate
-`$ python migrate.py migrate`
+`$ python manage.py migrate`
 
 ## Populate the database
 1. **Delete Data**(optional): delete all data in the database via: `$ python manage.py flush` (Confirm with `$ yes`)
