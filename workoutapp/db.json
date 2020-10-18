@@ -1313,11 +1313,50 @@
   }
 },
 {
+  "model": "admin.logentry",
+  "pk": 102,
+  "fields": {
+    "action_time": "2020-10-18T20:02:22.192Z",
+    "user": 1,
+    "content_type": 7,
+    "object_id": "3",
+    "object_repr": "demouser",
+    "action_flag": 1,
+    "change_message": "[{\"added\": {}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 103,
+  "fields": {
+    "action_time": "2020-10-18T20:06:38.355Z",
+    "user": 1,
+    "content_type": 9,
+    "object_id": "1",
+    "object_repr": "demouser",
+    "action_flag": 1,
+    "change_message": "[{\"added\": {}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 104,
+  "fields": {
+    "action_time": "2020-10-18T20:08:16.027Z",
+    "user": 1,
+    "content_type": 21,
+    "object_id": "3",
+    "object_repr": "demouser: 26950",
+    "action_flag": 1,
+    "change_message": "[{\"added\": {}}]"
+  }
+},
+{
   "model": "auth.user",
   "pk": 1,
   "fields": {
     "password": "pbkdf2_sha256$216000$J4oJeScBbRXC$9nPyDuF3Zx8UwqXh9sDHXyanBLMnnGnYD9938JcY974=",
-    "last_login": "2020-10-18T19:39:39.135Z",
+    "last_login": "2020-10-18T20:08:02.975Z",
     "is_superuser": true,
     "username": "demoadmin",
     "first_name": "",
@@ -1353,7 +1392,7 @@
   "pk": 3,
   "fields": {
     "password": "pbkdf2_sha256$216000$aty2zBDmkXIN$vhxIdfiUCkSGqNTJO3dGkNC3ADOC4u0B/kZXZ5tYcQg=",
-    "last_login": "2020-10-18T19:40:18.124Z",
+    "last_login": "2020-10-18T20:08:40.112Z",
     "is_superuser": false,
     "username": "demouser",
     "first_name": "Demo",
@@ -1392,6 +1431,31 @@
     "image": "https://www.vhv.rs/dpng/d/256-2569650_men-profile-icon-png-image-free-download-searchpng.png",
     "CreatedAt": "2020-09-29T19:58:57.082Z",
     "friends": []
+  }
+},
+{
+  "model": "user.userinfo",
+  "pk": 3,
+  "fields": {
+    "user": 3,
+    "slug": "demouser",
+    "firstName": "Demo",
+    "lastName": "User",
+    "age": 20,
+    "image": "https://www.vhv.rs/dpng/d/256-2569650_men-profile-icon-png-image-free-download-searchpng.png",
+    "CreatedAt": "2020-10-18T20:02:22.190Z",
+    "friends": [
+      1
+    ]
+  }
+},
+{
+  "model": "user.follow",
+  "pk": 1,
+  "fields": {
+    "Username": 3,
+    "Following": 1,
+    "FollowedAt": "2020-10-18T20:06:38.354Z"
   }
 },
 {
@@ -2150,6 +2214,16 @@
   }
 },
 {
+  "model": "workout.workoutrating",
+  "pk": 13,
+  "fields": {
+    "Judge": 3,
+    "Workout": 3,
+    "SubmittedAt": "2020-10-18T19:46:45.675Z",
+    "Rating": -1
+  }
+},
+{
   "model": "wallet.wallet",
   "pk": 1,
   "fields": {
@@ -2163,6 +2237,14 @@
   "fields": {
     "user": 2,
     "fitcoin": 0
+  }
+},
+{
+  "model": "wallet.wallet",
+  "pk": 3,
+  "fields": {
+    "user": 3,
+    "fitcoin": 36950
   }
 },
 {
@@ -2201,6 +2283,16 @@
     "customer": 1,
     "price": 100.0,
     "date": "2020-09-21T00:07:19.059Z"
+  }
+},
+{
+  "model": "payment.order",
+  "pk": 2,
+  "fields": {
+    "product": 4,
+    "customer": 3,
+    "price": 200.0,
+    "date": "2020-10-18T20:19:12.155Z"
   }
 }
 ]
