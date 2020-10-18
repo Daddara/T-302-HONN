@@ -18,18 +18,19 @@ function order_by_rating(target){
         let dislikes = parseInt(dislikes_element.querySelector('.social-span').textContent);
 
         let rating = 0;
-        // If there are no dislikes (divide by zero error)
-        if(dislikes===0){
-            if (likes===0){
+
+        if(dislikes===0 && likes===0){
                 rating = 0;
             }
+        else{
+            if (dislikes!==0 && likes===0){
+                rating = -dislikes
+            }
             else {
-                 rating = likes;
+                rating = (likes + 1) / (likes + dislikes + 1);
             }
         }
-        else {
-            rating = likes/(likes+dislikes);
-        }
+
         console.log(rating);
         // If the rating is not already in dict -> Create key and value
         let test_exists = dict[rating]
