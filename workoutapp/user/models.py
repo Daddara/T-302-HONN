@@ -16,23 +16,22 @@ class Messages(models.Model):
 class UserInfo(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     slug = models.SlugField()
-    firstName = models.CharField(max_length=20, default="")
-    lastName = models.CharField(max_length=20, default="")
+    first_name = models.CharField(max_length=20, default="")
+    last_name = models.CharField(max_length=20, default="")
     age = models.IntegerField(default=20)
-    bio = models.CharField(max_length=250, default="")
-    email = models.EmailField(max_length=254, default="")
+    bio = models.CharField(max_length=250, default="", blank=True)
+    email = models.EmailField(max_length=254, default="", blank=True)
     image = models.CharField(
         max_length=250,
         default="https://www.vhv.rs/dpng/d/256-2569650_men-profile-icon-png-image-free-download-searchpng.png")
     CreatedAt = models.DateTimeField(auto_now=True)
     friends = models.ManyToManyField("UserInfo", blank=True)
-    
+
     def __str__(self):
         return str(self.user.username)
 
     def get_abs_url(self):
         return "/accounts/profile/{}".format(self.slug)
-
 
 
 class Follow(models.Model):
