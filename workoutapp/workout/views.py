@@ -4,6 +4,7 @@ from django.shortcuts import render, redirect, get_object_or_404
 from django.http import HttpResponse
 import datetime
 
+from dashboard.views import add_like_information_to_workouts
 from .forms.rate_workout import RateWorkoutForm
 from .models import Workout, WorkoutManager, Exercise, ExerciseRating, RatingValue, WorkoutRating
 from .forms.create_workout_form import CreateWorkoutForm, WorkoutManagerForm
@@ -182,6 +183,7 @@ def rate_workout(request):
         # Be Happy
         return HttpResponse(status=200)
 
+
 def workout_details(request, workout_id):
     try:
         workout = get_object_or_404(Workout, pk=workout_id)
@@ -191,4 +193,10 @@ def workout_details(request, workout_id):
         managers = WorkoutManager.objects.filter(Workout=workout)
     except Workout.DoesNotExist:
         return HttpResponse(status=404)
-    return render(request, 'workout/workout_details.html', context={'workout':workout, 'managers':managers})
+
+    if not workout.Public:
+        if workout.User != request.user:
+            return HttpResponse(status=404)
+
+    workout = add_like_information_to_workouts(request, [workout])[0]
+    return render(request, 'workout/workout_details.html', context={'workout': workout, 'managers': managers})

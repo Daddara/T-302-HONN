@@ -1352,11 +1352,63 @@
   }
 },
 {
+  "model": "admin.logentry",
+  "pk": 105,
+  "fields": {
+    "action_time": "2020-10-20T14:20:10.592Z",
+    "user": 1,
+    "content_type": 13,
+    "object_id": "2",
+    "object_repr": "System's exercise: Situps",
+    "action_flag": 2,
+    "change_message": "[{\"changed\": {\"fields\": [\"Image\"]}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 106,
+  "fields": {
+    "action_time": "2020-10-20T14:21:36.636Z",
+    "user": 1,
+    "content_type": 13,
+    "object_id": "1",
+    "object_repr": "demoadmin's exercise: Pushups",
+    "action_flag": 2,
+    "change_message": "[{\"changed\": {\"fields\": [\"Image\"]}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 107,
+  "fields": {
+    "action_time": "2020-10-20T14:22:08.309Z",
+    "user": 1,
+    "content_type": 13,
+    "object_id": "3",
+    "object_repr": "System's exercise: Pullups",
+    "action_flag": 2,
+    "change_message": "[{\"changed\": {\"fields\": [\"Image\"]}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 108,
+  "fields": {
+    "action_time": "2020-10-20T14:22:41.838Z",
+    "user": 1,
+    "content_type": 13,
+    "object_id": "4",
+    "object_repr": "System's exercise: Bodyweight Squats",
+    "action_flag": 2,
+    "change_message": "[{\"changed\": {\"fields\": [\"Image\"]}}]"
+  }
+},
+{
   "model": "auth.user",
   "pk": 1,
   "fields": {
     "password": "pbkdf2_sha256$216000$J4oJeScBbRXC$9nPyDuF3Zx8UwqXh9sDHXyanBLMnnGnYD9938JcY974=",
-    "last_login": "2020-10-18T20:08:02.975Z",
+    "last_login": "2020-10-20T14:19:03.858Z",
     "is_superuser": true,
     "username": "demoadmin",
     "first_name": "",
@@ -1392,7 +1444,7 @@
   "pk": 3,
   "fields": {
     "password": "pbkdf2_sha256$216000$aty2zBDmkXIN$vhxIdfiUCkSGqNTJO3dGkNC3ADOC4u0B/kZXZ5tYcQg=",
-    "last_login": "2020-10-18T20:08:40.112Z",
+    "last_login": "2020-10-20T14:25:28.722Z",
     "is_superuser": false,
     "username": "demouser",
     "first_name": "Demo",
@@ -1414,8 +1466,10 @@
     "first_name": "Demo",
     "last_name": "Admin",
     "age": 25,
+    "bio": "I changed this",
+    "email": "new@gmail.com",
     "image": "https://www.vhv.rs/dpng/d/256-2569650_men-profile-icon-png-image-free-download-searchpng.png",
-    "CreatedAt": "2020-09-20T21:15:24.141Z",
+    "CreatedAt": "2020-10-18T23:45:13.796Z",
     "friends": []
   }
 },
@@ -1428,6 +1482,8 @@
     "first_name": "Fit",
     "last_name": "Connect",
     "age": 0,
+    "bio": "",
+    "email": "",
     "image": "https://www.vhv.rs/dpng/d/256-2569650_men-profile-icon-png-image-free-download-searchpng.png",
     "CreatedAt": "2020-09-29T19:58:57.082Z",
     "friends": []
@@ -1442,6 +1498,8 @@
     "first_name": "Demo",
     "last_name": "User",
     "age": 20,
+    "bio": "This is the best workout page evah",
+    "email": "",
     "image": "https://www.vhv.rs/dpng/d/256-2569650_men-profile-icon-png-image-free-download-searchpng.png",
     "CreatedAt": "2020-10-18T20:02:22.190Z",
     "friends": [
@@ -1731,9 +1789,9 @@
   "fields": {
     "Title": "Pushups",
     "Creator": 1,
-    "CreatedAt": "2020-10-18T19:11:58.024Z",
+    "CreatedAt": "2020-10-20T14:21:36.635Z",
     "Description": "STEPS: Get down on all fours, placing your hands slightly wider than your shoulders. Straighten your arms and legs. Lower your body until your chest nearly touches the floor. Pause, then push yourself back up. Repeat.",
-    "Image": "https://hips.hearstapps.com/hmg-prod.s3.amazonaws.com/images/basic-pushup-0-1446644701.jpg",
+    "Image": "https://cms.nhl.bamgrid.com/images/photos/290886446/1284x722/cut.jpg",
     "Equipment": null,
     "Public": true,
     "muscle_group": 11,
@@ -1750,9 +1808,9 @@
   "fields": {
     "Title": "Situps",
     "Creator": 2,
-    "CreatedAt": "2020-10-18T19:11:58.024Z",
+    "CreatedAt": "2020-10-20T14:20:10.591Z",
     "Description": "Lie down on your back, keep your knees bent and your back and feet flat on the mat. Slowly lift your torso and sit up. Return to the starting position by rolling down one vertebrae at a time. Repeat the exercise until set is complete. PROPER FORM AND",
-    "Image": "https://www.onefitstop.com/community/wp-content/uploads/2017/06/goodform_l-400x400.jpg",
+    "Image": "https://slellison.files.wordpress.com/2010/11/situps.jpg",
     "Equipment": null,
     "Public": true,
     "muscle_group": 12,
@@ -1769,9 +1827,9 @@
   "fields": {
     "Title": "Pullups",
     "Creator": 2,
-    "CreatedAt": "2020-10-18T19:11:58.024Z",
+    "CreatedAt": "2020-10-20T14:22:08.308Z",
     "Description": "A pull-up is an upper-body strength exercise.",
-    "Image": "https://www.vhv.rs/dpng/d/256-2569650_men-profile-icon-png-image-free-download-searchpng.png",
+    "Image": "https://hips.hearstapps.com/hmg-prod.s3.amazonaws.com/images/u05-bottomhalfwaytop-ism-mh310118-1558552383.jpg?crop=1.00xw:0.812xh;0,0.0812xh&resize=480:*",
     "Equipment": null,
     "Public": true,
     "muscle_group": 10,
@@ -1788,9 +1846,9 @@
   "fields": {
     "Title": "Bodyweight Squats",
     "Creator": 2,
-    "CreatedAt": "2020-10-18T19:11:58.024Z",
+    "CreatedAt": "2020-10-20T14:22:41.837Z",
     "Description": "Squat like a champ.",
-    "Image": "https://upload.wikimedia.org/wikipedia/commons/thumb/8/82/Squats.svg/1200px-Squats.svg.png",
+    "Image": "https://armoredfarmer.files.wordpress.com/2019/05/body-weight-squats-1.jpg",
     "Equipment": null,
     "Public": true,
     "muscle_group": 3,

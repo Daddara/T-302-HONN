@@ -154,9 +154,11 @@ def searchbarUsers(request):
     if request.method == 'GET':
         isFollowing = False
         search = request.GET.get('search')
-        post = User.objects.all().filter(username=search)
+        if not search:
+            search = ""
+        post = User.objects.filter(username__contains=search)
         user = User.objects.get(username=request.user)
-        followers = Follow.objects.all().filter(Username=request.user)
+        followers = Follow.objects.filter(Username=request.user)
         for i in followers:
             for j in post:
                 if i.Following.username == j.username:
@@ -169,7 +171,7 @@ def searchbarUsers(request):
 
     if request.method == 'POST':
         search = request.GET.get('search')
-        post = User.objects.all().filter(username=search)
+        post = User.objects.filter(username__contains=search)
         poster = post.get(username=search)
         current_user = User.objects.get(username=request.user)
         follow = Follow(Username=current_user, Following=poster, FollowedAt="")

@@ -6,10 +6,10 @@
             <a href="{% url 'exercise_details' exercise.id %}">{{exercise.Title}}</a>
         </div>
         <div><b>Trains:</b> {{exercise.muscle_group}}</div>
-        {% if exercise.equipment == None %}
+        {% if not exercise.Equipment %}
             <div><b>Equipment:</b> None</div>
         {% else %}
-            <div><b>Equipment:</b> {{exercise.equipment}}</div>
+            <div><b>Equipment:</b> {{ exercise.Equipment.Name }}</div>
         {% endif %}
         <div class="social-stats">
             <div class="likes" exercise-id="{{ exercise.id }}">

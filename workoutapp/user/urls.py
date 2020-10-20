@@ -11,7 +11,7 @@ urlpatterns = [
     path('following/', views.following, name='following'),
     path('delete-exercise/<int:exercise_id>/', views.delete_exercise, name="delete-exercise"),
     path('delete-workout/<int:workout_id>/', views.delete_workout, name="delete-workout"),
-    path('searchbarUsers/', views.searchbarUsers, name='searchbarUsers'),
+    path('search-user/', views.searchbarUsers, name='searchbarUsers'),
     path('friends/', views.view_friend_and_requests, name='user_friends'),
 
     path('friend-request/send/<int:id>', views.new_friend_request, name='send-request'),

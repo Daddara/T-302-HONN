@@ -1,68 +1,86 @@
 {% extends "base.html" %}
 {% load static %}
 {% block extra_head %}
-    <link rel="stylesheet" type="text/css" href="{% static 'workout/css/workout.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'workout/css/details.css' %}">
     <link rel="stylesheet" type="text/css" href="{% static 'scrollbars.css' %}">
     <link rel="stylesheet" type="text/css" href="{% static 'dashboard/css/dashboard_nav.css' %}">
     <link rel="stylesheet" type="text/css" href="{% static 'dashboard/css/dashboard_header.css' %}">
 {% endblock %}
 
 {% block content %}
+    {% include 'dashboard/dashboard_header_workout.html' %}
+    <div class="search-bar">
+        {% include 'dashboard/dashboard_nav_workout_detail.html' with categories=categories %}
+    </div>
+    <div class="page-content scrollbar-warning">
+        <div class="center-page-content">
+            <div class="workout-container">
+                <div class="creation-date">{{ workout.time_passed }}</div>
+                <div class="item-title"><h1>{{workout.Name}}</h1></div>
+                <div class="short-description">{{ workout.short_description }}</div>
+                <div class="goal"><b>Goal:</b> {{workout.workout_goal}}</div>
+                <div class="category"><b>Category:</b> {{workout.Category}}</div>
+                <div class="workout-content">
+                     {% if workout.Repetitions > 1 %}
+                         <div id="repeat-icon"><i class="fa fa-redo"></i></div>
+                        <div class="workout-reps">{{ workout.Repetitions }}x</div>
+                    {% endif %}
+                    <div class="center-page-content">
+                        {% if not managers %}
+                            <h4>No exercises have been added yet!</h4>
+                        {% endif %}
+                        {% for manager in managers %}
+                        <div class="exercise-manager">
+                            <span class="exercise-number">#{{ forloop.counter }}</span>
+                            <span class="exercise-quantity">{{ manager.Quantity }} {{ manager.Unit.Unit }}</span>
+                            {% include 'exercise/workout_exercise.html' with exercise=manager.Exercise %}
+                        </div>
+                        {% endfor %}
+                    </div>
+                </div>
 
-<div class="workout-background-shadow">
-    <div class="workout-container">
-        <div class="creation-date">{{ workout.time_passed }}</div>
-        <div class="item-title">{{workout.Name}}</div>
-
-        <div class="short-description">{{ workout.short_description }}</div>
-        <div><b>Goal:</b> {{workout.workout_goal}}</div>
-        <div><b>Category:</b> {{workout.Category}}</div>
-
-        {% for manager in managers %}
-            <div><b>{{ manager.Exercise }}: </b>{{ manager.Quantity }}</div>
-        {% endfor %}
-
-        {% if workout.Image != None %}
-            <img heigt="200px" width="200px" src="{{workout.Image}}" class="mx-auto img-fluid" alt="no image">
-        {% endif %}
-
-        <div class="social-stats">
-            <div class="likes" workout-id="{{ workout.id }}">
-                <span class="social-span">{{ workout.Likes }}</span>
-                {% if workout.Has_Liked %}
-                    <i class="fa fa-thumbs-up like-idf liked"></i>
-                {% else %}
-                    <i class="fa fa-thumbs-up like-idf"></i>
-                {% endif %}
+                <div class="social-stats">
+                    <div class="likes" workout-id="{{ workout.id }}">
+                        <span class="social-span">{{ workout.Likes }}</span>
+                        {% if workout.Has_Liked %}
+                            <i class="fa fa-thumbs-up like-idf liked"></i>
+                        {% else %}
+                            <i class="fa fa-thumbs-up like-idf"></i>
+                        {% endif %}
+                    </div>
+                    <div class="dislikes" workout-id="{{ workout.id }}">
+                        <span class="social-span">{{ workout.Dislikes }}</span>
+                        {% if workout.Has_Disliked %}
+                            <i class="fa fa-thumbs-down dislike-idf disliked"></i>
+                        {% else %}
+                            <i class="fa fa-thumbs-down dislike-idf"></i>
+                        {% endif %}
+                    </div>
+                </div>
+                <div class="workout-creator">
+                    {% if workout.User.username == 'System' %}
+                            By System
+                    {% else %}
+                        <!-- Link to user profile -->
+                        {% if workout.User == request.user %}
+                            <span style="color: black;">You created this workout</span>
+                        {% else %}
+                            <a href="{% url 'profile' workout.User.username %}">
+                                <span style="color: black;">Workout by</span> {{ workout.User.username }}
+                            </a>
+                        {% endif %}
+                    {% endif %}
+                </div>
             </div>
-            <div class="dislikes" workout-id="{{ workout.id }}">
-                <span class="social-span">{{ workout.Dislikes }}</span>
-                {% if workout.Has_Disliked %}
-                    <i class="fa fa-thumbs-down dislike-idf disliked"></i>
-                {% else %}
-                    <i class="fa fa-thumbs-down dislike-idf"></i>
-                {% endif %}
-            </div>
-        </div>
-        <div class="workout-creator">
-            {% if workout.User.username == 'System' %}
-                {% if workout.Public == False %}
-                    A private workout by {{ workout.User.username }}
-                {% else %}
-                    A public workout by {{ workout.User.username }}
-                {% endif %}
-
-            {% else %}
-                <!-- Link to user profile -->
-                {% if workout.Public == False %}
-                    <a href="#"><span style="color: black;">A private workout by</span> {{ workout.User.username }}</a>
-                {% else %}
-                    <a href="#"><span style="color: black;">A public workout by</span> {{ workout.User.username }}</a>
-                {% endif %}
-
-            {% endif %}
         </div>
     </div>
-</div>
 
+
+{% endblock %}
+{% block extra_js %}
+    <script>
+        // This is for the search input
+        let search_class="workout-container"
+    </script>
+    <script src="{% static 'workout/js/details.js' %}"></script>
 {% endblock %}
