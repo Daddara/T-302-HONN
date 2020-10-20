@@ -9,9 +9,9 @@
     <div class="page-content">
     <h2>Incoming friend requests</h2>
     {% for request in received %}
-        <h3><a href=#> {{ request.FromUser.username }} </h3></a>
-        <small><a class='btn btn-primary' href="/friend-request/accept/{{ request.FromUser.id }}">Accept</a></small>
-        <small><a class='btn btn-warning' href="/friend-request/delete/{{ request.FromUser.id }}">Ignore</a></small>
+        <h3><a href="{% url 'profile' request.FromUser.username %}"> {{ request.FromUser.username }} </a></h3>
+        <small><a class='btn btn-primary' href="{% url 'accept-request' request.FromUser.id %}">Accept</a></small>
+        <small><a class='btn btn-warning' href="{% url 'delete-request' request.FromUser.id %}">Ignore</a></small>
     {% endfor %}
     </div>
 {% endblock %}

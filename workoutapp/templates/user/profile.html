@@ -19,7 +19,7 @@
                             <h1 class="text-left text-uppercase">{{ user.username }}</h1>
                             <h6>{{ user.email }}</h6>
                         </div>
-                        {% if request.user == user %}
+
                         <div class="col-md-auto text-right">
                             <h3>Find a user to follow</h3>
                             <form action="{% url 'searchbarUsers' %}" method="get">
@@ -27,26 +27,33 @@
                                 <button type="submit">Search</button>
                             </form>
                         </div>
-                        {% endif %}
+
                     </div>
                     <div class="col-md-auto text-right">
+                    <!-- if current user is the same as the profile being viewed -->
                         {% if request.user == user %}
                             <a class='btn btn-primary' href="{% url 'user_friends' %}">My Friends</a>
+                    <!-- if profile being viewed is not current user -->
                         {% else %}
                             {% if status == 'not_friends' %}
-                                <a class='btn btn-primary' href="/friend-request/send/{{ user.id }}">Add Friend</a>
+                                <a class='btn btn-primary' href="{% url 'send-request' user.id %}">Add Friend</a>
                             {% elif status == 'sent' %}
-                                <a class="btn btn-warning" href="/friend-request/cancel/{{ user.id }}">Cancel Request</a>
+                                <a class="btn btn-warning" href="{% url 'cancel-request' user.id %}">Cancel Request</a>
+                            {% elif status == 'received' %}
+                                <a class="btn btn-warning" href="{% url 'user_friends' %}">Request received</a>
                             {% endif %}
                         {% endif %}
                     </div>
+
                     <div class="row">
                         <div class="col-md-auto text-left">
                             <h6>Full name: {{ user_info.firstName }} {{ user_info.lastName }}</h6>
                             <h6>Age: {{ user_info.age }}</h6>
                             <h6>Bio: {{ user_info.bio }}</h6>
                             <h6>Member since: {{ user_info.CreatedAt }}</h6>
-                            <a href="{% url 'edit-user' %} "><i class="fas fa-edit"></i>Edit User</a>
+                            {% if request.user == user %}
+                                <a href="{% url 'edit-user' %} "><i class="fas fa-edit"></i>Edit User</a>
+                            {% endif %}
                         </div>
 
                         <div class="col-md-12 mt-4">
@@ -55,9 +62,11 @@
                                      {% if exercises %}
                                      {% for exercise in exercises %}
                                          {% include 'exercise/single_exercise_minimal.html' with exercise=exercise %}
-                                         <a href="{% url 'delete-exercise' exercise.id %}">
-                                             <button class="btn btn-primary" type="button"><span>Delete exercise</span></button>
-                                         </a>
+                                         {% if request.user == user %}
+                                             <a href="{% url 'delete-exercise' exercise.id %}">
+                                                 <button class="btn btn-primary" type="button"><span>Delete exercise</span></button>
+                                             </a>
+                                         {% endif %}
                                      {% endfor %}
                                      {% else %}
                                         <p>You haven't added any exercises!</p>
@@ -69,9 +78,11 @@
                                     {% if workouts %}
                                     {% for workout in workouts %}
                                         {% include 'workout/single_workout_minified.html' with workout=workout %}
-                                        <a href="{% url 'delete-workout' workout.id %}">
-                                            <button class="btn btn-primary" type="button"><span>Delete workout</span></button>
-                                        </a>
+                                        {% if request.user == user %}
+                                            <a href="{% url 'delete-workout' workout.id %}">
+                                                <button class="btn btn-primary" type="button"><span>Delete workout</span></button>
+                                            </a>
+                                        {% endif %}
                                     {% endfor %}
                                     {% else %}
                                         <p>You haven't added any workouts!</p>
@@ -86,7 +97,9 @@
         </div>
         <div class="col-lg-4 order-lg-1 text-center">
             <img src="{{ user_info.image }}" class="img-fluid" alt="avatar">
-            <button class="btn btn-primary" type="button"><span>Change Photo</span></button>
+            {% if request.user == user %}
+                <button class="btn btn-primary" type="button"><span>Change Photo</span></button>
+            {% endif %}
             <!-- Needs javascript implementation for new profile picture -->
             <label class="custom-file">
                 <input type="file" id="file" class="custom-file-input">
