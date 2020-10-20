@@ -199,7 +199,6 @@ class FriendsTest(TestCase):
         self.assertEqual(len(FriendRequest.objects.all()), 1)
 
         response = self.client.get('/accounts/friend-request/accept/2')
-        self.assertRedirects(response, '/accounts/profile/TestUser', target_status_code=200)
         self.assertEqual(len(FriendRequest.objects.all()), 0)
         self.assertIn(self.user_info2, self.user_info.friends.all())
         print("200, OK")
@@ -210,7 +209,6 @@ class FriendsTest(TestCase):
         self.assertEqual(len(FriendRequest.objects.all()), 1)
 
         response = self.client.get('/accounts/friend-request/delete/2')
-        self.assertRedirects(response, '/accounts/profile/TestUser', target_status_code=200)
         self.assertEqual(len(FriendRequest.objects.all()), 0)
         self.assertNotIn(self.user_info2, self.user_info.friends.all())
         print("200, OK")

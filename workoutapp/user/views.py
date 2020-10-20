@@ -48,8 +48,8 @@ def profile_view(request, slug):
         # Has a friend request been sent
         if len(FriendRequest.objects.filter(FromUser=request.user).filter(ToUser=user)) == 1:
             status = 'sent'
-
-    exercise_models = None
+        elif len(FriendRequest.objects.filter(FromUser=user).filter(ToUser=request.user)) == 1:
+            status = 'received'
 
     # If user is viewing own user_info
     if request.user == user:
@@ -69,13 +69,13 @@ def profile_view(request, slug):
     # Otherwise only get the slug's public exercises
     else:
         try:
-            exercises = Exercise.objects.filter(Creator=slug).filter(Public=True)
+            exercise_models = Exercise.objects.filter(Creator=user).filter(Public=True)
             exercise_models = add_like_information_to_exercises(request, exercise_models)
         except Exercise.DoesNotExist:
-            exercises = None
+            exercise_models = None
 
         try:
-            workout_models = Workout.objects.filter(User=slug)
+            workout_models = Workout.objects.filter(User=user)
             workout_models = add_like_information_to_workouts(request, workout_models)
         except Workout.DoesNotExist:
             workout_models = None
@@ -182,7 +182,7 @@ def new_friend_request(request, id):
     recipient = get_object_or_404(User, id=id)
     user_info = UserInfo.objects.get(user=recipient)
     friend_request, created = FriendRequest.objects.get_or_create(FromUser=request.user, ToUser=recipient)
-    return HttpResponseRedirect(user_info.get_abs_url())
+    return redirect(user_info.get_abs_url())
 
 
 @login_required
@@ -191,7 +191,7 @@ def cancel_friend_request(request, id):
     user_info = UserInfo.objects.get(user=recipient)
     friend_request = FriendRequest.objects.get(FromUser=request.user, ToUser=recipient)
     friend_request.delete()
-    return HttpResponseRedirect(user_info.get_abs_url())
+    return redirect(user_info.get_abs_url())
 
 
 @login_required
@@ -200,7 +200,7 @@ def delete_friend_request(request, id):
     sender = get_object_or_404(User, id=id)
     friend_request = FriendRequest.objects.get(FromUser=sender, ToUser=request.user)
     friend_request.delete()
-    return HttpResponseRedirect(request_user.get_abs_url())
+    return redirect('user_friends')
 
 
 @login_required
@@ -214,4 +214,4 @@ def accept_friend_request(request, id):
     sender_info.friends.add(receiver_info)
     receiver_info.friends.add(sender_info)
     friend_request.delete()
-    return HttpResponseRedirect(request_user.get_abs_url())
+    return redirect('user_friends')

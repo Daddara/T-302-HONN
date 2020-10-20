@@ -14,8 +14,8 @@ urlpatterns = [
     path('searchbarUsers/', views.searchbarUsers, name='searchbarUsers'),
     path('friends/', views.view_friend_and_requests, name='user_friends'),
 
-    path('friend-request/send/<int:id>', views.new_friend_request),
-    path('friend-request/cancel/<int:id>', views.cancel_friend_request),
-    path('friend-request/delete/<int:id>', views.delete_friend_request),
-    path('friend-request/accept/<int:id>', views.accept_friend_request)
+    path('friend-request/send/<int:id>', views.new_friend_request, name='send-request'),
+    path('friend-request/cancel/<int:id>', views.cancel_friend_request, name='cancel-request'),
+    path('friend-request/delete/<int:id>', views.delete_friend_request, name='delete-request'),
+    path('friend-request/accept/<int:id>', views.accept_friend_request, name='accept-request')
 ]
