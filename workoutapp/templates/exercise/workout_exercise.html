@@ -1,0 +1,31 @@
+{% load static %}
+<div class="exercise-container">
+    <div class="creation-date">{{ exercise.time_passed }}</div>
+    <div class="item-title">
+        <a href="{% url 'exercise_details' exercise.id %}">{{exercise.Title}}</a>
+    </div>
+    <div><b>Trains:</b> {{exercise.muscle_group}}</div>
+    {% if not exercise.Equipment %}
+        <div><b>Equipment:</b> None</div>
+    {% else %}
+        <div><b>Equipment:</b> {{ exercise.Equipment.Name }}</div>
+    {% endif %}
+    <div class="created-at" style="display: none;">{{ exercise.CreatedAt.timestamp }}</div>
+
+    <!-- Only displayed when dropdown button is toggled -->
+    <div class="hidden-info">
+        <div class="image"><img src="{{ exercise.Image }}"></div>
+        <div><b>Exercise Description</b></div>
+        <div class="description">{{ exercise.Description }}</div>
+        <div class="exercise-creator">
+        {% if exercise.Creator.username == 'System' %}
+            By {{ exercise.Creator }}
+        {% else %}
+            <!-- Link to user profile -->
+            <a href="{% url 'profile' exercise.Creator.username %}"><span style="color: black;">By</span> {{ exercise.Creator }}</a>
+        {% endif %}
+    </div>
+    </div>
+    <div class="drop-up"><i class="fa fa-caret-up"></i></div>
+    <div class="drop-down"><i class="fa fa-caret-down"></i></div>
+</div>

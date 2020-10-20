@@ -1,0 +1,173 @@
+/* Workout styling */
+.workout-container {
+    margin-top: 30px;
+    padding: 5px;
+    padding-bottom: 20px;
+    display: inline-block;
+    justify-content: center;
+    min-height: 200px;
+    height: fit-content;
+    background-color: #ffa474;
+    border: 1px solid black;
+    border-radius: 4px;
+    position: relative;
+    width: 80%;
+}
+
+.workout-creator {
+    margin:0px;
+    padding: 0px;
+    display: flex;
+    font-size: small;
+    align-self: flex-end;
+    position: absolute;
+    bottom: 0;
+}
+
+.social-stats {
+    position: absolute;
+    bottom: 0;
+    right: 10px;
+}
+
+.creation-date {
+    position: absolute;
+    top: 0;
+    right: 1%;
+}
+
+.short-description {
+    width: 90%;
+    margin: auto;
+    padding-top: 5px;
+    padding-bottom: 10px;
+}
+
+.goal {
+    width: fit-content;
+    display: inline-block;
+    margin-right: 30px;
+}
+.category {
+    width: fit-content;
+    display: inline
+}
+.workout-image {
+    margin-top: 20px;
+}
+a {
+    color: #b03717;
+}
+
+a:hover {
+    color: black;
+}
+
+.page-title {
+    background-color: #ffa474;
+}
+
+.image img {
+    width: 250px;
+    height: 200px;
+}
+
+.workout-content {
+    margin-top: 10px;
+}
+
+#repeat-icon, .workout-reps {
+    font-size: 20px;
+    width: fit-content;
+    margin: auto;
+    display: inline-block;
+}
+
+
+/* Exercise styling */
+
+.hidden-info {
+    display: none;
+}
+
+.drop-up {
+    display: none;
+}
+.drop-up, .drop-down {
+    font-size: 25px;
+    width: fit-content;
+    margin: auto;
+}
+
+.drop-up:hover, .drop-down:hover{
+    transform: scale(1.5);
+}
+
+.exercise-quantity {
+    text-align: left;
+    font-weight: bold;
+}
+.exercise-number {
+    font-weight: bold;
+    font-size: larger;
+}
+
+.exercise-manager {
+    width: fit-content;
+    margin: 10px;
+    display: flex;
+    flex-direction: column;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    padding-left: 20px;
+    padding-right: 20px;
+    border: 1px dashed black;
+    border-radius: 10px;
+    margin-bottom: 20px;
+}
+
+.exercise-creator {
+    position: absolute;
+    left: 2px;
+    bottom: 0;
+}
+
+.exercise-container {
+    margin-bottom: 30px;
+    padding: 5px;
+    display: inline-block;
+    justify-content: center;
+    width: 400px;
+    min-height: 100px;
+    height: fit-content;
+    background-color: #c5d3da;
+    border: 1px solid black;
+    border-radius: 4px;
+    position: relative;
+}
+
+.creation-date {
+    position: absolute;
+    top: 0;
+    right: 1%;
+}
+
+.description {
+    margin: auto;
+    max-width: 400px;
+    margin-bottom: 40px;
+}
+
+/*Other*/
+@media (max-width: 1000px){
+    .workout-container {
+        width: 95%;
+    }
+    .exercise-manager {
+        width: 90%;
+    }
+    .exercise-container {
+        margin: auto;
+        width: inherit;
+    }
+}
