@@ -9,8 +9,6 @@ urlpatterns = [
     path('profile/update', views.edit_profile_view, name='edit-user'),
     path('profile/<slug:slug>', views.profile_view, name='profile'),
     path('following/', views.following, name='following'),
-    path('delete-exercise/<int:exercise_id>/', views.delete_exercise, name="delete-exercise"),
-    path('delete-workout/<int:workout_id>/', views.delete_workout, name="delete-workout"),
     path('search-user/', views.searchbarUsers, name='searchbarUsers'),
     path('friends/', views.view_friend_and_requests, name='user_friends'),
 
