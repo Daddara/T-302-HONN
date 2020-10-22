@@ -2,6 +2,7 @@
 {% load static %}
 {% block extra_head %}
     <link rel="stylesheet" href="{% static "exercise/css/exercise.css" %}">
+    <link rel="stylesheet" href="{% static "exercise/css/detail.css" %}">
     <link rel="stylesheet" href="{% static "scrollbars.css" %}">
     <link rel="stylesheet" type="text/css" href="{% static 'dashboard/css/dashboard_nav.css' %}">
     <link rel="stylesheet" type="text/css" href="{% static 'dashboard/css/dashboard_header.css' %}">
@@ -10,68 +11,72 @@
 {% block content %}
     {% include 'dashboard/dashboard_header_exercise.html' %}
     <div class="search-bar">
-    {% include 'dashboard/dashboard_nav_exercise.html' with muscle_groups=muscle_groups %}
+    {% include 'dashboard/dashboard_nav_exercise_detail.html' with muscle_groups=muscle_groups %}
     </div>
-    <div class="exercise-background-shadow">
-        <div class="exercise-container">
-            {% if exercise_details.Creator == request.user %}
-                <a href="{% url 'update_exercise' exercise_details.id %}">Edit</a>
-            {% endif %}
-            <div class="item-title">
-                    <h1 class="text-center text-uppercase">{{ exercise_details.Title }}</h1>
-            </div>
-            {% if exercise_details.Description == None %}
-                <div><b>Description:</b> None</div>
-            {% else %}
-                <div><b>Description:</b> {{ exercise_details.Description }}</div>
-            {% endif %}
-            <div><b>Trains:</b> {{exercise_details.muscle_group}}</div>
-            {% if exercise_details.Equipment == None %}
-                <div><b>Equipment:</b> None</div>
-            {% else %}
-                <div><b>Equipment:</b> {{exercise_details.Equipment}}</div>
-            {% endif %}
-
-            {% if exercise_details.Image != None %}
-                <img height="200px" width="200px" src="{{ exercise_details.Image }}" class="mx-auto img-fluid" alt="no image">
-            {% endif %}
-
-            <div class="social-stats">
-                <div class="likes" exercise-id="{{ exercise_details.id }}">
-                    <span class="social-span">{{ exercise_details.Likes }}</span>
-                    <!-- Needs javascript implementation for user changing his rating on page (+/- 1) -->
-                    {% if exercise.Has_Liked %}
-                        <i class="fa fa-thumbs-up like-idf liked"></i>
-                    {% else %}
-                        <i class="fa fa-thumbs-up like-idf"></i>
-                    {% endif %}
-                </div>
-                <div class="dislikes"  exercise-id="{{ exercise_details.id }}">
-                    <span class="social-span">{{ exercise_details.Dislikes }}</span>
-                    {% if exercise_details.Has_Disliked %}
-                        <i class="fa fa-thumbs-down dislike-idf disliked"></i>
-                    {% else %}
-                        <i class="fa fa-thumbs-down dislike-idf"></i>
-                    {% endif %}
-                </div>
-            </div>
-            <div class="exercise-creator">
-                {% if exercise_details.Creator.username == 'System' %}
-                    {% if exercise_details.public == False %}
-                        A private exercise by {{ exercise_details.Creator }}
-                    {% else %}
-                        A public exercise by {{ exercise_details.Creator }}
-                    {% endif %}
-
-                {% else %}
-                    <!-- Link to user profile -->
-                    {% if exercise_details.public == False %}
-                        <a href="#"><span style="color: black;">A private exercise by</span> {{ exercise_details.Creator }}</a>
-                    {% else %}
-                        <a href="#"><span style="color: black;">A public exercise by</span> {{ exercise_details.Creator }}</a>
-                    {% endif %}
-
+    <div class="page-content">
+        <div class="center-page-content">
+            <div class="exercise-container">
+                {% if exercise_details.Creator == request.user %}
+                    <div id="edit-exercise"><h6>
+                        <a href="{% url 'update_exercise' exercise_details.id %}"><i class="fas fa-edit"></i>Edit</a>
+                    </h6></div>
                 {% endif %}
+                <div class="item-title">
+                        <h1 class="text-center text-uppercase">{{ exercise_details.Title }}</h1>
+                </div>
+                {% if exercise_details.Description == None %}
+                    <div><b>Description:</b> None</div>
+                {% else %}
+                    <div><b>Description</b></div><div id="exercise-description">{{ exercise_details.Description }}</div>
+                {% endif %}
+                <div><b>Trains:</b> {{exercise_details.muscle_group}}</div>
+                {% if exercise_details.Equipment == None %}
+                    <div><b>Equipment:</b> None</div>
+                {% else %}
+                    <div><b>Equipment:</b> {{exercise_details.Equipment}}</div>
+                {% endif %}
+
+                {% if exercise_details.Image != None %}
+                    <img height="200px" width="200px" src="{{ exercise_details.Image }}" class="mx-auto img-fluid" alt="no image">
+                {% endif %}
+
+                <div class="social-stats">
+                    <div class="likes" exercise-id="{{ exercise_details.id }}">
+                        <span class="social-span">{{ exercise_details.Likes }}</span>
+                        <!-- Needs javascript implementation for user changing his rating on page (+/- 1) -->
+                        {% if exercise.Has_Liked %}
+                            <i class="fa fa-thumbs-up like-idf liked"></i>
+                        {% else %}
+                            <i class="fa fa-thumbs-up like-idf"></i>
+                        {% endif %}
+                    </div>
+                    <div class="dislikes"  exercise-id="{{ exercise_details.id }}">
+                        <span class="social-span">{{ exercise_details.Dislikes }}</span>
+                        {% if exercise_details.Has_Disliked %}
+                            <i class="fa fa-thumbs-down dislike-idf disliked"></i>
+                        {% else %}
+                            <i class="fa fa-thumbs-down dislike-idf"></i>
+                        {% endif %}
+                    </div>
+                </div>
+                <div class="exercise-creator">
+                    {% if exercise_details.Creator.username == 'System' %}
+                        {% if exercise_details.public == False %}
+                            A private exercise by {{ exercise_details.Creator }}
+                        {% else %}
+                            A public exercise by {{ exercise_details.Creator }}
+                        {% endif %}
+
+                    {% else %}
+                        <!-- Link to user profile -->
+                        {% if exercise_details.public == False %}
+                            <a href="#"><span style="color: black;">A private exercise by</span> {{ exercise_details.Creator }}</a>
+                        {% else %}
+                            <a href="#"><span style="color: black;">A public exercise by</span> {{ exercise_details.Creator }}</a>
+                        {% endif %}
+
+                    {% endif %}
+                </div>
             </div>
         </div>
     </div>

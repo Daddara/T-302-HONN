@@ -99,7 +99,7 @@ def update_exercise(request, exercise_id):
             return redirect('exercise_details', exercise_id=exercise_id)
         else:
             print(form.errors)
-    return render(request, 'exercise/update_exercise.html', {'form': form})
+    return render(request, 'exercise/update_exercise.html', {'form': form, 'exercise': exercise})
 
 
 def exercise_details(request, exercise_id):
