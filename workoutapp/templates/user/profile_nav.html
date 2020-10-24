@@ -32,6 +32,11 @@
                     <a id="exercises-nav" class="navbar-brand"><i class="fas fa-dumbbell"></i> Exercises</a>
                 {% endif %}
             </li>
+            <li class="nav-item">
+                {% if request.user == user %}
+                    <a id="wallet-nav" class="navbar-brand"><i class="fas fa-wallet"></i> Wallet</a>
+                {% endif %}
+            </li>
         </ul>
     </div>
 </nav>

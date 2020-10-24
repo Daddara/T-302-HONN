@@ -117,7 +117,7 @@
             <ul>
                 {% for person in following %}
                 <a class="profile-href" href="{% url 'profile' slug=person.Following.username %}">
-                    <li class="friend"> <!-- ENDED HERE FIX THIS WANT TO SEND FRIEND IMAGE HERE-->
+                    <li class="friend">
                         <img src="https://d1bvpoagx8hqbg.cloudfront.net/259/4ea4217efbbf179e02269b065d23a60e.jpg">
                         <div class="friend-name">{{ person.Following.username }}</div>
                     </li>
@@ -132,6 +132,28 @@
         <div id="bio"><b>Bio:</b> {{ user_info.bio }}</div>
         <div id="member-since"><b>Member since</b>: {{ user_info.CreatedAt }}</div>
         <div id="email"><b>Email:</b> {{ user.email }}</div>
+
+        {% if request.user != user %}
+        <div id="donation-container">
+            <form id="donation-form" method="POST" action="{% url 'profile' slug=user.username %}">
+                {% csrf_token %}
+                {% for field in donation_form %}
+                    {{ field.label_tag }} {{ field }}
+                    <button id="donate-button" type=submit form="donation-form" class="btn btn-primary">
+                        <i class="fas fa-donate"></i> Donate
+                    </button>
+                    {% if field.errors %}
+                    <div class="alert alert-danger" id="field-errors">{% for error in field.errors %}{{ error }}{% endfor %}</div>
+                    {% endif %}
+                    {% if messages %}
+                        {% for message in messages %}
+                             <div id="success-message" class="alert alert-success" id="field-errors">{{ message }}</div>
+                        {% endfor %}
+                    {% endif %}
+                {% endfor %}
+            </form>
+        </div>
+        {% endif %}
     </div>
 
     <div id="exercises">
@@ -144,6 +166,67 @@
         {% for workout in workouts %}
             {% include 'workout/single_workout_minified.html' with workout=workout %}
         {% endfor %}
+    </div>
+
+    <div id="wallet">
+        <div id="balance-info">
+            <div id="balance"><b><i class="fas fa-coins"></i> {{ user_wallet.fitcoin }} Fitcoins</b></div>
+            <a href="{% url 'purchase-fitcoins' %}"><button class="btn btn-primary"><i class="fas fa-cart-plus"></i> Top Up</button></a>
+        </div>
+        <div id="sent-transactions" class="scrollbar-info">
+            <div class="table-title"><h4>Sent Transactions</h4></div>
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th scope="col">#</th>
+                        <th scope="col">To</th>
+                        <th scope="col">Amount</th>
+                        <th scope="col">Date</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for transaction in sent_transactions %}
+                        <tr>
+                        <th scope="row">{{ forloop.counter }}</th>
+                        <td>
+                            <a href="{% url 'profile' slug=transaction.receiver.username %}">
+                                {{ transaction.receiver.username }}
+                            </a>
+                        </td>
+                        <td>{{ transaction.amount }}</td>
+                        <td>{{ transaction.date }}</td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+        <div id="received-transactions" class="scrollbar-info">
+            <div class="table-title"><h4>Received Transactions</h4></div>
+           <table class="table">
+                <thead>
+                    <tr>
+                        <th scope="col">#</th>
+                        <th scope="col">From</th>
+                        <th scope="col">Amount</th>
+                        <th scope="col">Date</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for transaction in received_transactions %}
+                        <tr>
+                        <th scope="row">{{ forloop.counter }}</th>
+                        <td>
+                            <a href="{% url 'profile' slug=transaction.sender.username %}">
+                                {{ transaction.sender.username }}
+                            </a>
+                        </td>
+                        <td>{{ transaction.amount }}</td>
+                        <td>{{ transaction.date }}</td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
     </div>
 
 </div>

@@ -1,11 +1,13 @@
+from django.contrib import messages
 from django.contrib.auth.models import User
 from django.http import HttpResponseRedirect
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.decorators import login_required
-from wallet.models import Wallet
+from wallet.models import Wallet, Transaction
 from .forms.create_account_form import CreateAccountForm
 from workout.models import Exercise
 from workout.models import Workout
+from .forms.donate_form import Donate
 from .models import UserInfo, FriendRequest, Follow
 from dashboard.views import add_like_information_to_exercises
 from dashboard.views import add_like_information_to_workouts
@@ -45,6 +47,12 @@ def profile_view(request, slug):
     received_requests = FriendRequest.objects.filter(ToUser=user)
     follower_count = Follow.objects.filter(Following=request.user).count()
     is_following = Follow.objects.filter(Username=request.user)
+    donation_form = Donate(initial={'amount': 100})
+    request_user_wallet = Wallet.objects.get(user=request.user)
+    sent_transactions = Transaction.objects.filter(sender=request.user)
+    received_transactions = Transaction.objects.filter(receiver=request.user)
+    print(sent_transactions)
+    print(received_transactions)
 
     # Check if viewed user is logged in user's friend
     status = None
@@ -73,6 +81,28 @@ def profile_view(request, slug):
 
     # Otherwise only get the slug's public exercises
     else:
+        if request.method == "POST":
+            donation_form = Donate(data=request.POST)
+            # someone tryna donate this bitch niga
+            if donation_form.is_valid():
+                # Check if oke and transfa da liras
+                amount = donation_form.cleaned_data['amount']
+                if request_user_wallet.fitcoin < amount:
+                    donation_form.add_error('amount', "Insufficient funds for transaction!")
+                else:
+                    donation_target = get_object_or_404(User, username=slug)
+                    target_user_wallet = Wallet.objects.get(user=donation_target)
+                    target_user_wallet.add_balance(amount)
+                    request_user_wallet.remove_balance(amount)
+                    new_transaction = Transaction.objects.create(sender=request.user, receiver=donation_target,
+                                                                 amount=amount)
+                    new_transaction.save()
+                    donation_form = Donate(initial={'amount': 100})
+                    messages.add_message(request, messages.SUCCESS, 'Donation sent!')
+            else:
+                # Sumting wong
+                donation_form.add_error(None, "Something went terribly wrong!")
+
         try:
             exercise_models = Exercise.objects.filter(Creator=user).filter(Public=True)
             exercise_models = add_like_information_to_exercises(request, exercise_models)
@@ -95,8 +125,13 @@ def profile_view(request, slug):
         'sent_requests': sent_requests,
         'received_requests': received_requests,
         'follower_count': follower_count,
-        'following': is_following
+        'following': is_following,
+        'donation_form': donation_form,
+        'user_wallet': request_user_wallet,
+        'sent_transactions': sent_transactions,
+        'received_transactions': received_transactions
     }
+
     return render(request, 'user/profile.html', context)
 
 

@@ -272,3 +272,65 @@ a.navbar-brand:hover {
 #edit-profile a{
     color: blue!important;
 }
+
+#donation-container {
+    background-color: deepskyblue;
+    border-radius: 10px;
+    padding: 10px;
+    position: absolute;
+    bottom: 20px
+}
+
+#donate-button, #id_amount {
+    display: inline-block;
+    width: fit-content!important;
+}
+
+#donate-button {
+    margin-left: 10px;
+}
+#id_amount {
+    width: 100px!important;
+}
+label {
+    font-weight: bold;
+}
+#text {
+    display: block;
+}
+
+#field-errors {
+    display: block;
+    width: fit-content;
+    margin: auto;
+}
+
+#success-message {
+    margin-top: 10px;
+}
+#wallet {
+    display: none;
+}
+
+#received-transactions, #sent-transactions {
+    margin-left: 40px;
+    border: 1px solid black;
+    display: inline-block;
+    width: 450px;
+    vertical-align: top;
+    height: 350px;
+    overflow-y: scroll;
+    background-color: #eae9e3;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    border-radius: 10px;
+}
+
+#balance {
+    font-size: x-large;
+    margin-bottom: 20px;
+}
+
+#balance-info {
+    margin-top: 20px;
+}
