@@ -40,6 +40,11 @@ def profile_view(request, slug):
     request_user_info = UserInfo.objects.get(user=request.user)
     user_info = UserInfo.objects.get(slug=slug)
     user = User.objects.get(username=user_info)
+    friends = user_info.friends.all()
+    sent_requests = FriendRequest.objects.filter(FromUser=user)
+    received_requests = FriendRequest.objects.filter(ToUser=user)
+    follower_count = Follow.objects.filter(Following=request.user).count()
+    is_following = Follow.objects.filter(Username=request.user)
 
     # Check if viewed user is logged in user's friend
     status = None
@@ -85,7 +90,12 @@ def profile_view(request, slug):
         'user_info': user_info,
         'exercises': exercise_models,
         'workouts': workout_models,
-        'status': status
+        'status': status,
+        'friends': friends,
+        'sent_requests': sent_requests,
+        'received_requests': received_requests,
+        'follower_count': follower_count,
+        'following': is_following
     }
     return render(request, 'user/profile.html', context)
 
@@ -103,7 +113,8 @@ def edit_profile_view(request):
             user_info.last_name = form.cleaned_data['last_name']
             user_info.bio = form.cleaned_data['bio']
             user_info.email = form.cleaned_data['email']
-            user_info.image = form.cleaned_data['image']
+            user_info.profile_image = form.cleaned_data['profile_image']
+            user_info.cover_image = form.cleaned_data['cover_image']
             user_info.save()
             return redirect('profile', slug=request.user.username)
 
@@ -177,7 +188,7 @@ def cancel_friend_request(request, id):
     user_info = UserInfo.objects.get(user=recipient)
     friend_request = FriendRequest.objects.get(FromUser=request.user, ToUser=recipient)
     friend_request.delete()
-    return redirect(user_info.get_abs_url())
+    return redirect('profile', slug=request.user.username)
 
 
 @login_required
@@ -186,7 +197,7 @@ def delete_friend_request(request, id):
     sender = get_object_or_404(User, id=id)
     friend_request = FriendRequest.objects.get(FromUser=sender, ToUser=request.user)
     friend_request.delete()
-    return redirect('user_friends')
+    return redirect('profile', slug=request.user.username)
 
 
 @login_required
@@ -200,4 +211,4 @@ def accept_friend_request(request, id):
     sender_info.friends.add(receiver_info)
     receiver_info.friends.add(sender_info)
     friend_request.delete()
-    return redirect('user_friends')
+    return redirect('profile', slug=request.user.username)

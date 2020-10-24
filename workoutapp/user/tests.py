@@ -90,7 +90,8 @@ class UserViewTests(TestCase):
                          'age': '30',
                          'email': 'test_user@test.com',
                          'bio': 'blabla',
-                         'image': 'newimageurl'}
+                         'profile_image': 'newimageurl',
+                         'cover_image': 'new_cover_image'}
         # Post the data
         response = self.client.post(reverse('edit-user'), mod_user_info)
 

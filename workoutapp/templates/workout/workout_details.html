@@ -38,6 +38,7 @@
                         {% endfor %}
                     </div>
                 </div>
+                {% if workout.User == request.user %}
                 <div class="add-exercise">
                     <!-- Button triggers selection popup -->
                     <button id="add-exercises-button" type="button" class="btn btn-success" data-toggle="modal" data-target="#popup-add-exercise">
@@ -101,6 +102,7 @@
                         </div>
                     </div>
                 </div>
+                {% endif %}
                 <div class="social-stats">
                     <div class="likes" workout-id="{{ workout.id }}">
                         <span class="social-span">{{ workout.Likes }}</span>

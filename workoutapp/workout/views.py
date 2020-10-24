@@ -107,7 +107,7 @@ def exercise_details(request, exercise_id):
         exercise = get_object_or_404(Exercise, pk=exercise_id)
     except Exercise.DoesNotExist:
         return HttpResponse(status=404)
-    return render(request, 'exercise/exercise_details.html', context={'exercise_details': exercise})
+    return render(request, 'exercise/exercise_details.html', context={'exercise': exercise})
 
 
 @csrf_exempt

@@ -1,5 +1,6 @@
 .exercise-container {
     width: 40rem;
+    position: relative;
 }
 .exercise-container:hover {
     transform: scale(1.0);
@@ -19,4 +20,10 @@
 
 .social-stats {
     margin-top: 40px;
+}
+
+#delete-exercise {
+    position: absolute;
+    right: 10px;
+    bottom: 2%;
 }

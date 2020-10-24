@@ -1,0 +1,38 @@
+{% load static %}
+<!--NAVIGATION BAR START-->
+<nav id="dashboard-nav" class="navbar navbar-expand-lg navbar-light bg-light">
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#dashboardToggler"
+            aria-controls="dashboardToggler" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="dashboardToggler">
+        <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
+            <li class="nav-item">
+                <a id="about-me-nav" class="navbar-brand"><i class="fas fa-info"></i> About</a>
+            </li>
+                <!-- if current user is the same as the profile being viewed -->
+            <li class="nav-item">
+                {% if request.user == user %}
+                    <a id="friends-nav" class="navbar-brand"><i class="fas fa-user-friends"></i> Friends</a>
+                {% endif %}
+            </li>
+            <li class="nav-item">
+                {% if request.user == user %}
+                    <a id="follower-nav" class="navbar-brand"><i class="fa fa-users" aria-hidden="true"></i> Following</a>
+                {% endif %}
+            </li>
+            <li class="nav-item">
+                {% if request.user != user %}
+                    <a id="workouts-nav" class="navbar-brand"><i class="far fa-file-word"></i> Workouts</a>
+                {% endif %}
+            </li>
+            <li class="nav-item">
+                {% if request.user != user %}
+                    <a id="exercises-nav" class="navbar-brand"><i class="fas fa-dumbbell"></i> Exercises</a>
+                {% endif %}
+            </li>
+        </ul>
+    </div>
+</nav>
+<!--NAVIGATION BAR END-->
