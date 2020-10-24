@@ -1404,11 +1404,89 @@
   }
 },
 {
+  "model": "admin.logentry",
+  "pk": 109,
+  "fields": {
+    "action_time": "2020-10-20T19:20:51.212Z",
+    "user": 1,
+    "content_type": 14,
+    "object_id": "11",
+    "object_repr": "Weight: Pnds",
+    "action_flag": 2,
+    "change_message": "[{\"changed\": {\"fields\": [\"Unit\"]}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 110,
+  "fields": {
+    "action_time": "2020-10-20T19:21:21.734Z",
+    "user": 1,
+    "content_type": 14,
+    "object_id": "12",
+    "object_repr": "None: None",
+    "action_flag": 1,
+    "change_message": "[{\"added\": {}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 111,
+  "fields": {
+    "action_time": "2020-10-20T19:21:54.017Z",
+    "user": 1,
+    "content_type": 14,
+    "object_id": "12",
+    "object_repr": "None: None",
+    "action_flag": 3,
+    "change_message": ""
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 112,
+  "fields": {
+    "action_time": "2020-10-20T19:21:58.757Z",
+    "user": 1,
+    "content_type": 14,
+    "object_id": "11",
+    "object_repr": "Weight: Pounds",
+    "action_flag": 2,
+    "change_message": "[{\"changed\": {\"fields\": [\"Unit\"]}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 113,
+  "fields": {
+    "action_time": "2020-10-24T14:03:46.255Z",
+    "user": 1,
+    "content_type": 7,
+    "object_id": "1",
+    "object_repr": "demoadmin",
+    "action_flag": 2,
+    "change_message": "[{\"changed\": {\"fields\": [\"Friends\"]}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 114,
+  "fields": {
+    "action_time": "2020-10-24T15:02:11.460Z",
+    "user": 1,
+    "content_type": 7,
+    "object_id": "1",
+    "object_repr": "demoadmin",
+    "action_flag": 2,
+    "change_message": "[{\"changed\": {\"fields\": [\"Friends\"]}}]"
+  }
+},
+{
   "model": "auth.user",
   "pk": 1,
   "fields": {
     "password": "pbkdf2_sha256$216000$J4oJeScBbRXC$9nPyDuF3Zx8UwqXh9sDHXyanBLMnnGnYD9938JcY974=",
-    "last_login": "2020-10-20T14:19:03.858Z",
+    "last_login": "2020-10-24T16:22:46.301Z",
     "is_superuser": true,
     "username": "demoadmin",
     "first_name": "",
@@ -1444,7 +1522,7 @@
   "pk": 3,
   "fields": {
     "password": "pbkdf2_sha256$216000$aty2zBDmkXIN$vhxIdfiUCkSGqNTJO3dGkNC3ADOC4u0B/kZXZ5tYcQg=",
-    "last_login": "2020-10-20T14:25:28.722Z",
+    "last_login": "2020-10-24T14:58:00.485Z",
     "is_superuser": false,
     "username": "demouser",
     "first_name": "Demo",
@@ -1465,12 +1543,15 @@
     "slug": "demoadmin",
     "first_name": "Demo",
     "last_name": "Admin",
-    "age": 25,
+    "age": 99,
     "bio": "I changed this",
     "email": "new@gmail.com",
-    "image": "https://www.vhv.rs/dpng/d/256-2569650_men-profile-icon-png-image-free-download-searchpng.png",
+    "profile_image": "https://www.meme-arsenal.com/memes/ef851516d068ab140a519fc273cda053.jpg",
     "CreatedAt": "2020-10-18T23:45:13.796Z",
-    "friends": []
+    "cover_image": "https://cultivatedculture.com/wp-content/uploads/2019/05/Chromatic-LinkedIn-Cover-Photo-Background.png",
+    "friends": [
+      2
+    ]
   }
 },
 {
@@ -1484,8 +1565,9 @@
     "age": 0,
     "bio": "",
     "email": "",
-    "image": "https://www.vhv.rs/dpng/d/256-2569650_men-profile-icon-png-image-free-download-searchpng.png",
+    "profile_image": "https://www.vhv.rs/dpng/d/256-2569650_men-profile-icon-png-image-free-download-searchpng.png",
     "CreatedAt": "2020-09-29T19:58:57.082Z",
+    "cover_image": "https://cultivatedculture.com/wp-content/uploads/2019/05/Chromatic-LinkedIn-Cover-Photo-Background.png",
     "friends": []
   }
 },
@@ -1500,8 +1582,9 @@
     "age": 20,
     "bio": "This is the best workout page evah",
     "email": "",
-    "image": "https://www.vhv.rs/dpng/d/256-2569650_men-profile-icon-png-image-free-download-searchpng.png",
+    "profile_image": "https://www.vhv.rs/dpng/d/256-2569650_men-profile-icon-png-image-free-download-searchpng.png",
     "CreatedAt": "2020-10-18T20:02:22.190Z",
+    "cover_image": "https://cultivatedculture.com/wp-content/uploads/2019/05/Chromatic-LinkedIn-Cover-Photo-Background.png",
     "friends": [
       1
     ]
@@ -1514,6 +1597,15 @@
     "Username": 3,
     "Following": 1,
     "FollowedAt": "2020-10-18T20:06:38.354Z"
+  }
+},
+{
+  "model": "user.friendrequest",
+  "pk": 4,
+  "fields": {
+    "FromUser": 1,
+    "ToUser": 3,
+    "Timestamp": "2020-10-24T15:02:38.554Z"
   }
 },
 {
@@ -1789,10 +1881,10 @@
   "fields": {
     "Title": "Pushups",
     "Creator": 1,
-    "CreatedAt": "2020-10-20T14:21:36.635Z",
+    "CreatedAt": "2020-10-22T21:56:17.678Z",
     "Description": "STEPS: Get down on all fours, placing your hands slightly wider than your shoulders. Straighten your arms and legs. Lower your body until your chest nearly touches the floor. Pause, then push yourself back up. Repeat.",
     "Image": "https://cms.nhl.bamgrid.com/images/photos/290886446/1284x722/cut.jpg",
-    "Equipment": null,
+    "Equipment": 1,
     "Public": true,
     "muscle_group": 11,
     "Likes": 0,
@@ -2093,16 +2185,6 @@
 },
 {
   "model": "workout.workoutmanager",
-  "pk": 4,
-  "fields": {
-    "Workout": 1,
-    "Exercise": 4,
-    "Unit": 4,
-    "Quantity": 50
-  }
-},
-{
-  "model": "workout.workoutmanager",
   "pk": 5,
   "fields": {
     "Workout": 7,
@@ -2119,6 +2201,26 @@
     "Exercise": 10,
     "Unit": 4,
     "Quantity": 15
+  }
+},
+{
+  "model": "workout.workoutmanager",
+  "pk": 9,
+  "fields": {
+    "Workout": 1,
+    "Exercise": 4,
+    "Unit": 3,
+    "Quantity": 10
+  }
+},
+{
+  "model": "workout.workoutmanager",
+  "pk": 10,
+  "fields": {
+    "Workout": 1,
+    "Exercise": 5,
+    "Unit": 1,
+    "Quantity": 3
   }
 },
 {
