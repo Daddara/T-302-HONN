@@ -117,6 +117,17 @@ class ViewWorkoutDetailsTest(TestCase):
         self.assertTemplateUsed(response, 'workout/workout_details.html')
         print("200, OK")
 
+    def test_get_workout_details_with_likes(self):
+        print("Testing get workout details with likes unauthorized: ", end="")
+        test_user = User.objects.create_user(username="TestUser", password="iampassword", email="randomemail@gmail.com")
+        category = Category.objects.create(Name="Penis")
+        workout = Workout.objects.create(User=test_user, Name="Test Workout", Public=True, Category=category)
+        response = self.client.post(reverse('rate_workout'), {'workout_id': workout.id, 'rating': "+1"})
+        response = self.client.post(reverse('workout_details', kwargs={'workout_id': workout.id}), follow=True)
+        self.assertEqual(response.status_code, 200)
+        self.assertTemplateUsed(response, 'workout/workout_details.html')
+        print("200, OK")
+
 
 class ViewExerciseTest(TestCase):
     def init(self):
