@@ -35,13 +35,6 @@
         </button>
 
         <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
-            <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
-                {% if user.is_authenticated %}
-                    <li class="nav-item">
-                        <a id='following-nav' class="navbar-brand" href="{% url 'following' %}">Following<span class="sr-only">(current)</span></a>
-                    </li>
-                {% endif %}
-            </ul>
             <ul class="navbar-nav ml-auto mt-2 mt-lg-0">
                 {% if user.is_authenticated %}
                     <li class="nav-item">
@@ -49,9 +42,6 @@
                     </li>
                     <li id="profile-button-container" class="nav-item">
                         <a id="profile-nav-button" class="navbar-brand" href="/accounts/profile/{{ request.user }}">Profile</a>
-                    </li>
-                    <li id="profile-button-container" class="nav-item">
-                        <a id="profile-nav-button" class="navbar-brand" href="{% url 'wallet' %}">Wallet</a>
                     </li>
                     <li id="logout-button-container" class="nav-item">
                         <a class="navbar-brand" href="{% url 'logout' %}">Logout</a>
