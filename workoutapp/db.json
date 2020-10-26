@@ -1482,11 +1482,24 @@
   }
 },
 {
+  "model": "admin.logentry",
+  "pk": 115,
+  "fields": {
+    "action_time": "2020-10-25T19:26:34.019Z",
+    "user": 1,
+    "content_type": 7,
+    "object_id": "2",
+    "object_repr": "System",
+    "action_flag": 2,
+    "change_message": "[{\"changed\": {\"fields\": [\"Friends\"]}}]"
+  }
+},
+{
   "model": "auth.user",
   "pk": 1,
   "fields": {
     "password": "pbkdf2_sha256$216000$J4oJeScBbRXC$9nPyDuF3Zx8UwqXh9sDHXyanBLMnnGnYD9938JcY974=",
-    "last_login": "2020-10-24T16:22:46.301Z",
+    "last_login": "2020-10-26T12:44:48.481Z",
     "is_superuser": true,
     "username": "demoadmin",
     "first_name": "",
@@ -1522,7 +1535,7 @@
   "pk": 3,
   "fields": {
     "password": "pbkdf2_sha256$216000$aty2zBDmkXIN$vhxIdfiUCkSGqNTJO3dGkNC3ADOC4u0B/kZXZ5tYcQg=",
-    "last_login": "2020-10-24T14:58:00.485Z",
+    "last_login": "2020-10-25T19:27:45.033Z",
     "is_superuser": false,
     "username": "demouser",
     "first_name": "Demo",
@@ -1531,6 +1544,60 @@
     "is_staff": false,
     "is_active": true,
     "date_joined": "2020-10-18T18:26:51Z",
+    "groups": [],
+    "user_permissions": []
+  }
+},
+{
+  "model": "auth.user",
+  "pk": 4,
+  "fields": {
+    "password": "pbkdf2_sha256$216000$fTPTI6AQTceC$UVfCBfLfRMxqsQ0lqCTBPUgrxrPj6s1Ssg3r+QittU0=",
+    "last_login": "2020-10-25T23:23:25.043Z",
+    "is_superuser": false,
+    "username": "demouser1",
+    "first_name": "Peter",
+    "last_name": "Pan",
+    "email": "peterpan@gmail.com",
+    "is_staff": false,
+    "is_active": true,
+    "date_joined": "2020-10-25T23:22:18.276Z",
+    "groups": [],
+    "user_permissions": []
+  }
+},
+{
+  "model": "auth.user",
+  "pk": 5,
+  "fields": {
+    "password": "pbkdf2_sha256$216000$0pSI2aEUzj21$mQ/pSlIz1VdO9JyB5OIb5+WDmZZvV/nCE031Ruh6hWs=",
+    "last_login": null,
+    "is_superuser": false,
+    "username": "demouser2",
+    "first_name": "Peter",
+    "last_name": "Potter",
+    "email": "peterpotter@gmail.com",
+    "is_staff": false,
+    "is_active": true,
+    "date_joined": "2020-10-25T23:22:49.084Z",
+    "groups": [],
+    "user_permissions": []
+  }
+},
+{
+  "model": "auth.user",
+  "pk": 6,
+  "fields": {
+    "password": "pbkdf2_sha256$216000$Pv4nDX7rTgYO$/wD6+78MgBKsk64qFTq8/6+r8LVbHl/mkbdUVLq9tRY=",
+    "last_login": null,
+    "is_superuser": false,
+    "username": "demouser3",
+    "first_name": "Peter",
+    "last_name": "Punk",
+    "email": "peterpunk@gmail.com",
+    "is_staff": false,
+    "is_active": true,
+    "date_joined": "2020-10-25T23:23:16.657Z",
     "groups": [],
     "user_permissions": []
   }
@@ -1549,9 +1616,7 @@
     "profile_image": "https://www.meme-arsenal.com/memes/ef851516d068ab140a519fc273cda053.jpg",
     "CreatedAt": "2020-10-18T23:45:13.796Z",
     "cover_image": "https://cultivatedculture.com/wp-content/uploads/2019/05/Chromatic-LinkedIn-Cover-Photo-Background.png",
-    "friends": [
-      2
-    ]
+    "friends": []
   }
 },
 {
@@ -1585,9 +1650,58 @@
     "profile_image": "https://www.vhv.rs/dpng/d/256-2569650_men-profile-icon-png-image-free-download-searchpng.png",
     "CreatedAt": "2020-10-18T20:02:22.190Z",
     "cover_image": "https://cultivatedculture.com/wp-content/uploads/2019/05/Chromatic-LinkedIn-Cover-Photo-Background.png",
-    "friends": [
-      1
-    ]
+    "friends": []
+  }
+},
+{
+  "model": "user.userinfo",
+  "pk": 4,
+  "fields": {
+    "user": 4,
+    "slug": "demouser1",
+    "first_name": "",
+    "last_name": "",
+    "age": 20,
+    "bio": "",
+    "email": "",
+    "profile_image": "https://www.vhv.rs/dpng/d/256-2569650_men-profile-icon-png-image-free-download-searchpng.png",
+    "CreatedAt": "2020-10-25T23:22:18.447Z",
+    "cover_image": "https://cultivatedculture.com/wp-content/uploads/2019/05/Chromatic-LinkedIn-Cover-Photo-Background.png",
+    "friends": []
+  }
+},
+{
+  "model": "user.userinfo",
+  "pk": 5,
+  "fields": {
+    "user": 5,
+    "slug": "demouser2",
+    "first_name": "",
+    "last_name": "",
+    "age": 20,
+    "bio": "",
+    "email": "",
+    "profile_image": "https://www.vhv.rs/dpng/d/256-2569650_men-profile-icon-png-image-free-download-searchpng.png",
+    "CreatedAt": "2020-10-25T23:22:49.256Z",
+    "cover_image": "https://cultivatedculture.com/wp-content/uploads/2019/05/Chromatic-LinkedIn-Cover-Photo-Background.png",
+    "friends": []
+  }
+},
+{
+  "model": "user.userinfo",
+  "pk": 6,
+  "fields": {
+    "user": 6,
+    "slug": "demouser3",
+    "first_name": "",
+    "last_name": "",
+    "age": 20,
+    "bio": "",
+    "email": "",
+    "profile_image": "https://www.vhv.rs/dpng/d/256-2569650_men-profile-icon-png-image-free-download-searchpng.png",
+    "CreatedAt": "2020-10-25T23:23:16.831Z",
+    "cover_image": "https://cultivatedculture.com/wp-content/uploads/2019/05/Chromatic-LinkedIn-Cover-Photo-Background.png",
+    "friends": []
   }
 },
 {
@@ -1600,12 +1714,30 @@
   }
 },
 {
+  "model": "user.follow",
+  "pk": 2,
+  "fields": {
+    "Username": 1,
+    "Following": 3,
+    "FollowedAt": "2020-10-25T23:15:49.376Z"
+  }
+},
+{
+  "model": "user.follow",
+  "pk": 3,
+  "fields": {
+    "Username": 4,
+    "Following": 1,
+    "FollowedAt": "2020-10-25T23:30:43.334Z"
+  }
+},
+{
   "model": "user.friendrequest",
-  "pk": 4,
+  "pk": 5,
   "fields": {
     "FromUser": 1,
     "ToUser": 3,
-    "Timestamp": "2020-10-24T15:02:38.554Z"
+    "Timestamp": "2020-10-25T23:19:09.785Z"
   }
 },
 {
@@ -2388,7 +2520,7 @@
   "pk": 1,
   "fields": {
     "user": 1,
-    "fitcoin": 5000
+    "fitcoin": 50
   }
 },
 {
@@ -2404,7 +2536,91 @@
   "pk": 3,
   "fields": {
     "user": 3,
-    "fitcoin": 36950
+    "fitcoin": 42050
+  }
+},
+{
+  "model": "wallet.wallet",
+  "pk": 4,
+  "fields": {
+    "user": 4,
+    "fitcoin": 0
+  }
+},
+{
+  "model": "wallet.wallet",
+  "pk": 5,
+  "fields": {
+    "user": 5,
+    "fitcoin": 0
+  }
+},
+{
+  "model": "wallet.wallet",
+  "pk": 6,
+  "fields": {
+    "user": 6,
+    "fitcoin": 0
+  }
+},
+{
+  "model": "wallet.transaction",
+  "pk": 1,
+  "fields": {
+    "sender": 1,
+    "receiver": 3,
+    "amount": 100,
+    "date": "2020-10-24T18:37:35.534Z"
+  }
+},
+{
+  "model": "wallet.transaction",
+  "pk": 2,
+  "fields": {
+    "sender": 1,
+    "receiver": 3,
+    "amount": 100,
+    "date": "2020-10-24T18:39:24.598Z"
+  }
+},
+{
+  "model": "wallet.transaction",
+  "pk": 3,
+  "fields": {
+    "sender": 1,
+    "receiver": 3,
+    "amount": 100,
+    "date": "2020-10-24T18:39:26.106Z"
+  }
+},
+{
+  "model": "wallet.transaction",
+  "pk": 4,
+  "fields": {
+    "sender": 1,
+    "receiver": 3,
+    "amount": 100,
+    "date": "2020-10-24T18:39:29.739Z"
+  }
+},
+{
+  "model": "wallet.transaction",
+  "pk": 5,
+  "fields": {
+    "sender": 1,
+    "receiver": 3,
+    "amount": 100,
+    "date": "2020-10-24T19:00:17.848Z"
+  }
+},
+{
+  "model": "wallet.transaction",
+  "pk": 6,
+  "fields": {
+    "sender": 1,
+    "receiver": 3,
+    "amount": 100,
+    "date": "2020-10-24T19:00:19.173Z"
   }
 },
 {
