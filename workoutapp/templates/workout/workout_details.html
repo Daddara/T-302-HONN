@@ -41,12 +41,74 @@
                         </div>
                         {% endfor %}
                     </div>
-                </div>
-
                 {% if workout.Image != None %}
                 <img height="200px" width="200px" src="{{ workout.Image }}" class="mx-auto img-fluid" alt="no image">
                 {% endif %}
+                </div>
+                {% if workout.User == request.user %}
+                <div class="add-exercise">
+                    <!-- Button triggers selection popup -->
+                    <button id="add-exercises-button" type="button" class="btn btn-success" data-toggle="modal" data-target="#popup-add-exercise">
+                    Quick Add Exercise
+                    </button>
+                    <!-- Popup for adding exercise -->
+                    <div class="modal fade" id="popup-add-exercise" tabindex="-1" role="dialog" aria-labelledby="PopUpAdd" aria-hidden="true">
+                        <div class="modal-dialog modal-dialog-centered" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="exampleModalLongTitle">Quick add exercise</h5>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                </div>
 
+                                <div id="exercise-selection" class="modal-body">
+                                    <div id="exercise-options">
+                                        <!-- This is where the options are rendered -->
+                                    </div>
+                                </div>
+
+                                <div class="modal-footer">
+                                    <label for="unit-options">Units</label>
+                                    <select id="unit-options">
+                                    </select>
+                                    <div id="units-container">
+                                        <label for="number">Amount: </label>
+                                        <input id="number" type="number" value="1">
+                                    </div>
+                                    <button type="button" class="btn btn-primary" data-dismiss="modal">Cancel</button>
+                                    <button onclick="add_clicked()" id="add-button" value="" class="btn btn-success" disabled data-toggle="modal">Add</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="remove-workout">
+                    <!-- Button triggers verification popup -->
+                    <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#popup-verify-workout-removal">
+                    Delete Workout
+                    </button>
+
+                    <!-- Popup for removal confirmation-->
+                    <div class="modal fade" id="popup-verify-workout-removal" tabindex="-1" role="dialog" aria-labelledby="PopUpVerify" aria-hidden="true">
+                        <div class="modal-dialog modal-dialog-centered" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="exampleModalLongTitle">Are you sure?</h5>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+                                <div class="modal-body">
+                                    You are about to permanently delete this workout. Are you sure you wish to proceed?
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-primary" data-dismiss="modal">Cancel</button>
+                                    <a href="{% url 'delete-workout' workout.id %}"><button class="btn btn-danger" data-toggle="modal">Delete</button></a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                {% endif %}
                 <div class="social-stats">
                     <div class="likes" lid="LikeButton" workout-id="{{ workout.id }}">
                         <span class="social-span">{{ workout.Likes }}</span>
@@ -89,6 +151,54 @@
     <script>
         // This is for the search input
         let search_class="workout-container"
+    </script>
+    <script>
+        $( "#add-exercises-button" ).on('click', function (e) {
+            e.preventDefault();
+            console.log("Clicked add exercise");
+            let response_data = null;
+            $.ajax({
+                url: "{% url 'get-all-exercises' %}",
+                data: {},
+                dataType: 'json',
+                success: function (data) {
+                    if (data) {
+                        response_data = data;
+                        console.log(response_data);
+                        add_choices(response_data);
+                    }
+                }
+            });
+
+        });
+
+        function ex_clicked(elem_id){
+            let all_buttons = document.getElementsByClassName('ex-option');
+            for (let i=0; i<all_buttons.length; i++){
+                all_buttons[i].classList.remove('ex-option-clicked');
+            }
+            let current_button = $('#'+elem_id);
+            if(!current_button.hasClass("ex-option-clicked")){
+                current_button.addClass("ex-option-clicked");
+            }
+
+            let url = 'add-exercise-to-workout'+'/'+elem_id+'/';
+            console.log(url);
+            let add_button = $('#add-button')
+            add_button.attr('disabled', false);
+            add_button.val(url);
+            console.log(add_button.val());
+        }
+
+        function add_clicked(){
+            let unit_id = $('#unit-options').val();
+            let amount = $('#number').val();
+            let add_button = $('#add-button')
+            let loc_href = add_button.val();
+            loc_href+=unit_id+"/"+amount+"/";
+            console.log(loc_href);
+            window.location.href = loc_href;
+        }
     </script>
     <script src="{% static 'workout/js/details.js' %}"></script>
 

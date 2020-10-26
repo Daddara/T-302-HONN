@@ -1,12 +1,12 @@
 from django.contrib.auth.decorators import login_required
 from django.views.decorators.csrf import csrf_exempt
 from django.shortcuts import render, redirect, get_object_or_404
-from django.http import HttpResponse
+from django.http import HttpResponse, JsonResponse
 import datetime
 
 from dashboard.views import add_like_information_to_workouts
 from .forms.rate_workout import RateWorkoutForm
-from .models import Workout, WorkoutManager, Exercise, ExerciseRating, RatingValue, WorkoutRating
+from .models import Workout, WorkoutManager, Exercise, ExerciseRating, RatingValue, WorkoutRating, UnitType
 from .forms.create_workout_form import CreateWorkoutForm, WorkoutManagerForm
 from .forms.create_exercise_form import ExerciseForm
 from .forms.rate_exercise_form import RateExerciseForm
@@ -91,7 +91,7 @@ def update_exercise(request, exercise_id):
     exercise = get_object_or_404(Exercise, pk=exercise_id)
     if request.user != exercise.Creator:
         return render(request, '404.html', status=404)
-    
+
     form = ExerciseForm(request.POST or None, instance=exercise)
     if request.method == 'POST':
         if form.is_valid():
@@ -99,7 +99,7 @@ def update_exercise(request, exercise_id):
             return redirect('exercise_details', exercise_id=exercise_id)
         else:
             print(form.errors)
-    return render(request, 'exercise/update_exercise.html', {'form': form})
+    return render(request, 'exercise/update_exercise.html', {'form': form, 'exercise': exercise})
 
 
 def exercise_details(request, exercise_id):
@@ -107,7 +107,7 @@ def exercise_details(request, exercise_id):
         exercise = get_object_or_404(Exercise, pk=exercise_id)
     except Exercise.DoesNotExist:
         return HttpResponse(status=404)
-    return render(request, 'exercise/exercise_details.html', context={'exercise_details': exercise})
+    return render(request, 'exercise/exercise_details.html', context={'exercise': exercise})
 
 
 @csrf_exempt
@@ -200,3 +200,54 @@ def workout_details(request, workout_id):
 
     workout = add_like_information_to_workouts(request, [workout])[0]
     return render(request, 'workout/workout_details.html', context={'workout': workout, 'managers': managers})
+
+
+@login_required
+def delete_exercise(request, exercise_id):
+    exercise = get_object_or_404(Exercise, Creator=request.user, pk=exercise_id)
+    exercise.delete()
+
+    return redirect('user_exercises')
+
+
+@login_required
+def delete_workout(request, workout_id):
+    workout = get_object_or_404(Workout, User=request.user, pk=workout_id)
+    workout.delete()
+
+    return redirect('user_workouts')
+
+
+@login_required
+def remove_exercise(request, workout_id, exercise_id):
+    """Removes exercise from a given workout"""
+    workout = get_object_or_404(Workout, pk=workout_id, User=request.user)
+    wm = get_object_or_404(WorkoutManager, Exercise=exercise_id, Workout=workout_id)
+    wm.delete()
+    return redirect('workout_details', workout_id=workout_id)
+
+
+def get_all_exercises_json(request):
+    exercises = Exercise.objects.all()
+    units = UnitType.objects.all()
+    ret_dict = {'exercises': {}, 'units': {}}
+
+    for exercise in exercises:
+        ret_dict['exercises'][exercise.id] = exercise.Title
+
+    for unit in units:
+        print(unit.Name + " "+str(unit.Unit))
+        ret_dict['units'][unit.id] = unit.Name + ": "+str(unit.Unit)
+
+    return JsonResponse(data=ret_dict, status=200)
+
+
+@login_required
+def add_exercise_to_workout(request, workout_id, exercise_id, unit_id, amount):
+    workout = get_object_or_404(Workout, pk=workout_id, User=request.user)
+    exercise = get_object_or_404(Exercise, pk=exercise_id)
+    unit = get_object_or_404(UnitType, pk=unit_id)
+    new_wm = WorkoutManager.objects.create(Exercise=exercise, Workout=workout, Unit=unit, Quantity=amount)
+    new_wm.save()
+    return redirect('workout_details', workout_id=workout_id)
+

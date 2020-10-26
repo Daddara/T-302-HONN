@@ -14,6 +14,10 @@ class Wallet(models.Model):
         self.fitcoin += fitcoins
         self.save()
 
+    def remove_balance(self, fitcoins: float):
+        self.fitcoin -= fitcoins
+        self.save()
+
 
 class Transaction(models.Model):
     sender = models.ForeignKey(User, on_delete=models.CASCADE, related_name="sender")
