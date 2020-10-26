@@ -194,7 +194,7 @@ def search_users(request):
         already_following = []
         # getting all the names and putting them in a list
         for user in request_user_following:
-            already_following.append(user.Following.username)  # This is absolutely ridiculous model attribute naming :)
+            already_following.append(user.Following.username)
 
         ret_list = {}
         # for all users matching the search input check that they should be returned
@@ -280,3 +280,5 @@ def accept_friend_request(request, id):
     receiver_info.friends.add(sender_info)
     friend_request.delete()
     return redirect('profile', slug=request.user.username)
+
+
