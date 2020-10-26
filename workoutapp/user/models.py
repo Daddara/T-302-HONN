@@ -33,7 +33,7 @@ class UserInfo(models.Model):
         return str(self.user.username)
 
     def get_abs_url(self):
-        return "/accounts/profile/{}".format(self.slug)
+        return "/accounts/profile/{}/".format(self.slug)
 
     def get_friends(self):
         return self.friends.all()

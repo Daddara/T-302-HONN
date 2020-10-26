@@ -1,3 +1,5 @@
+import json
+
 from django.test import TestCase, Client
 from django.contrib.auth.models import User
 from django.urls import reverse
@@ -50,8 +52,11 @@ class UserViewTests(TestCase):
         response = self.client.post(reverse('register'), data)
         self.assertRedirects(response, reverse('login'), target_status_code=200)
         if User.objects.filter(username=data['username']).exists():
-            self.client.login(username="TestUser", password="iampassword")
-            response = self.client.get('/accounts/profile/TestUser')
+            login_data = {'username': data['username'], 'password': data['password1']}
+            response = self.client.post(reverse('login'), data=login_data, follow=True)
+            self.assertEqual(response.status_code, 200)
+            self.assertTemplateUsed(response, 'dashboard/dashboard_workout.html')
+            response = self.client.get(reverse('profile', kwargs={'slug': data['username']}))
             self.assertEqual(response.status_code, 200)
             self.assertTemplateUsed(response, 'user/profile.html')
             print("200, OK")
@@ -122,9 +127,9 @@ class FollowTest(TestCase):
         self.user2 = User.objects.get(pk=2)
         self.assertEqual(self.user.username, 'TestUser')
         self.client.login(username="TestUser", password="iampassword")
-        self.follow = Follow.objects.create(Username=self.user, Following=self.user2)
 
     def test_following_view_get(self):
+        self.follow = Follow.objects.create(Username=self.user, Following=self.user2)
         print("Testing following page: ", end="")
         response = self.client.get(reverse('following'))
         self.assertEqual(response.status_code, 200)
@@ -132,16 +137,23 @@ class FollowTest(TestCase):
         print("200, OK")
 
     def is_following_test(self):
+        self.follow = Follow.objects.create(Username=self.user, Following=self.user2)
         print("Testing if he follows: ", end="")
         follow = Follow.objects.get(Following=self.user2)
         self.assertEqual(follow, pk=2)
         print("200, OK")
 
+    def test_follow(self):
+        print("Testing follow request: ", end="")
+        response = self.client.get(reverse('follow'), data={'user_id': self.user2.id})
+        self.assertJSONEqual(response.content, {'msg': 'Successfully followed user'})
+
     def test_search_result_view_get_search(self):
-        print("Testing search page: ", end="")
-        response = self.client.get(reverse('searchbarUsers'), data={'search': 'TestUser'})
+        self.follow = Follow.objects.create(Username=self.user, Following=self.user2)
+        print("Testing search filter response: ", end="")
+        response = self.client.get(reverse('search-user'), data={'search_input': 'TestUser2'})
         self.assertEqual(response.status_code, 200)
-        self.assertTemplateUsed(response, 'user/searchResults.html')
+        self.assertJSONEqual(response.content, {})
         print("200, OK")
 
 

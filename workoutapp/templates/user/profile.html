@@ -48,12 +48,17 @@
                 <div class="scrollbar-info" id="friends-list">
                     {% for friend in friends %}
                     <ul>
-                        <a class="profile-href" href="{% url 'profile' slug=friend.user.username %}">
-                            <li class="friend"> <!-- ENDED HERE FIX THIS WANT TO SEND FRIEND IMAGE HERE-->
-                                <img src="{{ friend.profile_image }}">
+                        <li class="friend"> <!-- ENDED HERE FIX THIS WANT TO SEND FRIEND IMAGE HERE-->
+                            <img src="{{ friend.profile_image }}">
+                            <a class="profile-href" href="{% url 'profile' slug=friend.user.username %}">
                                 <div class="friend-name">{{ friend.user.username }}</div>
-                            </li>
-                        </a>
+                            </a>
+                            <a href="{% url 'unfriend' friend.user.id %}">
+                                <button class="btn btn-danger remove-friend">
+                                <i class="fas fa-user-minus"></i>
+                                </button>
+                            </a>
+                        </li>
                     </ul>
                     {% endfor %}
                     <div id="special">
@@ -103,29 +108,43 @@
     {% endif %}
 
     <div id="follower-list-container">
-        <div id="find-user">
-            <div id="find-user-title"><b>Find a user to follow</b></div>
-            <form action="{% url 'searchbarUsers' %}" method="get">
-                <input id="searchbar-input" class="form-control" type="text" name="search">
-                <button id="submit-search" class="btn btn-primary" type="submit"><i class="fas fa-search"></i> Search</button>
-            </form>
+        <div id="im-following">
+            <div id="follower-list-title">
+                <h4>Following</h4>
+            </div>
+            <div class="scrollbar-info" id="follower-list">
+                <ul>
+                    {% for person in following %}
+                    <a class="profile-href" href="{% url 'profile' slug=person.Following.username %}">
+                        <li class="friend">
+                            <img src="https://d1bvpoagx8hqbg.cloudfront.net/259/4ea4217efbbf179e02269b065d23a60e.jpg">
+                            <div class="friend-name">{{ person.Following.username }}</div>
+                        </li>
+                    </a>
+                    {% endfor %}
+                </ul>
+            </div>
         </div>
-        <div id="follower-list-title">
-            <h4>Following List</h4>
-        </div>
-        <div class="scrollbar-info" id="follower-list">
-            <ul>
-                {% for person in following %}
-                <a class="profile-href" href="{% url 'profile' slug=person.Following.username %}">
-                    <li class="friend">
-                        <img src="https://d1bvpoagx8hqbg.cloudfront.net/259/4ea4217efbbf179e02269b065d23a60e.jpg">
-                        <div class="friend-name">{{ person.Following.username }}</div>
-                    </li>
-                </a>
-                {% endfor %}
-            </ul>
+        <div id="search-results">
+            <div id="find-user">
+                <div id="find-user-title"><b>Find a user to follow</b></div>
+                <div>
+                    <input id="searchbar-input" class="form-control" type="text" name="search" placeholder="Type something..." value="">
+                    <button id="submit-search" class="btn btn-primary" type="submit"><i class="fas fa-search"></i> Search</button>
+                </div>
+            </div>
+            <div id="search-results-list-title">
+                <h4>Search results</h4>
+            </div>
+            <div class="scrollbar-info" id="search-results-list">
+                <ul id="search-result-content">
+
+                </ul>
+            </div>
         </div>
     </div>
+
+
 
     <div id="about-me">
         <div id="age"><b>Age:</b> {{ user_info.age }}</div>
@@ -234,5 +253,65 @@
 
 {% endblock %}
 {% block extra_js %}
+    <script>
+        // Fetching user data once user submits search input
+        $("#submit-search").on('click', function (e){
+            e.preventDefault();
+            let search_input = $('#searchbar-input').val();
+            console.log(search_input);
+            let response_data = null;
+            $.ajax({
+                url: "{% url 'search-user' %}",
+                headers: {'X-CSRFToken': csrftoken},
+                data: {'search_input': search_input},
+                type: "GET",
+                dataType: 'json',
+                success: function (data) {
+                    if (data) {
+                        response_data = data;
+                        console.log(response_data);
+                        add_search_result_content(data);
+                    }
+                }
+            });
+        })
+
+        function follow(val){
+            console.log(val);
+            let response_data = null;
+            $.ajax({
+                url: "{% url 'follow' %}",
+                headers: {'X-CSRFToken': csrftoken},
+                data: {'user_id': val},
+                type: "GET",
+                dataType: 'json',
+                success: function (data) {
+                    if (data) {
+                        response_data = data;
+                        console.log(response_data);
+                    }
+                }
+            });
+        }
+
+        function add_search_result_content(data){
+            let content_target_element = $('#search-result-content')
+            content_target_element.empty();
+            let usernames = Object.keys(data);
+            for (let i=0; i<usernames.length; i++){
+                let username = usernames[i]
+                let user_data = data[username]; // image and user_id
+                let user_id = user_data['id']
+                let url = user_data['url']
+                content_target_element.append("<li class='friend'><img src="+user_data['image']+">" +
+                    "<a href="+url+">"+
+                    "<div class='friend-name'>"+username+"</div></a>" +
+                    "<button class='btn btn-primary follow-button' onclick=follow("+user_id+")>"+
+                    "<i class='fas fa-address-book'></i> Follow</button></li>")
+            }
+        }
+
+    </script>
     <script src="{% static 'profile/js/profile.js' %}"></script>
 {% endblock %}
+

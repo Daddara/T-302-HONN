@@ -124,3 +124,4 @@ $( "#incoming" ).on('click', function () {
 });
 
 
+//"<button class='btn btn-primary follow-button' onclick=follow("+user_id+")>"+"<i class='fas fa-address-book'></i> Follow</button>"

@@ -1,6 +1,6 @@
 from django.contrib import messages
 from django.contrib.auth.models import User
-from django.http import HttpResponseRedirect
+from django.http import HttpResponseRedirect, JsonResponse
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.decorators import login_required
 from wallet.models import Wallet, Transaction
@@ -51,8 +51,6 @@ def profile_view(request, slug):
     request_user_wallet = Wallet.objects.get(user=request.user)
     sent_transactions = Transaction.objects.filter(sender=request.user)
     received_transactions = Transaction.objects.filter(receiver=request.user)
-    print(sent_transactions)
-    print(received_transactions)
 
     # Check if viewed user is logged in user's friend
     status = None
@@ -172,6 +170,7 @@ def view_friend_and_requests(request):
 
 @login_required
 def following(request):
+    # What the fck is poster?
     poster = Follow.objects.filter(Username=request.user)
     try:
         return render(request, 'user/followerlist.html', context={'follow': poster})
@@ -180,33 +179,57 @@ def following(request):
 
 
 @login_required
-def searchbarUsers(request):
-    if request.method == 'GET':
-        isFollowing = False
-        search = request.GET.get('search')
-        if not search:
-            search = ""
-        post = User.objects.filter(username__contains=search)
-        user = User.objects.get(username=request.user)
-        followers = Follow.objects.filter(Username=request.user)
-        for i in followers:
-            for j in post:
-                if i.Following.username == j.username:
-                    isFollowing = True
-        if post:
-            return render(request, 'user/searchResults.html', context={'sr_user': post, 'current_user': user,
-                                                                       'is_following': isFollowing})
-        else:
-            return render(request, 'user/searchResults.html')
+def search_users(request):
+    data = request.GET.get('search_input')
+    if data:
+        search_input = data
+        # all users matching the query
+        users = User.objects.filter(username__contains=search_input)
+        if not users:
+            return JsonResponse({}, status=204)
 
-    if request.method == 'POST':
-        search = request.GET.get('search')
-        post = User.objects.filter(username__contains=search)
-        poster = post.get(username=search)
-        current_user = User.objects.get(username=request.user)
-        follow = Follow(Username=current_user, Following=poster, FollowedAt="")
-        follow.save()
-        return redirect(following)
+        # all users that the request user is already following
+        request_user_following = Follow.objects.filter(Username=request.user)
+
+        already_following = []
+        # getting all the names and putting them in a list
+        for user in request_user_following:
+            already_following.append(user.Following.username)  # This is absolutely ridiculous model attribute naming :)
+
+        ret_list = {}
+        # for all users matching the search input check that they should be returned
+        for user in users:
+            if user.username != "System" and user.username != request.user.username \
+                    and user.username not in already_following:
+                users_info = UserInfo.objects.get(user=user)
+                ret_list[user.username] = {'image': users_info.profile_image, 'id': user.id,
+                                           'url': users_info.get_abs_url()}
+
+        return JsonResponse(ret_list, status=200)
+    else:
+        return JsonResponse({}, status=204)
+
+
+@login_required
+def follow(request):
+    data = request.GET.get('user_id')
+    try:
+        user_id = int(data)
+    except ValueError:
+        return JsonResponse({'error': "Invalid request"}, status=400)
+
+    try:
+        follow_target = User.objects.get(pk=user_id)
+    except User.DoesNotExist:
+        return JsonResponse({'error': "Invalid request"}, status=400)
+
+    user_following = Follow.objects.filter(Username=request.user)
+    for already_following in user_following:
+        if follow_target == already_following.Following:
+            return JsonResponse({'msg': "Already following this user"}, status=200)
+
+    new_following = Follow.objects.create(Username=request.user, Following=follow_target)
+    return JsonResponse({'msg': "Successfully followed user"}, status=201)
 
 
 @login_required
@@ -215,6 +238,16 @@ def new_friend_request(request, id):
     user_info = UserInfo.objects.get(user=recipient)
     friend_request, created = FriendRequest.objects.get_or_create(FromUser=request.user, ToUser=recipient)
     return redirect(user_info.get_abs_url())
+
+
+@login_required
+def unfriend(request, user_id):
+    target = get_object_or_404(User, pk=user_id)
+    request_user_info = get_object_or_404(UserInfo, user=request.user)
+    target = get_object_or_404(UserInfo, user=target)
+    target.friends.remove(request_user_info)
+    request_user_info.friends.remove(target)
+    return redirect('profile', slug=request.user.username)
 
 
 @login_required
