@@ -2,6 +2,7 @@ import json
 from json import JSONDecodeError
 
 from django.contrib.auth.decorators import login_required
+from django.contrib.auth.models import User
 from django.http import JsonResponse, HttpResponse
 from django.shortcuts import render, get_object_or_404, redirect
 from payment.models import Product, Order
@@ -99,12 +100,6 @@ def service_payment_invalid(request, invalid_id):
 
     else:
         return render(request, '400.html', context={'error': 'Something unexplainable went wrong.'})
-
-
-@login_required
-def donate(request):
-    # donate to a user
-    pass
 
 
 @login_required

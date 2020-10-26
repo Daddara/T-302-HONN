@@ -1,0 +1,29 @@
+.exercise-container {
+    width: 40rem;
+    position: relative;
+}
+.exercise-container:hover {
+    transform: scale(1.0);
+}
+
+#edit-exercise {
+    position: absolute;
+    right: 10px;
+}
+
+#exercise-description {
+    width: 80%;
+    margin: auto;
+    margin-top: 10px;
+    margin-bottom: 20px;
+}
+
+.social-stats {
+    margin-top: 40px;
+}
+
+#delete-exercise {
+    position: absolute;
+    right: 10px;
+    bottom: 2%;
+}

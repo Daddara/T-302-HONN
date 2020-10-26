@@ -1,0 +1,374 @@
+#profile-image img {
+    border: 1px solid black;
+    margin: 20px;
+    border-radius: 10px;
+    width: 160px;
+    max-height: 160px;
+    min-height: 120px;
+}
+#profile-image {
+    margin-left: 10px;
+    width: fit-content;
+}
+
+#profile-header {
+    position: relative;
+    border: 1px solid black;
+    border-left: 0px;
+    height: fit-content;
+    width: 100%;
+    background-color: #ff7034;
+    background-size: contain;
+    background-repeat: repeat-x;
+    background-repeat: round;
+}
+
+.page-content {
+    border-top: 0;
+    padding: 0;
+    border-radius: 10px;
+}
+#main-info {
+    display: flex;
+}
+
+#username {
+    font-weight: bold;
+    font-size: x-large;
+    margin-top: 30px;
+    width: fit-content;
+    color: #0057ff;
+}
+#full-name, #follower-count {
+    width: fit-content;
+    font-weight: 500;
+    font-size: large;
+    color: #0057ff;
+}
+#follower-count {
+    margin-top: 10px;
+}
+
+#dashboard-nav {
+    margin: 0;
+    padding: 2px;
+    margin-top: 8px;
+    padding-left: 10px;
+    border-top: 1px solid black;
+}
+
+#edit-profile {
+    position: absolute;
+    right: 10px;
+    top: 5px;
+    font-size: large;
+    font-weight: bold;
+}
+
+.navbar-brand {
+    font-size: medium!important;
+}
+
+a.navbar-brand:hover {
+    color: #963211!important;
+    transform: scale(1.05);
+    cursor: pointer;
+}
+
+#about-me-nav {
+    color: #963211;
+    margin-left: 10px;
+}
+
+#friends-container {
+    display: none;
+    position: relative;
+}
+
+#about-me {
+    font-size: larger;
+    margin: auto;
+    margin-top: 20px;
+    text-align: left;
+    width: fit-content;
+}
+
+#age, #bio, #member-since, #email {
+    width: fit-content;
+}
+
+.friend img {
+    heigtht: 50px;
+    width: 50px;
+    border-radius: 5px;
+}
+
+.friend-name {
+    display: inline-block;
+    width: fit-content;
+    font-weight: 500;
+    margin-left: 5px;
+}
+
+.friend {
+    margin: auto;
+    width: 90%;
+    text-align: left;
+    padding-left: 15px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    margin-top: 10px;
+    background-color: #92cadb;
+    border-radius: 5px;
+    border: 1px solid white;
+    margin-bottom: 10px;
+    position: relative;
+}
+
+.friend:hover {
+    border: 1px solid blue;
+    cursor: pointer;
+}
+
+.friend:hover .friend-name {
+    color: blue;
+    cursor: pointer;
+}
+
+#friends-list ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+}
+#follower-list ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+}
+
+#search-results-list ul{
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+}
+
+#friends-list, #follower-list, #search-results-list{
+    margin-left: 30px;
+    border: 1px solid black;
+    border-radius: 10px;
+    width: 25rem;
+    height: 400px;
+    overflow-y: auto;
+    margin-bottom: 30px;
+    position: relative;
+}
+
+#friends-list-container, #follower-list-container {
+    margin-top: 15px;
+    width: fit-content;
+    position: relative;
+}
+#follower-list-container {
+    display: none;
+}
+
+#friends-list-title, #follower-list-title, #search-results-list-title {
+    margin: auto;
+    width: fit-content;
+}
+.profile-href a{
+    text-decoration:none;
+    cursor:pointer;
+}
+.profile-href a:hover{
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+#searchbar-input {
+    width: 15rem;
+    display: inline-block;
+}
+
+#submit-search {
+    width: fit-content;
+    display: inline-block;
+    margin-bottom: 5px;
+}
+
+#sent, #incoming {
+    display: inline-block;
+    width: 45%;
+    margin: auto;
+}
+
+.remove-friend {
+    position: absolute;
+    right: 10px;
+    margin-top: 5px;
+}
+
+#sent:hover {
+    color: #963211;
+    cursor: pointer;
+}
+
+#incoming:hover {
+    color: #963211;
+    cursor: pointer;
+}
+
+#special {
+    margin-left: auto;
+    margin-right: auto;
+    left: 0;
+    right: 0;
+    position: absolute;
+    bottom: 0;
+    background-color: #f8f9fa;
+    border-radius: 5px 5px 0px 0px;
+    max-height: 250px;
+    overflow-y: auto;
+}
+#buttons-special {
+    border-top: 1px solid black;
+    background-color: #f8f9fa;
+    margin: 0;
+    position: relative;
+}
+
+#sent-list, #received-list {
+    display: none;
+    position: relative;
+}
+
+.received, .sent {
+    position: relative;
+}
+
+.received:hover{
+    border: 1px solid white;
+    cursor: pointer;
+}
+
+.accept-button, .decline-button {
+    display: inline-block;
+    width: fit-content;
+}
+
+.accept-decline {
+    position: absolute;
+    right: 5px;
+    top: 10px;
+}
+
+.exercise-background-shadow {
+    margin: auto;
+    margin-top: 15px;
+    margin-left: 10px;
+    width: fit-content;
+    display: inline-flex;
+}
+
+.exercise-container {
+    min-height: 150px;
+}
+.exercise-creator {
+    display: none;
+}
+
+.workout-creator {
+    display: none;
+}
+
+.workout-background-shadow {
+    width: fit-content;
+    display: inline-flex;
+}
+
+#exercises, #workouts{
+    margin: auto;
+    width: fit-content;
+    display: none;
+}
+
+#edit-profile a{
+    color: blue!important;
+}
+
+#donation-container {
+    background-color: deepskyblue;
+    border-radius: 10px;
+    padding: 10px;
+    position: absolute;
+    bottom: 20px
+}
+
+#donate-button, #id_amount {
+    display: inline-block;
+    width: fit-content!important;
+}
+
+#donate-button {
+    margin-left: 10px;
+}
+#id_amount {
+    width: 100px!important;
+}
+label {
+    font-weight: bold;
+}
+#text {
+    display: block;
+}
+
+#field-errors {
+    display: block;
+    width: fit-content;
+    margin: auto;
+}
+
+#success-message {
+    margin-top: 10px;
+}
+#wallet {
+    display: none;
+}
+
+#received-transactions, #sent-transactions {
+    margin-left: 40px;
+    border: 1px solid black;
+    display: inline-block;
+    width: 450px;
+    vertical-align: top;
+    height: 350px;
+    overflow-y: auto;
+    background-color: #eae9e3;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    border-radius: 10px;
+}
+
+#balance {
+    font-size: x-large;
+    margin-bottom: 20px;
+}
+
+#balance-info {
+    margin-top: 20px;
+}
+
+#im-following, #search-results {
+    display: inline-block;
+}
+
+#follower-list-container {
+    text-align: center;
+    margin: auto;
+}
+.follow-button {
+    position: absolute;
+    right: 10px;
+    margin-top: 5px;
+}

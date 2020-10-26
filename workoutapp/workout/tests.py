@@ -1,6 +1,7 @@
 from django.test import TestCase, Client
 from django.urls import reverse
-from workout.models import Exercise, ExerciseRating, RatingValue, Category, Workout, Equipment, MuscleGroup, WorkoutRating
+from workout.models import Exercise, ExerciseRating, RatingValue, Category, Workout, Equipment, MuscleGroup, \
+    WorkoutRating, WorkoutManager, UnitType
 from django.contrib.auth.models import User
 
 
@@ -21,6 +22,7 @@ class CreateWorkoutTest(TestCase):
                  'password1': 'iampassword', 'password2': 'iampassword'}
         self.client.post(reverse('register'), data1)
         self.client.login(username="TestUser", password="iampassword")
+        return User.objects.get(username='TestUser')
 
     def test_create_workout_view_get(self):
         self._setup_user()
@@ -48,6 +50,42 @@ class CreateWorkoutTest(TestCase):
                              target_status_code=200)
         self.assertEqual(workout.workout_goal, data['workout_goal'])
         print("200, OK")
+
+    def test_get_all_exercises(self):
+        response = self.client.get(reverse('get-all-exercises'))
+        self.assertJSONEqual(response.content, {'exercises': {}, 'units': {}})
+
+    def test_remove_exercise(self):
+        user = self._setup_user()
+        exercise = Exercise.objects.create(Title="BlaBla", Creator=user)
+        category = Category.objects.create(Name="Fish")
+        unit = UnitType.objects.create(Name="Absolute Unit", Unit="Pimples")
+        workout = Workout.objects.create(User=user, Name="Workout", Category=category, short_description="")
+        # Creating exercise workout relation
+        wm = WorkoutManager.objects.create(Exercise=exercise, Workout=workout, Unit=unit, Quantity=10)
+        # Removing exercise workout relation
+        self.client.get(reverse('remove-workout-exercise', kwargs={'workout_id': workout.id,
+                                                                   'exercise_id': exercise.id}))
+        # Fetching all exercise workout relations
+        wms = WorkoutManager.objects.all()
+        # Asserting that none exist after removing the only one
+        self.assertEqual(len(wms), 0)
+
+    def test_add_exercise_to_workout(self):
+        user = self._setup_user()
+        exercise = Exercise.objects.create(Title="BlaBla", Creator=user)
+        category = Category.objects.create(Name="Fish")
+        unit = UnitType.objects.create(Name="Absolute Unit", Unit="Pimples")
+        workout = Workout.objects.create(User=user, Name="Workout", Category=category, short_description="")
+        # Creating new workout exercise relation
+        self.client.get(reverse('add-exercise-to-workout', kwargs={'workout_id': workout.id,
+                                                                   'exercise_id': exercise.id,
+                                                                   'unit_id': unit.id,
+                                                                   'amount': 10}))
+        # Fetching all workout managers
+        wms = WorkoutManager.objects.all()
+        # Asserting that one exists after calling the method
+        self.assertEqual(len(wms), 1)
 
 
 class CreateExerciseTest(TestCase):
@@ -369,3 +407,5 @@ class RateWorkoutTest(TestCase):
         response1 = self.client.post('/workout/rate_workout', {'workout_id': 21921212, 'rating': "+1"})
         self.assertEqual(response1.status_code, 404)
         print("200, OK")
+
+

@@ -21,17 +21,22 @@ class UserInfo(models.Model):
     age = models.IntegerField(default=20)
     bio = models.CharField(max_length=250, default="", blank=True)
     email = models.EmailField(max_length=254, default="", blank=True)
-    image = models.CharField(
+    profile_image = models.CharField(
         max_length=250,
         default="https://www.vhv.rs/dpng/d/256-2569650_men-profile-icon-png-image-free-download-searchpng.png")
     CreatedAt = models.DateTimeField(auto_now_add=True)
     friends = models.ManyToManyField("UserInfo", blank=True)
+    cover_image = models.CharField(max_length=250,
+       default="https://cultivatedculture.com/wp-content/uploads/2019/05/Chromatic-LinkedIn-Cover-Photo-Background.png")
 
     def __str__(self):
         return str(self.user.username)
 
     def get_abs_url(self):
-        return "/accounts/profile/{}".format(self.slug)
+        return "/accounts/profile/{}/".format(self.slug)
+
+    def get_friends(self):
+        return self.friends.all()
 
 
 class Follow(models.Model):

@@ -1,119 +1,317 @@
 {% extends 'base.html' %}
 {% load static %}
 {% block extra_head %}
+    <link rel="stylesheet" href="{% static "exercise/css/exercise.css" %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'workout/css/workout.css' %}">
     <link rel=stylesheet type="text/css" href="{% static 'profile/css/profile.css' %}">
+    <link rel="stylesheet" href="{% static "scrollbars.css" %}">
+
 {% endblock %}
 
-
-
 {% block content %}
+<div class="page-content scrollbar-info">
+    <div id="profile-header" style="background-image: url({{ user_info.cover_image }});">
+        <div id="main-info">
+             <div id="profile-image">
+                <img src="{{ user_info.profile_image }}" class="img-fluid" alt="avatar">
+            </div>
+            <div class="">
+                <div id="username">{{ user.username }}</div>
+                <div id="full-name">{{ user_info.first_name }} {{ user_info.last_name }}</div>
+                <div id="follower-count"><i class="fa fa-users" aria-hidden="true"></i> {{ follower_count }}</div>
+            </div>
+        </div>
+        {% if request.user == user %}
+            <a id="edit-profile" href="{% url 'edit-user' %} "><i class="fas fa-edit"></i>Edit User</a>
+        {% endif %}
+         <!-- if profile being viewed is not current user -->
+        {% if request.user != user %}
+            {% if status == 'not_friends' %}
+                <a id="edit-profile" class='btn btn-primary' href="{% url 'send-request' user.id %}"><i class="fa fa-user-plus" aria-hidden="true"></i> Add Friend</a>
+            {% elif status == 'sent' %}
+                <a id="edit-profile" class="btn btn-warning" href="{% url 'cancel-request' user.id %}">Cancel Request</a>
+            {% elif status == 'received' %}
+                <a id="edit-profile" class="btn btn-warning" href="{% url 'user_friends' %}">Request received</a>
+            {% endif %}
+        {% endif %}
 
-<div class="page-content">
-<div class="container">
-    <div class="row my-1">
-        <div class="col-lg-8 order-lg-2">
-            <div class="tab-content py-4">
-                <div class="tab-pane active" id="profile">
-                    <div class="row">
-                        <div class="col-md-auto text-left">
-                            <h1 class="text-left text-uppercase">{{ user.username }}</h1>
-                            <h6>{{ user.email }}</h6>
-                        </div>
+        {% include 'user/profile_nav.html' %}
+    </div>
 
-                        <div class="col-md-auto text-right">
-                            <h3>Find a user to follow</h3>
-                            <form action="{% url 'searchbarUsers' %}" method="get">
-                                <input type="text" name="search"/>
-                                <button type="submit">Search</button>
-                            </form>
-                        </div>
 
-                    </div>
-                    <div class="col-md-auto text-right">
-                    <!-- if current user is the same as the profile being viewed -->
-                        {% if request.user == user %}
-                            <a class='btn btn-primary' href="{% url 'user_friends' %}">My Friends</a>
-                    <!-- if profile being viewed is not current user -->
-                        {% else %}
-                            {% if status == 'not_friends' %}
-                                <a class='btn btn-primary' href="{% url 'send-request' user.id %}">Add Friend</a>
-                            {% elif status == 'sent' %}
-                                <a class="btn btn-warning" href="{% url 'cancel-request' user.id %}">Cancel Request</a>
-                            {% elif status == 'received' %}
-                                <a class="btn btn-warning" href="{% url 'user_friends' %}">Request received</a>
-                            {% endif %}
-                        {% endif %}
-                    </div>
-
-                    <div class="row">
-                        <div class="col-md-auto text-left">
-                            <h6>Full name: {{ user_info.firstName }} {{ user_info.lastName }}</h6>
-                            <h6>Age: {{ user_info.age }}</h6>
-                            <h6>Bio: {{ user_info.bio }}</h6>
-                            <h6>Member since: {{ user_info.CreatedAt }}</h6>
-                            {% if request.user == user %}
-                                <a href="{% url 'edit-user' %} "><i class="fas fa-edit"></i>Edit User</a>
-                            {% endif %}
-                        </div>
-
-                        <div class="col-md-12 mt-4">
-                             <h5 class="text-left">My Exercises</h5>
-
-                                     {% if exercises %}
-                                     {% for exercise in exercises %}
-                                         {% include 'exercise/single_exercise_minimal.html' with exercise=exercise %}
-                                         {% if request.user == user %}
-                                             <a href="{% url 'delete-exercise' exercise.id %}">
-                                                 <button class="btn btn-primary" type="button"><span>Delete exercise</span></button>
-                                             </a>
-                                         {% endif %}
-                                     {% endfor %}
-                                     {% else %}
-                                        <p>You haven't added any exercises!</p>
-                                     {% endif %}
-
-                            <!--still working on this. MUST work with css file or something -->
-
-                             <h5 class="text-left">My Workouts</h5>
-                                    {% if workouts %}
-                                    {% for workout in workouts %}
-                                        {% include 'workout/single_workout_minified.html' with workout=workout %}
-                                        {% if request.user == user %}
-                                            <a href="{% url 'delete-workout' workout.id %}">
-                                                <button class="btn btn-primary" type="button"><span>Delete workout</span></button>
+    {% if request.user == user %}
+        <div id="friends-container">
+            <div id="friends-list-container">
+                <div id="friends-list-title">
+                    <h4>Friends List</h4>
+                </div>
+                <div class="scrollbar-info" id="friends-list">
+                    {% for friend in friends %}
+                    <ul>
+                        <li class="friend"> <!-- ENDED HERE FIX THIS WANT TO SEND FRIEND IMAGE HERE-->
+                            <img src="{{ friend.profile_image }}">
+                            <a class="profile-href" href="{% url 'profile' slug=friend.user.username %}">
+                                <div class="friend-name">{{ friend.user.username }}</div>
+                            </a>
+                            <a href="{% url 'unfriend' friend.user.id %}">
+                                <button class="btn btn-danger remove-friend">
+                                <i class="fas fa-user-minus"></i>
+                                </button>
+                            </a>
+                        </li>
+                    </ul>
+                    {% endfor %}
+                    <div id="special">
+                        <ul id="sent-list">
+                            {% for sent in sent_requests %}
+                                    <li class="friend sent">
+                                        <img src="https://d1bvpoagx8hqbg.cloudfront.net/259/4ea4217efbbf179e02269b065d23a60e.jpg">
+                                         <a class="profile-href" href="{% url 'profile' slug=sent.ToUser.username %}">
+                                             <div class="friend-name">{{ sent.ToUser.username }}</div>
+                                         </a>
+                                        <div class="accept-decline">
+                                            <a href="{% url 'cancel-request' sent.ToUser.id %}">
+                                                <button class="btn btn-danger accept-button"><i class="far fa-trash-alt"></i></button>
                                             </a>
-                                        {% endif %}
-                                    {% endfor %}
-                                    {% else %}
-                                        <p>You haven't added any workouts!</p>
-                                     {% endif %}
+                                        </div>
+                                    </li>
+                            {% endfor %}
+                        </ul>
 
-                            <!--still working on this-->
+                        <ul id="received-list">
+                            {% for received in received_requests %}
+                                <li class="friend received"> <!-- ENDED HERE FIX THIS WANT TO SEND FRIEND IMAGE HERE-->
+                                    <img src="https://d1bvpoagx8hqbg.cloudfront.net/259/4ea4217efbbf179e02269b065d23a60e.jpg">
+                                    <a class="profile-href" href="{% url 'profile' slug=received.FromUser.username %}">
+                                        <div class="friend-name">{{ received.FromUser.username }}</div>
+                                    </a>
+                                    <div class="accept-decline">
+                                        <a href="{% url 'accept-request' received.FromUser.id %}">
+                                            <button class="btn btn-primary accept-button"><i class="fas fa-user-check"></i></button>
+                                        </a>
+                                        <a href="{% url 'delete-request' received.FromUser.id %}">
+                                            <button class="btn btn-danger decline-button"><i class="fas fa-user-minus"></i></button>
+                                        </a>
+                                    </div>
+                                </li>
+                            {% endfor %}
+                        </ul>
+
+                        <div id="buttons-special">
+                            <div id="sent"><i class="fa fa-paper-plane" aria-hidden="true"></i> Sent</div>
+                            <div id="incoming"><i class="fas fa-inbox"></i> Incoming</div>
                         </div>
                     </div>
-
                 </div>
             </div>
         </div>
-        <div class="col-lg-4 order-lg-1 text-center">
-            <img src="{{ user_info.image }}" class="img-fluid" alt="avatar">
-            {% if request.user == user %}
-                <button class="btn btn-primary" type="button"><span>Change Photo</span></button>
-            {% endif %}
-            <!-- Needs javascript implementation for new profile picture -->
-            <label class="custom-file">
-                <input type="file" id="file" class="custom-file-input">
-            </label>
+    {% endif %}
+
+    <div id="follower-list-container">
+        <div id="im-following">
+            <div id="follower-list-title">
+                <h4>Following</h4>
+            </div>
+            <div class="scrollbar-info" id="follower-list">
+                <ul>
+                    {% for person in following %}
+                    <a class="profile-href" href="{% url 'profile' slug=person.Following.username %}">
+                        <li class="friend">
+                            <img src="https://d1bvpoagx8hqbg.cloudfront.net/259/4ea4217efbbf179e02269b065d23a60e.jpg">
+                            <div class="friend-name">{{ person.Following.username }}</div>
+                        </li>
+                    </a>
+                    {% endfor %}
+                </ul>
+            </div>
+        </div>
+        <div id="search-results">
+            <div id="find-user">
+                <div id="find-user-title"><b>Find a user to follow</b></div>
+                <div>
+                    <input id="searchbar-input" class="form-control" type="text" name="search" placeholder="Type something..." value="">
+                    <button id="submit-search" class="btn btn-primary" type="submit"><i class="fas fa-search"></i> Search</button>
+                </div>
+            </div>
+            <div id="search-results-list-title">
+                <h4>Search results</h4>
+            </div>
+            <div class="scrollbar-info" id="search-results-list">
+                <ul id="search-result-content">
+
+                </ul>
+            </div>
         </div>
     </div>
-</div>
+
+
+
+    <div id="about-me">
+        <div id="age"><b>Age:</b> {{ user_info.age }}</div>
+        <div id="bio"><b>Bio:</b> {{ user_info.bio }}</div>
+        <div id="member-since"><b>Member since</b>: {{ user_info.CreatedAt }}</div>
+        <div id="email"><b>Email:</b> {{ user.email }}</div>
+
+        {% if request.user != user %}
+        <div id="donation-container">
+            <form id="donation-form" method="POST" action="{% url 'profile' slug=user.username %}">
+                {% csrf_token %}
+                {% for field in donation_form %}
+                    {{ field.label_tag }} {{ field }}
+                    <button id="donate-button" type=submit form="donation-form" class="btn btn-primary">
+                        <i class="fas fa-donate"></i> Donate
+                    </button>
+                    {% if field.errors %}
+                    <div class="alert alert-danger" id="field-errors">{% for error in field.errors %}{{ error }}{% endfor %}</div>
+                    {% endif %}
+                    {% if messages %}
+                        {% for message in messages %}
+                             <div id="success-message" class="alert alert-success" id="field-errors">{{ message }}</div>
+                        {% endfor %}
+                    {% endif %}
+                {% endfor %}
+            </form>
+        </div>
+        {% endif %}
+    </div>
+
+    <div id="exercises">
+        {% for exercise in exercises %}
+            {% include 'exercise/single_exercise_minimal.html' with exercise=exercise %}
+        {% endfor %}
+    </div>
+
+    <div id="workouts">
+        {% for workout in workouts %}
+            {% include 'workout/single_workout_minified.html' with workout=workout %}
+        {% endfor %}
+    </div>
+
+    <div id="wallet">
+        <div id="balance-info">
+            <div id="balance"><b><i class="fas fa-coins"></i> {{ user_wallet.fitcoin }} Fitcoins</b></div>
+            <a href="{% url 'purchase-fitcoins' %}"><button class="btn btn-primary"><i class="fas fa-cart-plus"></i> Top Up</button></a>
+        </div>
+        <div id="sent-transactions" class="scrollbar-info">
+            <div class="table-title"><h4>Sent Transactions</h4></div>
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th scope="col">#</th>
+                        <th scope="col">To</th>
+                        <th scope="col">Amount</th>
+                        <th scope="col">Date</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for transaction in sent_transactions %}
+                        <tr>
+                        <th scope="row">{{ forloop.counter }}</th>
+                        <td>
+                            <a href="{% url 'profile' slug=transaction.receiver.username %}">
+                                {{ transaction.receiver.username }}
+                            </a>
+                        </td>
+                        <td>{{ transaction.amount }}</td>
+                        <td>{{ transaction.date }}</td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+        <div id="received-transactions" class="scrollbar-info">
+            <div class="table-title"><h4>Received Transactions</h4></div>
+           <table class="table">
+                <thead>
+                    <tr>
+                        <th scope="col">#</th>
+                        <th scope="col">From</th>
+                        <th scope="col">Amount</th>
+                        <th scope="col">Date</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for transaction in received_transactions %}
+                        <tr>
+                        <th scope="row">{{ forloop.counter }}</th>
+                        <td>
+                            <a href="{% url 'profile' slug=transaction.sender.username %}">
+                                {{ transaction.sender.username }}
+                            </a>
+                        </td>
+                        <td>{{ transaction.amount }}</td>
+                        <td>{{ transaction.date }}</td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
 
 </div>
+
 
 {% endblock %}
-
-
 {% block extra_js %}
+    <script>
+        // Fetching user data once user submits search input
+        $("#submit-search").on('click', function (e){
+            e.preventDefault();
+            let search_input = $('#searchbar-input').val();
+            console.log(search_input);
+            let response_data = null;
+            $.ajax({
+                url: "{% url 'search-user' %}",
+                headers: {'X-CSRFToken': csrftoken},
+                data: {'search_input': search_input},
+                type: "GET",
+                dataType: 'json',
+                success: function (data) {
+                    if (data) {
+                        response_data = data;
+                        console.log(response_data);
+                        add_search_result_content(data);
+                    }
+                }
+            });
+        })
 
-<script src="{% static 'workout/js/rate_exercise.js' %}"></script>
+        function follow(val){
+            console.log(val);
+            let response_data = null;
+            $.ajax({
+                url: "{% url 'follow' %}",
+                headers: {'X-CSRFToken': csrftoken},
+                data: {'user_id': val},
+                type: "GET",
+                dataType: 'json',
+                success: function (data) {
+                    if (data) {
+                        response_data = data;
+                        console.log(response_data);
+                    }
+                }
+            });
+        }
+
+        function add_search_result_content(data){
+            let content_target_element = $('#search-result-content')
+            content_target_element.empty();
+            let usernames = Object.keys(data);
+            for (let i=0; i<usernames.length; i++){
+                let username = usernames[i]
+                let user_data = data[username]; // image and user_id
+                let user_id = user_data['id']
+                let url = user_data['url']
+                content_target_element.append("<li class='friend'><img src="+user_data['image']+">" +
+                    "<a href="+url+">"+
+                    "<div class='friend-name'>"+username+"</div></a>" +
+                    "<button class='btn btn-primary follow-button' onclick=follow("+user_id+")>"+
+                    "<i class='fas fa-address-book'></i> Follow</button></li>")
+            }
+        }
+
+    </script>
+    <script src="{% static 'profile/js/profile.js' %}"></script>
 {% endblock %}
+
