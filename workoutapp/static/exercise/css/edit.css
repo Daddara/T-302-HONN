@@ -30,6 +30,7 @@ label {
 #preview:hover {
     font-size: x-large;
     color: darkred;
+    cursor: pointer;
 }
 
 .item-title {

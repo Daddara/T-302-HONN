@@ -71,7 +71,7 @@ a.navbar-brand:hover {
     background-color: white;
     border: 1px solid black;
     background-color: rgba(233,223,209,0.91);
-    overflow-y: scroll;
+    overflow-y: auto;
     position: relative;
     width: 80%;
     margin: auto;

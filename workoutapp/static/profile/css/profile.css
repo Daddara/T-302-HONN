@@ -72,6 +72,7 @@
 a.navbar-brand:hover {
     color: #963211!important;
     transform: scale(1.05);
+    cursor: pointer;
 }
 
 #about-me-nav {
@@ -126,10 +127,12 @@ a.navbar-brand:hover {
 
 .friend:hover {
     border: 1px solid blue;
+    cursor: pointer;
 }
 
 .friend:hover .friend-name {
     color: blue;
+    cursor: pointer;
 }
 
 #friends-list ul {
@@ -155,7 +158,7 @@ a.navbar-brand:hover {
     border-radius: 10px;
     width: 25rem;
     height: 400px;
-    overflow-y: scroll;
+    overflow-y: auto;
     margin-bottom: 30px;
     position: relative;
 }
@@ -180,6 +183,7 @@ a.navbar-brand:hover {
 .profile-href a:hover{
     color: black;
     text-decoration: none;
+    cursor: pointer;
 }
 
 #searchbar-input {
@@ -207,10 +211,12 @@ a.navbar-brand:hover {
 
 #sent:hover {
     color: #963211;
+    cursor: pointer;
 }
 
 #incoming:hover {
     color: #963211;
+    cursor: pointer;
 }
 
 #special {
@@ -223,7 +229,7 @@ a.navbar-brand:hover {
     background-color: #f8f9fa;
     border-radius: 5px 5px 0px 0px;
     max-height: 250px;
-    overflow-y: scroll;
+    overflow-y: auto;
 }
 #buttons-special {
     border-top: 1px solid black;
@@ -243,6 +249,7 @@ a.navbar-brand:hover {
 
 .received:hover{
     border: 1px solid white;
+    cursor: pointer;
 }
 
 .accept-button, .decline-button {
@@ -336,7 +343,7 @@ label {
     width: 450px;
     vertical-align: top;
     height: 350px;
-    overflow-y: scroll;
+    overflow-y: auto;
     background-color: #eae9e3;
     margin-top: 20px;
     margin-bottom: 20px;
