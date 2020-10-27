@@ -218,7 +218,7 @@ class WeatherApiWeatherGateway(WeatherGateway):
         # TODO xFrednet 2020.09.12: More error handling
 
 
-class WeatherApiWeatherGatewayStub(WeatherGateway):
+class WeatherGatewayStub(WeatherGateway):
     def __init__(self):
         super().__init__()
 

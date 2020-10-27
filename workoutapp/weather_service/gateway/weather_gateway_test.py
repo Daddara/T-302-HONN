@@ -1,7 +1,7 @@
 import unittest
 import datetime
 
-from .weather_gateway import WeatherApiWeatherGateway, WeatherApiWeatherGatewayStub
+from .weather_gateway import WeatherApiWeatherGateway, WeatherGatewayStub
 from .weather_gateway import WeatherGatewayError
 
 
@@ -108,7 +108,7 @@ class TestWeatherApiDataSource(unittest.TestCase):
 
 class TestWeatherApiWeatherGatewayStub(unittest.TestCase):
     def setUp(self) -> None:
-        self.weather_gateway = WeatherApiWeatherGatewayStub()
+        self.weather_gateway = WeatherGatewayStub()
 
     def test_get_current_weather(self):
         data, error = self.weather_gateway.get_weather_current('Reykjavik')
