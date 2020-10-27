@@ -1,8 +1,10 @@
 from django.contrib import messages
 from django.contrib.auth.models import User
-from django.http import HttpResponseRedirect, JsonResponse
+from django.http import HttpResponseRedirect, JsonResponse, HttpResponse
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.decorators import login_required
+from django.template.loader import render_to_string
+
 from wallet.models import Wallet, Transaction
 from .forms.create_account_form import CreateAccountForm
 from workout.models import Exercise
@@ -45,12 +47,16 @@ def profile_view(request, slug):
     friends = user_info.friends.all()
     sent_requests = FriendRequest.objects.filter(FromUser=user)
     received_requests = FriendRequest.objects.filter(ToUser=user)
-    follower_count = Follow.objects.filter(Following=request.user).count()
+    follower_count = Follow.objects.filter(Following=user_info.user).count()
     is_following = Follow.objects.filter(Username=request.user)
     donation_form = Donate(initial={'amount': 100})
     request_user_wallet = Wallet.objects.get(user=request.user)
     sent_transactions = Transaction.objects.filter(sender=request.user)
     received_transactions = Transaction.objects.filter(receiver=request.user)
+
+    user_is_following = []
+    for follow_user in is_following:
+        user_is_following.append(UserInfo.objects.get(user=follow_user.Following))
 
     # Check if viewed user is logged in user's friend
     status = None
@@ -123,7 +129,7 @@ def profile_view(request, slug):
         'sent_requests': sent_requests,
         'received_requests': received_requests,
         'follower_count': follower_count,
-        'following': is_following,
+        'following': user_is_following,
         'donation_form': donation_form,
         'user_wallet': request_user_wallet,
         'sent_transactions': sent_transactions,
@@ -196,18 +202,17 @@ def search_users(request):
         for user in request_user_following:
             already_following.append(user.Following.username)
 
-        ret_list = {}
+        ret_list = []
         # for all users matching the search input check that they should be returned
         for user in users:
             if user.username != "System" and user.username != request.user.username \
                     and user.username not in already_following:
                 users_info = UserInfo.objects.get(user=user)
-                ret_list[user.username] = {'image': users_info.profile_image, 'id': user.id,
-                                           'url': users_info.get_abs_url()}
+                ret_list.append(users_info)
 
-        return JsonResponse(ret_list, status=200)
-    else:
-        return JsonResponse({}, status=204)
+        # Creating an html string using template and some data
+        html_response = render_to_string('user/follower_list.html', context={'users': ret_list})
+        return HttpResponse(html_response, status=200)
 
 
 @login_required
@@ -280,5 +285,3 @@ def accept_friend_request(request, id):
     receiver_info.friends.add(sender_info)
     friend_request.delete()
     return redirect('profile', slug=request.user.username)
-
-

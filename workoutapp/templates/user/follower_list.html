@@ -1,0 +1,9 @@
+{% for user in users %}
+    <li class="friend">
+        <img alt="Profile image" src="{{ user.profile_image }}">
+        <div class="friend-name">{{ user.user.username }}</div>
+        <button id="follow-{{ user.id }}" class="btn btn-primary follow-button" onclick="follow({{ user.id }})">
+            <i class='fas fa-address-book'></i> Follow
+        </button>
+    </li>
+{% endfor  %}

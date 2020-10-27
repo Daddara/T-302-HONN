@@ -113,14 +113,14 @@
                 <h4>Following</h4>
             </div>
             <div class="scrollbar-info" id="follower-list">
-                <ul>
-                    {% for person in following %}
-                    <a class="profile-href" href="{% url 'profile' slug=person.Following.username %}">
+                <ul id="follower-list-ul">
+                    {% for user_info in following %}
                         <li class="friend">
-                            <img src="https://d1bvpoagx8hqbg.cloudfront.net/259/4ea4217efbbf179e02269b065d23a60e.jpg">
-                            <div class="friend-name">{{ person.Following.username }}</div>
+                            <img src="{{ user_info.profile_image }}">
+                            <a class="profile-href" href="{% url 'profile' slug=user_info.user.username %}">
+                                <div class="friend-name">{{ user_info.user.username }}</div>
+                            </a>
                         </li>
-                    </a>
                     {% endfor %}
                 </ul>
             </div>
@@ -257,6 +257,7 @@
         // Fetching user data once user submits search input
         $("#submit-search").on('click', function (e){
             e.preventDefault();
+            let content_target_element = $('#search-result-content')
             let search_input = $('#searchbar-input').val();
             console.log(search_input);
             let response_data = null;
@@ -265,12 +266,12 @@
                 headers: {'X-CSRFToken': csrftoken},
                 data: {'search_input': search_input},
                 type: "GET",
-                dataType: 'json',
+                dataType: 'html',
                 success: function (data) {
                     if (data) {
-                        response_data = data;
-                        console.log(response_data);
-                        add_search_result_content(data);
+                        // Add the http response to element Omg I'm so cool
+                        content_target_element.empty();
+                        content_target_element.append(data);
                     }
                 }
             });
@@ -289,29 +290,22 @@
                     if (data) {
                         response_data = data;
                         console.log(response_data);
+                        follow_feedback(val)
                     }
                 }
             });
         }
+        function follow_feedback(val){
+            let button = $('#follow-'+val);
+            let follower_list = $('#follower-list-ul');
+            let follower_div = button.parent('.friend');
+            button.remove()
+            follower_list.append(follower_div)
+            /*
 
-        function add_search_result_content(data){
-            let content_target_element = $('#search-result-content')
-            content_target_element.empty();
-            let usernames = Object.keys(data);
-            for (let i=0; i<usernames.length; i++){
-                let username = usernames[i]
-                let user_data = data[username]; // image and user_id
-                let user_id = user_data['id']
-                let url = user_data['url']
-                content_target_element.append("<li class='friend'><img src="+user_data['image']+">" +
-                    "<a href="+url+">"+
-                    "<div class='friend-name'>"+username+"</div></a>" +
-                    "<button class='btn btn-primary follow-button' onclick=follow("+user_id+")>"+
-                    "<i class='fas fa-address-book'></i> Follow</button></li>")
-            }
+             */
         }
 
     </script>
     <script src="{% static 'profile/js/profile.js' %}"></script>
 {% endblock %}
-
