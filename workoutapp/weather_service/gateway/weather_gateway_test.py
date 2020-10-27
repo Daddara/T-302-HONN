@@ -117,9 +117,6 @@ class TestWeatherApiWeatherGatewayStub(unittest.TestCase):
             self.assertEqual(data.name, 'Reykjavik')
         else:
             self.assertIsNotNone(error)
-        # Funny story explained in the API class. The api is broken and will always return
-        # three days ^^. Tracked by #58 ~xFrednet
-        # self.assertEqual(len(data.days), 4)
 
     def test_get_forecast(self):
         data, error = self.weather_gateway.get_weather_forecast('Reykjavik', days=4)
