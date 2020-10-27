@@ -2,7 +2,7 @@ import json
 from django.core import serializers
 from django.http import HttpResponse
 from django.http import JsonResponse
-from .__init__ import WEATHER_API_STUB_GATEWAY, WEATHER_API_WEATHER_GATEWAY
+from .__init__ import WEATHER_GATEWAY_STUB, WEATHER_API_WEATHER_GATEWAY
 # Create your views here.
 
 
