@@ -1,7 +1,7 @@
 import unittest
 import datetime
 
-from .weather_gateway import WeatherApiWeatherGateway
+from .weather_gateway import WeatherApiWeatherGateway, WeatherApiWeatherGatewayStub
 from .weather_gateway import WeatherGatewayError
 
 
@@ -104,6 +104,33 @@ class TestWeatherApiDataSource(unittest.TestCase):
         # Funny story explained in the API class. The api is broken and will always return
         # three days ^^. Tracked by #58 ~xFrednet
         # self.assertEqual(len(data.days), 4)
+
+
+class TestWeatherApiWeatherGatewayStub(unittest.TestCase):
+    def setUp(self) -> None:
+        self.weather_gateway = WeatherApiWeatherGatewayStub()
+
+    def test_get_current_weather(self):
+        data, error = self.weather_gateway.get_weather_current('Reykjavik')
+        if error is None:
+            self.assertIsNotNone(data)
+            self.assertEqual(data.name, 'Reykjavik')
+        else:
+            self.assertIsNotNone(error)
+        # Funny story explained in the API class. The api is broken and will always return
+        # three days ^^. Tracked by #58 ~xFrednet
+        # self.assertEqual(len(data.days), 4)
+
+    def test_get_forecast(self):
+        data, error = self.weather_gateway.get_weather_forecast('Reykjavik', days=4)
+        if error is None:
+            self.assertIsNotNone(data)
+            self.assertEqual(data.name, 'Reykjavik')
+        else:
+            self.assertIsNotNone(error)
+
+    def tearDown(self) -> None:
+        self.weather_gateway = None
 
 
 if __name__ == '__main__':
