@@ -223,18 +223,18 @@ class WeatherGatewayStub(WeatherGateway):
         super().__init__()
 
     def get_weather_current(self, city: str) -> (CurrentWeatherData, WeatherGatewayError):
-        """Service view for current weather. Returns hardcoded"""
+        """Service view for current weather. Returns hardcoded data"""
         dummy_data = self.generate_current_weather(city=city)
         return dummy_data, None
 
     def get_weather_forecast(self, city: str, days: int = 3) -> (ForecastWeatherData, WeatherGatewayError):
-        """Service view for weather forecast. Returns randomized data or an random error"""
+        """Service view for weather forecast. Returns hardcoded data"""
         dummy_data = self.generate_days_forecast(city=city, days=days)
         return dummy_data, None
 
     @staticmethod
     def generate_current_weather(city: str) -> CurrentWeatherData:
-        """Randomly created dummy data, represents numbers in realistic range"""
+        """Returns hardcoded data"""
         return CurrentWeatherData(
             date_time=int(datetime.datetime.now().timestamp()),
             lat=45.00,
@@ -249,6 +249,7 @@ class WeatherGatewayStub(WeatherGateway):
 
     @staticmethod
     def generate_days_forecast(city: str, days: int) -> ForecastWeatherData:
+        """Returns hardcoded data"""
         forecast_days = []
         for i in range(days):
             if i == 0:
