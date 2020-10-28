@@ -1,5 +1,4 @@
-from .gateway.weather_gateway import WeatherApiWeatherGateway
+from .gateway.weather_gateway import WeatherApiWeatherGateway, WeatherGatewayStub
 
-
-GATEWAY = WeatherApiWeatherGateway()
-
+WEATHER_API_WEATHER_GATEWAY = WeatherApiWeatherGateway()
+WEATHER_GATEWAY_STUB = WeatherGatewayStub()

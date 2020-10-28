@@ -1,3 +1,5 @@
+import datetime
+import random
 import urllib.request, urllib.error
 import json
 import time
@@ -214,3 +216,90 @@ class WeatherApiWeatherGateway(WeatherGateway):
                 error_text
             )
         # TODO xFrednet 2020.09.12: More error handling
+
+
+class WeatherGatewayStub(WeatherGateway):
+    def __init__(self):
+        super().__init__()
+
+    def get_weather_current(self, city: str) -> (CurrentWeatherData, WeatherGatewayError):
+        """Service view for current weather. Returns randomized data or an random error"""
+        if not self.roll_one_in_twenty_error():  # If number is zero
+            if self.roll_fifty_fifty():
+                return None, WeatherGatewayError(err_type=WeatherGatewayError.ERR_TYPE_HTTP, err_sub_id=401,
+                                                 err_text="Random error insertion: The API key is invalid")
+
+            return None, WeatherGatewayError(err_type=WeatherGatewayError.ERR_TYPE_HTTP, err_sub_id=400,
+                                             err_text="Random error insertion: The city name is invalid")
+
+        dummy_data = self.generate_current_weather(city=city)
+        return dummy_data, None
+
+    def get_weather_forecast(self, city: str, days: int = 3) -> (ForecastWeatherData, WeatherGatewayError):
+        """Service view for weather forecast. Returns randomized data or an random error"""
+        if not self.roll_one_in_twenty_error():  # If number is zero
+            if self.roll_fifty_fifty():
+                return None, WeatherGatewayError(err_type=WeatherGatewayError.ERR_TYPE_HTTP, err_sub_id=401,
+                                                 err_text="Random error insertion: The API key is invalid")
+
+            return None, WeatherGatewayError(err_type=WeatherGatewayError.ERR_TYPE_HTTP, err_sub_id=400,
+                                             err_text="Random error insertion: The city name is invalid")
+
+        dummy_data = self.generate_days_forecast(city=city, days=days)
+        print(dummy_data)
+        return dummy_data, None
+
+    @staticmethod
+    def roll_one_in_twenty_error() -> int:
+        """Returns zero or number larger than zero (True or False)"""
+        return random.randint(0, 20)
+
+    @staticmethod
+    def roll_fifty_fifty() -> int:
+        """Returns zero or one (True or False)"""
+        return random.randint(0, 1)
+
+    @staticmethod
+    def generate_current_weather(city: str) -> CurrentWeatherData:
+        """Randomly created dummy data, represents numbers in realistic range"""
+        return CurrentWeatherData(
+            date_time=int(datetime.datetime.now().timestamp()),
+            lat=round(random.uniform(-90, 90), 2),
+            lon=round(random.uniform(-90, 90), 2),
+            name=city,
+            temp_c=round(random.uniform(-15, 25), 2),
+            wind_kph=round(random.uniform(0, 250), 2),
+            precipitation_mm=round(random.uniform(0, 80), 2),
+            cloud=random.randint(0, 100),
+            visibility_km=round(random.uniform(0, 300), 2),
+        )
+
+    @staticmethod
+    def generate_days_forecast(city: str, days: int) -> ForecastWeatherData:
+        forecast_days = []
+        for i in range(days):
+            if i == 0:
+                forecast_day = datetime.datetime.now()
+            else:
+                forecast_day = datetime.datetime.now() + datetime.timedelta(days=i)
+            min_temp = round(random.uniform(-15, 15), 2)
+            max_temp = round(random.uniform(0, 10), 2) + min_temp
+            forecast_days.append(
+                ForecastDayWeatherData(
+                    date_time=int(forecast_day.timestamp()),
+                    min_temp_c=min_temp,
+                    max_temp_c=max_temp,
+                    avg_temp_c=round(random.uniform(min_temp, max_temp), 2),
+                    precipitation_mm=round(random.uniform(0, 80), 2),
+                    max_wind_kmh=round(random.uniform(0, 250), 2),
+                    avg_visibility_km=round(random.uniform(0, 300), 2),
+                    chance_rain=round(random.uniform(0, 100), 2),
+                    chance_snow=round(random.uniform(0, 100), 2),
+                )
+            )
+
+        return ForecastWeatherData(date_time=int(time.time()),
+                                   lat=round(random.uniform(-90, 90), 2),
+                                   lon=round(random.uniform(-90, 90), 2),
+                                   name=city,
+                                   days=forecast_days)
