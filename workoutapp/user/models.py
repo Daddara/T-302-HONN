@@ -1,3 +1,5 @@
+from datetime import datetime
+
 from django.conf import settings
 from django.contrib.auth.models import User
 from django.db import models
@@ -18,7 +20,7 @@ class UserInfo(models.Model):
     slug = models.SlugField()
     first_name = models.CharField(max_length=20, default="")
     last_name = models.CharField(max_length=20, default="")
-    age = models.IntegerField(default=20)
+    birth_date = models.DateField(default=datetime.now)
     bio = models.CharField(max_length=250, default="", blank=True)
     email = models.EmailField(max_length=254, default="", blank=True)
     profile_image = models.CharField(

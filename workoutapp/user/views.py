@@ -147,7 +147,7 @@ def edit_profile_view(request):
     if request.method == 'POST':
         form = EditUserInfoForm(request.POST)
         if form.is_valid():
-            user_info.age = form.cleaned_data['age']
+            user_info.birth_date = form.cleaned_data['birth_date']
             user_info.first_name = form.cleaned_data['first_name']
             user_info.last_name = form.cleaned_data['last_name']
             user_info.bio = form.cleaned_data['bio']
