@@ -146,3 +146,51 @@ class UserViewTests(TestCase):
             Name="iNSaNiTY",
             User=user1,
             short_description="I don't know who I am").save()
+
+    def test_favourite_exercise_view(self):
+        print("Testing favourite exercise view: ", end="")
+        test_user = User.objects.create_user(username="TestUser", password="iampassword", email="randomemail@gmail.com")
+        self.client.login(username="TestUser", password="iampassword")
+        response = self.client.get(reverse('favourite_exercise'), follow=True)
+        self.assertEqual(response.status_code, 200)
+        self.assertTemplateUsed(response, 'dashboard/dashboard_favourites_exercise.html')
+        print("200, OK")
+
+    def test_favourites_add_exercise(self):
+
+        pass
+
+    def test_favourites_remove_exercise(self):
+
+        pass
+
+    def test_favourites_add_exercise_unauthenticated(self):
+        print("Testing adding favourite exercise unauthenticated: ", end="")
+        response = self.client.get(reverse('favourites_add_exercise'), follow=True)
+        self.assertEqual(response.status_code, 200)
+        self.assertTemplateUsed(response, 'user/register.html')
+        print("200, OK")
+
+    def test_favourite_workout_view(self):
+        print("Testing favourite workout view: ", end="")
+        test_user = User.objects.create_user(username="TestUser", password="iampassword", email="randomemail@gmail.com")
+        self.client.login(username="TestUser", password="iampassword")
+        response = self.client.get(reverse('favourite_workout'), follow=True)
+        self.assertEqual(response.status_code, 200)
+        self.assertTemplateUsed(response, 'dashboard/dashboard_favourites_workout.html')
+        print("200, OK")
+
+    def test_favourites_add_workout(self):
+
+        pass
+
+    def test_favourites_remove_workout(self):
+
+        pass
+
+    def test_favourites_add_workout_unauthenticated(self):
+        print("Testing adding favourite workout unauthenticated: ", end="")
+        response = self.client.get(reverse('favourites_add_workout'), follow=True)
+        self.assertEqual(response.status_code, 200)
+        self.assertTemplateUsed(response, 'user/register.html')
+        print("200, OK")
