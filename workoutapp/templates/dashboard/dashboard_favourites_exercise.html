@@ -17,7 +17,7 @@
     <div class="page-content scrollbar-info">
         <div class="center-page-content">
             {% for exercise in fav_exercise %}
-                {% include 'exercise/single_exercise_minimal.html' with exercise=exercise %}
+                {% include 'exercise/single_exercise_minimal.html' with exercise=fav.exercise %}
             {% endfor %}
         </div>
     </div>
