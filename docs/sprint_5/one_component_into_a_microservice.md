@@ -17,7 +17,7 @@ These aspects don't state a size of these services. He him self states that ther
 ## Some background information
 We want to give some background information about our application before we go into detail on which component we would refactor into a microservice and how. Our current system uses a Django backend and most views are rendered using the Django template system. This system was good to get the website up quickly and to write most code in Python. It is, however, not optimized for microservices due to the constant page reloading.
 
-The problems with constant reloading can be seen with the weather service. The data is always queried from the frontend to enable a more modula system and faster loading times. This causes a lot of unnecessary requests to the same endpoint to get the weather. A microservice architecture with our backend rendering would cause a lot of requests to always retrieve the same data. We would therefor only advice this refactoring if we also switch to a frontend based application. 
+The problems with constant reloading can be seen with the weather service. The data is always queried from the frontend to enable a more modular system and faster loading times. This causes a lot of unnecessary requests to the same endpoint to get the weather. A microservice architecture with our backend rendering would cause a lot of requests to always retrieve the same data. We would therefor only advice this refactoring if we also switch to a frontend based application. 
 
 Martin Fowler also states that in most cases small to medium sized systems like ours are probably better of using a monolith architecture to figure everything out (Fowler 2015). 
 
@@ -37,7 +37,7 @@ The refactoring of this component would be super simple. We would create a new D
 As mentioned before we can currently not fullfil the point 7. _Infrastructure Automation_. We have scripts to run the server automatically but that's all the _automation_ we've created so far. A real implementation should have more applications along with automatic routing. Having a registered domain with load balancing servers would a big focus in the actual setup it self.
 
 ## Meta requirements
-Martin Fowler also mentioned that a microservice architecture should have basic monitoring and rapid application development. There is currently no monitoring implementation in our application. We would therefor create a new microservice that monitors our other services and reports unexpected behavior. This component would of course also need to be monitored. A solution for this would be at least two other monitoring services that monitor the entire application along with each other. A failure of on monitor service would therefor leave us with two running systems reporting the failure.
+Martin Fowler also mentioned that a microservice architecture should have basic monitoring and rapid application development. There is currently no monitoring implementation in our application. We would therefor create a new microservice that monitors our other services and reports unexpected behavior. This component would of course also need to be monitored. A solution for this would be at least two other monitoring services that monitor the entire application along with each other. A failure of one monitor service would therefor leave us with two running systems to report this failure.
 
 ## Sources
 1. Fowler, Martin. 2014: Microservices, GOTO 2014. 
