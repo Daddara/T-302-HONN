@@ -24,4 +24,3 @@ def current(_request):
     return JsonResponse(data.__dict__, safe=False)
 
 
-
