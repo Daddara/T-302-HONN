@@ -86,6 +86,16 @@ class Exercise(models.Model):
         return self.Creator.username + "'s exercise: " + self.Title
 
 
+class FavouriteExercise(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    exercise = models.ForeignKey(Exercise, on_delete=models.CASCADE)
+
+
+class FavouriteWorkout(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    workout = models.ForeignKey(Workout, on_delete=models.CASCADE)
+
+
 class UnitType(models.Model):
     Name = models.CharField(max_length=20, default="")
     Unit = models.CharField(max_length=20, default="")

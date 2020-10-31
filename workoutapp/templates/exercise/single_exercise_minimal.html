@@ -30,6 +30,11 @@
                 {% endif %}
             </div>
         </div>
+        <div class="fav_ex">
+            {% if request.user.is_authenticated %}
+                <a href="{% url 'favourites_add_exercise' exercise.id %}">Add to Favourites</a>
+            {% endif %}
+        </div>
         <div class="exercise-creator">
             {% if exercise.Creator.username == 'System' %}
                 By {{ exercise.Creator }}

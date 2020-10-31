@@ -13,7 +13,7 @@
             </li>
             {% if user.is_authenticated %}
             <li class="nav-item">
-                <a id='favourite-nav' class="navbar-brand" href="">Favourites<span class="sr-only"></span></a>
+                <a id='favourite-nav' class="navbar-brand" href="{% url 'favourite_workout' %}">Favourites<span class="sr-only"></span></a>
             </li>
             <li class="nav-item">
                 <a id='mine-nav' class="navbar-brand" href="{% url 'user_workouts' %}">My Own<span class="sr-only"></span></a>

@@ -1,6 +1,6 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404, HttpResponseRedirect
 from django.contrib.auth.models import User
-from workout.models import Workout, Exercise, WorkoutRating, ExerciseRating, Category, MuscleGroup
+from workout.models import Workout, Exercise, WorkoutRating, ExerciseRating, Category, MuscleGroup, FavouriteExercise, FavouriteWorkout
 from django.contrib.auth.decorators import login_required
 from datetime import timedelta, datetime
 import pytz
@@ -73,6 +73,43 @@ def filter_workout_category(category: int) -> list:
         return Workout.objects.filter(Category=category, Public=True)
     except Workout.DoesNotExist:
         return []
+
+@login_required
+def favourite_exercise(request):
+    fav_exercise = FavouriteExercise.objects.filter(user=request.user)
+    return render(request, 'dashboard/dashboard_favourites_exercise.html', {'fav_exercise': fav_exercise})
+
+
+@login_required
+def favourites_add_exercise(request, exercise_id):
+    exercise = get_object_or_404(Exercise, id=exercise_id)
+    try:
+        fav_ex = FavouriteExercise.objects.get(exercise=exercise, user=request.user)
+        fav_ex.delete()
+    except FavouriteExercise.DoesNotExist:
+        new_ex = FavouriteExercise.objects.create(exercise=exercise, user=request.user)
+        new_ex.save()
+
+    return HttpResponseRedirect(request.META['HTTP_REFERER'])
+
+
+@login_required
+def favourite_workout(request):
+    fav_workout = FavouriteWorkout.objects.filter(user=request.user)
+    return render(request, 'dashboard/dashboard_favourites_workout.html', {'fav_workout': fav_workout})
+
+
+@login_required
+def favourites_add_workout(request, workout_id):
+    workout = get_object_or_404(Workout, pk=workout_id)
+    try:
+        fav_wo = FavouriteWorkout.objects.get(workout=workout, user=request.user)
+        fav_wo.delete()
+    except FavouriteWorkout.DoesNotExist:
+        new_wo = FavouriteWorkout.objects.create(workout=workout, user=request.user)
+        new_wo.save()
+
+    return HttpResponseRedirect(request.META['HTTP_REFERER'])
 
 
 def get_exercises_with_likes(request):
