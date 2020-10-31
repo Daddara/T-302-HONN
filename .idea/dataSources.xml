@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="DataSourceManagerImpl" format="xml" multifile-model="true">
+    <data-source source="LOCAL" name="local_database" uuid="ea62478a-e792-42ab-a937-68713fb3f94f">
+      <driver-ref>sqlite.xerial</driver-ref>
+      <synchronize>true</synchronize>
+      <jdbc-driver>org.sqlite.JDBC</jdbc-driver>
+      <jdbc-url>jdbc:sqlite:C:\Users\Kristján\Desktop\Skóli\HONN\t-302-honn-2020-team-9\workoutapp\local_database</jdbc-url>
+    </data-source>
+  </component>
+</project>
