@@ -18,8 +18,8 @@
     </div>
     <div class="page-content scrollbar-info">
         <div class="center-page-content">
-            {% for workout in fav_workout %}
-                {% include 'workout/single_workout_minified.html' with workout=workout %}
+            {% for fav in fav_workout %}
+                {% include 'workout/single_workout_minified.html' with workout=fav.workout %}
             {% endfor %}
         </div>
     </div>
