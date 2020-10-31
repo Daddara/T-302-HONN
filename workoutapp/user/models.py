@@ -20,7 +20,7 @@ class UserInfo(models.Model):
     slug = models.SlugField()
     first_name = models.CharField(max_length=20, default="")
     last_name = models.CharField(max_length=20, default="")
-    birth_date = models.DateField(default=datetime.now)
+    birth_date = models.DateField(default=None, null=True)
     bio = models.CharField(max_length=250, default="", blank=True)
     email = models.EmailField(max_length=254, default="", blank=True)
     profile_image = models.CharField(
