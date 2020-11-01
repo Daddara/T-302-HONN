@@ -13,9 +13,9 @@
     {% include 'dashboard/dashboard_nav_exercise.html' with muscle_groups=muscle_groups %}
     </div>
 
-    {% if fav_exercise %}
     <div class="page-content scrollbar-info">
         <div class="center-page-content">
+            {% if fav_exercise %}
             {% for fav in fav_exercise %}
                 {% include 'exercise/single_exercise_minimal.html' with exercise=fav.exercise %}
             {% endfor %}

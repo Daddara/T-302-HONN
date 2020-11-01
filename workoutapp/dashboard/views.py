@@ -161,6 +161,15 @@ def add_like_information_to_exercises(request, exercise_models):
                     elif user_rating.Rating == -1:
                         model.Has_Disliked = True
 
+            if request.user.is_authenticated:
+                try:
+                    user_favourite = FavouriteExercise.objects.filter(user=request.user, exercise=model)
+                except FavouriteExercise.DoesNotExist:
+                    user_favourite = None
+
+                if user_favourite:
+                    model.has_favourite = True
+
         return exercise_models
 
 
@@ -209,6 +218,15 @@ def add_like_information_to_workouts(request, workout_models):
                     # If the user disliked the exercise
                     elif user_rating.Rating == -1:
                         model.Has_Disliked = True
+
+                if request.user.is_authenticated:
+                    try:
+                        user_favourite = FavouriteWorkout.objects.filter(user=request.user, workout=model)
+                    except FavouriteWorkout.DoesNotExist:
+                        user_favourite = None
+
+                    if user_favourite:
+                        model.has_favourite = True
 
         return workout_models
 

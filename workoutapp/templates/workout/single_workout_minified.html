@@ -25,9 +25,13 @@
                 {% endif %}
             </div>
         </div>
-        <div class="fav_ex">
+        <div class="fav_wo">
             {% if request.user.is_authenticated %}
-                <a href="{% url 'favourites_add_workout' workout.id %}">Add to Favourites</a>
+                {% if workout.has_favourite %}
+                    <a href="{% url 'favourites_add_workout' workout.id %}">Remove from Favourites</a>
+                {% else %}
+                    <a href="{% url 'favourites_add_workout' workout.id %}">Add to Favourites</a>
+                {% endif %}
             {% else %}
                 <a href="{% url 'register' %}">Add to Favourites</a>
             {% endif %}

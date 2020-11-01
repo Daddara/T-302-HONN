@@ -28,6 +28,7 @@ class Workout(models.Model):
     Public = models.BooleanField(default=False)
     Has_Liked = models.BooleanField(default=False)
     Has_Disliked = models.BooleanField(default=False)
+    has_favourite = models.BooleanField(default=False)
     Repetitions = models.IntegerField(default=1, blank=True)
     time_passed = models.CharField(max_length=40, default="1 Day ago")
 
@@ -77,6 +78,7 @@ class Exercise(models.Model):
     Dislikes = models.IntegerField(default=0)
     Has_Liked = models.BooleanField(default=False)
     Has_Disliked = models.BooleanField(default=False)
+    has_favourite = models.BooleanField(default=False)
     time_passed = models.CharField(max_length=40, default="1 Day ago")
 
     class Meta:
