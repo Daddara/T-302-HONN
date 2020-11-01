@@ -20,6 +20,9 @@ class EditUserInfoForm(forms.ModelForm):
     class Meta:
         model = UserInfo
         exclude = ['user', 'slug', 'friends']
+        widgets = {
+            'birth_date': forms.TextInput(attrs={'placeholder': 'YYYY-MM-DD'}),
+        }
 
 
 
