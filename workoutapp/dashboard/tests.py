@@ -166,9 +166,12 @@ class UserViewTests(TestCase):
 
     def test_favourites_add_exercise_unauthenticated(self):
         print("Testing adding favourite exercise unauthenticated: ", end="")
-        response = self.client.get(reverse('favourites_add_exercise'), follow=True)
+        test_user = User.objects.create_user(username="TestUser", password="iampassword", email="randomemail@gmail.com")
+        muscle_group = MuscleGroup.objects.create(name="Arms")
+        exercise = Exercise.objects.create(Title="Test", Creator=test_user, muscle_group=muscle_group, Public=True)
+        response = self.client.get(reverse('favourites_add_exercise', kwargs={'exercise_id': exercise.id}), follow=True)
         self.assertEqual(response.status_code, 200)
-        self.assertTemplateUsed(response, 'user/register.html')
+        self.assertTemplateUsed(response, 'user/login.html')
         print("200, OK")
 
     def test_favourite_workout_view(self):
@@ -190,7 +193,10 @@ class UserViewTests(TestCase):
 
     def test_favourites_add_workout_unauthenticated(self):
         print("Testing adding favourite workout unauthenticated: ", end="")
-        response = self.client.get(reverse('favourites_add_workout'), follow=True)
+        test_user = User.objects.create_user(username="TestUser", password="iampassword", email="randomemail@gmail.com")
+        category = Category.objects.create(Name="Penis")
+        workout = Workout.objects.create(User=test_user, Name="Test Workout", Public=True, Category=category)
+        response = self.client.get(reverse('favourites_add_workout', kwargs={'workout_id': workout.id}), follow=True)
         self.assertEqual(response.status_code, 200)
-        self.assertTemplateUsed(response, 'user/register.html')
+        self.assertTemplateUsed(response, 'user/login.html')
         print("200, OK")

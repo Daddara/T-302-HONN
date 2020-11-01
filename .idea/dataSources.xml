@@ -7,5 +7,11 @@
       <jdbc-driver>org.sqlite.JDBC</jdbc-driver>
       <jdbc-url>jdbc:sqlite:C:\Users\Kristján\Desktop\Skóli\HONN\t-302-honn-2020-team-9\workoutapp\local_database</jdbc-url>
     </data-source>
+    <data-source source="LOCAL" name="" uuid="d24c213b-3ce7-4ff1-97f7-8982c9533949">
+      <driver-ref>sqlite.xerial</driver-ref>
+      <synchronize>true</synchronize>
+      <jdbc-driver>org.sqlite.JDBC</jdbc-driver>
+      <jdbc-url>jdbc:sqlite:C:\Users\Kristján\Desktop\Skóli\HONN\t-302-honn-2020-team-9\workoutapp\.coverage</jdbc-url>
+    </data-source>
   </component>
 </project>
