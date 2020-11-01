@@ -1,7 +1,7 @@
 from django.test import TestCase, Client
 from django.contrib.auth.models import User
 from django.urls import reverse
-from workout.models import Exercise, MuscleGroup, Category, ExerciseRating, WorkoutRating
+from workout.models import Exercise, MuscleGroup, Category, ExerciseRating, WorkoutRating, FavouriteExercise, FavouriteWorkout
 
 import datetime
 
@@ -157,12 +157,24 @@ class UserViewTests(TestCase):
         print("200, OK")
 
     def test_favourites_add_exercise(self):
-
-        pass
+        print("Testing adding favourite exercise: ", end="")
+        test_user = User.objects.create_user(username="TestUser", password="iampassword", email="randomemail@gmail.com")
+        muscle_group = MuscleGroup.objects.create(name="Arms")
+        exercise = Exercise.objects.create(Title="Test", Creator=test_user, muscle_group=muscle_group, Public=True)
+        new_favourite = FavouriteExercise.objects.create(exercise=exercise, user=test_user)
+        self.assertIn(new_favourite, FavouriteExercise.objects.filter(user=test_user))
+        print("200, OK")
 
     def test_favourites_remove_exercise(self):
-
-        pass
+        print("Testing removing favourite exercise: ", end="")
+        test_user = User.objects.create_user(username="TestUser", password="iampassword", email="randomemail@gmail.com")
+        muscle_group = MuscleGroup.objects.create(name="Arms")
+        exercise = Exercise.objects.create(Title="Test", Creator=test_user, muscle_group=muscle_group, Public=True)
+        new_favourite = FavouriteExercise.objects.create(exercise=exercise, user=test_user)
+        self.assertIn(new_favourite, FavouriteExercise.objects.filter(user=test_user))
+        remove_favourite = FavouriteExercise.objects.filter(exercise=exercise, user=test_user).delete()
+        self.assertNotIn(new_favourite, FavouriteExercise.objects.filter(user=test_user))
+        print("200, OK")
 
     def test_favourites_add_exercise_unauthenticated(self):
         print("Testing adding favourite exercise unauthenticated: ", end="")
@@ -184,12 +196,24 @@ class UserViewTests(TestCase):
         print("200, OK")
 
     def test_favourites_add_workout(self):
-
-        pass
+        print("Testing adding favourite workout: ", end="")
+        test_user = User.objects.create_user(username="TestUser", password="iampassword", email="randomemail@gmail.com")
+        category = Category.objects.create(Name="Penis")
+        workout = Workout.objects.create(User=test_user, Name="Test Workout", Public=True, Category=category)
+        new_favourite = FavouriteWorkout.objects.create(workout=workout, user=test_user)
+        self.assertIn(new_favourite, FavouriteWorkout.objects.filter(user=test_user))
+        print("200, OK")
 
     def test_favourites_remove_workout(self):
-
-        pass
+        print("Testing removing favourite workout: ", end="")
+        test_user = User.objects.create_user(username="TestUser", password="iampassword", email="randomemail@gmail.com")
+        category = Category.objects.create(Name="Penis")
+        workout = Workout.objects.create(User=test_user, Name="Test Workout", Public=True, Category=category)
+        new_favourite = FavouriteWorkout.objects.create(workout=workout, user=test_user)
+        self.assertIn(new_favourite, FavouriteWorkout.objects.filter(user=test_user))
+        remove_favourite = FavouriteWorkout.objects.filter(workout=workout, user=test_user).delete()
+        self.assertNotIn(new_favourite, FavouriteWorkout.objects.filter(user=test_user))
+        print("200, OK")
 
     def test_favourites_add_workout_unauthenticated(self):
         print("Testing adding favourite workout unauthenticated: ", end="")
