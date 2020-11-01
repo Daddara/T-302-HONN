@@ -79,6 +79,9 @@ Django framework, see architecture [here](docs/sprint_1/project_overview/project
 
 We've documented the used design patterns in [`docs/sprint_2/design_patterns`](docs/sprint_2/design_patterns).
 
+## Final interface demo
+An _awesome_ demo of our interface can be found here: [interface demo](docs/sprint_5/interface_demo.md)
+
 ## User stories
 The following are user stories to implement agreed by the TA
 * #2 As a user I would like to be able to create and exercise that I can save and look at later.
@@ -151,7 +154,7 @@ We also included some screenshots of our website from the end of the sprint. The
 We plan to document and implement the required lecture aspects. We will address the conditional passes we have had as well. These tasks are tracked in the following issues: 
 * #105, #101, #102, #103, #104 
 
-The documentation can be found here: [docs/sprint_5/](docs/sprint_5/)
+The documentation can be found here: [docs/sprint_5/](docs/sprint_5/) \
 
 In addition we plan to implement the following user stories and bugfixes this sprint: 
 * #56, #23, #106, #96, #99, #107, #100
