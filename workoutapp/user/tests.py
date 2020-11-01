@@ -93,7 +93,7 @@ class UserViewTests(TestCase):
         # Set up data to insert into form
         mod_user_info = {'first_name': 'New first name',
                          'last_name': 'New last name',
-                         'age': '30',
+                         'birth_date': '1969-04-20',
                          'email': 'test_user@test.com',
                          'bio': 'blabla',
                          'profile_image': 'newimageurl',
