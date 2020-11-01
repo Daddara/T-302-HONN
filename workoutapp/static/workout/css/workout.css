@@ -63,3 +63,9 @@ a:hover {
 .page-title {
     background-color: #ffa474;
 }
+
+.fav_wo {
+    position: absolute;
+    right: 2px;
+    bottom: 0;
+}

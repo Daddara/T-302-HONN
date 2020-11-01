@@ -1,6 +1,7 @@
 from django.shortcuts import render, redirect, get_object_or_404, HttpResponseRedirect
 from django.contrib.auth.models import User
-from workout.models import Workout, Exercise, WorkoutRating, ExerciseRating, Category, MuscleGroup, FavouriteExercise, FavouriteWorkout
+from workout.models import Workout, Exercise, WorkoutRating, ExerciseRating, Category, MuscleGroup, FavouriteExercise, \
+    FavouriteWorkout
 from django.contrib.auth.decorators import login_required
 from datetime import timedelta, datetime
 import pytz
@@ -8,6 +9,7 @@ import pytz
 
 def dashboard(request):
     return redirect('public_workouts')
+
 
 @login_required
 def user_exercises(request):
@@ -50,7 +52,8 @@ def exercises(request):
 def filter_ex_public(request, muscle_group):
     muscle_groups = MuscleGroup.objects.all()
     filtered_exercises = filter_exercise_category(muscle_group)
-    context = {'exercises': add_like_information_to_exercises(request, filtered_exercises), 'muscle_groups': muscle_groups}
+    context = {'exercises': add_like_information_to_exercises(request, filtered_exercises),
+               'muscle_groups': muscle_groups}
     return render(request, 'dashboard/dashboard_exercise.html', context)
 
 
@@ -74,10 +77,16 @@ def filter_workout_category(category: int) -> list:
     except Workout.DoesNotExist:
         return []
 
+
 @login_required
 def favourite_exercise(request):
     fav_exercise = FavouriteExercise.objects.filter(user=request.user)
-    return render(request, 'dashboard/dashboard_favourites_exercise.html', {'fav_exercise': fav_exercise})
+    pre_exercises = []
+    for fav in fav_exercise:
+        pre_exercises.append(fav.exercise)
+
+    user_exercises = add_like_information_to_exercises(request, pre_exercises)
+    return render(request, 'dashboard/dashboard_exercise.html', {'exercises': user_exercises})
 
 
 @login_required
@@ -96,7 +105,12 @@ def favourites_add_exercise(request, exercise_id):
 @login_required
 def favourite_workout(request):
     fav_workout = FavouriteWorkout.objects.filter(user=request.user)
-    return render(request, 'dashboard/dashboard_favourites_workout.html', {'fav_workout': fav_workout})
+    pre_workouts = []
+    for fav in fav_workout:
+        pre_workouts.append(fav.workout)
+
+    user_workouts = add_like_information_to_workouts(request, pre_workouts)
+    return render(request, 'dashboard/dashboard_workout.html', {'workouts': user_workouts})
 
 
 @login_required

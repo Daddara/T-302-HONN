@@ -25,17 +25,19 @@
                 {% endif %}
             </div>
         </div>
-        <div class="fav_wo">
-            {% if request.user.is_authenticated %}
-                {% if workout.has_favourite %}
-                    <a href="{% url 'favourites_add_workout' workout.id %}">Remove from Favourites</a>
+        {% if user.is_authenticated %}
+            <div class="fav_wo">
+                {% if request.user.is_authenticated %}
+                    {% if workout.has_favourite %}
+                        <a href="{% url 'favourites_add_workout' workout.id %}">Remove from Favourites</a>
+                    {% else %}
+                        <a href="{% url 'favourites_add_workout' workout.id %}">Add to Favourites</a>
+                    {% endif %}
                 {% else %}
-                    <a href="{% url 'favourites_add_workout' workout.id %}">Add to Favourites</a>
+                    <a href="{% url 'register' %}">Add to Favourites</a>
                 {% endif %}
-            {% else %}
-                <a href="{% url 'register' %}">Add to Favourites</a>
-            {% endif %}
-        </div>
+            </div>
+        {% endif %}
         <div class="workout-creator">
             {% if workout.User.username == 'System' %}
                 By {{ workout.User.username }}
