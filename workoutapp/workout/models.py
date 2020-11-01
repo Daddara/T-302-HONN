@@ -28,6 +28,7 @@ class Workout(models.Model):
     Public = models.BooleanField(default=False)
     Has_Liked = models.BooleanField(default=False)
     Has_Disliked = models.BooleanField(default=False)
+    has_favourite = models.BooleanField(default=False)
     Repetitions = models.IntegerField(default=1, blank=True)
     time_passed = models.CharField(max_length=40, default="1 Day ago")
 
@@ -77,6 +78,7 @@ class Exercise(models.Model):
     Dislikes = models.IntegerField(default=0)
     Has_Liked = models.BooleanField(default=False)
     Has_Disliked = models.BooleanField(default=False)
+    has_favourite = models.BooleanField(default=False)
     time_passed = models.CharField(max_length=40, default="1 Day ago")
 
     class Meta:
@@ -84,6 +86,16 @@ class Exercise(models.Model):
 
     def __str__(self):
         return self.Creator.username + "'s exercise: " + self.Title
+
+
+class FavouriteExercise(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    exercise = models.ForeignKey(Exercise, on_delete=models.CASCADE)
+
+
+class FavouriteWorkout(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    workout = models.ForeignKey(Workout, on_delete=models.CASCADE)
 
 
 class UnitType(models.Model):

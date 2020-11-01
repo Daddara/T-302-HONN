@@ -1,6 +1,7 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404, HttpResponseRedirect
 from django.contrib.auth.models import User
-from workout.models import Workout, Exercise, WorkoutRating, ExerciseRating, Category, MuscleGroup
+from workout.models import Workout, Exercise, WorkoutRating, ExerciseRating, Category, MuscleGroup, FavouriteExercise, \
+    FavouriteWorkout
 from django.contrib.auth.decorators import login_required
 from datetime import timedelta, datetime
 import pytz
@@ -8,6 +9,7 @@ import pytz
 
 def dashboard(request):
     return redirect('public_workouts')
+
 
 @login_required
 def user_exercises(request):
@@ -50,7 +52,8 @@ def exercises(request):
 def filter_ex_public(request, muscle_group):
     muscle_groups = MuscleGroup.objects.all()
     filtered_exercises = filter_exercise_category(muscle_group)
-    context = {'exercises': add_like_information_to_exercises(request, filtered_exercises), 'muscle_groups': muscle_groups}
+    context = {'exercises': add_like_information_to_exercises(request, filtered_exercises),
+               'muscle_groups': muscle_groups}
     return render(request, 'dashboard/dashboard_exercise.html', context)
 
 
@@ -73,6 +76,54 @@ def filter_workout_category(category: int) -> list:
         return Workout.objects.filter(Category=category, Public=True)
     except Workout.DoesNotExist:
         return []
+
+
+@login_required
+def favourite_exercise(request):
+    fav_exercise = FavouriteExercise.objects.filter(user=request.user)
+    pre_exercises = []
+    for fav in fav_exercise:
+        pre_exercises.append(fav.exercise)
+
+    user_exercises = add_like_information_to_exercises(request, pre_exercises)
+    return render(request, 'dashboard/dashboard_exercise.html', {'exercises': user_exercises})
+
+
+@login_required
+def favourites_add_exercise(request, exercise_id):
+    exercise = get_object_or_404(Exercise, id=exercise_id)
+    try:
+        fav_ex = FavouriteExercise.objects.get(exercise=exercise, user=request.user)
+        fav_ex.delete()
+    except FavouriteExercise.DoesNotExist:
+        new_ex = FavouriteExercise.objects.create(exercise=exercise, user=request.user)
+        new_ex.save()
+
+    return HttpResponseRedirect(request.META['HTTP_REFERER'])
+
+
+@login_required
+def favourite_workout(request):
+    fav_workout = FavouriteWorkout.objects.filter(user=request.user)
+    pre_workouts = []
+    for fav in fav_workout:
+        pre_workouts.append(fav.workout)
+
+    user_workouts = add_like_information_to_workouts(request, pre_workouts)
+    return render(request, 'dashboard/dashboard_workout.html', {'workouts': user_workouts})
+
+
+@login_required
+def favourites_add_workout(request, workout_id):
+    workout = get_object_or_404(Workout, pk=workout_id)
+    try:
+        fav_wo = FavouriteWorkout.objects.get(workout=workout, user=request.user)
+        fav_wo.delete()
+    except FavouriteWorkout.DoesNotExist:
+        new_wo = FavouriteWorkout.objects.create(workout=workout, user=request.user)
+        new_wo.save()
+
+    return HttpResponseRedirect(request.META['HTTP_REFERER'])
 
 
 def get_exercises_with_likes(request):
@@ -124,6 +175,15 @@ def add_like_information_to_exercises(request, exercise_models):
                     elif user_rating.Rating == -1:
                         model.Has_Disliked = True
 
+            if request.user.is_authenticated:
+                try:
+                    user_favourite = FavouriteExercise.objects.filter(user=request.user, exercise=model)
+                except FavouriteExercise.DoesNotExist:
+                    user_favourite = None
+
+                if user_favourite:
+                    model.has_favourite = True
+
         return exercise_models
 
 
@@ -172,6 +232,15 @@ def add_like_information_to_workouts(request, workout_models):
                     # If the user disliked the exercise
                     elif user_rating.Rating == -1:
                         model.Has_Disliked = True
+
+                if request.user.is_authenticated:
+                    try:
+                        user_favourite = FavouriteWorkout.objects.filter(user=request.user, workout=model)
+                    except FavouriteWorkout.DoesNotExist:
+                        user_favourite = None
+
+                    if user_favourite:
+                        model.has_favourite = True
 
         return workout_models
 

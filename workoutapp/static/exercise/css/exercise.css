@@ -40,3 +40,9 @@
     top: 0;
     right: 1%;
 }
+
+.fav_ex {
+    position: absolute;
+    right: 2px;
+    bottom: 0;
+}
