@@ -10,6 +10,9 @@ from .weather_data import ForecastDayWeatherData
 # from .weather_data import WeatherWarnings
 
 
+
+
+
 class WeatherGatewayError:
     """An error class for all possible errors that might occur in the gateway"""
 
@@ -275,3 +278,16 @@ class WeatherGatewayStub(WeatherGateway):
                                    lon=45,
                                    name=city,
                                    days=forecast_days)
+
+class WeatherService():
+    """Takes a WeatherGateway object as a construction argument"""
+    def __init__(self, service_provider: WeatherGateway):
+        self.__service_provider = service_provider
+
+    def get_weather(self, city: str):
+        """Uses object injected in the constructor to get the current weather"""
+        return self.__service_provider.get_weather_current(city)
+
+    def get_forecast(self, city: str, days: int):
+        """Uses object injected in the constructor to get the weather forecast"""
+        return self.__service_provider.get_weather_forecast(city, days)

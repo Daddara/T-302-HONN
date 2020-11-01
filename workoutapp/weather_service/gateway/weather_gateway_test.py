@@ -1,7 +1,7 @@
 import unittest
 import datetime
 
-from .weather_gateway import WeatherApiWeatherGateway, WeatherGatewayStub
+from .weather_gateway import WeatherApiWeatherGateway, WeatherGatewayStub, WeatherService
 from .weather_gateway import WeatherGatewayError
 
 
@@ -128,6 +128,32 @@ class TestWeatherApiWeatherGatewayStub(unittest.TestCase):
 
     def tearDown(self) -> None:
         self.weather_gateway = None
+
+
+class TestWeatherServiceInjector(unittest.TestCase):
+    def setUp(self) -> None:
+        self.service_provider = WeatherGatewayStub()
+        self.weather_service = WeatherService(self.service_provider)
+
+    def test_get_current_weather(self):
+        data, error = self.weather_service.get_weather('Reykjavik')
+        if error is None:
+            self.assertIsNotNone(data)
+            self.assertEqual(data.name, 'Reykjavik')
+        else:
+            self.assertIsNotNone(error)
+
+    def test_get_forecast(self):
+        data, error = self.weather_service.get_forecast('Reykjavik', days=4)
+        if error is None:
+            self.assertIsNotNone(data)
+            self.assertEqual(data.name, 'Reykjavik')
+        else:
+            self.assertIsNotNone(error)
+
+    def tearDown(self) -> None:
+        self.weather_provider = None
+        self.weather_service = None
 
 
 if __name__ == '__main__':

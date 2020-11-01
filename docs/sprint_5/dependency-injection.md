@@ -1,0 +1,5 @@
+Dependency Injection means that one object receives other objects that it depends on. This other object is called a dependency of the first object. Dependency injection enables loose coupling. This ensures easy replacability.
+
+We've implemented a _Constructor Dependency Injection_ in the WeatherService class. The constructor takes an implementation of the `WeaterGateway` interface. The injected `WeatherApiWeatherGateway` instance is getting instanciated and injected in the `weather_service/__init__.py` file. The funcion call in Django gets forwarted to the `WeatherService` which used the injected `WeatherGateway` instance.
+
+We use dependency injection to have loose coupling between the `WeatherService` it self and the gateway we use. We're currently using the weather data from WeatherApi.com. That's also the reason why we use a gateway in the first place. Using dependency injection enables us to replace the gateway even easier
