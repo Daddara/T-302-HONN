@@ -41,9 +41,6 @@
                         </div>
                         {% endfor %}
                     </div>
-                {% if workout.Image != None %}
-                <img height="200px" width="200px" src="{{ workout.Image }}" class="mx-auto img-fluid" alt="no image">
-                {% endif %}
                 </div>
                 {% if workout.User == request.user %}
                 <div class="add-exercise">
