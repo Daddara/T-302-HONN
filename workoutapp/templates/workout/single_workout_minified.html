@@ -25,7 +25,7 @@
                 {% endif %}
             </div>
         </div>
-        <div class="fav_wo">
+        <div>
             {% if request.user.is_authenticated %}
                 {% if workout.has_favourite %}
                     <a href="{% url 'favourites_add_workout' workout.id %}">Remove from Favourites</a>
