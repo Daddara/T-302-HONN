@@ -153,7 +153,7 @@ class UserViewTests(TestCase):
         self.client.login(username="TestUser", password="iampassword")
         response = self.client.get(reverse('favourite_exercise'), follow=True)
         self.assertEqual(response.status_code, 200)
-        self.assertTemplateUsed(response, 'dashboard/dashboard_favourites_exercise.html')
+        self.assertTemplateUsed(response, 'dashboard/dashboard_exercise.html')
         print("200, OK")
 
     def test_favourites_add_exercise(self):
@@ -192,7 +192,7 @@ class UserViewTests(TestCase):
         self.client.login(username="TestUser", password="iampassword")
         response = self.client.get(reverse('favourite_workout'), follow=True)
         self.assertEqual(response.status_code, 200)
-        self.assertTemplateUsed(response, 'dashboard/dashboard_favourites_workout.html')
+        self.assertTemplateUsed(response, 'dashboard/dashboard_workout.html')
         print("200, OK")
 
     def test_favourites_add_workout(self):
